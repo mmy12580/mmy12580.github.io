@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  
+  <link rel="next" href="https://mmy12580.github.io/posts/cool_optimization/" />
+  <link rel="canonical" href="https://mmy12580.github.io/posts/look-at-activation-functions/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Look at Activation Functions | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Look at Activation Functions | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Look at Activation Functions",
+    "headline" : "Look at Activation Functions",
+    "description" : "Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-01-23 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2019-01-23 00:00:00 &#43;0000 UTC",
+    "url" : "https://mmy12580.github.io/posts/look-at-activation-functions/",
+    "wordCount" : "1056",
+    "keywords" : [ "deep learning","natural language processing", "Moyan&#39;s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Look at Activation Functions</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-01-23 itemprop="datePublished">January 23, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="overview">Overview:</h1>
+
+<p>Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are <strong>ReLU</strong> and its extended work such as <strong>LReLU</strong>, <strong>PReLu</strong>, <strong>ELU</strong>, <strong>SELU</strong>, and <strong>CReLU</strong> etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications. This blog will first introduce common types of non-linear activation functions, and then I will introduce which to choose on challenging NLP tasks.</p>
+
+<h1 id="properties">Properties</h1>
+
+<p><strong>In general</strong>, activation functions have properties as followings:</p>
+
+<ol>
+<li><strong>non-linearity</strong>: The non-linear activations functions are used not only to stimulate like real brains but also to enhance the ability of representation to approximate the data distribution. In other words, it increases large capacity  of model to generalize the data better;</li>
+<li><strong>differentiable</strong>: Due to the non-convex optimization problem, deep learning considers back-propagation which is essentially chain rule of derivatives;</li>
+<li><strong>monotonic</strong>: Monotonic guarantees single layer is convex;</li>
+<li>$f(x) \approx x$: When activation function satisfies this property, if values after initialization is small, the training efficiency will increase; if not, initialization needs to be carefully set;</li>
+<li><strong>domain</strong>: When the output of activation functions is determined in a range, the gradient based optimization method will be stable. However when the output is unlimited, the training will be more efficient, but choosing learning rate will be necessarily careful.</li>
+</ol>
+
+<h1 id="comparison">Comparison</h1>
+
+<h2 id="sigmoid">Sigmoid</h2>
+
+<p>Let us first talk about the classic choice, <strong>sigmod</strong> function, which has formula as
+$$
+\sigma(x) = \frac{1}{1 + e^{-x}}
+$$
+The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldquo;S&rdquo;-shaped curve.</p>
+
+<h3 id="advantages">Advantages:</h3>
+
+<ul>
+<li>Mapping values to (0, 1) so it wont blow up activation</li>
+<li>Can be used as the output layer to give credible value</li>
+
+<li><p>Easy derivatives:</p>
+
+<p>
+\begin{align*}
+\sigma'(x) &= - \frac{1}{(1 + e^{-x})^2} (-e^{-x}) \\
+      &= \frac{1}{1 + e^{-x}} \frac{e^{-x}}{1 + e^{-x}} \\
+      &= \frac{1}{1 + e^{-x}} \frac{1 + e^{-x} - 1}{1 + e^{-x}} \\
+      &= \sigma(x)(1 - \sigma(x))
+\end{align*}
+</p>  </li>
+</ul>
+
+<h3 id="disadvantages">Disadvantages:</h3>
+
+<ul>
+<li><strong>Gradient Vanishing</strong>: When $\sigma(x) \rightarrow 0$ or $\sigma(x) \rightarrow 1$, the $\frac{\partial \sigma}{\partial x} \rightarrow 0$. Another intuitive reason is that the $\max f&rsquo;(x) = 0.25$ when $x=0.5$. That means every time the gradient signal flows through a sigmoid gate, its magnitude always diminishes by one quarter (or more);</li>
+<li>Non-zero centered output: Imagine if x is all positive and all negative, what result will $f&rsquo;(x)$ has? It slowers the convergence rate;</li>
+<li>Slow: Exponential computation is relatively slower comparing to ReLu</li>
+</ul>
+
+<h2 id="tanh">Tanh</h2>
+
+<p>To solve the non-zero centered output, <strong>tanh</strong> is introduced since its domain is from [-1, 1]. Mathematically, it is just transformed version of sigmoid:</p>
+
+<p>$$ \tanh(x) = 2\sigma(2x -1) = \frac{1 - e^{-2x}}{1 + e^{-2x}} $$</p>
+
+<h3 id="advantages-1">Advantages:</h3>
+
+<ul>
+<li>Zero-centered output: Release the burden of initialization in some degree; Also, it fasters the convergence.</li>
+
+<li><p>Easy derivatives:</p>
+
+<p>
+\begin{align*}
+\tanh'(x) &= \frac{\partial \tanh}{\partial x} = (\frac{\sin x}{\cos x})' \\
+      &= \frac{\sin'x \cos x + \sin x \cos'x}{\cos^2 x} \\
+      &= \frac{\cos^2 x - sin^2 x}{\cos^2 x}\\
+      &= 1 - \frac{\sin^2 x}{\cos^2 x} = 1 - \tanh^2(x)
+\end{align*}
+</p>  </li>
+</ul>
+
+<h3 id="disadvantages-1">Disadvantages:</h3>
+
+<ul>
+<li>Gradient Vanishing: When $\tanh(x) \rightarrow 1$ or $\tanh(x) \rightarrow -1$, $\tanh&rsquo;(x) \rightarrow 0$</li>
+<li>Slow: Exponential computation is still included</li>
+</ul>
+
+<h2 id="relu">ReLU</h2>
+
+<p><strong>ReLU</strong> has become the most popular method in deep learning applications. The idea behind is very simple,</p>
+
+<p>$$ReLu(x) = \max(0, x)$$</p>
+
+<h4 id="advantages-2">Advantages:</h4>
+
+<ul>
+<li>Solves gradient vanishing problem</li>
+<li>Faster computation leads to faster convergence</li>
+<li>Even simpler derivative</li>
+</ul>
+
+<h4 id="disadvantages-2">Disadvantages:</h4>
+
+<ul>
+<li>Non-zero centered</li>
+<li><strong>Dead ReLU problem</strong>: Some of the neurons wont be activated. Possible reasons: 1. Unlucky initialization 2. Learning rate is too high. (Small learning rate, Xavier Initialization and Batch Normalization help).</li>
+</ul>
+
+<h2 id="lrelu-and-prelu">LReLU and PReLU</h2>
+
+<p>To solve ReLU problems, there are few work proposed to solve dead area and non-zero centerd problems.</p>
+
+<h3 id="lrelu">LReLU</h3>
+
+<ul>
+<li>$f(x) = max(bx, x)$</li>
+<li>Normally, b = 0.01 or 0.3</li>
+</ul>
+
+<h3 id="prelu">PReLU</h3>
+
+<ul>
+<li>$f(x) = max(\alpha x, x)$</li>
+<li>$\alpha$ is a learnable parameter</li>
+</ul>
+
+<p>Note: Even both methods are designed to solve ReLU problems, it is <strong>NOT</strong> guaranteed they will perform better than ReLU. Also, due to the tiny changes, they do not converge as fast as ReLU.</p>
+
+<h2 id="elu">ELU</h2>
+
+<p>What slows down the learning is the bias shift which is present in ReLUs. Those who have mean activation larger than zero and learning causes bias shift for the following layers. <strong>ELU</strong> is designed as an alternative of ReLU to reduce the bias shift by pushing the mean activation toward zero.</p>
+
+<p>
+\begin{split}
+    ELU(x) &= \alpha (\exp(x) - 1), && \quad x \le 0 \\
+           &= x, &&  \quad  x > 0   
+\end{split}
+</p>
+
+<h3 id="advantages-3">Advantages:</h3>
+
+<ul>
+<li>Zero-Centered outputs</li>
+<li>No Dead ReLU issues</li>
+<li>Seems to be a merged version of LReLU and PReLU</li>
+</ul>
+
+<h4 id="disadvantages-3">Disadvantages:</h4>
+
+<ul>
+<li>Slow</li>
+<li>Saturates for the large negative values</li>
+</ul>
+
+<h2 id="selu">SELU</h2>
+
+<p>The last common non-linear activation function is <strong>SELU</strong>, scaled exponential linear unit. It has self-normalizing properties because the activations that are close to zero mean and unit variance, propagated through network layers, will converge towards zero mean and unit variance. This, in particular, makes the learning highly robust and allows to train networks that have many layers.</p>
+
+<p>
+\begin{split}
+    SELU(x) &= \lambda \alpha (\exp(x) - 1), && \quad x \le 0 \\
+           &= \lambda x, &&  \quad  x > 0   
+\end{split}
+</p>
+
+<p>which has gradient</p>
+
+<p>
+\begin{split}
+    \frac{\partial d}{\partial x}  SELU(x) &= SELU(x) + \lambda \alpha, && \quad x \le 0 \\
+           &= \lambda, &&  \quad  x > 0   
+\end{split}
+</p>
+
+<p>where $\alpha = 1.6733$ and $\lambda = 1.0507$.</p>
+
+<p><strong><em>Question</em></strong>: Would SELU, ELU be more useful than Batch Normalization?</p>
+
+<h1 id="activation-functions-on-nlp">Activation functions on NLP</h1>
+
+<p>Here, I will list a few activations used on state-of-the-art NLP models, such as BERTetc.</p>
+
+<h2 id="gelu">GELU</h2>
+
+<p>Since BERT was released in December, all the NLP tasks benchmark scores have been updated, such as SQuad machine understanding, CoLLN 2003 named entity recognition, etc. By exploring tricks and theory behind BERT, BERT uses <strong>GELU</strong>, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.</p>
+
+<pre><code>def gelu(input_tensor):
+  &quot;&quot;&quot;Gaussian Error Linear Unit.
+  This is a smoother version of the RELU.
+  Original paper: https://arxiv.org/abs/1606.08415
+  Args:
+    input_tensor: float Tensor to perform activation.
+  Returns:
+    `input_tensor` with the GELU activation applied.
+  &quot;&quot;&quot;
+  cdf = 0.5 * (1.0 + tf.erf(input_tensor / tf.sqrt(2.0)))
+  return input_tensor * cdf
+</code></pre>
+
+<p><br></p>
+
+<h1 id="extension">Extension:</h1>
+
+<p>I found a masterpiece from a data scientist via github which has a great way of visualizing varieties of activation functions. Try to play with it. It might help you remember it more. Click <a href="https://dashee87.github.io/deep%20learning/visualising-activation-functions-in-neural-networks/">here</a> to his website.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/look-at-activation-functions/>https://mmy12580.github.io/posts/look-at-activation-functions/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+         
+        
+        <a href="https://mmy12580.github.io/posts/cool_optimization/" class="next" rel="next" title="Cool_optimization">Cool_optimization&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>
