@@ -17,48 +17,184 @@
       <guid>https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/</guid>
       <description>
 
-&lt;h1 id=&#34;代码&#34;&gt;代码&lt;/h1&gt;
+&lt;h1 id=&#34;初衷&#34;&gt;初衷&lt;/h1&gt;
 
-&lt;p&gt;个人网站这个事情，想倒腾很久了。可惜一直被各种事情给影响，近来想着，还是得发一下狠。在2019年年初倒腾一个个人网站，原因很简单，高效的做做笔记，发表一些看法，希望能和更多人交流，学习以及成长。Stay foolish, stay hungary!&lt;/p&gt;
-
-&lt;p&gt;本文将介绍如何搭配Hugo + Github Pages + 个人域名 + 添加https的流程。因为我是用Mac搭建的，所以这里的准备工作和具体的流程都只包含了如何用Mac搭建（linux 大同小异)。这里对windows的洪湖先说声抱歉了(シ_ _)シ。对于写代码的要求，这里并不高，只需要你对terminal会用一些常用的代码就可以了，当然，其最基本的git的代码还是需要的 e.g git clone, add, commit, push这些 。而对于完全没写过代码的小白，有一些东西也只能麻烦你们自己google了，比如如何建立github。我这里会提供一些相对应的链接，以方便你在建立网站时的流程。&lt;/p&gt;
+&lt;p&gt;个人网站这个事情，想倒腾很久了。可惜一直被各种事情给影响，近来想着，还是得发一下狠。在2019年年初倒腾一个个人网站，原因很简单，高效的做做笔记，发表一些看法，希望能和更多人交流，学习以及成长。Stay foolish, stay hungary!
+本文将介绍如何搭配Hugo + Github Pages + 个人域名的流程。因为我是用Mac搭建的，所以这里的准备工作和具体的流程都只包含了如何用Mac搭建（linux 大同小异)。这里对windows的童鞋先说声抱歉了(シ_ _)シ，因为我学代码开始没用过😅。对于写代码的要求，这里并不高，只需要你对terminal会用一些常用的代码就可以了，当然，其最基本的git的代码还是需要的 e.g git clone, add, commit, push这些 。而对于完全没写过代码的小白，有一些东西也只能麻烦你们自己google了，比如如何建立github。我这里会提供一些相对应的链接，以方便你在建立网站时的流程.&lt;/p&gt;
 
 &lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
 
-&lt;h3 id=&#34;依赖环境&#34;&gt;依赖环境&lt;/h3&gt;
+&lt;p&gt;正如标题所说，只需要安装hugo, github page, 以及https保障网站安全就好了.&lt;/p&gt;
+
+&lt;h3 id=&#34;依赖环境&#34;&gt;依赖环境：&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;brew&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;安装brew, 先打开&lt;code&gt;spotlight&lt;/code&gt;输入&lt;code&gt;terminal&lt;/code&gt;,然后复制以下代码&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;安装后，安装git 用&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;brew&lt;/li&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;li&gt;hugo&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-brew&#34;&gt;brew install git
+&lt;h3 id=&#34;前期安装&#34;&gt;前期安装&lt;/h3&gt;
+
+&lt;p&gt;安装brew, 先打开&lt;code&gt;spotlight&lt;/code&gt;输入&lt;code&gt;terminal&lt;/code&gt;, 然后复制以下代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;/usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Github Page&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;安装后，安装git&lt;/p&gt;
 
-&lt;li&gt;&lt;p&gt;官网很清楚 按照步骤来一下就好了&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://pages.github.com&#34;&gt;https://pages.github.com&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;hugo&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;安装我们需要的网站建立的框架&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;brew install hugo
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;brew install git
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;安装我们需要的网站建立的框架&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;brew install hugo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;选择管理blog的位置,例如我的桌面，然后建立新项目e.g myblog, 并进入blog文件夹&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;cd ~/Desktop
+hugo new site myblog
+cd myblog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;尝试建立内容为”hello world&amp;rdquo;的post, 将其命名为myfirst_post.md&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;hugo new posts/myfirst_post
+echo &amp;quot;hello world&amp;quot; &amp;gt; content/posts/myfirst_post.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动hugo的静态服务:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;hugo sever -D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个时候会显示一对代码例如:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-plain&#34;&gt;Serving pages from memory Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打开浏览器，进入localhost:1313就能看到你的网站内容了;&lt;/p&gt;
+
+&lt;h2 id=&#34;host-on-github&#34;&gt;Host on Github&lt;/h2&gt;
+
+&lt;p&gt;这个时候的简单博客只适合在本地使用，是一个可以写完博客，并且查看所得内容的呈现，但是想要给其他人看，需要做成一个网站。作为一名程序猿，github再适合不过了。
+这里特指github page。建立github page, 可以说极其简单，直接参照&lt;a href=&#34;https://pages.github.com/&#34;&gt;官网&lt;/a&gt;的第一步，进入github, 创建新的repo, 为其命名xxx.github.io. xxx要对应你的github的账号名。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmy12580.github.io/images/create_repo.png&#34; alt=&#34;create_repo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下来就只需要做两件事情。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;将刚刚生成的blog（整个文档）做成一个github repo。将其命名为 xxxblog&lt;/li&gt;
+&lt;li&gt;在生成的xxblog里，将github page repo 例如 xxx.github.io, 生成在 xxxblog里&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;步骤一的方法可以直接参考&lt;a href=&#34;http://leonshi.com/2016/02/01/add-existing-project-to-github/&#34;&gt;将已存在目录转换为git repo&lt;/a&gt;。
+完成后在目录内，运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git submodule add -b master git@github.com:&amp;lt;USERNAME&amp;gt;/&amp;lt;USERNAME&amp;gt;.github.io.git public. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;note&lt;/strong&gt;: 这里的&lt;code&gt;&amp;lt;USERNAME&amp;gt;&lt;/code&gt;指的是你github账号的名字
+这行代码的意义是将你的github.io，也就是github page作为运行你的博客的host，等会可以连接你发布的静态文档，以方便其他人和自己在不同的网络里登陆并且阅读
+因为，发博客是持续性的工作，所以为了简单化发博客的特点，这里特地加了一个脚本(script)，以方便每次只需要将写好的markdown，commit到host（xxx.github.io)上。&lt;/p&gt;
+
+&lt;p&gt;在当前目录下, 建立一个可执行文件 deploy.sh。将以下内容复制到deploy.sh上。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+echo -e &amp;quot;\033[0;32mDeploying updates to GitHub...\033[0m&amp;quot;
+
+# 启动hugo.
+hugo 
+
+# 进入public 文件夹，这个实际上是xxx.github.io
+cd public
+
+# 加入新发布的markdown
+git add .
+
+# 标注此次更新的内容与时间 
+msg=&amp;quot;rebuilding site `date`&amp;quot;
+if [ $# -eq 1 ]
+  then msg=&amp;quot;$1&amp;quot;
+fi
+git commit -m &amp;quot;$msg&amp;quot;
+
+# 上传到xxx.github.io
+git push origin master
+
+# 返回上一级目录
+cd ..
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将deploy.sh，变成可执行文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chmod +x deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;谨记&lt;/strong&gt;：将public添加到blog里面的./gitignore，这样不会影响到repo的问题。如果没有gitignore, 可以直接创立如下.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo public/ &amp;gt; .gitignore
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;大功告成，以后写新的博客以及发布只需要像一下一样&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 进入blog所在目录
+cd blog
+
+# 创建新博客例如 深度学习笔记
+hugo new posts/深度学习笔记.md
+
+# 运行deploy.sh 发布到自己的Host上
+./deploy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;进阶设置&#34;&gt;进阶设置&lt;/h2&gt;
+
+&lt;h3 id=&#34;主题设置&#34;&gt;主题设置&lt;/h3&gt;
+
+&lt;p&gt;刚刚的演示只是建立了一个小白板的过程，一个让人眼前一亮的UI，也是很需要的。可以去&lt;a href=&#34;https://themes.gohugo.io&#34;&gt;hugo主题&lt;/a&gt;，下载你喜欢的主题，并放入&lt;code&gt;theme/&lt;/code&gt;目录下
+。然后更改你的&lt;code&gt;config.toml&lt;/code&gt;. 运行&lt;code&gt;hugo server -D&lt;/code&gt;，在本地查看效果以方便调整&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#将hugo那行改成 你下载的主题 例如Serif
+hugo -t Serif
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你感兴趣我的主题，可以去下载&lt;a href=&#34;https://themes.gohugo.io/leaveit/&#34;&gt;LeaveIt&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;自定义域名&#34;&gt;自定义域名&lt;/h3&gt;
+
+&lt;p&gt;很多人感觉访问自己的博客 xxx.github.io不够酷，这里有两种方案，&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;免费一年的域名，从&lt;a href=&#34;https://www.freenom.com/en/index.html?lang=en&#34;&gt;FreeNom&lt;/a&gt;, 可获得 .TK / .ML / .GA / .CF / .GQ&lt;/li&gt;
+&lt;li&gt;付费域名 e.g Godaddy, Domain.com,各种&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;因为一致做机器学习，所以看到.ml很合适，我就选择了freenom，申请了自己&lt;a href=&#34;moyan.ml&#34;&gt;博客&lt;/a&gt;的地址。申请很简单，直接按照官网步骤走，弄好之后，
+我们来连接xxx.github.io以及自己的域名例如xxx.io。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 进入github.io即为public的文件夹下
+cd blog/public
+
+# 创立一个文件并将申请的域名写入
+echo xxx.io &amp;gt; CNAME
+
+# 复制github.io对应的地址
+ping xxx.github.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后我们进入freenom网站，添加一下xxx.github.io和xxx.io的关系。
+先进入MyDomains -&amp;gt; Manage Domain -&amp;gt; Management Tools -&amp;gt; NameServers把DNSPod中刚刚生成出的两个记录例如192.30.252.153 和 192.30.252.154
+以A类写入。刚刚生成的CNAME自动会将xxx.github.io转为刚刚申请的xxx.io。保存后过几个小时，点开xxx.io即可使用。&lt;/p&gt;
+
+&lt;h3 id=&#34;添加https&#34;&gt;添加https&lt;/h3&gt;
+
+&lt;p&gt;建议使用&lt;a href=&#34;cloudxns.net&#34;&gt;cloudxns&lt;/a&gt;.完全免费，没有任何复杂的东西。其实添加https意义并不大，个人主页基本上其实也是分享一些东西。几乎也不会有任何攻击。
+感兴趣的同学可以查看&lt;a href=&#34;https://blog.csdn.net/luckytanggu/article/details/83089655&#34;&gt;教程&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -279,7 +415,7 @@ The name &amp;ldquo;sigmoid&amp;rdquo; comes from its shape, which we normally c
 
 &lt;p&gt;Since BERT was released in December, all the NLP tasks benchmark scores have been updated, such as SQuad machine understanding, CoLLN 2003 named entity recognition, etc. By exploring tricks and theory behind BERT, BERT uses &lt;strong&gt;GELU&lt;/strong&gt;, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;def gelu(input_tensor):
+&lt;pre&gt;&lt;code class=&#34;language-nolinenumbers&#34;&gt;def gelu(input_tensor):
   &amp;quot;&amp;quot;&amp;quot;Gaussian Error Linear Unit.
   This is a smoother version of the RELU.
   Original paper: https://arxiv.org/abs/1606.08415
