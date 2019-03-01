@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Moyan&#39;s Website</title>
-    <link>https://mmy12580.github.io/posts/</link>
-    <description>Recent content in Posts on Moyan&#39;s Website</description>
+    <title>github on Moyan&#39;s Website</title>
+    <link>https://mmy12580.github.io/tags/github/</link>
+    <description>Recent content in github on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 01 Mar 2019 11:27:28 -0500</lastBuildDate>
     
-	<atom:link href="https://mmy12580.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mmy12580.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -28,24 +28,6 @@
  hugo
  安装我们需要的网站建立的框架
   brew install hugo     </description>
-    </item>
-    
-    <item>
-      <title>Advanced Learning Rate</title>
-      <link>https://mmy12580.github.io/posts/cool-optimization/</link>
-      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/cool-optimization/</guid>
-      <description>A summary of advanced learning rate As a researcher, most of the time is to build an approriate prototype for tasks. The learning rate is one of the most important things need to be taken care of. It works like its name e.g a small value learnign rate means trainig a model in a slow speed, vice versa.</description>
-    </item>
-    
-    <item>
-      <title>Look at Activation Functions</title>
-      <link>https://mmy12580.github.io/posts/look-at-activation-functions/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/look-at-activation-functions/</guid>
-      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
     </item>
     
   </channel>

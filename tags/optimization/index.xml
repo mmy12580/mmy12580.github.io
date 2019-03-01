@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>optimization on Moyan&#39;s Website</title>
+    <link>https://mmy12580.github.io/tags/optimization/</link>
+    <description>Recent content in optimization on Moyan&#39;s Website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 25 Jan 2019 11:18:47 -0500</lastBuildDate>
+    
+	<atom:link href="https://mmy12580.github.io/tags/optimization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Advanced Learning Rate</title>
+      <link>https://mmy12580.github.io/posts/cool-optimization/</link>
+      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/cool-optimization/</guid>
+      <description>A summary of advanced learning rate As a researcher, most of the time is to build an approriate prototype for tasks. The learning rate is one of the most important things need to be taken care of. It works like its name e.g a small value learnign rate means trainig a model in a slow speed, vice versa.</description>
+    </item>
+    
+  </channel>
+</rss>

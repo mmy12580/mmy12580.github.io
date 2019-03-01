@@ -6,16 +6,73 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Jan 2019 11:18:47 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 01 Mar 2019 11:27:28 -0500</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Cool_optimization</title>
-      <link>https://mmy12580.github.io/posts/cool_optimization/</link>
+      <title>网站搭建:hugo&#43;github</title>
+      <link>https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/</link>
+      <pubDate>Fri, 01 Mar 2019 11:27:28 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/</guid>
+      <description>
+
+&lt;h1 id=&#34;代码&#34;&gt;代码&lt;/h1&gt;
+
+&lt;p&gt;个人网站这个事情，想倒腾很久了。可惜一直被各种事情给影响，近来想着，还是得发一下狠。在2019年年初倒腾一个个人网站，原因很简单，高效的做做笔记，发表一些看法，希望能和更多人交流，学习以及成长。Stay foolish, stay hungary!&lt;/p&gt;
+
+&lt;p&gt;本文将介绍如何搭配Hugo + Github Pages + 个人域名 + 添加https的流程。因为我是用Mac搭建的，所以这里的准备工作和具体的流程都只包含了如何用Mac搭建（linux 大同小异)。这里对windows的洪湖先说声抱歉了(シ_ _)シ。对于写代码的要求，这里并不高，只需要你对terminal会用一些常用的代码就可以了，当然，其最基本的git的代码还是需要的 e.g git clone, add, commit, push这些 。而对于完全没写过代码的小白，有一些东西也只能麻烦你们自己google了，比如如何建立github。我这里会提供一些相对应的链接，以方便你在建立网站时的流程。&lt;/p&gt;
+
+&lt;h2 id=&#34;准备工作&#34;&gt;准备工作&lt;/h2&gt;
+
+&lt;h3 id=&#34;依赖环境&#34;&gt;依赖环境&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;brew&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;安装brew, 先打开&lt;code&gt;spotlight&lt;/code&gt;输入&lt;code&gt;terminal&lt;/code&gt;,然后复制以下代码&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;/usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;安装后，安装git 用&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-brew&#34;&gt;brew install git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Github Page&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;官网很清楚 按照步骤来一下就好了&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://pages.github.com&#34;&gt;https://pages.github.com&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;hugo&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;安装我们需要的网站建立的框架&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;brew install hugo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Advanced Learning Rate</title>
+      <link>https://mmy12580.github.io/posts/cool-optimization/</link>
       <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/cool_optimization/</guid>
-      <description>&lt;p&gt;Optimiztion on deep learning is always painful.&lt;/p&gt;
+      <guid>https://mmy12580.github.io/posts/cool-optimization/</guid>
+      <description>
+
+&lt;h1 id=&#34;a-summary-of-advanced-learning-rate&#34;&gt;A summary of advanced learning rate&lt;/h1&gt;
+
+&lt;p&gt;As a researcher, most of the time is to build an approriate prototype for tasks. The learning rate is one of the most important things need to be taken care of. It works like its name e.g a small value learnign rate means trainig a model in a slow speed, vice versa.&lt;/p&gt;
 </description>
     </item>
     

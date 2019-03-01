@@ -6,10 +6,19 @@
     <description>Recent content in deep learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jan 2019 11:18:47 -0500</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advanced Learning Rate</title>
+      <link>https://mmy12580.github.io/posts/cool-optimization/</link>
+      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/cool-optimization/</guid>
+      <description>A summary of advanced learning rate As a researcher, most of the time is to build an approriate prototype for tasks. The learning rate is one of the most important things need to be taken care of. It works like its name e.g a small value learnign rate means trainig a model in a slow speed, vice versa.</description>
+    </item>
     
     <item>
       <title>Look at Activation Functions</title>
