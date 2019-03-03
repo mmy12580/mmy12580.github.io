@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/faiss_dev/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Industrial Solution: FAISS | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Industrial Solution: FAISS | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Industrial Solution: FAISS",
+    "headline" : "Industrial Solution: FAISS",
+    "description" : "Intuition Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-03-02 01:55:11 -0500 EST",
+    "dateModified" : "2019-03-02 01:55:11 -0500 EST",
+    "url" : "https://mmy12580.github.io/posts/faiss_dev/",
+    "wordCount" : "439",
+    "keywords" : [  "Moyan&#39;s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Industrial Solution: FAISS</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-03-02 itemprop="datePublished">March 2, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="intuition">Intuition</h1>
+
+<p>Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can. So, what can we do?</p>
+
+<h1 id="faiss">Faiss</h1>
+
+<p>My solution is to use a powerful tool created by Facebook named as <strong>Faiss</strong>. If you are a nlper, you should actually use it before, maybe you just don&rsquo;t know since when you use it. 😄, no worries. I am going to explain it to you soon.</p>
+
+<p>Let us look at a real case, when you build a word embedding i.e., trained from wiki data. If you would like to find the most similar 10 words to a given word, say, sushi, what do you normally do?</p>
+
+<h3 id="numpy-users">Numpy Users.</h3>
+
+<p><code>np.memmap</code> is a good trick to use when you have a large word embeddings to load to the memory.</p>
+
+<pre><code>import numpy as np 
+# define cosine distance
+def cosine_distance(vec1, vec2):
+    vec1_norm = np.linalg.norm(vec1)
+    vec2_norm = np.linalg.norm(vec2)
+    return vec1.dot(vec2) / (vec1_norm * vec2_norm)
+# loading embeddings via np.memmap
+embeds = np.memmap('wiki200', dtype='float32', model=r)
+results = []
+# for loop search
+for item in embeds:
+    eword, embed = item
+    dist = cosine_distance(words, embed)
+    results.append(eword, dist)
+# sort results
+print(sorted(results, key=lambda x: x[1])[:10])
+</code></pre>
+
+<h3 id="gensim-user">Gensim User.</h3>
+
+<p>The key of Gensim to retrieve the most similar words for the query word is to use <a href="https://github.com/spotify/annoy">Annoy</a>, which creates large read-only file-based data sturctures that are mmapped into memory so that many processes may share the same data.</p>
+
+<pre><code>from gensim.similarities.index import AnnoyIndexer
+from gensim.models import KeyedVectors
+
+# load pretrained model 
+model = KeyedVectors.load('wiki200.vec', binary=False)
+indexer = AnnoyInnder(model, num_trees=2)
+
+# retrieve most smiliar words
+mode.most_similar('sushi', topn=10, indexer=indexer)
+[('sushi', 1.0), 
+ ('sashimi', 0.88),
+ ('maki', 0.81),
+ ('katsu', 0.64 )]
+</code></pre>
+
+<h3 id="any-thing-better">Any thing better?</h3>
+
+<p>Both methods work in some cirumstances. Nevertheless, it does not provide satistifactory results in production sometimes. Now, I am going to introduce the method I mentioned early that nlpers have useds, which is used in <strong>FastText</strong>. Recall the usuage of FastText, it conducts nearest neighbor queries like below:</p>
+
+<pre><code>./fasttext nn wiki200.bin 
+Query word? sushi
+sushi 1.0
+sashimi 0.88
+maki 0.81
+katsu 0.64
+</code></pre>
+
+<p>The nearest neighobour searching integrated on FastText is called <strong>Faiss</strong>, yet another super powerful tools for industrial solutions. It is also what we use in <strong>Leafy.ai</strong>.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/faiss_dev/>https://mmy12580.github.io/posts/faiss_dev/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" class="prev" rel="prev" title="网站搭建:hugo&#43;github"><i class="iconfont icon-left"></i>&nbsp;网站搭建:hugo&#43;github</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

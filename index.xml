@@ -6,8 +6,83 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Mar 2019 11:27:28 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 02 Mar 2019 01:55:11 -0500</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Industrial Solution: FAISS</title>
+      <link>https://mmy12580.github.io/posts/faiss_dev/</link>
+      <pubDate>Sat, 02 Mar 2019 01:55:11 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/faiss_dev/</guid>
+      <description>
+
+&lt;h1 id=&#34;intuition&#34;&gt;Intuition&lt;/h1&gt;
+
+&lt;p&gt;Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can. So, what can we do?&lt;/p&gt;
+
+&lt;h1 id=&#34;faiss&#34;&gt;Faiss&lt;/h1&gt;
+
+&lt;p&gt;My solution is to use a powerful tool created by Facebook named as &lt;strong&gt;Faiss&lt;/strong&gt;. If you are a nlper, you should actually use it before, maybe you just don&amp;rsquo;t know since when you use it. 😄, no worries. I am going to explain it to you soon.&lt;/p&gt;
+
+&lt;p&gt;Let us look at a real case, when you build a word embedding i.e., trained from wiki data. If you would like to find the most similar 10 words to a given word, say, sushi, what do you normally do?&lt;/p&gt;
+
+&lt;h3 id=&#34;numpy-users&#34;&gt;Numpy Users.&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;np.memmap&lt;/code&gt; is a good trick to use when you have a large word embeddings to load to the memory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import numpy as np 
+# define cosine distance
+def cosine_distance(vec1, vec2):
+    vec1_norm = np.linalg.norm(vec1)
+    vec2_norm = np.linalg.norm(vec2)
+    return vec1.dot(vec2) / (vec1_norm * vec2_norm)
+# loading embeddings via np.memmap
+embeds = np.memmap(&#39;wiki200&#39;, dtype=&#39;float32&#39;, model=r)
+results = []
+# for loop search
+for item in embeds:
+    eword, embed = item
+    dist = cosine_distance(words, embed)
+    results.append(eword, dist)
+# sort results
+print(sorted(results, key=lambda x: x[1])[:10])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;gensim-user&#34;&gt;Gensim User.&lt;/h3&gt;
+
+&lt;p&gt;The key of Gensim to retrieve the most similar words for the query word is to use &lt;a href=&#34;https://github.com/spotify/annoy&#34;&gt;Annoy&lt;/a&gt;, which creates large read-only file-based data sturctures that are mmapped into memory so that many processes may share the same data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from gensim.similarities.index import AnnoyIndexer
+from gensim.models import KeyedVectors
+
+# load pretrained model 
+model = KeyedVectors.load(&#39;wiki200.vec&#39;, binary=False)
+indexer = AnnoyInnder(model, num_trees=2)
+
+# retrieve most smiliar words
+mode.most_similar(&#39;sushi&#39;, topn=10, indexer=indexer)
+[(&#39;sushi&#39;, 1.0), 
+ (&#39;sashimi&#39;, 0.88),
+ (&#39;maki&#39;, 0.81),
+ (&#39;katsu&#39;, 0.64 )]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;any-thing-better&#34;&gt;Any thing better?&lt;/h3&gt;
+
+&lt;p&gt;Both methods work in some cirumstances. Nevertheless, it does not provide satistifactory results in production sometimes. Now, I am going to introduce the method I mentioned early that nlpers have useds, which is used in &lt;strong&gt;FastText&lt;/strong&gt;. Recall the usuage of FastText, it conducts nearest neighbor queries like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./fasttext nn wiki200.bin 
+Query word? sushi
+sushi 1.0
+sashimi 0.88
+maki 0.81
+katsu 0.64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The nearest neighobour searching integrated on FastText is called &lt;strong&gt;Faiss&lt;/strong&gt;, yet another super powerful tools for industrial solutions. It is also what we use in &lt;strong&gt;Leafy.ai&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>网站搭建:hugo&#43;github</title>
@@ -199,16 +274,23 @@ ping xxx.github.io
     </item>
     
     <item>
-      <title>Advanced Learning Rate</title>
-      <link>https://mmy12580.github.io/posts/cool-optimization/</link>
+      <title>Amazing Optimizer until 2019.3</title>
+      <link>https://mmy12580.github.io/posts/optimizers/</link>
       <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/cool-optimization/</guid>
+      <guid>https://mmy12580.github.io/posts/optimizers/</guid>
       <description>
 
-&lt;h1 id=&#34;a-summary-of-advanced-learning-rate&#34;&gt;A summary of advanced learning rate&lt;/h1&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;As a researcher, most of the time is to build an approriate prototype for tasks. The learning rate is one of the most important things need to be taken care of. It works like its name e.g a small value learnign rate means trainig a model in a slow speed, vice versa.&lt;/p&gt;
+&lt;p&gt;As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate
+The learning rate is one of the most important things need to be taken care of. It not only helps better convergence e.g hit a better local minima or luckly global minima, but also faster the process of convergence.&lt;/p&gt;
+
+&lt;p&gt;Apparently, the most popular choices are &lt;strong&gt;adam&lt;/strong&gt; and &lt;strong&gt;sgd&lt;/strong&gt; optimizers. They have played a key role in the literature of deep learning, and some traditional machine learning algorithms. It is treated as a breathough to optimize a large volume of data based non-convex cases. However, which one is to use is still debatable. Adam has shown its advantage i.e., suprising fast converging, while sgd and its extention sgd + momentum are proved to yield a better or sometimes way better performance, i.e., higher accuracy on new data. A lot of researchers are trying to create a &lt;strong&gt;fast&lt;/strong&gt; and &lt;strong&gt;good&lt;/strong&gt; optmizer, so the work which can be descrbited as a variety of mutation method on Adam or sgd have been studied. Aa far as I concern, there are few works are really promising. I would like to share it with you. Luckily, the code of the works is released too, and it can be easilly add to your model, so to have a faster experience in training and get a promising results in generalization.&lt;/p&gt;
+
+&lt;h3 id=&#34;adamw&#34;&gt;AdamW&lt;/h3&gt;
+
+&lt;h3 id=&#34;adamg&#34;&gt;AdamG&lt;/h3&gt;
 </description>
     </item>
     
@@ -227,11 +309,11 @@ ping xxx.github.io
     </item>
     
     <item>
-      <title>Look at Activation Functions</title>
-      <link>https://mmy12580.github.io/posts/look-at-activation-functions/</link>
+      <title>Activation is important!</title>
+      <link>https://mmy12580.github.io/posts/activation/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/look-at-activation-functions/</guid>
+      <guid>https://mmy12580.github.io/posts/activation/</guid>
       <description>
 
 &lt;h1 id=&#34;overview&#34;&gt;Overview:&lt;/h1&gt;
