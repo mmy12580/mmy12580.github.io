@@ -6,8 +6,23 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Mar 2019 01:55:11 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About</title>
+      <link>https://mmy12580.github.io/about/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/about/</guid>
+      <description>&lt;p&gt;I am a Machine Learning Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, currently focused on recommendation system, reinforcement learning, and generative adversarial network. In the meantime, I am also an AI Researcher at &lt;a href=&#34;https://leafy.io/&#34;&gt;Leafy lab&lt;/a&gt; working on an app powered by natural language processing. Previously, I worked in two fast growing start-up companies, which are &lt;a href=&#34;http://google.com/&#34;&gt;Istuary Innovation Group&lt;/a&gt; and &lt;a href=&#34;https://choosemuse.com/&#34;&gt;Muse® by Interaxon Inc&lt;/a&gt;. At Istuary Innovation Group, I was mainly on developing deep learning algorithms on smart cameras which include facial recognition, face alignment, and object recognition. While I was InteraXon, designing signal denosing and signal reconstruction is my job to help customers have better expereince in mediation. Currently,
+I&amp;rsquo;m interested in transfer learning, multi-task learning, and light neural network models for NLP and democratizing machine learning and AI. Have a look at my &lt;a href=&#34;https://drive.google.com/open?id=1K72qGm5pysBoNFLxbOBgYfTwp8ZeopbP&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+&lt;p&gt;I write this blog not only to help me refresh my memory about engineering details and theory behind models, training tricks, and optimization but also to communicate with people who might read and share what they know so we can learn from each other.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Industrial Solution: FAISS</title>
@@ -291,20 +306,6 @@ The learning rate is one of the most important things need to be taken care of. 
 &lt;h3 id=&#34;adamw&#34;&gt;AdamW&lt;/h3&gt;
 
 &lt;h3 id=&#34;adamg&#34;&gt;AdamG&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://mmy12580.github.io/about/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/about/</guid>
-      <description>&lt;p&gt;I am an Applied Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, currently focused on recommendation system, reinforcement learning, and generative adversarial network. In the meantime, I am also an Artificial Intelligence Researcher at &lt;a href=&#34;https://leafy.ai/&#34;&gt;Leafy.ai&lt;/a&gt; working on natural language processing. Previously, I worked in a start-up company, &lt;a href=&#34;http://google.com/&#34;&gt;Istuary Innovation Group&lt;/a&gt;, on developing deep learning algorithms on smart camera, which includes face recognition, face alignment, and object recognition. I&amp;rsquo;m interested in transfer learning, multi-task learning, and light neural network models for NLP and democratizing machine learning and AI. Have a look at my &lt;a href=&#34;https://drive.google.com/file/d/12JC-CSasaQpasyAhzh2llL2ZI5FlCFX-/view?usp=sharing&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
-
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-
-&lt;p&gt;I write this blog not only to help me refresh my memory about engineering details and theory behind models, training tricks, and optimization but also to communicate with people who might read and share what they know so we can learn from each other.&lt;/p&gt;
 </description>
     </item>
     
