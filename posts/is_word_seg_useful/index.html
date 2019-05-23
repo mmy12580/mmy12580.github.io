@@ -9,9 +9,9 @@
   <meta name="description" content="Moyan&#39;s personal website">
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
-  <link rel="prev" href="https://mmy12580.github.io/posts/faiss_dev/" />
-  <link rel="next" href="https://mmy12580.github.io/posts/is_word_seg_useful/" />
-  <link rel="canonical" href="https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/" />
+  <link rel="prev" href="https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/" />
+  <link rel="next" href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" />
+  <link rel="canonical" href="https://mmy12580.github.io/posts/is_word_seg_useful/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Leafy开源中文分词模型 | Moyan&#39;s Website
+           Is_word_tokenization_useful? | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Leafy开源中文分词模型 | Moyan&#39;s Website">
+  <meta name="title" content="Is_word_tokenization_useful? | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https://mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Leafy开源中文分词模型",
-    "headline" : "Leafy开源中文分词模型",
-    "description" : "Transformer搭建中文分词模型 为了给用户有更好的NLP产品体验，以及为了后端拥有更好的文本搜索引擎处理方案，特地做来一套完整的NLP系统，包括了分词(tokenziation), 序列标注(Sequential Labeling)的其他功能 e.g POS tagging和实体识别(NER)，以及其余下游任务(downstream tasks) 例如，文本搜索（Information Retrieval)和智能客服（Q&amp;A)。",
+    "name" : "Is_word_tokenization_useful?",
+    "headline" : "Is_word_tokenization_useful?",
+    "description" : "Is Chinese Word Segmentation Necessary? I have been working on NLP for more than a year and half, especially on Chinese due to the work at Leafy AI Lab. Segmenting a chunk of text into words is usually the first step of processing Chinese text, and it is often used for so many downstream tasks such as sequential labeling, lexical analysis, dependency parsing, an so on. However, I found an interesting phenomenon while I was conducting research on Named Entity Recognition (NER).",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Moyan Mei",
     "copyrightHolder" : "Moyan Mei",
     "copyrightYear" : "2019",
-    "datePublished": "2019-05-22 17:10:03 -0400 EDT",
-    "dateModified" : "2019-05-22 17:10:03 -0400 EDT",
-    "url" : "https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/",
-    "wordCount" : "10",
+    "datePublished": "2019-05-23 10:27:31 -0400 EDT",
+    "dateModified" : "2019-05-23 10:27:31 -0400 EDT",
+    "url" : "https://mmy12580.github.io/posts/is_word_seg_useful/",
+    "wordCount" : "82",
     "keywords" : [  "Moyan&#39;s Website"]
 }
 </script>
@@ -120,11 +120,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Leafy开源中文分词模型</h1>
+        <h1 class="post-title" itemprop="name headline">Is_word_tokenization_useful?</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
-                on <time datetime=2019-05-22 itemprop="datePublished">May 22, 2019</time>
+                on <time datetime=2019-05-23 itemprop="datePublished">May 23, 2019</time>
                 </span>
                 in
                 
@@ -148,9 +148,9 @@
 
           
 
-<h1 id="transformer搭建中文分词模型">Transformer搭建中文分词模型</h1>
+<h1 id="is-chinese-word-segmentation-necessary">Is Chinese Word Segmentation Necessary?</h1>
 
-<p>为了给用户有更好的NLP产品体验，以及为了后端拥有更好的文本搜索引擎处理方案，特地做来一套完整的NLP系统，包括了分词(tokenziation), 序列标注(Sequential Labeling)的其他功能 e.g POS tagging和实体识别(NER)，以及其余下游任务(downstream tasks) 例如，文本搜索（Information Retrieval)和智能客服（Q&amp;A)。</p>
+<p>I have been working on NLP for more than a year and half, especially on Chinese due to the work at <strong>Leafy AI Lab</strong>. Segmenting a chunk of text into words is usually the first step of processing Chinese text, and it is often used for so many downstream tasks such as sequential labeling, lexical analysis, dependency parsing, an so on. <strong>However</strong>, I found an interesting phenomenon while I was conducting research on Named Entity Recognition (<strong>NER</strong>).</p>
 
     </div>
 
@@ -165,7 +165,7 @@
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/>https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/</span>
+                    <a href=https://mmy12580.github.io/posts/is_word_seg_useful/>https://mmy12580.github.io/posts/is_word_seg_useful/</span>
             </p>
             
             
@@ -182,10 +182,10 @@
 
     <div class="post-nav">
         
-        <a href="https://mmy12580.github.io/posts/faiss_dev/" class="prev" rel="prev" title="Industrial Solution: FAISS"><i class="iconfont icon-left"></i>&nbsp;Industrial Solution: FAISS</a>
+        <a href="https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/" class="prev" rel="prev" title="Leafy开源中文分词模型"><i class="iconfont icon-left"></i>&nbsp;Leafy开源中文分词模型</a>
          
         
-        <a href="https://mmy12580.github.io/posts/is_word_seg_useful/" class="next" rel="next" title="Is_word_tokenization_useful?">Is_word_tokenization_useful?&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" class="next" rel="next" title="多线程还是多进程?">多线程还是多进程?&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
