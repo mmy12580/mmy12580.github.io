@@ -9,9 +9,9 @@
   <meta name="description" content="Moyan&#39;s personal website">
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
-  <link rel="prev" href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" />
+  <link rel="prev" href="https://mmy12580.github.io/posts/faiss_dev/" />
   <link rel="next" href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" />
-  <link rel="canonical" href="https://mmy12580.github.io/posts/faiss_dev/" />
+  <link rel="canonical" href="https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Industrial Solution: FAISS | Moyan&#39;s Website
+           Leafy开源中文分词模型 | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Industrial Solution: FAISS | Moyan&#39;s Website">
+  <meta name="title" content="Leafy开源中文分词模型 | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,9 +44,9 @@
          "@id": "https://mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Industrial Solution: FAISS",
-    "headline" : "Industrial Solution: FAISS",
-    "description" : "Intuition Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can.",
+    "name" : "Leafy开源中文分词模型",
+    "headline" : "Leafy开源中文分词模型",
+    "description" : "Transformer搭建中文分词模型 为了给用户有更好的NLP产品体验，以及为了后端拥有更好的文本搜索引擎处理方案，特地做来一套完整的NLP系统，包括了分词(tokenziation), 序列标注(Sequential Labeling)的其他功能 e.g POS tagging和实体识别(NER)，以及其余下游任务(downstream tasks) 例如，文本搜索（Information Retrieval)和智能客服（Q&amp;A)。",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Moyan Mei",
     "copyrightHolder" : "Moyan Mei",
     "copyrightYear" : "2019",
-    "datePublished": "2019-03-02 01:55:11 -0500 EST",
-    "dateModified" : "2019-03-02 01:55:11 -0500 EST",
-    "url" : "https://mmy12580.github.io/posts/faiss_dev/",
-    "wordCount" : "439",
+    "datePublished": "2019-05-22 17:10:03 -0400 EDT",
+    "dateModified" : "2019-05-22 17:10:03 -0400 EDT",
+    "url" : "https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/",
+    "wordCount" : "10",
     "keywords" : [  "Moyan&#39;s Website"]
 }
 </script>
@@ -120,11 +120,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Industrial Solution: FAISS</h1>
+        <h1 class="post-title" itemprop="name headline">Leafy开源中文分词模型</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
-                on <time datetime=2019-03-02 itemprop="datePublished">March 2, 2019</time>
+                on <time datetime=2019-05-22 itemprop="datePublished">May 22, 2019</time>
                 </span>
                 in
                 
@@ -148,70 +148,9 @@
 
           
 
-<h1 id="intuition">Intuition</h1>
+<h1 id="transformer搭建中文分词模型">Transformer搭建中文分词模型</h1>
 
-<p>Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can. So, what can we do?</p>
-
-<h1 id="faiss">Faiss</h1>
-
-<p>My solution is to use a powerful tool created by Facebook named as <strong>Faiss</strong>. If you are a nlper, you should actually use it before, maybe you just don&rsquo;t know since when you use it. 😄, no worries. I am going to explain it to you soon.</p>
-
-<p>Let us look at a real case, when you build a word embedding i.e., trained from wiki data. If you would like to find the most similar 10 words to a given word, say, sushi, what do you normally do?</p>
-
-<h3 id="numpy-users">Numpy Users.</h3>
-
-<p><code>np.memmap</code> is a good trick to use when you have a large word embeddings to load to the memory.</p>
-
-<pre><code>import numpy as np 
-# define cosine distance
-def cosine_distance(vec1, vec2):
-    vec1_norm = np.linalg.norm(vec1)
-    vec2_norm = np.linalg.norm(vec2)
-    return vec1.dot(vec2) / (vec1_norm * vec2_norm)
-# loading embeddings via np.memmap
-embeds = np.memmap('wiki200', dtype='float32', model=r)
-results = []
-# for loop search
-for item in embeds:
-    eword, embed = item
-    dist = cosine_distance(words, embed)
-    results.append(eword, dist)
-# sort results
-print(sorted(results, key=lambda x: x[1])[:10])
-</code></pre>
-
-<h3 id="gensim-user">Gensim User.</h3>
-
-<p>The key of Gensim to retrieve the most similar words for the query word is to use <a href="https://github.com/spotify/annoy">Annoy</a>, which creates large read-only file-based data sturctures that are mmapped into memory so that many processes may share the same data.</p>
-
-<pre><code>from gensim.similarities.index import AnnoyIndexer
-from gensim.models import KeyedVectors
-
-# load pretrained model 
-model = KeyedVectors.load('wiki200.vec', binary=False)
-indexer = AnnoyInnder(model, num_trees=2)
-
-# retrieve most smiliar words
-mode.most_similar('sushi', topn=10, indexer=indexer)
-[('sushi', 1.0), 
- ('sashimi', 0.88),
- ('maki', 0.81),
- ('katsu', 0.64 )]
-</code></pre>
-
-<h3 id="any-thing-better">Any thing better?</h3>
-
-<p>Both methods work in some cirumstances. Nevertheless, it does not provide satistifactory results in production sometimes. Now, I am going to introduce the method I mentioned early that nlpers have useds, which is used in <strong>FastText</strong>. Recall the usuage of FastText, it conducts nearest neighbor queries like below:</p>
-
-<pre><code>./fasttext nn wiki200.bin 
-Query word? sushi
-sushi 1.0
-sashimi 0.88
-maki 0.81
-katsu 0.64
-</code></pre>
-
-<p>The nearest neighobour searching integrated on FastText is called <strong>Faiss</strong>, yet another super powerful tools for industrial solutions. It is also what we use in <strong>Leafy.ai</strong>.</p>
+<p>为了给用户有更好的NLP产品体验，以及为了后端拥有更好的文本搜索引擎处理方案，特地做来一套完整的NLP系统，包括了分词(tokenziation), 序列标注(Sequential Labeling)的其他功能 e.g POS tagging和实体识别(NER)，以及其余下游任务(downstream tasks) 例如，文本搜索（Information Retrieval)和智能客服（Q&amp;A)。</p>
 
     </div>
 
@@ -226,7 +165,7 @@ katsu 0.64
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=https://mmy12580.github.io/posts/faiss_dev/>https://mmy12580.github.io/posts/faiss_dev/</span>
+                    <a href=https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/>https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/</span>
             </p>
             
             
@@ -243,7 +182,7 @@ katsu 0.64
 
     <div class="post-nav">
         
-        <a href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" class="prev" rel="prev" title="网站搭建:hugo&#43;github"><i class="iconfont icon-left"></i>&nbsp;网站搭建:hugo&#43;github</a>
+        <a href="https://mmy12580.github.io/posts/faiss_dev/" class="prev" rel="prev" title="Industrial Solution: FAISS"><i class="iconfont icon-left"></i>&nbsp;Industrial Solution: FAISS</a>
          
         
         <a href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" class="next" rel="next" title="多线程还是多进程?">多线程还是多进程?&nbsp;<i class="iconfont icon-right"></i></a>

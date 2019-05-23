@@ -6,8 +6,156 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 May 2019 10:41:23 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>多线程还是多进程?</title>
+      <link>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Thu, 23 May 2019 10:41:23 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
+      <description>
+
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;因为我是python的使用者，所以这里我只能通过我对于我工作中的一些经验，提出一些在python上什么时候使用多线程(Multi-Threading)还是多进程(Multi-Processing)。对于其他专业人士，这里稍微多多包涵一下，毕竟我也非科班出身。但是对于data scientist, machine learning engineer, 我个人会给出一些详细的比较，以帮助大家以后在design自己的pipeline。&lt;/p&gt;
+
+&lt;p&gt;当大家考虑在CPU上进行并行计算（parallel computing)的时候，一般Google: how to do parallel computing in python? 一般会出现的是典型的两个packages, e.g &lt;code&gt;multiprocessing&lt;/code&gt; 以及 &lt;code&gt;concurent.futures&lt;/code&gt;。对于具体怎么使用，一般在stack overflow的答案，大家一copy, 改成一个function, 然后直接套用就结束了。对于数据不大，并且相对直接的运算上 e.g exp, pow等，结果比for loop快很多倍就够了。没错，但是本文想讨论的是，如果是你的 ML pipeline，这时候应该怎么用？也是改一个function，直接套用包，就可以保证速度，保证质量了吗？所以，这才特地总结了一个blog, 供自己和大家参考。&lt;/p&gt;
+
+&lt;p&gt;我们通过问题来一步步进行比较，在文章末端，会提供结论。&lt;/p&gt;
+
+&lt;h2 id=&#34;多线程-多进程&#34;&gt;多线程=多进程？&lt;/h2&gt;
+
+&lt;p&gt;答案很明显，是&lt;strong&gt;错误&lt;/strong&gt;的。 这里，我通过一些简单的的代码，来实现比较。以下代码我建立了三种计算的方法，for loop, 多线程，以及多进程以及画图比较多进程和多线程的函数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import time 
+import numpy as np 
+from matplotlib import pyplot as plt
+from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
+
+
+# naive for loop
+def naive_add(x):
+    start = time.time()
+    count = 0
+    for i in range(10**8):
+        count += i
+    stop = time.time()
+    return start, stop
+
+# 多线程
+def multithreading(func, args, workers):
+    with ThreadPoolExecutor(workers) as ex:
+        res = ex.map(func, args)
+    return list(res)
+
+
+# 多进程
+def multiprocessing(func, args, workers):
+    with ProcessPoolExecutor(workers) as ex:
+        res = ex.map(func, args)
+    return list(res)
+
+
+# visualize 结果
+def visualize_runtimes(results, title):
+    start, stop = np.array(results).T
+    plt.barh(range(len(start)), stop - start)
+    plt.grid(axis=&#39;x&#39;)
+    plt.ylabel(&amp;quot;Tasks&amp;quot;)
+    plt.xlabel(&amp;quot;Seconds&amp;quot;)
+    plt.xlim(0, 28)
+    ytks = range(len(results))
+    plt.yticks(ytks, [&#39;job {}&#39;.format(exp) for exp in ytks])
+    plt.title(title)
+    return stop[-1] - start[0]    
+
+def compare(workers, jobs):
+	# plot 
+	plt.subplot(1, 2, 1)	
+	visualize_runtimes(multithreading(naive_add, range(jobs), workers), &#39;Multi-Threading&#39;)
+	plt.subplot(1, 2, 2)
+	visualize_runtimes(multiprocessing(naive_add, range(jobs), workers), &#39;Multi-Processing&#39;)
+	plt.show()
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+	compare(workers=4, jobs=4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果如下图，多线程需要大概24s的计算时间，而多进程只需要5s的计算时间，近乎5倍的速度。很明显，多线程并不等于多进程。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmy12580.github.io/post_imgs/thres_vs_process.png&#34; alt=&#34;RunTime Comparison&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;多进程可以看出，每一个job运行时间一样，这个更可以理解成一个厨师煮一份10人份大锅红烧肉需要半小时。假设煮这样一份10人份大锅红烧肉的时间对于每个厨师都相同。食堂里有一百人需要吃红烧肉，这时候我们可以让10个厨师同时工作，那么总共只需要半小时可以煮出100人份的红烧肉。这也是我们Intuitively理解的并行计算，多人（worker)做同分工作（job），时间不变。&lt;/p&gt;
+
+&lt;p&gt;那么问题来了？多线程相比之下，这么慢，是什么原因？以及它还有必要的存在么？如果有必要，那到底能干什么？&lt;/p&gt;
+
+&lt;h2 id=&#34;多线程进阶&#34;&gt;多线程进阶&lt;/h2&gt;
+
+&lt;h3 id=&#34;q1-这么慢-到底是什么原因&#34;&gt;Q1：这么慢，到底是什么原因？&lt;/h3&gt;
+
+&lt;p&gt;这个可能有些读者不太关心，因为觉得反正多进程(multi-process)够用了，而且后文中会讲解多线程（multi-thread)具体用途。哈哈，但是我认为这个问题的答案能帮助很多ML从业者理解分布式计算系统的来源。大部分人训练深度学习模型有多GPU的时候，一般怎么做？可能正如多进程一样，模型并行（model parallel）。直接训练N个模型，最后ensemble好了。还是那个结论，可取，但是很多公司的结局方案无法负担得起多模型的共同决策。 那么，这时候我们可能只要一个model去作为解决方案。这时候可能考虑到的情况就会有，数据并行（data parallel), 有深度学习知识的读者知道back-propagation会用来更新神经网络每一层的梯度，数据并行的话，前一层的更新会受后一层更新的影响，这时候如何加速梯度更新？以及运行网络爬虫时，出现错误，以及资源调用问题，这时候如何处理。这个时候，&lt;strong&gt;异步处理&lt;/strong&gt;与多线程就会非常有用。这里我并不会详细讲解异步处理，会在之后的post中单讲一篇。那我们先耐着性子看看多线程慢的原因，以及为什么合适异步处理。&lt;/p&gt;
+
+&lt;p&gt;沿用上面的代码，我们添加一个tracking代码，将本身改变成一个list, 这样我们可以track每一次多进程和多线程对于每一个worker，job是什么。以及改变一下compare function里的测试函数从navie_add换成live_tracker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# tracking
+def live_tracker(x):
+    reference = time.time()
+    l = []
+    for i in range(10**6):
+        l.append(time.time() - reference)
+    return l
+
+
+def visualize_live_runtimes(results, title):
+    for i, exp in enumerate(results):
+        print(i)
+        plt.scatter(exp, np.ones(len(exp)) * i, alpha=0.8, c=&#39;red&#39;, edgecolors=&#39;none&#39;, s=1)
+
+    plt.grid(axis=&#39;x&#39;)
+    plt.ylabel(&amp;quot;Tasks&amp;quot;)
+    ytks = range(len(results))
+    plt.yticks(ytks, [&#39;job {}&#39;.format(exp) for exp in ytks])
+    plt.xlabel(&amp;quot;Seconds&amp;quot;)
+    plt.title(title)
+
+
+def compare(workers, jobs):
+	plt.subplot(1, 2, 1)
+	visualize_live_runtimes(multithreading(live_tracker, range(jobs), workers), &amp;quot;Multithreading&amp;quot;)
+	plt.subplot(1, 2, 2)
+	visualize_live_runtimes(multiprocessing(live_tracker, range(jobs), workers), &amp;quot;Multiprocessing&amp;quot;)
+	plt.show()
+
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+	comapre(workers=4, jobs=4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmy12580.github.io/post_imgs/thres_vs_process2.png&#34; alt=&#34;Live RunTime Comparision&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;这里有一个非常有意思的结论&#34;&gt;这里有一个非常有意思的结论！&lt;/h3&gt;
+
+&lt;p&gt;在多线程中，线程并不是并行计算，而是每个线程在时间t会被单独处理，称之为并发(Concurrency)）。简单来说，每一个job中，每一个线程都会运行一点点，然后有其他的线程接替该工作继续进行相关计算。这里很容易混淆与并行(parallelism)的概念。并发(Concurrency)与并行(parallelism)的主要区别可以理解为&lt;strong&gt;并发是同一时间内多人做多件事&lt;/strong&gt;，而&lt;strong&gt;并行是同一时间内多个人做同一件事&lt;/strong&gt;已获得速度提升。&lt;/p&gt;
+
+&lt;p&gt;这么一看，是不是能理解为什么多进程会慢？相当于没有百分之百的利用多人(workers)的特点去专注一件事情。是不是也能理解为什么它有一定的存在意义？因为它可以处理多件事情。想想爬虫在做的事情，如果有1000个链接需要去爬，每一个链接都会有time out的可能性，这时候如何调整thread去别的链接爬虫？以及做中文分词(深度学习），给一段话分词，I/O上多线程会非常适用。在后续发布的我开发的中文分词模型中，也运用到了。&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;我们来稍微回顾一下今天涉及到的内容并且我会添加一些个人经验。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;多进程不等于多线程&lt;/li&gt;
+&lt;li&gt;多线程是并发(Concurency), 而多进程是并行(parallelism)&lt;/li&gt;
+&lt;li&gt;多线程适用于I/O， 而多进程适用于加速&lt;/li&gt;
+&lt;li&gt;多进程中最多使用电脑中可用的&lt;strong&gt;核&lt;/strong&gt;的数量 e.g n_{process} = n_cores&lt;/li&gt;
+&lt;li&gt;多线程中选取$m=list(range(2, 8))中的一个数使得n_threds = m * n_cores, 测试m能让I/O速度到达最快&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
     
     <item>
       <title>About</title>

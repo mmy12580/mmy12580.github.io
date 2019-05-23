@@ -1,0 +1,11 @@
+---
+title: "Is_word_tokenization_useful?"
+date: 2019-05-23T10:27:31-04:00
+draft: true
+---
+
+
+# A useful suggestion: Is Chinese Word Tokenization Necessary?
+
+
+I have been working on NLP for more than a year, especially Chinese due to the work at **Leafy Lab**. When developing any of the NLP downstream tasks, embedding is always the key part of it. As most NLP researchers agreed, embedding can boost the performance of NLP downstream tasks due to the semantic representation. However, I never really had a chance to stop for a while and criticizes if I am done correctly with the appropriate embeddings. Here, I mean the level of embeddings, such as word, character, n-grams or even hybrid. 

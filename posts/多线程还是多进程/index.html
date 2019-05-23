@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/faiss_dev/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           多线程还是多进程? | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="多线程还是多进程? | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "多线程还是多进程?",
+    "headline" : "多线程还是多进程?",
+    "description" : "Introduction 因为我是python的使用者，所以这里我只能通过我对于我工作中的一些经验，提出一些在python上什么时候使用多线程(Multi-Threading)还是多进程(Multi-Processing)。对于其他专业人士，这里稍微多多包涵一下，毕竟我也非科班出身。但是对于data scientist, machine learning engineer, 我个人会给出一些详细的比较，以帮助大家以后在design自己的pipeline。
+当大家考虑在CPU上进行并行计算（parallel computing)的时候，一般Google: how to do parallel computing in python? 一般会出现的是典型的两个packages, e.g multiprocessing 以及 concurent.futures。对于具体怎么使用，一般在stack overflow的答案，大家一copy, 改成一个function, 然后直接套用就结束了。对于数据不大，并且相对直接的运算上 e.g exp, pow等，结果比for loop快很多倍就够了。没错，但是本文想讨论的是，如果是你的 ML pipeline，这时候应该怎么用？也是改一个function，直接套用包，就可以保证速度，保证质量了吗？所以，这才特地总结了一个blog, 供自己和大家参考。
+我们通过问题来一步步进行比较，在文章末端，会提供结论。
+多线程=多进程？ 答案很明显，是错误的。 这里，我通过一些简单的的代码，来实现比较。以下代码我建立了三种计算的方法，for loop, 多线程，以及多进程以及画图比较多进程和多线程的函数。
+import time import numpy as np from matplotlib import pyplot as plt from concurrent.futures import ProcessPoolExecutor from concurrent.futures import ThreadPoolExecutor # naive for loop def naive_add(x): start = time.time() count = 0 for i in range(10**8): count += i stop = time.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-23 10:41:23 -0400 EDT",
+    "dateModified" : "2019-05-23 10:41:23 -0400 EDT",
+    "url" : "https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/",
+    "wordCount" : "284",
+    "keywords" : [  "Moyan&#39;s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">多线程还是多进程?</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-05-23 itemprop="datePublished">May 23, 2019</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="introduction">Introduction</h1>
+
+<p>因为我是python的使用者，所以这里我只能通过我对于我工作中的一些经验，提出一些在python上什么时候使用多线程(Multi-Threading)还是多进程(Multi-Processing)。对于其他专业人士，这里稍微多多包涵一下，毕竟我也非科班出身。但是对于data scientist, machine learning engineer, 我个人会给出一些详细的比较，以帮助大家以后在design自己的pipeline。</p>
+
+<p>当大家考虑在CPU上进行并行计算（parallel computing)的时候，一般Google: how to do parallel computing in python? 一般会出现的是典型的两个packages, e.g <code>multiprocessing</code> 以及 <code>concurent.futures</code>。对于具体怎么使用，一般在stack overflow的答案，大家一copy, 改成一个function, 然后直接套用就结束了。对于数据不大，并且相对直接的运算上 e.g exp, pow等，结果比for loop快很多倍就够了。没错，但是本文想讨论的是，如果是你的 ML pipeline，这时候应该怎么用？也是改一个function，直接套用包，就可以保证速度，保证质量了吗？所以，这才特地总结了一个blog, 供自己和大家参考。</p>
+
+<p>我们通过问题来一步步进行比较，在文章末端，会提供结论。</p>
+
+<h2 id="多线程-多进程">多线程=多进程？</h2>
+
+<p>答案很明显，是<strong>错误</strong>的。 这里，我通过一些简单的的代码，来实现比较。以下代码我建立了三种计算的方法，for loop, 多线程，以及多进程以及画图比较多进程和多线程的函数。</p>
+
+<pre><code class="language-python">import time 
+import numpy as np 
+from matplotlib import pyplot as plt
+from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
+
+
+# naive for loop
+def naive_add(x):
+    start = time.time()
+    count = 0
+    for i in range(10**8):
+        count += i
+    stop = time.time()
+    return start, stop
+
+# 多线程
+def multithreading(func, args, workers):
+    with ThreadPoolExecutor(workers) as ex:
+        res = ex.map(func, args)
+    return list(res)
+
+
+# 多进程
+def multiprocessing(func, args, workers):
+    with ProcessPoolExecutor(workers) as ex:
+        res = ex.map(func, args)
+    return list(res)
+
+
+# visualize 结果
+def visualize_runtimes(results, title):
+    start, stop = np.array(results).T
+    plt.barh(range(len(start)), stop - start)
+    plt.grid(axis='x')
+    plt.ylabel(&quot;Tasks&quot;)
+    plt.xlabel(&quot;Seconds&quot;)
+    plt.xlim(0, 28)
+    ytks = range(len(results))
+    plt.yticks(ytks, ['job {}'.format(exp) for exp in ytks])
+    plt.title(title)
+    return stop[-1] - start[0]    
+
+def compare(workers, jobs):
+	# plot 
+	plt.subplot(1, 2, 1)	
+	visualize_runtimes(multithreading(naive_add, range(jobs), workers), 'Multi-Threading')
+	plt.subplot(1, 2, 2)
+	visualize_runtimes(multiprocessing(naive_add, range(jobs), workers), 'Multi-Processing')
+	plt.show()
+
+
+if __name__ == &quot;__main__&quot;:
+	compare(workers=4, jobs=4)
+</code></pre>
+
+<p>结果如下图，多线程需要大概24s的计算时间，而多进程只需要5s的计算时间，近乎5倍的速度。很明显，多线程并不等于多进程。</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/thres_vs_process.png" alt="RunTime Comparison" class="lazyload"><figcaption class="image-caption">RunTime Comparison</figcaption></figure></p>
+
+<p>多进程可以看出，每一个job运行时间一样，这个更可以理解成一个厨师煮一份10人份大锅红烧肉需要半小时。假设煮这样一份10人份大锅红烧肉的时间对于每个厨师都相同。食堂里有一百人需要吃红烧肉，这时候我们可以让10个厨师同时工作，那么总共只需要半小时可以煮出100人份的红烧肉。这也是我们Intuitively理解的并行计算，多人（worker)做同分工作（job），时间不变。</p>
+
+<p>那么问题来了？多线程相比之下，这么慢，是什么原因？以及它还有必要的存在么？如果有必要，那到底能干什么？</p>
+
+<h2 id="多线程进阶">多线程进阶</h2>
+
+<h3 id="q1-这么慢-到底是什么原因">Q1：这么慢，到底是什么原因？</h3>
+
+<p>这个可能有些读者不太关心，因为觉得反正多进程(multi-process)够用了，而且后文中会讲解多线程（multi-thread)具体用途。哈哈，但是我认为这个问题的答案能帮助很多ML从业者理解分布式计算系统的来源。大部分人训练深度学习模型有多GPU的时候，一般怎么做？可能正如多进程一样，模型并行（model parallel）。直接训练N个模型，最后ensemble好了。还是那个结论，可取，但是很多公司的结局方案无法负担得起多模型的共同决策。 那么，这时候我们可能只要一个model去作为解决方案。这时候可能考虑到的情况就会有，数据并行（data parallel), 有深度学习知识的读者知道back-propagation会用来更新神经网络每一层的梯度，数据并行的话，前一层的更新会受后一层更新的影响，这时候如何加速梯度更新？以及运行网络爬虫时，出现错误，以及资源调用问题，这时候如何处理。这个时候，<strong>异步处理</strong>与多线程就会非常有用。这里我并不会详细讲解异步处理，会在之后的post中单讲一篇。那我们先耐着性子看看多线程慢的原因，以及为什么合适异步处理。</p>
+
+<p>沿用上面的代码，我们添加一个tracking代码，将本身改变成一个list, 这样我们可以track每一次多进程和多线程对于每一个worker，job是什么。以及改变一下compare function里的测试函数从navie_add换成live_tracker</p>
+
+<pre><code class="language-python"># tracking
+def live_tracker(x):
+    reference = time.time()
+    l = []
+    for i in range(10**6):
+        l.append(time.time() - reference)
+    return l
+
+
+def visualize_live_runtimes(results, title):
+    for i, exp in enumerate(results):
+        print(i)
+        plt.scatter(exp, np.ones(len(exp)) * i, alpha=0.8, c='red', edgecolors='none', s=1)
+
+    plt.grid(axis='x')
+    plt.ylabel(&quot;Tasks&quot;)
+    ytks = range(len(results))
+    plt.yticks(ytks, ['job {}'.format(exp) for exp in ytks])
+    plt.xlabel(&quot;Seconds&quot;)
+    plt.title(title)
+
+
+def compare(workers, jobs):
+	plt.subplot(1, 2, 1)
+	visualize_live_runtimes(multithreading(live_tracker, range(jobs), workers), &quot;Multithreading&quot;)
+	plt.subplot(1, 2, 2)
+	visualize_live_runtimes(multiprocessing(live_tracker, range(jobs), workers), &quot;Multiprocessing&quot;)
+	plt.show()
+
+
+if __name__ == &quot;__main__&quot;:
+	comapre(workers=4, jobs=4)
+</code></pre>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/thres_vs_process2.png" alt="Live RunTime Comparision" class="lazyload"><figcaption class="image-caption">Live RunTime Comparision</figcaption></figure></p>
+
+<h3 id="这里有一个非常有意思的结论">这里有一个非常有意思的结论！</h3>
+
+<p>在多线程中，线程并不是并行计算，而是每个线程在时间t会被单独处理，称之为并发(Concurrency)）。简单来说，每一个job中，每一个线程都会运行一点点，然后有其他的线程接替该工作继续进行相关计算。这里很容易混淆与并行(parallelism)的概念。并发(Concurrency)与并行(parallelism)的主要区别可以理解为<strong>并发是同一时间内多人做多件事</strong>，而<strong>并行是同一时间内多个人做同一件事</strong>已获得速度提升。</p>
+
+<p>这么一看，是不是能理解为什么多进程会慢？相当于没有百分之百的利用多人(workers)的特点去专注一件事情。是不是也能理解为什么它有一定的存在意义？因为它可以处理多件事情。想想爬虫在做的事情，如果有1000个链接需要去爬，每一个链接都会有time out的可能性，这时候如何调整thread去别的链接爬虫？以及做中文分词(深度学习），给一段话分词，I/O上多线程会非常适用。在后续发布的我开发的中文分词模型中，也运用到了。</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>我们来稍微回顾一下今天涉及到的内容并且我会添加一些个人经验。</p>
+
+<ol>
+<li>多进程不等于多线程</li>
+<li>多线程是并发(Concurency), 而多进程是并行(parallelism)</li>
+<li>多线程适用于I/O， 而多进程适用于加速</li>
+<li>多进程中最多使用电脑中可用的<strong>核</strong>的数量 e.g n_{process} = n_cores</li>
+<li>多线程中选取$m=list(range(2, 8))中的一个数使得n_threds = m * n_cores, 测试m能让I/O速度到达最快</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/faiss_dev/" class="prev" rel="prev" title="Industrial Solution: FAISS"><i class="iconfont icon-left"></i>&nbsp;Industrial Solution: FAISS</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>
