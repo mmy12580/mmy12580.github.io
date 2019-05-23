@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on Moyan&#39;s Website</title>
+    <link>https://mmy12580.github.io/tags/python/</link>
+    <description>Recent content in python on Moyan&#39;s Website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 May 2019 10:41:23 -0400</lastBuildDate>
+    
+	<atom:link href="https://mmy12580.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>多线程还是多进程?</title>
+      <link>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</link>
+      <pubDate>Thu, 23 May 2019 10:41:23 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
+      <description>Introduction 因为我是python的使用者，所以这里我只能通过我对于我工作中的一些经验，提出一些在python上什么时候使用多线程(Multi-Threading)还是多进程(Multi-Processing)。对于其他专业人士，这里稍微多多包涵一下，毕竟我也非科班出身。但是对于data scientist, machine learning engineer, 我个人会给出一些详细的比较，以帮助大家以后在design自己的pipeline。
+当大家考虑在CPU上进行并行计算（parallel computing)的时候，一般Google: how to do parallel computing in python? 一般会出现的是典型的两个packages, e.g multiprocessing 以及 concurent.futures。对于具体怎么使用，一般在stack overflow的答案，大家一copy, 改成一个function, 然后直接套用就结束了。对于数据不大，并且相对直接的运算上 e.g exp, pow等，结果比for loop快很多倍就够了。没错，但是本文想讨论的是，如果是你的 ML pipeline，这时候应该怎么用？也是改一个function，直接套用包，就可以保证速度，保证质量了吗？所以，这才特地总结了一个blog, 供自己和大家参考。
+我们通过问题来一步步进行比较，在文章末端，会提供结论。
+多线程=多进程？ 答案很明显，是错误的。 这里，我通过一些简单的的代码，来实现比较。以下代码我建立了三种计算的方法，for loop, 多线程，以及多进程以及画图比较多进程和多线程的函数。
+import time import numpy as np from matplotlib import pyplot as plt from concurrent.futures import ProcessPoolExecutor from concurrent.futures import ThreadPoolExecutor # naive for loop def naive_add(x): start = time.time() count = 0 for i in range(10**8): count += i stop = time.</description>
+    </item>
+    
+  </channel>
+</rss>
