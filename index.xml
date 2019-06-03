@@ -151,8 +151,8 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;li&gt;多进程不等于多线程&lt;/li&gt;
 &lt;li&gt;多线程是并发(Concurency), 而多进程是并行(parallelism)&lt;/li&gt;
 &lt;li&gt;多线程适用于I/O， 而多进程适用于加速&lt;/li&gt;
-&lt;li&gt;多进程中最多使用电脑中可用的&lt;strong&gt;核&lt;/strong&gt;的数量 e.g n_{process} = n_cores&lt;/li&gt;
-&lt;li&gt;多线程中选取$m=list(range(2, 8))中的一个数使得n_threds = m * n_cores, 测试m能让I/O速度到达最快&lt;/li&gt;
+&lt;li&gt;多进程中最多使用电脑中可用的&lt;strong&gt;核&lt;/strong&gt;的数量 e.g n_process = n_cores&lt;/li&gt;
+&lt;li&gt;多线程中选取m=list(range(2, 8))中的一个数使得n_threds = m * n_cores, 测试m能让I/O速度到达最快&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
@@ -205,14 +205,46 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 
 &lt;p&gt;Ituitively, 这些都很适合POS Tagging + 分词的特点，甚至我们可以延展到实体识别。&lt;/p&gt;
 
-&lt;h2 id=&#34;搭建模型-transformer&#34;&gt;搭建模型（Transformer)&lt;/h2&gt;
+&lt;h2 id=&#34;搭建模型-transformer-based&#34;&gt;搭建模型（Transformer based)&lt;/h2&gt;
 
 &lt;p&gt;我使用&lt;a href=&#34;https://drive.google.com/open?id=1U_uoJ6tm2_FCX15KCJ49K8EURDChy24O&#34;&gt;人民日报2014&lt;/a&gt;数据来训练模型。在我的github下，已经封装成了一个可执行script文件，只需要在文件下使用&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;./preprocess_data.sh
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;就会下载数据，解压，然后清理最后生成输入字典(src_dict)，输出字典(tgt_dict), 和清理好的数据存储更efficient的h5格式的训练数据processed_2014.h5。&lt;/p&gt;
+&lt;p&gt;就会下载数据，解压，然后清理最后生成输入字典&lt;code&gt;src_dict&lt;/code&gt;，输出字典&lt;code&gt;tgt_dict&lt;/code&gt;, 和清理好的数据&lt;code&gt;processed_2014.txt&lt;/code&gt;以及最后转换为vector，并且存储更有效率的h5格式的训练数据&lt;code&gt;processed_2014.h5&lt;/code&gt;。清理好的数据如下。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;2 0 1 2 年 ， 位 于 西 湖 景 区 太 子 湾 的 “ 听 涛 居 ” 开 张 ， 3 个 月 前 ， 位 于 萧 山 湘 湖 的 “ 碧 湘 楼 ” 开 张 。 开 的 时 间 都 不 算 长 ， 可 在 这 次 会 所 整 顿 中 ， 这 两 家 餐 饮 场 所 都 被 要 求 关 闭 了 。	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;B-T I-T I-T I-T E-T S-W B-V E-V B-NZ I-NZ I-NZ E-NZ B-NZ I-NZ E-NZ S-UDE1 S-W B-NZ E-NZ S-V S-W B-VI E-VI S-W B-T I-T E-T S-F S-W B-V E-V B-NS E-NS B-NZ E-NZ S-UDE1 S-W B-NR I-NR E-NR S-W B-VI E-VI S-W S-V S-UDE1 B-N E-N S-D B-V E-V S-A S-W S-V S-P B-R E-R B-NIS E-NIS B-V E-V S-F S-W S-RZV B-MQ E-MQ B-N E-N B-N E-N S-D S-PBEI B-N E-N B-V E-V S-ULE S-W
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每个句子输入的长度最大值为150， 长度不足150的部分会被padding补齐。我们可以看一下配置过的具体的超参数(hyper-parameters)与其他的配置文件。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;epochs = 128 # 多少轮训练
+steps_per_epoch = 1000 # 每轮训练需要的次数
+num_gpu = 1 # 本机测试 GTX1080一张
+
+# configuration
+config = {
+        &#39;src_vocab_size&#39;: 6864
+        &#39;tgt_vocab_size&#39;: 339,
+        &#39;max_seq_len&#39;: 150,
+        &#39;max_depth&#39;: 2,
+        &#39;model_dim&#39;: 256,
+        &#39;embedding_size_word&#39;: 300,
+        &#39;embedding_dropout&#39;: 0.0,
+        &#39;residual_dropout&#39;: 0.1,
+        &#39;attention_dropout&#39;: 0.1,
+        &#39;l2_reg_penalty&#39;: 1e-6,
+        &#39;confidence_penalty_weight&#39;: 0.1,
+        &#39;compression_window_size&#39;: None,
+        &#39;num_heads&#39;: 2,
+        &#39;use_crf&#39;: True
+    }
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://mmy12580.github.io/post_imgs/cws_model.png&#34; alt=&#34;cws model&#34; /&gt;&lt;/p&gt;
 </description>

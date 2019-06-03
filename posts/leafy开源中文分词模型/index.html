@@ -62,7 +62,7 @@
     "datePublished": "2019-05-22 00:00:00 &#43;0000 UTC",
     "dateModified" : "2019-05-22 00:00:00 &#43;0000 UTC",
     "url" : "https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/",
-    "wordCount" : "93",
+    "wordCount" : "302",
     "keywords" : [  "Moyan&#39;s Website"]
 }
 </script>
@@ -195,14 +195,46 @@
 
 <p>Ituitively, 这些都很适合POS Tagging + 分词的特点，甚至我们可以延展到实体识别。</p>
 
-<h2 id="搭建模型-transformer">搭建模型（Transformer)</h2>
+<h2 id="搭建模型-transformer-based">搭建模型（Transformer based)</h2>
 
 <p>我使用<a href="https://drive.google.com/open?id=1U_uoJ6tm2_FCX15KCJ49K8EURDChy24O">人民日报2014</a>数据来训练模型。在我的github下，已经封装成了一个可执行script文件，只需要在文件下使用</p>
 
 <pre><code>./preprocess_data.sh
 </code></pre>
 
-<p>就会下载数据，解压，然后清理最后生成输入字典(src_dict)，输出字典(tgt_dict), 和清理好的数据存储更efficient的h5格式的训练数据processed_2014.h5。</p>
+<p>就会下载数据，解压，然后清理最后生成输入字典<code>src_dict</code>，输出字典<code>tgt_dict</code>, 和清理好的数据<code>processed_2014.txt</code>以及最后转换为vector，并且存储更有效率的h5格式的训练数据<code>processed_2014.h5</code>。清理好的数据如下。</p>
+
+<pre><code class="language-bash">2 0 1 2 年 ， 位 于 西 湖 景 区 太 子 湾 的 “ 听 涛 居 ” 开 张 ， 3 个 月 前 ， 位 于 萧 山 湘 湖 的 “ 碧 湘 楼 ” 开 张 。 开 的 时 间 都 不 算 长 ， 可 在 这 次 会 所 整 顿 中 ， 这 两 家 餐 饮 场 所 都 被 要 求 关 闭 了 。	
+</code></pre>
+
+<pre><code class="language-bash">B-T I-T I-T I-T E-T S-W B-V E-V B-NZ I-NZ I-NZ E-NZ B-NZ I-NZ E-NZ S-UDE1 S-W B-NZ E-NZ S-V S-W B-VI E-VI S-W B-T I-T E-T S-F S-W B-V E-V B-NS E-NS B-NZ E-NZ S-UDE1 S-W B-NR I-NR E-NR S-W B-VI E-VI S-W S-V S-UDE1 B-N E-N S-D B-V E-V S-A S-W S-V S-P B-R E-R B-NIS E-NIS B-V E-V S-F S-W S-RZV B-MQ E-MQ B-N E-N B-N E-N S-D S-PBEI B-N E-N B-V E-V S-ULE S-W
+</code></pre>
+
+<p>每个句子输入的长度最大值为150， 长度不足150的部分会被padding补齐。我们可以看一下配置过的具体的超参数(hyper-parameters)与其他的配置文件。</p>
+
+<pre><code class="language-python">epochs = 128 # 多少轮训练
+steps_per_epoch = 1000 # 每轮训练需要的次数
+num_gpu = 1 # 本机测试 GTX1080一张
+
+# configuration
+config = {
+        'src_vocab_size': 6864
+        'tgt_vocab_size': 339,
+        'max_seq_len': 150,
+        'max_depth': 2,
+        'model_dim': 256,
+        'embedding_size_word': 300,
+        'embedding_dropout': 0.0,
+        'residual_dropout': 0.1,
+        'attention_dropout': 0.1,
+        'l2_reg_penalty': 1e-6,
+        'confidence_penalty_weight': 0.1,
+        'compression_window_size': None,
+        'num_heads': 2,
+        'use_crf': True
+    }
+
+</code></pre>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/cws_model.png" alt="cws model" class="lazyload"><figcaption class="image-caption">cws model</figcaption></figure></p>
 
