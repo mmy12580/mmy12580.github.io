@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://mmy12580.github.io/posts/training_nn_on_large_batches/</loc>
+      
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/</loc>
       
       <lastmod>2019-05-23T10:41:23-04:00</lastmod>
@@ -85,7 +95,7 @@
     <url>
       <loc>https://mmy12580.github.io/</loc>
       
-      <lastmod>2019-05-23T10:41:23-04:00</lastmod>
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
       
@@ -97,7 +107,7 @@
     <url>
       <loc>https://mmy12580.github.io/posts/</loc>
       
-      <lastmod>2019-05-23T10:41:23-04:00</lastmod>
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
       
@@ -119,7 +129,7 @@
     <url>
       <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
       
-      <lastmod>2019-01-25T11:18:47-05:00</lastmod>
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
       
@@ -131,7 +141,7 @@
     <url>
       <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
       
-      <lastmod>2019-01-23T00:00:00+00:00</lastmod>
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
       
@@ -216,6 +226,18 @@
       <loc>https://mmy12580.github.io/categories/python/</loc>
       
       <lastmod>2019-05-23T10:41:23-04:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/training-tricks/</loc>
+      
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
       

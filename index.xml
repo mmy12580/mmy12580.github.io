@@ -6,8 +6,299 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 May 2019 10:41:23 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 17 Jun 2019 12:21:44 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Training on Large Batches</title>
+      <link>https://mmy12580.github.io/posts/training_nn_on_large_batches/</link>
+      <pubDate>Mon, 17 Jun 2019 12:21:44 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/training_nn_on_large_batches/</guid>
+      <description>
+
+&lt;p&gt;According to Sebastian Ruder&amp;rsquo;s blog &lt;a href=&#34;http://ruder.io/nlp-imagenet/&#34;&gt;post&lt;/a&gt;, the Imagenet moment of NLP has arrived. Especially, models like e.g &lt;code&gt;BERT&lt;/code&gt;, &lt;code&gt;ELMO&lt;/code&gt;, &lt;code&gt;UlMFIT&lt;/code&gt;,&lt;code&gt;Open-GPT&lt;/code&gt;, &lt;code&gt;Transformer-XL&lt;/code&gt; have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a tranfer learning task from a pre-training model such as 345 millions parameter &lt;code&gt;open-gpt2&lt;/code&gt; with a large batch say 256. Certainly, if your NLP taks is with small datasest, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In &lt;code&gt;Leafy&lt;/code&gt; projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.&lt;/p&gt;
+
+&lt;h2 id=&#34;in-particular-this-post-includes&#34;&gt;In particular, this post includes:&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Train a model on a single or multi GPU server with batches larger than the GPUs memory or when even a single training sample won’t fit&lt;/li&gt;
+&lt;li&gt;Most efficient use of a multi-GPU machine&lt;/li&gt;
+&lt;li&gt;The simplest way to train a model using several machines in a distributed setup.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;simplest-trick-gradient-accumulation&#34;&gt;Simplest trick: gradient accumulation.&lt;/h2&gt;
+
+&lt;p&gt;Here, I mainly use &lt;strong&gt;&lt;em&gt;pytorch&lt;/em&gt;&lt;/strong&gt; as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natrual). Comparing to standard optimization which looks like below,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i, (inputs, label) in enumerate(training_set):
+	outputs = model(inputs)               
+	loss = criterion(outputs labels) 
+
+	# backward
+	optimizer.zero_grad() # then reset gradients tensor
+	loss.backward()                           
+	optimizer.step()         				  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the &lt;em&gt;gradient accumulation&lt;/em&gt; looks like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i, (inputs, labels) in enumerate(training_set):
+	outputs = model(inputs)               
+	loss = criterion(outputs labels) 
+
+	# backward
+	# loss normalization 
+	loss = loss / accumulation_steps # taking average loss over accumulated steps
+	# back propagation
+	loss.backward()                                 
+	# update parameters
+	if (i+1) % accumulation_steps == 0:             
+		optimizer.step()  # update all parameters
+		optimizer.zero_grad() # then reset gradients tensor
+                       
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In summary, gradient accummlation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.&lt;/p&gt;
+
+&lt;h2 id=&#34;torch-utils-checkpoint&#34;&gt;Torch.utils.checkpoint&lt;/h2&gt;
+
+&lt;p&gt;When a model is too large for a single GPU, is there a way to implement the training? &lt;strong&gt;Yes, but it has a cost. It costs computing over GPU usuage.&lt;/strong&gt; The trick is to use the checkpoint fucntion in Pytorch. If you would like to know what exactly it does in details, check &lt;a href=&#34;https://pytorch.org/docs/stable/checkpoint.html&#34;&gt;here&lt;/a&gt;, the offical documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too larget to fit in GPU, so what &lt;code&gt;torch.utils.checkpoint&lt;/code&gt; can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to acheive it is like below&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# pseudo 1000 layers model
+layers = [nn.Linear(10, 10) for _ in range(1000)]
+model = nn.Sequential(*layers)
+
+from torch.utils.checkpoint import checkpoint_sequential
+
+# 分成两个部分
+num_segments = 2
+x = checkpoint_sequential(model, num_segments, input)
+x.sum().backward() 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This concept has intersactions with meta-learning, and it has been experimentally proved to be useful for sequence model.&lt;/p&gt;
+
+&lt;h2 id=&#34;mulit-gpu-utility-maximization&#34;&gt;Mulit-GPU Utility Maximization&lt;/h2&gt;
+
+&lt;p&gt;Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great chocie to yield faster training. Here, The top option is always the data parallelism.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;parallel_model = torch.nn.DataParallel(model) 
+predictions = parallel_model(inputs)          
+loss = criterion(predictions, labels)     
+loss.backward()                               
+optimizer.step()                              
+predictions = parallel_model(inputs)          
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from &lt;strong&gt;zhihu&lt;/strong&gt; is like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As step 4 of the Forward pass (top-right) shows the results of &lt;em&gt;ALL&lt;/em&gt; the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len= 21128. If we do batch_size=32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.&lt;/p&gt;
+
+&lt;p&gt;What can we do then?&lt;/p&gt;
+
+&lt;h2 id=&#34;balance-load-on-multi-gpu-machine&#34;&gt;Balance load on multi-GPU machine&lt;/h2&gt;
+
+&lt;p&gt;There are two main solution to the imbalanced GPU usage issue:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;computing the loss in the forward pass of your model&lt;/li&gt;
+&lt;li&gt;computing the loss in a parallel fashion&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&#34;https://hangzhang.org/&#34;&gt;张航&lt;/a&gt;, he solved the problems simply by creating his own version of data parallelism. If you are interested, download &lt;a href=&#34;https://gist.github.com/thomwolf/7e2407fbd5945f07821adae3d9fd1312&#34;&gt;here&lt;/a&gt;, and then import them like normal torch.nn.utils.DataParallel.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from parallel import DataParallelModel, DataParallelCriterion
+
+parallel_model = DataParallelModel(model)             # solution 1
+parallel_loss  = DataParallelCriterion(loss_function) # solution 2
+predictions = parallel_model(inputs)      
+loss = parallel_loss(predictions, labels) 
+loss.backward()                           
+optimizer.step()                          
+predictions = parallel_model(inputs)      
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The difference between &lt;code&gt;DataParallelModel&lt;/code&gt; and &lt;code&gt;torch.nn.DataParallel&lt;/code&gt; is just that the output of the forward pass (predictions) is not gathered on GPU-1 and is thus a tuple of n_gpu tensors, each tensor being located on a respective GPU.&lt;/p&gt;
+
+&lt;p&gt;The DataParallelCriterion takes input the tuple of n_gpu tensors and the target labels tensor. It computes the loss function in parallel on each GPU, splitting the target label tensor the same way the model input was chunked by DataParallel. A related illustration become like below&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/1600/1*F6SXjBp6BCoFTZ26RKnz9A.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;distributed-computing&#34;&gt;Distributed Computing&lt;/h2&gt;
+
+&lt;p&gt;Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on mnist looks like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 2 --world-size 2
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A good code to implement is like below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from __future__ import print_function
+import argparse
+import torch
+import torch.nn as nn
+import time
+
+import torch.nn.parallel
+import torch.nn.functional as F
+import torch.backends.cudnn as cudnn
+import torch.distributed as dist
+import torch.utils.data 
+import torch.utils.data.distributed
+import torch.optim as optim
+from torchvision import datasets, transforms
+from torch.autograd import Variable
+
+# Training settings
+parser = argparse.ArgumentParser(description=&#39;PyTorch MNIST Example&#39;)
+parser.add_argument(&#39;--batch-size&#39;, type=int, default=1024, metavar=&#39;N&#39;,
+                    help=&#39;input batch size for training (default: 64)&#39;)
+parser.add_argument(&#39;--test-batch-size&#39;, type=int, default=1000, metavar=&#39;N&#39;,
+                    help=&#39;input batch size for testing (default: 1000)&#39;)
+parser.add_argument(&#39;--epochs&#39;, type=int, default=20, metavar=&#39;N&#39;,
+                    help=&#39;number of epochs to train (default: 10)&#39;)
+parser.add_argument(&#39;--lr&#39;, type=float, default=0.01, metavar=&#39;LR&#39;,
+                    help=&#39;learning rate (default: 0.01)&#39;)
+parser.add_argument(&#39;--momentum&#39;, type=float, default=0.5, metavar=&#39;M&#39;,
+                    help=&#39;SGD momentum (default: 0.5)&#39;)
+parser.add_argument(&#39;--no-cuda&#39;, action=&#39;store_true&#39;, default=False,
+                    help=&#39;disables CUDA training&#39;)
+parser.add_argument(&#39;--seed&#39;, type=int, default=1, metavar=&#39;S&#39;,
+                    help=&#39;random seed (default: 1)&#39;)
+parser.add_argument(&#39;--log-interval&#39;, type=int, default=10, metavar=&#39;N&#39;,
+                    help=&#39;how many batches to wait before logging training status&#39;)
+parser.add_argument(&#39;--init-method&#39;, type=str, default=&#39;tcp://127.0.0.1:23456&#39;)
+parser.add_argument(&#39;--rank&#39;, type=int)
+parser.add_argument(&#39;--world-size&#39;,type=int)
+
+args = parser.parse_args()
+args.cuda = not args.no_cuda and torch.cuda.is_available()
+
+# initialization
+dist.init_process_group(init_method=args.init_method,backend=&amp;quot;gloo&amp;quot;,world_size=args.world_size,rank=args.rank,group_name=&amp;quot;pytorch_test&amp;quot;)
+
+torch.manual_seed(args.seed)
+if args.cuda:
+    torch.cuda.manual_seed(args.seed)
+
+train_dataset=datasets.MNIST(&#39;data&#39;, train=True, download=True,
+               transform=transforms.Compose([
+                   transforms.ToTensor(),
+                   transforms.Normalize((0.1307,), (0.3081,))
+               ]))
+
+# distirbuted sampling
+train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+
+kwargs = {&#39;num_workers&#39;: 1, &#39;pin_memory&#39;: True} if args.cuda else {}
+
+train_loader = torch.utils.data.DataLoader(train_dataset,
+    batch_size=args.batch_size, shuffle=True, **kwargs)
+test_loader = torch.utils.data.DataLoader(
+    datasets.MNIST(&#39;data&#39;, train=False, transform=transforms.Compose([
+                       transforms.ToTensor(),
+                       transforms.Normalize((0.1307,), (0.3081,))
+                   ])),
+    batch_size=args.test_batch_size, shuffle=True, **kwargs)
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.conv2_drop = nn.Dropout2d()
+        self.fc1 = nn.Linear(320, 50)
+        self.fc2 = nn.Linear(50, 10)
+
+    def forward(self, x):
+        x = F.relu(F.max_pool2d(self.conv1(x), 2))
+        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
+        x = x.view(-1, 320)
+        x = F.relu(self.fc1(x))
+        x = F.dropout(x, training=self.training)
+        x = self.fc2(x)
+        return F.log_softmax(x)
+
+model = Net()
+if args.cuda:
+    # to different cuda devices
+    model.cuda()
+    model = torch.nn.parallel.DistributedDataParallel(model)
+    # model = torch.nn.DataParallel(model,device_ids=[0,1,2,3]).cuda()
+    # model.cuda()
+
+optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+
+def train(epoch):
+    model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        if args.cuda:
+            data, target = data.cuda(), target.cuda()
+        data, target = Variable(data), Variable(target)
+        optimizer.zero_grad()
+        output = model(data)
+        loss = F.nll_loss(output, target)
+        loss.backward()
+        optimizer.step()
+        if batch_idx % args.log_interval == 0:
+            print(&#39;Train Epoch: {} [{}/{} ({:.0f}%)]tLoss: {:.6f}&#39;.format(
+                epoch, batch_idx * len(data), len(train_loader.dataset),
+                100. * batch_idx / len(train_loader), loss.data[0]))
+
+def test():
+    model.eval()
+    test_loss = 0
+    correct = 0
+    for data, target in test_loader:
+        if args.cuda:
+            data, target = data.cuda(), target.cuda()
+        data, target = Variable(data, volatile=True), Variable(target)
+        output = model(data)
+        test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
+        pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
+        correct += pred.eq(target.data.view_as(pred)).cpu().sum()
+
+    test_loss /= len(test_loader.dataset)
+    print(&#39;nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)n&#39;.format(
+        test_loss, correct, len(test_loader.dataset),
+        100. * correct / len(test_loader.dataset)))
+
+tot_time=0;
+
+for epoch in range(1, args.epochs + 1):
+    # set epoch for gathering same epoch info over synchronized jobs
+    train_sampler.set_epoch(epoch)
+    start_cpu_secs = time.time()
+    #long running
+    train(epoch)
+    end_cpu_secs = time.time()
+    print(&amp;quot;Epoch {} of {} took {:.3f}s&amp;quot;.format(
+        epoch , args.epochs , end_cpu_secs - start_cpu_secs))
+    tot_time+=end_cpu_secs - start_cpu_secs
+    test()
+
+print(&amp;quot;Total time= {:.3f}s&amp;quot;.format(tot_time))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion:&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;If you want to try a larger batch size in one GPU machine, try &lt;em&gt;gradient accumulation&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try &lt;em&gt;gradient checkpoint&lt;/em&gt;;&lt;/li&gt;
+&lt;li&gt;If you have multi-GPU, try &lt;em&gt;DataParallel&lt;/em&gt; from Pytorch or provided link;&lt;/li&gt;
+&lt;li&gt;If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try &lt;em&gt;Distributed Computing&lt;/em&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Good luck for all of you to any case you would like to implement deep learning algorithms.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>多线程还是多进程?</title>
@@ -214,10 +505,28 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 
 &lt;p&gt;就会下载数据，解压，然后清理最后生成输入字典&lt;code&gt;src_dict&lt;/code&gt;，输出字典&lt;code&gt;tgt_dict&lt;/code&gt;, 和清理好的数据&lt;code&gt;processed_2014.txt&lt;/code&gt;以及最后转换为vector，并且存储更有效率的h5格式的训练数据&lt;code&gt;processed_2014.h5&lt;/code&gt;。清理好的数据如下。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;2 0 1 2 年 ， 位 于 西 湖 景 区 太 子 湾 的 “ 听 涛 居 ” 开 张 ， 3 个 月 前 ， 位 于 萧 山 湘 湖 的 “ 碧 湘 楼 ” 开 张 。 开 的 时 间 都 不 算 长 ， 可 在 这 次 会 所 整 顿 中 ， 这 两 家 餐 饮 场 所 都 被 要 求 关 闭 了 。	
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;B-T I-T I-T I-T E-T S-W B-V E-V B-NZ I-NZ I-NZ E-NZ B-NZ I-NZ E-NZ S-UDE1 S-W B-NZ E-NZ S-V S-W B-VI E-VI S-W B-T I-T E-T S-F S-W B-V E-V B-NS E-NS B-NZ E-NZ S-UDE1 S-W B-NR I-NR E-NR S-W B-VI E-VI S-W S-V S-UDE1 B-N E-N S-D B-V E-V S-A S-W S-V S-P B-R E-R B-NIS E-NIS B-V E-V S-F S-W S-RZV B-MQ E-MQ B-N E-N B-N E-N S-D S-PBEI B-N E-N B-V E-V S-ULE S-W
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;&amp;gt;&amp;gt;&amp;gt; text = &#39;拉脱维亚/nsf 正式/ad 宣告/v 成为/v 欧元区/nz [第/m 18/m 个/q]/mq 成员国/n \n
+&amp;gt;&amp;gt;&amp;gt; _parse_text(text)
+[[(&#39;拉&#39;, &#39;B-NSF&#39;),
+  (&#39;脱&#39;, &#39;I-NSF&#39;),
+  (&#39;维&#39;, &#39;I-NSF&#39;),
+  (&#39;亚&#39;, &#39;E-NSF&#39;),
+  (&#39;正&#39;, &#39;B-AD&#39;),
+  (&#39;式&#39;, &#39;E-AD&#39;),
+  (&#39;宣&#39;, &#39;B-V&#39;),
+  (&#39;告&#39;, &#39;E-V&#39;),
+  (&#39;成&#39;, &#39;B-V&#39;),
+  (&#39;为&#39;, &#39;E-V&#39;),
+  (&#39;欧&#39;, &#39;B-NZ&#39;),
+  (&#39;元&#39;, &#39;I-NZ&#39;),
+  (&#39;区&#39;, &#39;E-NZ&#39;),
+  (&#39;第&#39;, &#39;B-MQ&#39;),
+  (&#39;1&#39;, &#39;I-MQ&#39;),
+  (&#39;8&#39;, &#39;I-MQ&#39;),
+  (&#39;个&#39;, &#39;E-MQ&#39;),
+  (&#39;成&#39;, &#39;B-N&#39;),
+  (&#39;员&#39;, &#39;I-N&#39;),
+  (&#39;国&#39;, &#39;E-N&#39;)]]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;每个句子输入的长度最大值为150， 长度不足150的部分会被padding补齐。我们可以看一下配置过的具体的超参数(hyper-parameters)与其他的配置文件。&lt;/p&gt;

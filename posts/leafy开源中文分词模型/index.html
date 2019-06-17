@@ -62,7 +62,7 @@
     "datePublished": "2019-05-22 00:00:00 &#43;0000 UTC",
     "dateModified" : "2019-05-22 00:00:00 &#43;0000 UTC",
     "url" : "https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/",
-    "wordCount" : "302",
+    "wordCount" : "201",
     "keywords" : [  "Moyan&#39;s Website"]
 }
 </script>
@@ -204,10 +204,28 @@
 
 <p>就会下载数据，解压，然后清理最后生成输入字典<code>src_dict</code>，输出字典<code>tgt_dict</code>, 和清理好的数据<code>processed_2014.txt</code>以及最后转换为vector，并且存储更有效率的h5格式的训练数据<code>processed_2014.h5</code>。清理好的数据如下。</p>
 
-<pre><code class="language-bash">2 0 1 2 年 ， 位 于 西 湖 景 区 太 子 湾 的 “ 听 涛 居 ” 开 张 ， 3 个 月 前 ， 位 于 萧 山 湘 湖 的 “ 碧 湘 楼 ” 开 张 。 开 的 时 间 都 不 算 长 ， 可 在 这 次 会 所 整 顿 中 ， 这 两 家 餐 饮 场 所 都 被 要 求 关 闭 了 。	
-</code></pre>
-
-<pre><code class="language-bash">B-T I-T I-T I-T E-T S-W B-V E-V B-NZ I-NZ I-NZ E-NZ B-NZ I-NZ E-NZ S-UDE1 S-W B-NZ E-NZ S-V S-W B-VI E-VI S-W B-T I-T E-T S-F S-W B-V E-V B-NS E-NS B-NZ E-NZ S-UDE1 S-W B-NR I-NR E-NR S-W B-VI E-VI S-W S-V S-UDE1 B-N E-N S-D B-V E-V S-A S-W S-V S-P B-R E-R B-NIS E-NIS B-V E-V S-F S-W S-RZV B-MQ E-MQ B-N E-N B-N E-N S-D S-PBEI B-N E-N B-V E-V S-ULE S-W
+<pre><code class="language-bash">&gt;&gt;&gt; text = '拉脱维亚/nsf 正式/ad 宣告/v 成为/v 欧元区/nz [第/m 18/m 个/q]/mq 成员国/n \n
+&gt;&gt;&gt; _parse_text(text)
+[[('拉', 'B-NSF'),
+  ('脱', 'I-NSF'),
+  ('维', 'I-NSF'),
+  ('亚', 'E-NSF'),
+  ('正', 'B-AD'),
+  ('式', 'E-AD'),
+  ('宣', 'B-V'),
+  ('告', 'E-V'),
+  ('成', 'B-V'),
+  ('为', 'E-V'),
+  ('欧', 'B-NZ'),
+  ('元', 'I-NZ'),
+  ('区', 'E-NZ'),
+  ('第', 'B-MQ'),
+  ('1', 'I-MQ'),
+  ('8', 'I-MQ'),
+  ('个', 'E-MQ'),
+  ('成', 'B-N'),
+  ('员', 'I-N'),
+  ('国', 'E-N')]]
 </code></pre>
 
 <p>每个句子输入的长度最大值为150， 长度不足150的部分会被padding补齐。我们可以看一下配置过的具体的超参数(hyper-parameters)与其他的配置文件。</p>
