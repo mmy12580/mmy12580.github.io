@@ -6,8 +6,139 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Jun 2019 12:21:44 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 18 Jun 2019 11:28:17 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A quick summary for imbalanced data</title>
+      <link>https://mmy12580.github.io/posts/imbalanced_learn_summary/</link>
+      <pubDate>Tue, 18 Jun 2019 11:28:17 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/imbalanced_learn_summary/</guid>
+      <description>
+
+&lt;p&gt;Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class. However, the interest of classification is normally the minority class. Sadly 😔, they are normally a short amount of data or low quality data. Therefore, learning from classification methods from imbalanced dataset can divide into two approaches:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;data-level strategies&lt;/strong&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;algorithmic strategies&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In this blog, I will show what problems caused the learning difficult, and their state-of-the-art solutions.&lt;/p&gt;
+
+&lt;h2 id=&#34;why-it-is-difficult&#34;&gt;Why it is difficult?&lt;/h2&gt;
+
+&lt;p&gt;Before introducing the summary of solutions about imbalanced data, let us look at what makes the imbalanced learning difficult? Given a series of research about imbalanced classification, there are mainly four types of problems:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Most of the minority class samples happen to be in high-density majority class samples&lt;/li&gt;
+&lt;li&gt;There is a huge overlap between different class distributions&lt;/li&gt;
+&lt;li&gt;Data is noisy, especially minority data&lt;/li&gt;
+&lt;li&gt;Sparsity on minority data and small disjuncts situation&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;illustrations&#34;&gt;Illustrations:&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/04clover5z-800-7-30-BI.png&#34; alt=&#34;Case 1: minority samples show up in high-density majority samples&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmy12580.github.io/post_imgs/overlap.jpg&#34; alt=&#34;Case 2: overlap&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/custom_data_small_disjunct_3.png&#34; alt=&#34;Case 4: small disjuncts&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;data-level-strategy&#34;&gt;Data-level Strategy&lt;/h2&gt;
+
+&lt;p&gt;The most intuitive way is to re-sample the data to make them somehow &amp;lsquo;balanced&amp;rsquo; because in this case, we can still perform normal machine learning techniques on them. There are generally three types methods:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Down-sampling from majority class e.g RUS, NearMiss, ENN, Tomeklink&lt;/li&gt;
+&lt;li&gt;Over-sampling from minority class e.g SMOTE, ADASYN, Borderline-SMOTE&lt;/li&gt;
+&lt;li&gt;Hybrid method e.g Smote + ENN&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There are pros and cons from data-level strategy.&lt;/p&gt;
+
+&lt;h3 id=&#34;pros&#34;&gt;Pros:&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Boost the performance of classifiers by removing some noise data&lt;/li&gt;
+&lt;li&gt;Down-sampling can remove some samples so it is helpful for faster computation&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;cons&#34;&gt;Cons:&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Re-sampling method is generally finding neighborhood samples from distances. &lt;strong&gt;Curse of dimensionality happens!&lt;/strong&gt;. It wont be helpful for large-scale data&lt;/li&gt;
+&lt;li&gt;Unreasonable re-sampling caused by noise may not accurately capture the distribution information, thus, yields bad performance.&lt;/li&gt;
+&lt;li&gt;Not applicable to some complex dataset since distance metric is inapplicable&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Data-level strategy can be easily achieved by using python package, &lt;a href=&#34;https://imbalanced-learn.readthedocs.io/en/stable/introduction.html&#34;&gt;imbalanced-learn&lt;/a&gt;, which you can build a pipeline just like scikit-learn interface.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from imblearn.over_sampling import ADASYN, SMOTE, RandomOverSampler
+from imblearn.pipeline import make_pipeline
+
+X = data.data[idxs]
+y = data.target[idxs]
+y[y == majority_person] = 0
+y[y == minority_person] = 1
+
+classifier = [&#39;3NN&#39;, neighbors.KNeighborsClassifier(3)]
+
+samplers = [
+    [&#39;Standard&#39;, DummySampler()],
+    [&#39;ADASYN&#39;, ADASYN(random_state=RANDOM_STATE)],
+    [&#39;ROS&#39;, RandomOverSampler(random_state=RANDOM_STATE)],
+    [&#39;SMOTE&#39;, SMOTE(random_state=RANDOM_STATE)],
+]
+
+# create a pipeline with sampling methods
+pipelines = [
+    [&#39;{}-{}&#39;.format(sampler[0], classifier[0]),
+     make_pipeline(sampler[1], classifier[1])]
+    for sampler in samplers
+]
+
+# train
+for name, pipeline in pipelines:
+    mean_tpr = 0.0
+    mean_fpr = np.linspace(0, 1, 100)
+    for train, test in cv.split(X, y):
+        probas_ = pipeline.fit(X[train], y[train]).predict_proba(X[test])
+        fpr, tpr, thresholds = roc_curve(y[test], probas_[:, 1])
+        mean_tpr += interp(mean_fpr, fpr, tpr)
+        mean_tpr[0] = 0.0
+        roc_auc = auc(fpr, tpr)
+
+    mean_tpr /= cv.get_n_splits(X, y)
+    mean_tpr[-1] = 1.0
+    mean_auc = auc(mean_fpr, mean_tpr)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;algorithmic-strategy&#34;&gt;Algorithmic strategy&lt;/h2&gt;
+
+&lt;h3 id=&#34;cost-sensitive-learning&#34;&gt;Cost-sensitive learning&lt;/h3&gt;
+
+&lt;p&gt;In stead of touching data, we can also work on algorithms. The most intuitive way is the &lt;strong&gt;cost-sensitive learning&lt;/strong&gt;. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&amp;lsquo;majority&amp;rsquo;: 1, &amp;lsquo;minority&amp;rsquo;: 10}.&lt;/p&gt;
+
+&lt;p&gt;Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.&lt;/p&gt;
+
+&lt;h3 id=&#34;ensemble-learning&#34;&gt;Ensemble learning&lt;/h3&gt;
+
+&lt;p&gt;Another method that seems to be getting more and more popular for solving data imbalance is ensembles such as SMOTEBoost, SMOTEBagging, Easy Ensemble or BalanceCascade. As far as I observe from my work, ensemble learning seems to the currently best method to solve data imbalance case; nevertheless, it requires more computational power and time to implement, and it might lead to non-robust classifiers.&lt;/p&gt;
+
+&lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Down-sampling: It is able to remove some noise and it is very fast to implement. &lt;strong&gt;Random Downsampling&lt;/strong&gt; can be used in any situation, but it might be harmful for high imbalanced ratio cases. &lt;strong&gt;NearMiss&lt;/strong&gt; is very sensitive to noisy data. To remove noise of data, you can try &lt;strong&gt;Tomeklink&lt;/strong&gt;, &lt;strong&gt;AllKNN&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Oversampling: It is very easy to overfit the data. &lt;strong&gt;SMOTE&lt;/strong&gt; and &lt;strong&gt;ADASYN&lt;/strong&gt; could be helpful for small data.&lt;/li&gt;
+&lt;li&gt;Hybrid sampling: Also helpful for small dataset&lt;/li&gt;
+&lt;li&gt;Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.&lt;/li&gt;
+&lt;li&gt;Bagging is normally better than Boosting based ensemble method.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&amp;rsquo;s &lt;a href=&#34;chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf&#34;&gt;paper&lt;/a&gt;, you will benefit a lot, and it can be used in other applications such as &lt;a href=&#34;https://www.kaggle.com/ntnu-testimon/paysim1&#34;&gt;fraud detection dataset on Kaggle&lt;/a&gt;, and you can check this &lt;a href=&#34;https://github.com/Tony607/Focal_Loss_Keras&#34;&gt;github&lt;/a&gt; to have a practice with &lt;code&gt;focal loss&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Training on Large Batches</title>
@@ -17,7 +148,7 @@
       <guid>https://mmy12580.github.io/posts/training_nn_on_large_batches/</guid>
       <description>
 
-&lt;p&gt;According to Sebastian Ruder&amp;rsquo;s blog &lt;a href=&#34;http://ruder.io/nlp-imagenet/&#34;&gt;post&lt;/a&gt;, the Imagenet moment of NLP has arrived. Especially, models like e.g &lt;code&gt;BERT&lt;/code&gt;, &lt;code&gt;ELMO&lt;/code&gt;, &lt;code&gt;UlMFIT&lt;/code&gt;,&lt;code&gt;Open-GPT&lt;/code&gt;, &lt;code&gt;Transformer-XL&lt;/code&gt; have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a tranfer learning task from a pre-training model such as 345 millions parameter &lt;code&gt;open-gpt2&lt;/code&gt; with a large batch say 256. Certainly, if your NLP taks is with small datasest, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In &lt;code&gt;Leafy&lt;/code&gt; projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.&lt;/p&gt;
+&lt;p&gt;According to Sebastian Ruder&amp;rsquo;s blog &lt;a href=&#34;http://ruder.io/nlp-imagenet/&#34;&gt;post&lt;/a&gt;, the ImageNet moment of NLP has arrived. Especially, models like e.g &lt;code&gt;BERT&lt;/code&gt;, &lt;code&gt;ELMO&lt;/code&gt;, &lt;code&gt;UlMFIT&lt;/code&gt;,&lt;code&gt;Open-GPT&lt;/code&gt;, &lt;code&gt;Transformer-XL&lt;/code&gt; have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter &lt;code&gt;open-gpt2&lt;/code&gt; with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In &lt;code&gt;Leafy&lt;/code&gt; projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.&lt;/p&gt;
 
 &lt;h2 id=&#34;in-particular-this-post-includes&#34;&gt;In particular, this post includes:&lt;/h2&gt;
 
@@ -29,7 +160,7 @@
 
 &lt;h2 id=&#34;simplest-trick-gradient-accumulation&#34;&gt;Simplest trick: gradient accumulation.&lt;/h2&gt;
 
-&lt;p&gt;Here, I mainly use &lt;strong&gt;&lt;em&gt;pytorch&lt;/em&gt;&lt;/strong&gt; as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natrual). Comparing to standard optimization which looks like below,&lt;/p&gt;
+&lt;p&gt;Here, I mainly use &lt;strong&gt;&lt;em&gt;Pytorch&lt;/em&gt;&lt;/strong&gt; as the back-end framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;for i, (inputs, label) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -59,11 +190,11 @@
                        
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;In summary, gradient accummlation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.&lt;/p&gt;
+&lt;p&gt;In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.&lt;/p&gt;
 
 &lt;h2 id=&#34;torch-utils-checkpoint&#34;&gt;Torch.utils.checkpoint&lt;/h2&gt;
 
-&lt;p&gt;When a model is too large for a single GPU, is there a way to implement the training? &lt;strong&gt;Yes, but it has a cost. It costs computing over GPU usuage.&lt;/strong&gt; The trick is to use the checkpoint fucntion in Pytorch. If you would like to know what exactly it does in details, check &lt;a href=&#34;https://pytorch.org/docs/stable/checkpoint.html&#34;&gt;here&lt;/a&gt;, the offical documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too larget to fit in GPU, so what &lt;code&gt;torch.utils.checkpoint&lt;/code&gt; can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to acheive it is like below&lt;/p&gt;
+&lt;p&gt;When a model is too large for a single GPU, is there a way to implement the training? &lt;strong&gt;Yes, but it has a cost. It costs computing over GPU usage.&lt;/strong&gt; The trick is to use the checkpoint function in Pytorch. If you would like to know what exactly it does in details, check &lt;a href=&#34;https://pytorch.org/docs/stable/checkpoint.html&#34;&gt;here&lt;/a&gt;, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what &lt;code&gt;torch.utils.checkpoint&lt;/code&gt; can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# pseudo 1000 layers model
 layers = [nn.Linear(10, 10) for _ in range(1000)]
@@ -71,17 +202,17 @@ model = nn.Sequential(*layers)
 
 from torch.utils.checkpoint import checkpoint_sequential
 
-# 分成两个部分
+# split into two segments
 num_segments = 2
 x = checkpoint_sequential(model, num_segments, input)
 x.sum().backward() 
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This concept has intersactions with meta-learning, and it has been experimentally proved to be useful for sequence model.&lt;/p&gt;
+&lt;p&gt;This concept has interactions with meta-learning, and it has been experimentally proved to be useful for sequence model.&lt;/p&gt;
 
-&lt;h2 id=&#34;mulit-gpu-utility-maximization&#34;&gt;Mulit-GPU Utility Maximization&lt;/h2&gt;
+&lt;h2 id=&#34;multi-gpu-utility-maximization&#34;&gt;Multi-GPU Utility Maximization&lt;/h2&gt;
 
-&lt;p&gt;Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great chocie to yield faster training. Here, The top option is always the data parallelism.&lt;/p&gt;
+&lt;p&gt;Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great choice to yield faster training. Here, The top option is always the data parallelism.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;parallel_model = torch.nn.DataParallel(model) 
 predictions = parallel_model(inputs)          
@@ -129,7 +260,7 @@ predictions = parallel_model(inputs)
 
 &lt;h2 id=&#34;distributed-computing&#34;&gt;Distributed Computing&lt;/h2&gt;
 
-&lt;p&gt;Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on mnist looks like&lt;/p&gt;
+&lt;p&gt;Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on MNIST dataset looks like&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2

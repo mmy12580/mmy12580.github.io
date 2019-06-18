@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data on Moyan&#39;s Website</title>
+    <link>https://mmy12580.github.io/tags/data/</link>
+    <description>Recent content in data on Moyan&#39;s Website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Jun 2019 11:28:17 -0400</lastBuildDate>
+    
+	<atom:link href="https://mmy12580.github.io/tags/data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A quick summary for imbalanced data</title>
+      <link>https://mmy12580.github.io/posts/imbalanced_learn_summary/</link>
+      <pubDate>Tue, 18 Jun 2019 11:28:17 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/imbalanced_learn_summary/</guid>
+      <description>Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -10,7 +10,7 @@
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
   <link rel="prev" href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" />
-  
+  <link rel="next" href="https://mmy12580.github.io/posts/imbalanced_learn_summary/" />
   <link rel="canonical" href="https://mmy12580.github.io/posts/training_nn_on_large_batches/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "Training on Large Batches",
     "headline" : "Training on Large Batches",
-    "description" : "According to Sebastian Ruder&rsquo;s blog post, the Imagenet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT,Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a tranfer learning task from a pre-training model such as 345 millions parameter open-gpt2 with a large batch say 256. Certainly, if your NLP taks is with small datasest, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
+    "description" : "According to Sebastian Ruder&rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT,Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter open-gpt2 with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-06-17 12:21:44 -0400 EDT",
     "dateModified" : "2019-06-17 12:21:44 -0400 EDT",
     "url" : "https://mmy12580.github.io/posts/training_nn_on_large_batches/",
-    "wordCount" : "1615",
+    "wordCount" : "1619",
     "keywords" : [ "deep learning","training tricks", "Moyan&#39;s Website"]
 }
 </script>
@@ -154,7 +154,7 @@
 
           
 
-<p>According to Sebastian Ruder&rsquo;s blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the Imagenet moment of NLP has arrived. Especially, models like e.g <code>BERT</code>, <code>ELMO</code>, <code>UlMFIT</code>,<code>Open-GPT</code>, <code>Transformer-XL</code> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a tranfer learning task from a pre-training model such as 345 millions parameter <code>open-gpt2</code> with a large batch say 256. Certainly, if your NLP taks is with small datasest, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <code>Leafy</code> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
+<p>According to Sebastian Ruder&rsquo;s blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the ImageNet moment of NLP has arrived. Especially, models like e.g <code>BERT</code>, <code>ELMO</code>, <code>UlMFIT</code>,<code>Open-GPT</code>, <code>Transformer-XL</code> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter <code>open-gpt2</code> with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <code>Leafy</code> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
 
 <h2 id="in-particular-this-post-includes">In particular, this post includes:</h2>
 
@@ -166,7 +166,7 @@
 
 <h2 id="simplest-trick-gradient-accumulation">Simplest trick: gradient accumulation.</h2>
 
-<p>Here, I mainly use <strong><em>pytorch</em></strong> as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natrual). Comparing to standard optimization which looks like below,</p>
+<p>Here, I mainly use <strong><em>Pytorch</em></strong> as the back-end framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
 
 <pre><code>for i, (inputs, label) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -196,11 +196,11 @@
                        
 </code></pre>
 
-<p>In summary, gradient accummlation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
+<p>In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
 
 <h2 id="torch-utils-checkpoint">Torch.utils.checkpoint</h2>
 
-<p>When a model is too large for a single GPU, is there a way to implement the training? <strong>Yes, but it has a cost. It costs computing over GPU usuage.</strong> The trick is to use the checkpoint fucntion in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the offical documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too larget to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to acheive it is like below</p>
+<p>When a model is too large for a single GPU, is there a way to implement the training? <strong>Yes, but it has a cost. It costs computing over GPU usage.</strong> The trick is to use the checkpoint function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
 
 <pre><code class="language-python"># pseudo 1000 layers model
 layers = [nn.Linear(10, 10) for _ in range(1000)]
@@ -208,17 +208,17 @@ model = nn.Sequential(*layers)
 
 from torch.utils.checkpoint import checkpoint_sequential
 
-# 分成两个部分
+# split into two segments
 num_segments = 2
 x = checkpoint_sequential(model, num_segments, input)
 x.sum().backward() 
 </code></pre>
 
-<p>This concept has intersactions with meta-learning, and it has been experimentally proved to be useful for sequence model.</p>
+<p>This concept has interactions with meta-learning, and it has been experimentally proved to be useful for sequence model.</p>
 
-<h2 id="mulit-gpu-utility-maximization">Mulit-GPU Utility Maximization</h2>
+<h2 id="multi-gpu-utility-maximization">Multi-GPU Utility Maximization</h2>
 
-<p>Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great chocie to yield faster training. Here, The top option is always the data parallelism.</p>
+<p>Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great choice to yield faster training. Here, The top option is always the data parallelism.</p>
 
 <pre><code>parallel_model = torch.nn.DataParallel(model) 
 predictions = parallel_model(inputs)          
@@ -266,7 +266,7 @@ predictions = parallel_model(inputs)
 
 <h2 id="distributed-computing">Distributed Computing</h2>
 
-<p>Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on mnist looks like</p>
+<p>Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on MNIST dataset looks like</p>
 
 <pre><code>python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2
@@ -478,6 +478,8 @@ print(&quot;Total time= {:.3f}s&quot;.format(tot_time))
         
         <a href="https://mmy12580.github.io/posts/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E8%BF%9B%E7%A8%8B/" class="prev" rel="prev" title="多线程还是多进程?"><i class="iconfont icon-left"></i>&nbsp;多线程还是多进程?</a>
          
+        
+        <a href="https://mmy12580.github.io/posts/imbalanced_learn_summary/" class="next" rel="next" title="A quick summary for imbalanced data">A quick summary for imbalanced data&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

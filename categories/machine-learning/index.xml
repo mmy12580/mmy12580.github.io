@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>machine learning on Moyan&#39;s Website</title>
-    <link>https://mmy12580.github.io/tags/machine-learning/</link>
+    <link>https://mmy12580.github.io/categories/machine-learning/</link>
     <description>Recent content in machine learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 18 Jun 2019 11:28:17 -0400</lastBuildDate>
     
-	<atom:link href="https://mmy12580.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mmy12580.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://mmy12580.github.io/posts/imbalanced_learn_summary/</guid>
       <description>Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class.</description>
-    </item>
-    
-    <item>
-      <title>Amazing Optimizer until 2019.3</title>
-      <link>https://mmy12580.github.io/posts/optimizers/</link>
-      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/optimizers/</guid>
-      <description>Introduction As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate The learning rate is one of the most important things need to be taken care of.</description>
     </item>
     
   </channel>

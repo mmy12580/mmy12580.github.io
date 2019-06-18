@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/training_nn_on_large_batches/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/imbalanced_learn_summary/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           A quick summary for imbalanced data | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="A quick summary for imbalanced data | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "A quick summary for imbalanced data",
+    "headline" : "A quick summary for imbalanced data",
+    "description" : "Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-06-18 11:28:17 -0400 EDT",
+    "dateModified" : "2019-06-18 11:28:17 -0400 EDT",
+    "url" : "https://mmy12580.github.io/posts/imbalanced_learn_summary/",
+    "wordCount" : "881",
+    "keywords" : [ "machine learning","data", "Moyan&#39;s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">A quick summary for imbalanced data</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-06-18 itemprop="datePublished">June 18, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/machine-learning/"> machine learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<p>Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class. However, the interest of classification is normally the minority class. Sadly 😔, they are normally a short amount of data or low quality data. Therefore, learning from classification methods from imbalanced dataset can divide into two approaches:</p>
+
+<ol>
+<li><strong>data-level strategies</strong><br /></li>
+<li><strong>algorithmic strategies</strong></li>
+</ol>
+
+<p>In this blog, I will show what problems caused the learning difficult, and their state-of-the-art solutions.</p>
+
+<h2 id="why-it-is-difficult">Why it is difficult?</h2>
+
+<p>Before introducing the summary of solutions about imbalanced data, let us look at what makes the imbalanced learning difficult? Given a series of research about imbalanced classification, there are mainly four types of problems:</p>
+
+<ol>
+<li>Most of the minority class samples happen to be in high-density majority class samples</li>
+<li>There is a huge overlap between different class distributions</li>
+<li>Data is noisy, especially minority data</li>
+<li>Sparsity on minority data and small disjuncts situation</li>
+</ol>
+
+<h3 id="illustrations">Illustrations:</h3>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/04clover5z-800-7-30-BI.png" alt="Case 1: minority samples show up in high-density majority samples" class="lazyload"><figcaption class="image-caption">Case 1: minority samples show up in high-density majority samples</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/overlap.jpg" alt="Case 2: overlap" class="lazyload"><figcaption class="image-caption">Case 2: overlap</figcaption></figure></p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/custom_data_small_disjunct_3.png" alt="Case 4: small disjuncts" class="lazyload"><figcaption class="image-caption">Case 4: small disjuncts</figcaption></figure></p>
+
+<h2 id="data-level-strategy">Data-level Strategy</h2>
+
+<p>The most intuitive way is to re-sample the data to make them somehow &lsquo;balanced&rsquo; because in this case, we can still perform normal machine learning techniques on them. There are generally three types methods:</p>
+
+<ol>
+<li>Down-sampling from majority class e.g RUS, NearMiss, ENN, Tomeklink</li>
+<li>Over-sampling from minority class e.g SMOTE, ADASYN, Borderline-SMOTE</li>
+<li>Hybrid method e.g Smote + ENN</li>
+</ol>
+
+<p>There are pros and cons from data-level strategy.</p>
+
+<h3 id="pros">Pros:</h3>
+
+<ol>
+<li>Boost the performance of classifiers by removing some noise data</li>
+<li>Down-sampling can remove some samples so it is helpful for faster computation</li>
+</ol>
+
+<h3 id="cons">Cons:</h3>
+
+<ol>
+<li>Re-sampling method is generally finding neighborhood samples from distances. <strong>Curse of dimensionality happens!</strong>. It wont be helpful for large-scale data</li>
+<li>Unreasonable re-sampling caused by noise may not accurately capture the distribution information, thus, yields bad performance.</li>
+<li>Not applicable to some complex dataset since distance metric is inapplicable</li>
+</ol>
+
+<p>Data-level strategy can be easily achieved by using python package, <a href="https://imbalanced-learn.readthedocs.io/en/stable/introduction.html">imbalanced-learn</a>, which you can build a pipeline just like scikit-learn interface.</p>
+
+<pre><code>from imblearn.over_sampling import ADASYN, SMOTE, RandomOverSampler
+from imblearn.pipeline import make_pipeline
+
+X = data.data[idxs]
+y = data.target[idxs]
+y[y == majority_person] = 0
+y[y == minority_person] = 1
+
+classifier = ['3NN', neighbors.KNeighborsClassifier(3)]
+
+samplers = [
+    ['Standard', DummySampler()],
+    ['ADASYN', ADASYN(random_state=RANDOM_STATE)],
+    ['ROS', RandomOverSampler(random_state=RANDOM_STATE)],
+    ['SMOTE', SMOTE(random_state=RANDOM_STATE)],
+]
+
+# create a pipeline with sampling methods
+pipelines = [
+    ['{}-{}'.format(sampler[0], classifier[0]),
+     make_pipeline(sampler[1], classifier[1])]
+    for sampler in samplers
+]
+
+# train
+for name, pipeline in pipelines:
+    mean_tpr = 0.0
+    mean_fpr = np.linspace(0, 1, 100)
+    for train, test in cv.split(X, y):
+        probas_ = pipeline.fit(X[train], y[train]).predict_proba(X[test])
+        fpr, tpr, thresholds = roc_curve(y[test], probas_[:, 1])
+        mean_tpr += interp(mean_fpr, fpr, tpr)
+        mean_tpr[0] = 0.0
+        roc_auc = auc(fpr, tpr)
+
+    mean_tpr /= cv.get_n_splits(X, y)
+    mean_tpr[-1] = 1.0
+    mean_auc = auc(mean_fpr, mean_tpr)
+</code></pre>
+
+<h2 id="algorithmic-strategy">Algorithmic strategy</h2>
+
+<h3 id="cost-sensitive-learning">Cost-sensitive learning</h3>
+
+<p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <strong>cost-sensitive learning</strong>. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
+
+<p>Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.</p>
+
+<h3 id="ensemble-learning">Ensemble learning</h3>
+
+<p>Another method that seems to be getting more and more popular for solving data imbalance is ensembles such as SMOTEBoost, SMOTEBagging, Easy Ensemble or BalanceCascade. As far as I observe from my work, ensemble learning seems to the currently best method to solve data imbalance case; nevertheless, it requires more computational power and time to implement, and it might lead to non-robust classifiers.</p>
+
+<h2 id="experience">Experience</h2>
+
+<ol>
+<li>Down-sampling: It is able to remove some noise and it is very fast to implement. <strong>Random Downsampling</strong> can be used in any situation, but it might be harmful for high imbalanced ratio cases. <strong>NearMiss</strong> is very sensitive to noisy data. To remove noise of data, you can try <strong>Tomeklink</strong>, <strong>AllKNN</strong>.</li>
+<li>Oversampling: It is very easy to overfit the data. <strong>SMOTE</strong> and <strong>ADASYN</strong> could be helpful for small data.</li>
+<li>Hybrid sampling: Also helpful for small dataset</li>
+<li>Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.</li>
+<li>Bagging is normally better than Boosting based ensemble method.</li>
+</ol>
+
+<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&rsquo;s <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <code>focal loss</code>.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/imbalanced_learn_summary/>https://mmy12580.github.io/posts/imbalanced_learn_summary/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/machine-learning/">
+                    #machine learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/data/">
+                    #data</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/training_nn_on_large_batches/" class="prev" rel="prev" title="Training on Large Batches"><i class="iconfont icon-left"></i>&nbsp;Training on Large Batches</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

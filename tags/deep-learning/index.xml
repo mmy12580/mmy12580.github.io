@@ -17,7 +17,7 @@
       <pubDate>Mon, 17 Jun 2019 12:21:44 -0400</pubDate>
       
       <guid>https://mmy12580.github.io/posts/training_nn_on_large_batches/</guid>
-      <description>According to Sebastian Ruder&amp;rsquo;s blog post, the Imagenet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT,Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a tranfer learning task from a pre-training model such as 345 millions parameter open-gpt2 with a large batch say 256. Certainly, if your NLP taks is with small datasest, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.</description>
+      <description>According to Sebastian Ruder&amp;rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT,Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter open-gpt2 with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.</description>
     </item>
     
     <item>
