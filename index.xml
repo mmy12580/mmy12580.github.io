@@ -579,7 +579,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
     </item>
     
     <item>
-      <title>Leafy开源中文分词模型(Transformer)</title>
+      <title>Leafy中文分词模型 - Transformer</title>
       <link>https://mmy12580.github.io/posts/leafy%E5%BC%80%E6%BA%90%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Wed, 22 May 2019 00:00:00 +0000</pubDate>
       
@@ -599,8 +599,8 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;p&gt;简单来说，词是文本具有&lt;strong&gt;意义&lt;/strong&gt;的&lt;strong&gt;最小单位&lt;/strong&gt;，而且好的词，可以让一些下游任务更直接方便。目前中国有很多的分词工具，最著名的例如&lt;a href=&#34;https://github.com/fxsjy/jieba&#34;&gt;jieba&lt;/a&gt;, &lt;a href=&#34;https://github.com/hankcs/HanLP&#34;&gt;hanlp&lt;/a&gt;, 以及北大今年最新的研究成果&lt;a href=&#34;https://github.com/lancopku/pkuseg-python&#34;&gt;pkuseg&lt;/a&gt;等等。需要知道中文分词详情内容并且带有基础代码使用的，这里有一份很好的&lt;a href=&#34;https://bainingchao.github.io/2019/02/13/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B9%8B%E4%B8%AD%E6%96%87%E8%87%AA%E5%8A%A8%E5%88%86%E8%AF%8D/&#34;&gt;博客内容&lt;/a&gt;。 那么问题来了，既然有这么多优秀的分词工具，&lt;strong&gt;为什么要做自己的分词？&lt;/strong&gt; 我总结了下，有三个理由！&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;泛化能力不够强（Questionable Interpretablity)&lt;/strong&gt;: 分词的难点是&lt;strong&gt;歧义，规范，以及未登录词识别&lt;/strong&gt;。不同的方法有不同的优缺点，目前还没有一个universally good方法。有经验的NLPer，会发现很多训练好的模型，放到一个新的domain里，比如新闻，法律，医药，模型的承载力capacity不够大，不具有好的泛化能力&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;不具有解释性（non-interpretabl)&lt;/strong&gt;: 目前的中文分词的直接应用，更多是作为搜索引擎，或者是作为许多NLP下游任务的预处理工具。传统的机器学习/统计学习方法和一些目前存在的深度学习分词方法和其他的下游任务，绝大部分情况是独立分开进行的。语义各种语言学特征更多来自于无监督, 自监督与监督学习的任务中获得，并可解释。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;泛化能力不够强（questionable generalization)&lt;/strong&gt;: 分词的难点是&lt;strong&gt;歧义，规范，以及未登录词识别&lt;/strong&gt;。不同的方法有不同的优缺点，目前还没有一个universally good方法。有经验的NLPer，会发现很多训练好的模型，放到一个新的domain里，比如新闻，法律，医药，模型的承载力capacity不够大，不具有好的泛化能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;不具有解释性（non-interpretable)&lt;/strong&gt;: 目前的中文分词的直接应用，更多是作为搜索引擎，或者是作为许多NLP下游任务的预处理工具。传统的机器学习/统计学习方法和一些目前存在的深度学习分词方法和其他的下游任务，绝大部分情况是独立分开进行的。语义各种语言学特征更多来自于无监督, 自监督与监督学习的任务中获得，并可解释。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;不具有延展性 (non-extendable)&lt;/strong&gt;: 受到了多任务学习（multi-task learning）的特点的启发，pos taggging和name entity recognition，这两个任务非常相似，基本上只是不同标签化，最终套一层条件随机场(CRF)已获得joint probability的最大化。这点，逻辑上很类似于多标签学习（multi-label learning)，例如 “我喜欢尤文图斯俱乐部”， 而尤文图斯俱乐部除了是名词（pos tagging)之外也是特有名词（entity)。但是在学习的时候因为使用的latent特征并不完全相同以及laten特征的分布不同, 所以多标签学习在表现上并不如多任务学习。当然，这里还有另外一种学习方法, 联合学习（joint modelling)，逻辑上也非常类似，也有很好的result，这里最重要的区别就是联合学习是指相似度高的任务同时学习， 而多任务学习可以是不同任务，相似度也不一定要求高，并且可以有先后顺序的学习方法。这里参见一下大牛Sebastian Ruder的&lt;a href=&#34;http://ruder.io/thesis/neural_transfer_learning_for_nlp.pdf&#34;&gt;Ph.D. thesis&lt;/a&gt;. 这种多任务学习，可以成为一个完整的端对端系统(end-to-end learning), 让我们最终能在多领域多任务下完成好的任务。Facebook中的&lt;a href=&#34;https://github.com/facebookresearch/XLM&#34;&gt;XLM&lt;/a&gt;成功的搭建了跨语言模型，通过不同的语言去获得当下语言的一些特性和解决当下语言中某个较难学习的任务，文中提到最常用的项目即为机器翻译以及文本分类。在此，我们可以将分词模型通过联合学习学成，再通过多任务学习扩展，以提供更优秀的人工智能解决方案&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -695,8 +695,9 @@ config = {
       <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/about/</guid>
-      <description>&lt;p&gt;I am a Machine Learning Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, currently focused on recommendation system, reinforcement learning, and generative adversarial network. In the meantime, I am also an AI Researcher at &lt;a href=&#34;leafy.io&#34;&gt;Leafy lab&lt;/a&gt; working on an app powered by natural language processing. Previously, I worked in two fast growing start-up companies, which are &lt;a href=&#34;https://twitter.com/istuary&#34;&gt;Istuary Innovation Group&lt;/a&gt; and &lt;a href=&#34;https://choosemuse.com/&#34;&gt;Muse® by Interaxon Inc&lt;/a&gt;. At Istuary Innovation Group, I was mainly on developing deep learning algorithms on smart cameras which include facial recognition, face alignment, and object recognition. While I was InteraXon, designing signal denosing and signal reconstruction is my job to help customers have better expereince in mediation. Currently,
-I&amp;rsquo;m interested in transfer learning, multi-task learning, and light neural network models for NLP and democratizing machine learning and AI. Have a look at my &lt;a href=&#34;https://drive.google.com/open?id=1K72qGm5pysBoNFLxbOBgYfTwp8ZeopbP&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
+      <description>&lt;p&gt;I am a Machine Learning Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, currently focused on recommendation system, reinforcement learning, and generative adversarial network. In the meantime, I am also an AI Researcher at &lt;a href=&#34;leafy.io&#34;&gt;Leafy lab&lt;/a&gt; working on an app powered by natural language processing. Previously, I worked in a fast growing start-up company, &lt;a href=&#34;https://twitter.com/istuary&#34;&gt;Istuary Innovation Group&lt;/a&gt;. At Istuary Innovation Group, I was mainly on developing deep learning algorithms on two products. First is a &lt;strong&gt;smart cameras&lt;/strong&gt; e.g., facial recognition, face verification, and face alignment, and the second is a &lt;strong&gt;&lt;em&gt;News app&lt;/em&gt;&lt;/strong&gt; which you input a keyword e.g. &lt;strong&gt;&lt;em&gt;internet of thing&lt;/em&gt;&lt;/strong&gt;, the semantic similar news will be fetched, and then the multi-document/single-document summarization will be presented.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m interested in transfer learning, multi-task learning, and light neural network models for NLP and democratizing machine learning and AI. Have a look at my &lt;a href=&#34;https://drive.google.com/open?id=1K72qGm5pysBoNFLxbOBgYfTwp8ZeopbP&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
 
 &lt;p&gt;&amp;nbsp;&lt;/p&gt;
 
