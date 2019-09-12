@@ -2,21 +2,9 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://mmy12580.github.io/categories/</loc>
+      <loc>https://mmy12580.github.io/posts/_how_to_choose_tasks/</loc>
       
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</loc>
-      
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
+      <lastmod>2019-09-12T17:40:36-04:00</lastmod>
       
       
       
@@ -26,7 +14,7 @@
     <url>
       <loc>https://mmy12580.github.io/</loc>
       
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
+      <lastmod>2019-09-12T17:40:36-04:00</lastmod>
       
       
       
@@ -38,55 +26,7 @@
     <url>
       <loc>https://mmy12580.github.io/posts/</loc>
       
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/</loc>
-      
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
-      
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
-      
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/natural-language-processing/</loc>
-      
-      <lastmod>2019-09-06T00:00:00+00:00</lastmod>
+      <lastmod>2019-09-12T17:40:36-04:00</lastmod>
       
       
       
@@ -101,6 +41,30 @@
       <lastmod>2019-06-18T11:28:17-04:00</lastmod>
       
       
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/</loc>
+      
+      <lastmod>2019-06-18T11:28:17-04:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/</loc>
+      
+      <lastmod>2019-06-18T11:28:17-04:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
       
       
     </url>
@@ -147,6 +111,30 @@
       <lastmod>2019-06-17T12:21:44-04:00</lastmod>
       
       
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
+      
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
+      
+      <lastmod>2019-06-17T12:21:44-04:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
       
       
     </url>
@@ -279,6 +267,18 @@
       <lastmod>2019-01-23T00:00:00+00:00</lastmod>
       
       
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/natural-language-processing/</loc>
+      
+      <lastmod>2019-01-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
       
       
     </url>
