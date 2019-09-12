@@ -5,13 +5,13 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Sep 2019 11:54:18 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>How to choose tasks for multi-task learning in NLP?</title>
       <link>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</link>
-      <pubDate>Fri, 06 Sep 2019 11:54:18 -0400</pubDate>
+      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</guid>
       <description>
@@ -55,7 +55,7 @@
 
 &lt;p&gt;In this blog, I will show what problems caused the learning difficult, and their state-of-the-art solutions.&lt;/p&gt;
 
-&lt;h2 id=&#34;why-it-is-difficult&#34;&gt;Why it is difficult?&lt;/h2&gt;
+&lt;h2 id=&#34;why-is-it-difficult&#34;&gt;Why is it difficult?&lt;/h2&gt;
 
 &lt;p&gt;Before introducing the summary of solutions about imbalanced data, let us look at what makes the imbalanced learning difficult? Given a series of research about imbalanced classification, there are mainly four types of problems:&lt;/p&gt;
 

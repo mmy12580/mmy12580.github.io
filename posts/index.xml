@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Sep 2019 11:54:18 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>How to choose tasks for multi-task learning in NLP?</title>
       <link>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</link>
-      <pubDate>Fri, 06 Sep 2019 11:54:18 -0400</pubDate>
+      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</guid>
       <description>Introduction Machine learning generally involves training a model to solve a single task. However, focusing on a single taks may ommit hidden information that might improve the target task from the related tasks. Multi-Task Learning (MTL) is therefore introduced to grasp the &amp;ldquo;knowledge&amp;rdquo; from auxiliary tasks.
