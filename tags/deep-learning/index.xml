@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>Amazing Optimizer until 2019.3</title>
-      <link>https://mmy12580.github.io/posts/optimizers/</link>
-      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/optimizers/</guid>
-      <description>Introduction As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate The learning rate is one of the most important things need to be taken care of.</description>
-    </item>
-    
-    <item>
       <title>Activation is important!</title>
       <link>https://mmy12580.github.io/posts/activation/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>

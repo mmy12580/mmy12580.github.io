@@ -1006,27 +1006,6 @@ ping xxx.github.io
     </item>
     
     <item>
-      <title>Amazing Optimizer until 2019.3</title>
-      <link>https://mmy12580.github.io/posts/optimizers/</link>
-      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/optimizers/</guid>
-      <description>
-
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate
-The learning rate is one of the most important things need to be taken care of. It not only helps better convergence e.g hit a better local minima or luckly global minima, but also faster the process of convergence.&lt;/p&gt;
-
-&lt;p&gt;Apparently, the most popular choices are &lt;strong&gt;adam&lt;/strong&gt; and &lt;strong&gt;sgd&lt;/strong&gt; optimizers. They have played a key role in the literature of deep learning, and some traditional machine learning algorithms. It is treated as a breathough to optimize a large volume of data based non-convex cases. However, which one is to use is still debatable. Adam has shown its advantage i.e., suprising fast converging, while sgd and its extention sgd + momentum are proved to yield a better or sometimes way better performance, i.e., higher accuracy on new data. A lot of researchers are trying to create a &lt;strong&gt;fast&lt;/strong&gt; and &lt;strong&gt;good&lt;/strong&gt; optmizer, so the work which can be descrbited as a variety of mutation method on Adam or sgd have been studied. Aa far as I concern, there are few works are really promising. I would like to share it with you. Luckily, the code of the works is released too, and it can be easilly add to your model, so to have a faster experience in training and get a promising results in generalization.&lt;/p&gt;
-
-&lt;h3 id=&#34;adamw&#34;&gt;AdamW&lt;/h3&gt;
-
-&lt;h3 id=&#34;adamg&#34;&gt;AdamG&lt;/h3&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Activation is important!</title>
       <link>https://mmy12580.github.io/posts/activation/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
