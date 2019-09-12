@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/imbalanced_learn_summary/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/how_to_choose_tasks/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           How to choose tasks for multi-task learning in NLP? | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="How to choose tasks for multi-task learning in NLP? | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "How to choose tasks for multi-task learning in NLP?",
+    "headline" : "How to choose tasks for multi-task learning in NLP?",
+    "description" : "Introduction Machine learning generally involves training a model to solve a single task. However, focusing on a single tasks may omit hidden information that might improve the target task from the related tasks. Multi-Task Learning (MTL) is therefore introduced to grasp the \x26ldquo;knowledge\x26rdquo; from auxiliary tasks.\nThere has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-09-12 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2019-09-12 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/how_to_choose_tasks\/",
+    "wordCount" : "231",
+    "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">How to choose tasks for multi-task learning in NLP?</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-09-12 itemprop="datePublished">September 12, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Machine learning generally involves training a model to solve a single task. However, focusing on a single tasks may omit hidden information that might improve the target task from the related tasks.  <strong>Multi-Task Learning</strong> (MTL) is therefore introduced to grasp the &ldquo;knowledge&rdquo; from auxiliary tasks.</p>
+
+<p>There has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task. The reasons why MTL work are summarized nicely by <em>Sebastian Ruder</em> in his paper, <a href="https://arxiv.org/abs/1706.05098">An Overview of Multi-Task Learning in Deep Neural Networks</a>. I included them here,</p>
+
+<ol>
+<li>implicit data augmentation,</li>
+<li>attention focusing,</li>
+<li>eavesdropping,</li>
+<li>representation bias,</li>
+<li>regularization.</li>
+</ol>
+
+<p>Even though, many efforts have been devoted to evaluate whether MTL can be leveraged to learn rich representations that can be used in various NLP downstream tasks, there is still lack of understanding of the settings in which multi-task learning has a significant effect. In another words, how do we choose tasks for MTL based on their <strong>similarity</strong>, <strong>relationship</strong>, <strong>hierarchy</strong>, and <strong>benefit</strong>?</p>
+
+<h2 id="learning-task-relationship">Learning task relationship</h2>
+
+<p>It is known that multi-tasking learning is beneficial to our applications based on an assumption that the tasks are closely related. In another word, sharing information with an unrelated task might actually hurt performance. To fulfill the potential of MTL, we need to leverage some prior knowledge to identify whether some tasks are related or not at first place.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/how_to_choose_tasks/>https://mmy12580.github.io/posts/how_to_choose_tasks/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/imbalanced_learn_summary/" class="prev" rel="prev" title="A quick summary for imbalanced data"><i class="iconfont icon-left"></i>&nbsp;A quick summary for imbalanced data</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>
