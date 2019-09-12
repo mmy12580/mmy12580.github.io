@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "How to choose tasks for multi-task learning in NLP?",
     "headline" : "How to choose tasks for multi-task learning in NLP?",
-    "description" : "It is known that a model trained in a multi-task framework can take advantage of inductive transfer between the tasks, achieving a better generalization performance (Caruana 1993).",
+    "description" : "Introduction Machine learning generally involves training a model to solve a single task. However, focusing on a single taks may ommit hidden information that might improve the target task from the related tasks. Multi-Task Learning (MTL) is therefore introduced to grasp the \x26ldquo;knowledge\x26rdquo; from auxiliary tasks.\nThere has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-09-06 11:54:18 -0400 EDT",
     "dateModified" : "2019-09-06 11:54:18 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/_how_to_choose_tasks_for_multi_task_learning\/",
-    "wordCount" : "27",
+    "wordCount" : "230",
     "keywords" : [  "Moyan\x27s Website"]
 }
 </script>
@@ -146,7 +146,27 @@
           
           
 
-          <p>It is known that a model trained in a multi-task framework can take advantage of <strong>inductive transfer</strong> between the tasks, achieving a better generalization performance (Caruana 1993).</p>
+          
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Machine learning generally involves training a model to solve a single task. However, focusing on a single taks may ommit hidden information that might improve the target task from the related tasks.  <strong>Multi-Task Learning</strong> (MTL) is therefore introduced to grasp the &ldquo;knowledge&rdquo; from auxiliary tasks.</p>
+
+<p>There has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task. The reasons why MTL work are summarized nicely by <em>Sebastian Ruder</em> in his paper, <a href="https://arxiv.org/abs/1706.05098">An Overview of Multi-Task Learning in Deep Neural Networks</a>. I included them here,</p>
+
+<ol>
+<li>implicit data augmentation,</li>
+<li>attention focusing,</li>
+<li>eavesdorpping,</li>
+<li>representation bias,</li>
+<li>regularization.</li>
+</ol>
+
+<p>Even though, many efforts have been devoted to evaluate whether MTL canbe leveraged to learn rich representations that can be used in various NLP downstream tasks, there is still lack of understanding of the settings in which multi-task learning has a significant effect. In another words, how do we choose tasks for MTL based on their <strong>similarity</strong>, <strong>relationship</strong>, <strong>hierarchy</strong>, and <strong>benefit</strong>?</p>
+
+<h2 id="learning-task-relationship">Learning task relationship</h2>
+
+<p>It is known that multi-tasking learning is beneficial to our applications based on an assumtion that the tasks are closely related. In anothe rword, sharing information with an unrelated task might actually hurt performance. To fufill the potential of MTL, we need to leverage some prior knowledge to identify whethter some taks are related or not at first place.</p>
 
     </div>
 

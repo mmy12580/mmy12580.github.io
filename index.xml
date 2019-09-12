@@ -5,8 +5,38 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jun 2019 11:28:17 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 06 Sep 2019 11:54:18 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to choose tasks for multi-task learning in NLP?</title>
+      <link>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</link>
+      <pubDate>Fri, 06 Sep 2019 11:54:18 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks_for_multi_task_learning/</guid>
+      <description>
+
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+
+&lt;p&gt;Machine learning generally involves training a model to solve a single task. However, focusing on a single taks may ommit hidden information that might improve the target task from the related tasks.  &lt;strong&gt;Multi-Task Learning&lt;/strong&gt; (MTL) is therefore introduced to grasp the &amp;ldquo;knowledge&amp;rdquo; from auxiliary tasks.&lt;/p&gt;
+
+&lt;p&gt;There has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task. The reasons why MTL work are summarized nicely by &lt;em&gt;Sebastian Ruder&lt;/em&gt; in his paper, &lt;a href=&#34;https://arxiv.org/abs/1706.05098&#34;&gt;An Overview of Multi-Task Learning in Deep Neural Networks&lt;/a&gt;. I included them here,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;implicit data augmentation,&lt;/li&gt;
+&lt;li&gt;attention focusing,&lt;/li&gt;
+&lt;li&gt;eavesdorpping,&lt;/li&gt;
+&lt;li&gt;representation bias,&lt;/li&gt;
+&lt;li&gt;regularization.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Even though, many efforts have been devoted to evaluate whether MTL canbe leveraged to learn rich representations that can be used in various NLP downstream tasks, there is still lack of understanding of the settings in which multi-task learning has a significant effect. In another words, how do we choose tasks for MTL based on their &lt;strong&gt;similarity&lt;/strong&gt;, &lt;strong&gt;relationship&lt;/strong&gt;, &lt;strong&gt;hierarchy&lt;/strong&gt;, and &lt;strong&gt;benefit&lt;/strong&gt;?&lt;/p&gt;
+
+&lt;h2 id=&#34;learning-task-relationship&#34;&gt;Learning task relationship&lt;/h2&gt;
+
+&lt;p&gt;It is known that multi-tasking learning is beneficial to our applications based on an assumtion that the tasks are closely related. In anothe rword, sharing information with an unrelated task might actually hurt performance. To fufill the potential of MTL, we need to leverage some prior knowledge to identify whethter some taks are related or not at first place.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>A quick summary for imbalanced data</title>
