@@ -10,10 +10,10 @@
     
     <item>
       <title>How to choose tasks for multi-task learning in NLP?</title>
-      <link>https://mmy12580.github.io/posts/how_to_choose_tasks/</link>
+      <link>https://mmy12580.github.io/posts/_how_to_choose_tasks/</link>
       <pubDate>Thu, 12 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/how_to_choose_tasks/</guid>
+      <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks/</guid>
       <description>
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
@@ -32,9 +32,23 @@
 
 &lt;p&gt;Even though, many efforts have been devoted to evaluate whether MTL can be leveraged to learn rich representations that can be used in various NLP downstream tasks, there is still lack of understanding of the settings in which multi-task learning has a significant effect. In another words, how do we choose tasks for MTL based on their &lt;strong&gt;similarity&lt;/strong&gt;, &lt;strong&gt;relationship&lt;/strong&gt;, &lt;strong&gt;hierarchy&lt;/strong&gt;, and &lt;strong&gt;benefit&lt;/strong&gt;?&lt;/p&gt;
 
-&lt;h2 id=&#34;learning-task-relationship&#34;&gt;Learning task relationship&lt;/h2&gt;
+&lt;h2 id=&#34;task-relationship&#34;&gt;Task Relationship&lt;/h2&gt;
 
 &lt;p&gt;It is known that multi-tasking learning is beneficial to our applications based on an assumption that the tasks are closely related. In another word, sharing information with an unrelated task might actually hurt performance. To fulfill the potential of MTL, we need to leverage some prior knowledge to identify whether some tasks are related or not at first place.&lt;/p&gt;
+
+&lt;h3 id=&#34;clustering-tasks&#34;&gt;Clustering tasks&lt;/h3&gt;
+
+&lt;p&gt;The most intuitive solution is to use a constrain that enforces tasks clustering. For $K$ clusters and $C$ tasks, a method introduced by [Evgeniou, T (2005)][1] is formulated as below. The idea behind is to penalize the parameter vectors between different tasks and their variance.&lt;/p&gt;
+
+&lt;p&gt;
+\begin{align*}
+\Omega=\sum_{k=1}^{K} \sum_{t \in C_{k}} \rho_{t}\left\|a_{\cdot, t}-\overline{a}_{k}\right\|^{2}+\rho\left\|\overline{a}_{k}\right\|^{2}
+\end{align*}
+&lt;/p&gt;  
+
+&lt;h2 id=&#34;references&#34;&gt;References:&lt;/h2&gt;
+
+&lt;p&gt;[1]: Evgeniou, T., Micchelli, C. A., and Pontil, M. (2005). Learning multiple tasks with kernel methods. Journal of Machine Learning Research, 6:615–637.&lt;/p&gt;
 </description>
     </item>
     

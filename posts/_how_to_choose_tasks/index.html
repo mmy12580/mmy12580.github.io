@@ -54,11 +54,11 @@
     "accountablePerson" : "Moyan Mei",
     "copyrightHolder" : "Moyan Mei",
     "copyrightYear" : "2019",
-    "datePublished": "2019-09-12 17:40:36 -0400 EDT",
-    "dateModified" : "2019-09-12 17:40:36 -0400 EDT",
+    "datePublished": "2019-09-12 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2019-09-12 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/_how_to_choose_tasks\/",
-    "wordCount" : "231",
-    "keywords" : [  "Moyan\x27s Website"]
+    "wordCount" : "308",
+    "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
 
@@ -127,7 +127,11 @@
                 on <time datetime=2019-09-12 itemprop="datePublished">September 12, 2019</time>
                 </span>
                 in
-                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
         </div>
     </header>
     <div class="post-content">
@@ -164,9 +168,23 @@
 
 <p>Even though, many efforts have been devoted to evaluate whether MTL can be leveraged to learn rich representations that can be used in various NLP downstream tasks, there is still lack of understanding of the settings in which multi-task learning has a significant effect. In another words, how do we choose tasks for MTL based on their <strong>similarity</strong>, <strong>relationship</strong>, <strong>hierarchy</strong>, and <strong>benefit</strong>?</p>
 
-<h2 id="learning-task-relationship">Learning task relationship</h2>
+<h2 id="task-relationship">Task Relationship</h2>
 
 <p>It is known that multi-tasking learning is beneficial to our applications based on an assumption that the tasks are closely related. In another word, sharing information with an unrelated task might actually hurt performance. To fulfill the potential of MTL, we need to leverage some prior knowledge to identify whether some tasks are related or not at first place.</p>
+
+<h3 id="clustering-tasks">Clustering tasks</h3>
+
+<p>The most intuitive solution is to use a constrain that enforces tasks clustering. For $K$ clusters and $C$ tasks, a method introduced by [Evgeniou, T (2005)][1] is formulated as below. The idea behind is to penalize the parameter vectors between different tasks and their variance.</p>
+
+<p>
+\begin{align*}
+\Omega=\sum_{k=1}^{K} \sum_{t \in C_{k}} \rho_{t}\left\|a_{\cdot, t}-\overline{a}_{k}\right\|^{2}+\rho\left\|\overline{a}_{k}\right\|^{2}
+\end{align*}
+</p>  
+
+<h2 id="references">References:</h2>
+
+<p>[1]: Evgeniou, T., Micchelli, C. A., and Pontil, M. (2005). Learning multiple tasks with kernel methods. Journal of Machine Learning Research, 6:615–637.</p>
 
     </div>
 
@@ -189,6 +207,17 @@
 
   
     <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            </section>
         
         <section>
                 <a href="javascript:window.history.back();">back</a></span> · 

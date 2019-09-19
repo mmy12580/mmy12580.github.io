@@ -13,10 +13,10 @@
     
     <item>
       <title>How to choose tasks for multi-task learning in NLP?</title>
-      <link>https://mmy12580.github.io/posts/how_to_choose_tasks/</link>
+      <link>https://mmy12580.github.io/posts/_how_to_choose_tasks/</link>
       <pubDate>Thu, 12 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/how_to_choose_tasks/</guid>
+      <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks/</guid>
       <description>Introduction Machine learning generally involves training a model to solve a single task. However, focusing on a single tasks may omit hidden information that might improve the target task from the related tasks. Multi-Task Learning (MTL) is therefore introduced to grasp the &amp;ldquo;knowledge&amp;rdquo; from auxiliary tasks.
 There has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task.</description>
     </item>
