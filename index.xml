@@ -36,15 +36,11 @@ import sys
 import unicodedata
 
 # number 
-number_regex = re.compile(
-    r&amp;quot;(?:^|(?&amp;lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&amp;quot;
-)
+number_regex = re.compile(r&amp;quot;(?:^|(?&amp;lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&amp;quot;)
 
 # puncuation with unicode
 punct_regex = dict.fromkeys(
-    (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&amp;quot;P&amp;quot;)),
-    &amp;quot;&amp;quot;,
-)
+    (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&amp;quot;P&amp;quot;)),&amp;quot;&amp;quot;)
 r4 =  &amp;quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;amp;%^*()&amp;lt;&amp;gt;+&amp;quot;&amp;quot;&#39;?@|:~{}#]+|[——！\\\，。=？、：“”‘’￥……（）《》【】]&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -53,9 +49,8 @@ r4 =  &amp;quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;amp;%^*()&amp;lt;
 &lt;p&gt;由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现&lt;span style=&#34;color:red&#34;&gt;全角&lt;/span&gt;和&lt;span style=&#34;color:red&#34;&gt;半角&lt;/span&gt;的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# double quotes
-double_quotes = [&amp;quot;«&amp;quot;, &amp;quot;‹&amp;quot;, &amp;quot;»&amp;quot;, &amp;quot;›&amp;quot;, &amp;quot;„&amp;quot;,
-				 &amp;quot;“&amp;quot;, &amp;quot;‟&amp;quot;, &amp;quot;”&amp;quot;, &amp;quot;❝&amp;quot;, &amp;quot;❞&amp;quot;,
-				 &amp;quot;❮&amp;quot;, &amp;quot;❯&amp;quot;, &amp;quot;〝&amp;quot;, &amp;quot;〞&amp;quot;, &amp;quot;〟&amp;quot;,&amp;quot;＂&amp;quot;,]
+double_quotes = [&amp;quot;«&amp;quot;, &amp;quot;‹&amp;quot;, &amp;quot;»&amp;quot;, &amp;quot;›&amp;quot;, &amp;quot;„&amp;quot;, &amp;quot;“&amp;quot;, &amp;quot;‟&amp;quot;, &amp;quot;”&amp;quot;, &amp;quot;❝&amp;quot;, &amp;quot;❞&amp;quot;,
+&amp;quot;❮&amp;quot;, &amp;quot;❯&amp;quot;, &amp;quot;〝&amp;quot;, &amp;quot;〞&amp;quot;, &amp;quot;〟&amp;quot;,&amp;quot;＂&amp;quot;,]
 
 # single quotes
 single_quotes = [&amp;quot;‘&amp;quot;, &amp;quot;‛&amp;quot;, &amp;quot;’&amp;quot;, &amp;quot;❛&amp;quot;, &amp;quot;❜&amp;quot;, &amp;quot;`&amp;quot;, &amp;quot;´&amp;quot;, &amp;quot;‘&amp;quot;, &amp;quot;’&amp;quot;]

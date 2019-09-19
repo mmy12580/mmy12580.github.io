@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "NlP预处理常用",
     "headline" : "NlP预处理常用",
-    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  \nimport re import sys import unicodedata # number number_regex = re.compile( r\x26quot;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(\\.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26quot; ) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26quot;P\x26quot;)), \x26quot;\x26quot;, ) r4 = \x26quot;\\\\【.*?】\x2b|\\\\《.*?》\x2b|\\\\#.*?#\x2b|[.!\/_,$\x26amp;%^*()\x26lt;\x26gt;\x2b\x26quot;\x26quot;\x27?@|:~{}#]\x2b|[——！\\\\\\，。=？、：“”‘’￥……（）《》【】]\x26quot;  引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。\n# double quotes double_quotes = [\x26quot;«\x26quot;, \x26quot;‹\x26quot;, \x26quot;»\x26quot;, \x26quot;›\x26quot;, \x26quot;„\x26quot;, \x26quot;“\x26quot;, \x26quot;‟\x26quot;, \x26quot;”\x26quot;, \x26quot;❝\x26quot;, \x26quot;❞\x26quot;, \x26quot;❮\x26quot;, \x26quot;❯\x26quot;, \x26quot;〝\x26quot;, \x26quot;〞\x26quot;, \x26quot;〟\x26quot;,\x26quot;＂\x26quot;,] # single quotes single_quotes = [\x26quot;‘\x26quot;, \x26quot;‛\x26quot;, \x26quot;’\x26quot;, \x26quot;❛\x26quot;, \x26quot;❜\x26quot;, \x26quot;`\x26quot;, \x26quot;´\x26quot;, \x26quot;‘\x26quot;, \x26quot;’\x26quot;] # define related regex double_quote_regex = re.",
+    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  \nimport re import sys import unicodedata # number number_regex = re.compile(r\x26quot;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(\\.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26quot;) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26quot;P\x26quot;)),\x26quot;\x26quot;) r4 = \x26quot;\\\\【.*?】\x2b|\\\\《.*?》\x2b|\\\\#.*?#\x2b|[.!\/_,$\x26amp;%^*()\x26lt;\x26gt;\x2b\x26quot;\x26quot;\x27?@|:~{}#]\x2b|[——！\\\\\\，。=？、：“”‘’￥……（）《》【】]\x26quot;  引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。\n# double quotes double_quotes = [\x26quot;«\x26quot;, \x26quot;‹\x26quot;, \x26quot;»\x26quot;, \x26quot;›\x26quot;, \x26quot;„\x26quot;, \x26quot;“\x26quot;, \x26quot;‟\x26quot;, \x26quot;”\x26quot;, \x26quot;❝\x26quot;, \x26quot;❞\x26quot;, \x26quot;❮\x26quot;, \x26quot;❯\x26quot;, \x26quot;〝\x26quot;, \x26quot;〞\x26quot;, \x26quot;〟\x26quot;,\x26quot;＂\x26quot;,] # single quotes single_quotes = [\x26quot;‘\x26quot;, \x26quot;‛\x26quot;, \x26quot;’\x26quot;, \x26quot;❛\x26quot;, \x26quot;❜\x26quot;, \x26quot;`\x26quot;, \x26quot;´\x26quot;, \x26quot;‘\x26quot;, \x26quot;’\x26quot;] # define related regex double_quote_regex = re.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-09-19 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-09-19 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8\/",
-    "wordCount" : "440",
+    "wordCount" : "436",
     "keywords" : [ "natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -173,15 +173,11 @@ import sys
 import unicodedata
 
 # number 
-number_regex = re.compile(
-    r&quot;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&quot;
-)
+number_regex = re.compile(r&quot;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&quot;)
 
 # puncuation with unicode
 punct_regex = dict.fromkeys(
-    (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&quot;P&quot;)),
-    &quot;&quot;,
-)
+    (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&quot;P&quot;)),&quot;&quot;)
 r4 =  &quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;%^*()&lt;&gt;+&quot;&quot;'?@|:~{}#]+|[——！\\\，。=？、：“”‘’￥……（）《》【】]&quot;
 </code></pre>
 
@@ -190,9 +186,8 @@ r4 =  &quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;%^*()&lt;&gt;+&quot;&
 <p>由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现<span style="color:red">全角</span>和<span style="color:red">半角</span>的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。</p>
 
 <pre><code class="language-python"># double quotes
-double_quotes = [&quot;«&quot;, &quot;‹&quot;, &quot;»&quot;, &quot;›&quot;, &quot;„&quot;,
-				 &quot;“&quot;, &quot;‟&quot;, &quot;”&quot;, &quot;❝&quot;, &quot;❞&quot;,
-				 &quot;❮&quot;, &quot;❯&quot;, &quot;〝&quot;, &quot;〞&quot;, &quot;〟&quot;,&quot;＂&quot;,]
+double_quotes = [&quot;«&quot;, &quot;‹&quot;, &quot;»&quot;, &quot;›&quot;, &quot;„&quot;, &quot;“&quot;, &quot;‟&quot;, &quot;”&quot;, &quot;❝&quot;, &quot;❞&quot;,
+&quot;❮&quot;, &quot;❯&quot;, &quot;〝&quot;, &quot;〞&quot;, &quot;〟&quot;,&quot;＂&quot;,]
 
 # single quotes
 single_quotes = [&quot;‘&quot;, &quot;‛&quot;, &quot;’&quot;, &quot;❛&quot;, &quot;❜&quot;, &quot;`&quot;, &quot;´&quot;, &quot;‘&quot;, &quot;’&quot;]
