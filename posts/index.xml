@@ -6,10 +6,23 @@
     <description>Recent content in Posts on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 19 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NlP预处理常用</title>
+      <link>https://mmy12580.github.io/posts/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8/</link>
+      <pubDate>Thu, 19 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8/</guid>
+      <description>NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。
+去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据
+ 数字 (digit/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  
+import re import sys import unicodedata # number number_regex = re.compile( r&amp;quot;(?:^|(?&amp;lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&amp;quot; ) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&amp;quot;P&amp;quot;)), &amp;quot;&amp;quot;, ) r4 = &amp;quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;amp;%^*()&amp;lt;&amp;gt;+&amp;quot;&amp;quot;&#39;?@|:~{}#]+|[——！\\\，。=？、：“”‘’￥……（）《》【】]&amp;quot;  引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。
+# double quotes double_quotes = [&amp;quot;«&amp;quot;, &amp;quot;‹&amp;quot;, &amp;quot;»&amp;quot;, &amp;quot;›&amp;quot;, &amp;quot;„&amp;quot;, &amp;quot;“&amp;quot;, &amp;quot;‟&amp;quot;, &amp;quot;”&amp;quot;, &amp;quot;❝&amp;quot;, &amp;quot;❞&amp;quot;, &amp;quot;❮&amp;quot;, &amp;quot;❯&amp;quot;, &amp;quot;〝&amp;quot;, &amp;quot;〞&amp;quot;, &amp;quot;〟&amp;quot;,&amp;quot;＂&amp;quot;,] # single quotes single_quotes = [&amp;quot;‘&amp;quot;, &amp;quot;‛&amp;quot;, &amp;quot;’&amp;quot;, &amp;quot;❛&amp;quot;, &amp;quot;❜&amp;quot;, &amp;quot;`&amp;quot;, &amp;quot;´&amp;quot;, &amp;quot;‘&amp;quot;, &amp;quot;’&amp;quot;] # define related regex double_quote_regex = re.</description>
+    </item>
     
     <item>
       <title>How to choose tasks for multi-task learning in NLP?</title>
