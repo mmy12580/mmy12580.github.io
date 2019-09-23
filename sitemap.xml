@@ -4,7 +4,7 @@
     <url>
       <loc>https://mmy12580.github.io/categories/</loc>
       
-      <lastmod>2019-09-19T00:00:00+00:00</lastmod>
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
       
       
       
@@ -16,7 +16,77 @@
     <url>
       <loc>https://mmy12580.github.io/</loc>
       
-      <lastmod>2019-09-19T00:00:00+00:00</lastmod>
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/posts/normalization_for_dl/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/posts/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/machine-learning/</loc>
+      
+      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
       
       
       
@@ -31,30 +101,6 @@
       <lastmod>2019-09-19T00:00:00+00:00</lastmod>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/posts/</loc>
-      
-      <lastmod>2019-09-19T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/</loc>
-      
-      <lastmod>2019-09-19T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>
@@ -96,40 +142,6 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/posts/_how_to_choose_tasks/</loc>
-      
-      <lastmod>2019-09-12T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
-      
-      <lastmod>2019-09-12T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
-      
-      <lastmod>2019-09-12T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://mmy12580.github.io/posts/imbalanced_learn_summary/</loc>
       
       <lastmod>2019-06-18T11:28:17-04:00</lastmod>
@@ -153,18 +165,6 @@
   
     <url>
       <loc>https://mmy12580.github.io/categories/machine-learning/</loc>
-      
-      <lastmod>2019-06-18T11:28:17-04:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/machine-learning/</loc>
       
       <lastmod>2019-06-18T11:28:17-04:00</lastmod>
       

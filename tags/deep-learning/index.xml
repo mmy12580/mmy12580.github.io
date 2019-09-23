@@ -6,19 +6,20 @@
     <description>Recent content in deep learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>How to choose tasks for multi-task learning in NLP?</title>
-      <link>https://mmy12580.github.io/posts/_how_to_choose_tasks/</link>
-      <pubDate>Thu, 12 Sep 2019 00:00:00 +0000</pubDate>
+      <title>Normalization in Deep Learning</title>
+      <link>https://mmy12580.github.io/posts/normalization_for_dl/</link>
+      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mmy12580.github.io/posts/_how_to_choose_tasks/</guid>
-      <description>Introduction Machine learning generally involves training a model to solve a single task. However, focusing on a single tasks may omit hidden information that might improve the target task from the related tasks. Multi-Task Learning (MTL) is therefore introduced to grasp the &amp;ldquo;knowledge&amp;rdquo; from auxiliary tasks.
-There has a been a plenty of applications and studies about MTL, and MTL is known capable of achieving better generalization for each individual task.</description>
+      <guid>https://mmy12580.github.io/posts/normalization_for_dl/</guid>
+      <description>Introduction Batch Normalization (BN)  has been treated as one of the standard &amp;ldquo;plug-in&amp;rdquo; tool to deep neural networks since its first release[^1]. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:
+ faster training higher learning rate easier initialization more activations support deeper but simpler architecture regularization  Algorithms:
+ \begin{aligned} &amp;{\text { Input: Values of } x \text { over a mini-batch: } \mathcal{B}=\left\{x_{1 \ldots m}\right\}} \\ &amp;{\text { Output: } \{y_{i}=\mathrm{B} \mathrm{N}_{\gamma, \beta} (x_{i})\}} \\ &amp;{\mu_{\mathcal{B}} \leftarrow \frac{1}{m} \sum_{i=1}^{m} x_{i} \qquad \text { // min-batch mean}} \\ &amp;{\sigma_{\mathcal{B}}^{2} \leftarrow \frac{1}{m} \sum_{i=1}^{m}\left(x_{i}-\mu_{\mathcal{B}}\right)^{2} \qquad \text { // mini-batch variance }} \\ &amp;{\hat{x}_{i} \leftarrow \frac{x_{i}-\mu_{\mathcal{B}}}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}} \qquad \text { // normalize }} \\ &amp;{y_{i} \leftarrow \gamma \widehat{x}_{i}+\beta \equiv \mathrm{B} \mathrm{N}_{\gamma, \beta}\left(x_{i}\right) \qquad \text { // scale and shift }} \end{aligned} Here, $\gamma$ and $\beta$ are the parameters to be learned, the parameters update is based on chain rule like followings:</description>
     </item>
     
     <item>

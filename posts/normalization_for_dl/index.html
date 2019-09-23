@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/normalization_for_dl/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Normalization in Deep Learning | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Normalization in Deep Learning | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Normalization in Deep Learning",
+    "headline" : "Normalization in Deep Learning",
+    "description" : "Introduction Batch Normalization (BN)  has been treated as one of the standard \x26ldquo;plug-in\x26rdquo; tool to deep neural networks since its first release[^1]. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:\n faster training higher learning rate easier initialization more activations support deeper but simpler architecture regularization  Algorithms:\n \\begin{aligned} \x26{\\text { Input: Values of } x \\text { over a mini-batch: } \\mathcal{B}=\\left\\{x_{1 \\ldots m}\\right\\}} \\\\ \x26{\\text { Output: } \\{y_{i}=\\mathrm{B} \\mathrm{N}_{\\gamma, \\beta} (x_{i})\\}} \\\\ \x26{\\mu_{\\mathcal{B}} \\leftarrow \\frac{1}{m} \\sum_{i=1}^{m} x_{i} \\qquad \\text { \/\/ min-batch mean}} \\\\ \x26{\\sigma_{\\mathcal{B}}^{2} \\leftarrow \\frac{1}{m} \\sum_{i=1}^{m}\\left(x_{i}-\\mu_{\\mathcal{B}}\\right)^{2} \\qquad \\text { \/\/ mini-batch variance }} \\\\ \x26{\\hat{x}_{i} \\leftarrow \\frac{x_{i}-\\mu_{\\mathcal{B}}}{\\sqrt{\\sigma_{\\mathcal{B}}^{2}\x2b\\epsilon}} \\qquad \\text { \/\/ normalize }} \\\\ \x26{y_{i} \\leftarrow \\gamma \\widehat{x}_{i}\x2b\\beta \\equiv \\mathrm{B} \\mathrm{N}_{\\gamma, \\beta}\\left(x_{i}\\right) \\qquad \\text { \/\/ scale and shift }} \\end{aligned} Here, $\\gamma$ and $\\beta$ are the parameters to be learned, the parameters update is based on chain rule like followings:",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-09-23 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2019-09-23 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/normalization_for_dl\/",
+    "wordCount" : "1437",
+    "keywords" : [ "deep learning","machine learning", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Normalization in Deep Learning</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2019-09-23 itemprop="datePublished">September 23, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="introduction">Introduction</h2>
+
+<p><span style="color:blue"> Batch Normalization (BN) </span> has been treated as one of the standard &ldquo;plug-in&rdquo; tool to deep neural networks since its first release[^1]. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:</p>
+
+<ol>
+<li><strong>faster training</strong></li>
+<li><strong>higher learning rate</strong></li>
+<li><strong>easier initialization</strong></li>
+<li><strong>more activations support</strong></li>
+<li><strong>deeper but simpler architecture</strong></li>
+<li><strong>regularization</strong></li>
+</ol>
+
+<p><strong>Algorithms</strong>:</p>
+
+<p>
+\begin{aligned}
+    &{\text { Input: Values of } x \text { over a mini-batch: } \mathcal{B}=\left\{x_{1 \ldots m}\right\}} \\
+    &{\text { Output: } \{y_{i}=\mathrm{B} \mathrm{N}_{\gamma, \beta} (x_{i})\}} \\ 
+    &{\mu_{\mathcal{B}} \leftarrow \frac{1}{m} \sum_{i=1}^{m} x_{i} \qquad \text { // min-batch mean}} \\ &{\sigma_{\mathcal{B}}^{2} \leftarrow \frac{1}{m} \sum_{i=1}^{m}\left(x_{i}-\mu_{\mathcal{B}}\right)^{2} \qquad \text { // mini-batch variance }} \\ 
+    &{\hat{x}_{i} \leftarrow \frac{x_{i}-\mu_{\mathcal{B}}}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}} \qquad \text { // normalize }} \\ 
+    &{y_{i} \leftarrow \gamma \widehat{x}_{i}+\beta \equiv \mathrm{B} \mathrm{N}_{\gamma, \beta}\left(x_{i}\right) \qquad  \text { // scale and shift }}
+\end{aligned}
+</p>
+
+<p>Here, $\gamma$ and $\beta$ are the parameters to be learned, the parameters update is based on chain rule like followings:</p>
+
+<p>
+\begin{aligned} 
+    \frac{\partial \ell}{\partial \widehat{x}_{i}} &=\frac{\partial \ell}{\partial y_{i}} \cdot \gamma \\ \frac{\partial \ell}{\partial \sigma_{\mathcal{B}}^{2}} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot\left(x_{i}-\mu_{\mathcal{B}}\right) \cdot \frac{-1}{2}\left(\sigma_{\mathcal{B}}^{2}+\epsilon\right)^{-3 / 2} \\ 
+    \frac{\partial \ell}{\partial \mu_{\mathcal{B}}} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{-1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}} \\ 
+    \frac{\partial \ell}{\partial x_{i}} &=\frac{\partial \ell}{\partial \widehat{x}_{i}} \cdot \frac{1}{\sqrt{\sigma_{\mathcal{B}}^{2}+\epsilon}}+\frac{\partial \ell}
+    {\partial \sigma_{\mathcal{B}}^{2}} \cdot \frac{2\left(x_{i}-\mu_{\mathcal{B}}\right)}{m}+\frac{\partial \ell}{\partial \mu_{\mathcal{B}}} \cdot \frac{1}{m} \\ 
+    \frac{\partial \ell}{\partial \gamma} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}} \cdot \widehat{x}_{i} \\ 
+    \frac{\partial \ell}{\partial \beta} &=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}} 
+\end{aligned}
+</p>    
+
+<p>Basically, a short summary for BN is that it is designed to solve <span style="color:blue">gradient vanish/explosion </span> by scaling (normalizing) the <span style="color:red"> net activation </span> (output before activation) to values with mean equal to $0$ and variance $1$. Furthermore, It increases the model capacity in some degree. Due to scaled distribution of the output, so BN is normally applied before activation function (think about $RELU(x) = max(0, x)$).
+Note that it is <strong>also applicable</strong> to put BN after activation according to other research work, and the performance may be even better.</p>
+
+<p>Certainly, even though BN can be very helpful to be included in deep learning models, BN is not a universal solution. It has some drawbacks due to its nature,</p>
+
+<ol>
+<li>when batch size is small, the performance is significantly worse;</li>
+<li>for some fine-grain tasks, BN will bring negative effects;</li>
+<li>it is not designed for &ldquo;dynamic&rdquo; network, e.g., sequence model;</li>
+<li>statistics are different between training stage and inference stage.</li>
+</ol>
+
+<p>Therefore, the variety of BN $[1]$ has been proposed, e.g., <span style="color:blue"> layer normalization  </span> $[2]$ , <span style="color:blue"> group normalization </span> $[4]$ , <span style="color:blue"> weight normalization </span> $[5]$ , and <span style="color:blue"> instance normalization </span> $[3]$ .</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/normalization.png" alt="normalization" class="lazyload"><figcaption class="image-caption">normalization</figcaption></figure></p>
+
+<h2 id="layer-normalization">Layer Normalization</h2>
+
+<p>Layer normalization (LN) is very commonly to be used in NLP applications. For the design of BERT, both encoders and decoders have applied transformers, which is a block that LN is applied after a multi-head attention mechanism. As I just summarized, BN is not designed for dynamic networks such as RNN, transformers since each batch has different size (text length) and some are really small (like drawback 1 above). Certainly, if large batch is allowed, we can still apply <span style="color:blue"> bucket sampling </span> to sort the input texts based on its length, and then apply BN as well. A more natural solution is to apply normalization on layers instead of batches.</p>
+
+<p>In RNN setting, LN can be applied to each time point, and we can guarantee the statistics is summarized over all $H$ hidden nodes for different time point. For node at time $t$, given the input that hidden state $h_{t-1}$ and input at time t, $x_t$, the output before LN is calculated as</p>
+
+<p>
+\begin{aligned}
+    a^t=W_{h h} h^{t-1}+W_{x h} x^t
+\end{aligned}
+</p>
+
+<p>and then we can apply LN on hidden state as below</p>
+
+<p>
+\begin{aligned}
+h^t = \frac{g}{\sqrt{(\sigma^t)^2+\epsilon}} \odot (a^t-\mu^t)+ b  \qquad \mu^{t}=\frac{1}{H} \sum_{i=1}^{H} a_{i}^{t} \qquad \sigma^{t}=\sqrt{\frac{1}{H} \sum_{i=1}^{H}\left(a_{i}^{t}-\mu^{t}\right)^{2}}
+\end{aligned}
+</p>    
+
+<p>where $g$ is the gain, and $b$ is the bias.</p>
+
+<h3 id="note">Note:</h3>
+
+<p>The main difference in implementing both normalization methods is that BN takes same feature from different samples (batch), while LN takes different features from the same sample. It is also why sometimes BN&rsquo;s performance is superior than LN due to the fact that the same feature after normalization will remain the original information.</p>
+
+<h2 id="instance-normalization">Instance Normalization</h2>
+
+<p>Instance normalization (IN) is proposed to scale the distribution into a even smaller area. By looking at the formula,</p>
+
+<p>
+    \begin{aligned}
+        y_{t i j k}=\frac{x_{t i j k}-\mu_{t i}}{\sqrt{\sigma_{t i}^{2}+\epsilon}} \qquad \mu_{t i}=\frac{1}{H W} \sum_{l=1}^{W} \sum_{m=1}^{H} x_{t i l m} \qquad \sigma_{t i}^{2}=\frac{1}{H W} \sum_{l=1}^{W} \sum_{m=1}^{H}\left(x_{t i l m}-m u_{t i}\right)^{2}
+    \end{aligned}
+</p>
+
+<p>the main difference between BN and IN is that BN normalizes the data across the batch and spatial locations (CNN based), while IN normalizes each batch independently. In other words, BN computes one mean and standard deviation from batch, while IN computes $T$ of them not jointly.</p>
+
+<p>It is not hard to find out that the beauty of IN is that it is used for <strong>small batch</strong> and <strong>fine-grain</strong> cases since it does not calculate across channels and batches, which will include random noise.</p>
+
+<h2 id="group-normalization">Group Normalization</h2>
+
+<p>A method proposed by Kaimin takes the advantage from both BN and IN, which is group normalization (GN).For example, the batch input data, e.g., image can be decribed into 4 dimensions, $[N, C, H, W]$, where $N$ is the batch size, $C$ is the channel, and $H$ and $W$ are the feature shape, i.e., hight and weight. What GN does is that it firstly divide channels into groups, and then normalize on groups. In symbolized version, the original shape $[N, C, H, W]$ will be reshaped by group normalization to $[N, G, C//G, H, W]$, where $G$ stands for group.</p>
+
+<p>The idea behind GN is pretty intuitve. Acoording to CNN method, the extracted feature after filters have the property, invariance. In other words, the features learned from the same data has the same ditribution, so the same features can be put in to the same group, which can be undertood such as HOG or GIST feature which are group representing features with physical meanings.</p>
+
+<h2 id="weight-normalization">Weight Normalization</h2>
+
+<p>An alternative method to BN and LN is the weight normalization (WN). BN and LN normalize data, while WN normlize on weights. The idea of WN is to decompose weights vector $w$ into a parameter vector $v$ and a parameter scalar $g$, the math form is</p>
+
+<p>
+\begin{aligned}
+w = \frac{g}{\|v\|} \ v
+\end{aligned}
+</p>    
+
+<p>where $|v|$ is the norm of $v$. When $v = w$ and $g = ||w||$, WN will remain the original way of calculation, so WN can increase the capacity of networks. $v$ and $g$ can be update by SGD as</p>
+
+<p>
+$$
+\nabla_{g} L=\frac{\nabla_{\mathbf{w}} L \cdot \mathbf{v}}{\|\mathbf{v}\|} \quad \nabla_{\mathbf{v}} L=\frac{g}{\|\mathbf{v}\|} \nabla_{\mathbf{w}} L-\frac{g \nabla_{g} L}{\|\mathbf{v}\|^{2}} \mathbf{v}
+$$
+</p>
+
+<p>where $L$ is the loss function, and $ \nabla_{\mathbf{w}} L$ is the gradient of $w$ under $L$, the above SGD process can be also written in geometry asepect</p>
+
+<p>
+\begin{aligned}
+\nabla_{\mathbf{v}} L=\frac{g}{\|\mathbf{v}\|} M_{\mathbf{w}} \nabla_{\mathbf{w}} L \quad \text { with } \quad M_{\mathbf{w}}=I-\frac{\mathbf{w} \mathbf{w}^{\prime}}{\|\mathbf{w}\|^{2}}
+\end{aligned}
+</p>
+
+<p>and the formula deriving process is</p>
+
+<p>
+\begin{array}{c}{\nabla_{\mathbf{v}} L=\frac{g}{\|\mathbf{v}\|} \nabla_{\mathbf{w}} L-\frac{g \nabla_{g} L}{\|\mathbf{v}\|^{2}} \mathbf{v}} \\ {=\frac{g}{\|\mathbf{v}\|} \nabla_{\mathbf{w}} L-\frac{g}{\|\mathbf{v}\|^{2}} \frac{\nabla_{\mathbf{w}} L \cdot \mathbf{v}}{\|\mathbf{v}\|} \mathbf{v}} \\ {=\frac{g}{\|\mathbf{v}\|}\left(I-\frac{\mathbf{v} \mathbf{v}^{\prime}}{\|\mathbf{v}\|^{2}}\right) \nabla_{\mathbf{w}} L} \\ {=\frac{g}{\|\mathbf{v}\|}\left(I-\frac{\mathbf{w} \mathbf{w}^{\prime}}{\|\mathbf{w}\|^{2}}\right) \nabla_{\mathbf{w}} L} \\ {=\frac{g}{\|\mathbf{v}\|} M_{\mathbf{w}} \nabla_{\mathbf{w}} L}\end{array}
+</p>
+
+<p>Two key parts are reflected from above process,</p>
+
+<ol>
+<li>WN will scale down weights&rsquo; graidents by $\frac{g}{|v|}$;</li>
+<li>WN will project gradients into a direction far away from $\nabla_w L$.</li>
+</ol>
+
+<p>Therefore, they faster model convergence.</p>
+
+<h3 id="equalivance-to-bn">Equalivance to BN</h3>
+
+<p>When neural netowrk only has one layer and the batch follows independent mean 0 and vairance 1 distribution, WN is equivant to BN.</p>
+
+<h3 id="initliazation">Initliazation</h3>
+
+<p>The method of intializing WN is different from BN, and it is suggested from the original paper,</p>
+
+<ul>
+<li>$v$ follows normal distirbution with mean 0 and standard deviation 0.05</li>
+
+<li><p>$g$ and $b$ leverage statistics based on first batch for initialization</p>
+
+<p>
+$$g \leftarrow \frac{1}{\sigma[t]} \quad b \leftarrow -\frac{\mu[t]}{\sigma[t]}$$
+</p></li>
+</ul>
+
+<p>An interesting finding from WN is to use <span style="color:blue"> mean-only BN </span>, so it only applies mean reduction but not dividing variance. The reason behind is that the original BN (divide by variance) will include extra noise. Some work also shows that WN + mean-only BN will yield better generalization than BN but way slower convergence.</p>
+
+<p>A quick summary of WN advantages is:</p>
+
+<ul>
+<li>faster convergence</li>
+<li>more robostness</li>
+<li>applicable to dynamic netowrks, RNN</li>
+<li>not sensitive to noise, can be used in GAN and RL</li>
+</ul>
+
+<h2 id="extension">Extension</h2>
+
+<p>Those mehtods are released for couple years, and they have been proved to be useful in different applications. However, a theory that there is no free lunch is still applicable to any of the normalization cases. A recent work published by <strong><em>SenseTime Research</em></strong> $[6]$ takes advantages over multiple methods introduced above. It is called Switchable Normalization, and its illustration is</p>
+
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://raw.githubusercontent.com/switchablenorms/Switchable-Normalization/master/teaser.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
+
+<p>A great blog related to that in Chinese can be found in <a href="https://zhuanlan.zhihu.com/p/39296570?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=70591319113728">here</a>.</p>
+
+<h2 id="references">References</h2>
+
+<p>$[1]$: <a href="https://arxiv.org/abs/1502.03167v3">https://arxiv.org/abs/1502.03167v3</a> <br />
+$[2]$: <a href="https://arxiv.org/abs/1607.06450">https://arxiv.org/abs/1607.06450</a> <br />
+$[3]$: <a href="https://arxiv.org/abs/1607.08022">https://arxiv.org/abs/1607.08022</a> <br />
+$[4]$: <a href="https://arxiv.org/abs/1803.08494">https://arxiv.org/abs/1803.08494</a> <br />
+$[5]$: <a href="https://arxiv.org/abs/1602.07868">https://arxiv.org/abs/1602.07868</a> <br />
+$[6]$: <a href="https://arxiv.org/abs/1806.10779">https://arxiv.org/abs/1806.10779</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/normalization_for_dl/>https://mmy12580.github.io/posts/normalization_for_dl/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/machine-learning/">
+                    #machine learning</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8/" class="prev" rel="prev" title="NlP预处理常用"><i class="iconfont icon-left"></i>&nbsp;NlP预处理常用</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>deep learning</title>
+      <link>https://mmy12580.github.io/tags/deep-learning/</link>
+      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>https://mmy12580.github.io/tags/machine-learning/</link>
+      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>natural language processing</title>
@@ -21,29 +39,11 @@
     </item>
     
     <item>
-      <title>deep learning</title>
-      <link>https://mmy12580.github.io/tags/deep-learning/</link>
-      <pubDate>Thu, 12 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>data</title>
       <link>https://mmy12580.github.io/tags/data/</link>
       <pubDate>Tue, 18 Jun 2019 11:28:17 -0400</pubDate>
       
       <guid>https://mmy12580.github.io/tags/data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine learning</title>
-      <link>https://mmy12580.github.io/tags/machine-learning/</link>
-      <pubDate>Tue, 18 Jun 2019 11:28:17 -0400</pubDate>
-      
-      <guid>https://mmy12580.github.io/tags/machine-learning/</guid>
       <description></description>
     </item>
     
