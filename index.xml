@@ -18,7 +18,7 @@
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;&lt;span style=&#34;color:blue&#34;&gt; Batch Normalization (BN) &lt;/span&gt; has been treated as one of the standard &amp;ldquo;plug-in&amp;rdquo; tool to deep neural networks since its first release[^1]. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color:blue&#34;&gt; Batch Normalization (BN) &lt;/span&gt; has been treated as one of the standard &amp;ldquo;plug-in&amp;rdquo; tool to deep neural networks since its first release. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;faster training&lt;/strong&gt;&lt;/li&gt;
