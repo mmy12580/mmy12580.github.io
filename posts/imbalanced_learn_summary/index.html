@@ -57,7 +57,7 @@
     "datePublished": "2019-06-18 11:28:17 -0400 EDT",
     "dateModified" : "2019-06-18 11:28:17 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/imbalanced_learn_summary\/",
-    "wordCount" : "881",
+    "wordCount" : "884",
     "keywords" : [ "machine learning","data", "Moyan\x27s Website"]
 }
 </script>
@@ -187,9 +187,9 @@
 <p>The most intuitive way is to re-sample the data to make them somehow &lsquo;balanced&rsquo; because in this case, we can still perform normal machine learning techniques on them. There are generally three types methods:</p>
 
 <ol>
-<li>Down-sampling from majority class e.g RUS, NearMiss, ENN, Tomeklink</li>
-<li>Over-sampling from minority class e.g SMOTE, ADASYN, Borderline-SMOTE</li>
-<li>Hybrid method e.g Smote + ENN</li>
+<li><span style="color:blue">Down-sampling from majority class</span> e.g RUS, NearMiss, ENN, Tomeklink</li>
+<li><span style="color:blue">Over-sampling from minority class</span> e.g SMOTE, ADASYN, Borderline-SMOTE</li>
+<li><span style="color:blue">Hybrid method </span> e.g Smote + ENN</li>
 </ol>
 
 <p>There are pros and cons from data-level strategy.</p>
@@ -204,7 +204,7 @@
 <h3 id="cons">Cons:</h3>
 
 <ol>
-<li>Re-sampling method is generally finding neighborhood samples from distances. <strong>Curse of dimensionality happens!</strong>. It wont be helpful for large-scale data</li>
+<li>Re-sampling method is generally finding neighborhood samples from distances. <span style="color:red">Curse of dimensionality happens! </span>. It wont be helpful for large-scale data.</li>
 <li>Unreasonable re-sampling caused by noise may not accurately capture the distribution information, thus, yields bad performance.</li>
 <li>Not applicable to some complex dataset since distance metric is inapplicable</li>
 </ol>
@@ -255,7 +255,7 @@ for name, pipeline in pipelines:
 
 <h3 id="cost-sensitive-learning">Cost-sensitive learning</h3>
 
-<p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <strong>cost-sensitive learning</strong>. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
+<p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <span style="color:blue"> cost-sensitive learning </span>. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
 
 <p>Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.</p>
 
@@ -266,14 +266,14 @@ for name, pipeline in pipelines:
 <h2 id="experience">Experience</h2>
 
 <ol>
-<li>Down-sampling: It is able to remove some noise and it is very fast to implement. <strong>Random Downsampling</strong> can be used in any situation, but it might be harmful for high imbalanced ratio cases. <strong>NearMiss</strong> is very sensitive to noisy data. To remove noise of data, you can try <strong>Tomeklink</strong>, <strong>AllKNN</strong>.</li>
-<li>Oversampling: It is very easy to overfit the data. <strong>SMOTE</strong> and <strong>ADASYN</strong> could be helpful for small data.</li>
+<li>Down-sampling: It is able to remove some noise and it is very fast to implement. <span style="color:blue">Random Downsampling</span> can be used in any situation, but it might be harmful for high imbalanced ratio cases. <span style="color:blue">NearMiss</span> is very sensitive to noisy data. To remove noise of data, you can try <span style="color:blue">tomeklink</span>, <span style="color:blue">AllKNN</span>.</li>
+<li>Oversampling: It is very easy to overfit the data. <span style="color:blue">SMOTE</span> and <span style="color:blue">ADASYN</span> could be helpful for small data.</li>
 <li>Hybrid sampling: Also helpful for small dataset</li>
 <li>Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.</li>
 <li>Bagging is normally better than Boosting based ensemble method.</li>
 </ol>
 
-<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&rsquo;s <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <code>focal loss</code>.</p>
+<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&rsquo;s <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <span style="color:blue"> focal loss </span>.</p>
 
     </div>
 

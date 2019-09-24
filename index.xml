@@ -463,9 +463,9 @@ all_stopwords = gensim_stopwords.union([nltk_top_words, spacy_stopwords])
 &lt;p&gt;The most intuitive way is to re-sample the data to make them somehow &amp;lsquo;balanced&amp;rsquo; because in this case, we can still perform normal machine learning techniques on them. There are generally three types methods:&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Down-sampling from majority class e.g RUS, NearMiss, ENN, Tomeklink&lt;/li&gt;
-&lt;li&gt;Over-sampling from minority class e.g SMOTE, ADASYN, Borderline-SMOTE&lt;/li&gt;
-&lt;li&gt;Hybrid method e.g Smote + ENN&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color:blue&#34;&gt;Down-sampling from majority class&lt;/span&gt; e.g RUS, NearMiss, ENN, Tomeklink&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color:blue&#34;&gt;Over-sampling from minority class&lt;/span&gt; e.g SMOTE, ADASYN, Borderline-SMOTE&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#34;color:blue&#34;&gt;Hybrid method &lt;/span&gt; e.g Smote + ENN&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;There are pros and cons from data-level strategy.&lt;/p&gt;
@@ -480,7 +480,7 @@ all_stopwords = gensim_stopwords.union([nltk_top_words, spacy_stopwords])
 &lt;h3 id=&#34;cons&#34;&gt;Cons:&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Re-sampling method is generally finding neighborhood samples from distances. &lt;strong&gt;Curse of dimensionality happens!&lt;/strong&gt;. It wont be helpful for large-scale data&lt;/li&gt;
+&lt;li&gt;Re-sampling method is generally finding neighborhood samples from distances. &lt;span style=&#34;color:red&#34;&gt;Curse of dimensionality happens! &lt;/span&gt;. It wont be helpful for large-scale data.&lt;/li&gt;
 &lt;li&gt;Unreasonable re-sampling caused by noise may not accurately capture the distribution information, thus, yields bad performance.&lt;/li&gt;
 &lt;li&gt;Not applicable to some complex dataset since distance metric is inapplicable&lt;/li&gt;
 &lt;/ol&gt;
@@ -531,7 +531,7 @@ for name, pipeline in pipelines:
 
 &lt;h3 id=&#34;cost-sensitive-learning&#34;&gt;Cost-sensitive learning&lt;/h3&gt;
 
-&lt;p&gt;In stead of touching data, we can also work on algorithms. The most intuitive way is the &lt;strong&gt;cost-sensitive learning&lt;/strong&gt;. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&amp;lsquo;majority&amp;rsquo;: 1, &amp;lsquo;minority&amp;rsquo;: 10}.&lt;/p&gt;
+&lt;p&gt;In stead of touching data, we can also work on algorithms. The most intuitive way is the &lt;span style=&#34;color:blue&#34;&gt; cost-sensitive learning &lt;/span&gt;. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&amp;lsquo;majority&amp;rsquo;: 1, &amp;lsquo;minority&amp;rsquo;: 10}.&lt;/p&gt;
 
 &lt;p&gt;Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.&lt;/p&gt;
 
@@ -542,14 +542,14 @@ for name, pipeline in pipelines:
 &lt;h2 id=&#34;experience&#34;&gt;Experience&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Down-sampling: It is able to remove some noise and it is very fast to implement. &lt;strong&gt;Random Downsampling&lt;/strong&gt; can be used in any situation, but it might be harmful for high imbalanced ratio cases. &lt;strong&gt;NearMiss&lt;/strong&gt; is very sensitive to noisy data. To remove noise of data, you can try &lt;strong&gt;Tomeklink&lt;/strong&gt;, &lt;strong&gt;AllKNN&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;Oversampling: It is very easy to overfit the data. &lt;strong&gt;SMOTE&lt;/strong&gt; and &lt;strong&gt;ADASYN&lt;/strong&gt; could be helpful for small data.&lt;/li&gt;
+&lt;li&gt;Down-sampling: It is able to remove some noise and it is very fast to implement. &lt;span style=&#34;color:blue&#34;&gt;Random Downsampling&lt;/span&gt; can be used in any situation, but it might be harmful for high imbalanced ratio cases. &lt;span style=&#34;color:blue&#34;&gt;NearMiss&lt;/span&gt; is very sensitive to noisy data. To remove noise of data, you can try &lt;span style=&#34;color:blue&#34;&gt;tomeklink&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;AllKNN&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Oversampling: It is very easy to overfit the data. &lt;span style=&#34;color:blue&#34;&gt;SMOTE&lt;/span&gt; and &lt;span style=&#34;color:blue&#34;&gt;ADASYN&lt;/span&gt; could be helpful for small data.&lt;/li&gt;
 &lt;li&gt;Hybrid sampling: Also helpful for small dataset&lt;/li&gt;
 &lt;li&gt;Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.&lt;/li&gt;
 &lt;li&gt;Bagging is normally better than Boosting based ensemble method.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&amp;rsquo;s &lt;a href=&#34;chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf&#34;&gt;paper&lt;/a&gt;, you will benefit a lot, and it can be used in other applications such as &lt;a href=&#34;https://www.kaggle.com/ntnu-testimon/paysim1&#34;&gt;fraud detection dataset on Kaggle&lt;/a&gt;, and you can check this &lt;a href=&#34;https://github.com/Tony607/Focal_Loss_Keras&#34;&gt;github&lt;/a&gt; to have a practice with &lt;code&gt;focal loss&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&amp;rsquo;s &lt;a href=&#34;chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf&#34;&gt;paper&lt;/a&gt;, you will benefit a lot, and it can be used in other applications such as &lt;a href=&#34;https://www.kaggle.com/ntnu-testimon/paysim1&#34;&gt;fraud detection dataset on Kaggle&lt;/a&gt;, and you can check this &lt;a href=&#34;https://github.com/Tony607/Focal_Loss_Keras&#34;&gt;github&lt;/a&gt; to have a practice with &lt;span style=&#34;color:blue&#34;&gt; focal loss &lt;/span&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -561,7 +561,7 @@ for name, pipeline in pipelines:
       <guid>https://mmy12580.github.io/posts/training_nn_on_large_batches/</guid>
       <description>
 
-&lt;p&gt;According to Sebastian Ruder&amp;rsquo;s blog &lt;a href=&#34;http://ruder.io/nlp-imagenet/&#34;&gt;post&lt;/a&gt;, the ImageNet moment of NLP has arrived. Especially, models like e.g &lt;code&gt;BERT&lt;/code&gt;, &lt;code&gt;ELMO&lt;/code&gt;, &lt;code&gt;UlMFIT&lt;/code&gt;,&lt;code&gt;Open-GPT&lt;/code&gt;, &lt;code&gt;Transformer-XL&lt;/code&gt; have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter &lt;code&gt;open-gpt2&lt;/code&gt; with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In &lt;code&gt;Leafy&lt;/code&gt; projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.&lt;/p&gt;
+&lt;p&gt;According to Sebastian Ruder&amp;rsquo;s blog &lt;a href=&#34;http://ruder.io/nlp-imagenet/&#34;&gt;post&lt;/a&gt;, the ImageNet moment of NLP has arrived. Especially, models like e.g &lt;span style=&#34;color:blue&#34;&gt;BERT&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;ELMO&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;UlMFIT&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;Open-GPT&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;Transformer-XL&lt;/span&gt; have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter &lt;span style=&#34;color:blue&#34;&gt;Open-GPT2&lt;/span&gt; with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In &lt;strong&gt;&lt;em&gt;Leafy&lt;/em&gt;&lt;/strong&gt; projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.&lt;/p&gt;
 
 &lt;h2 id=&#34;in-particular-this-post-includes&#34;&gt;In particular, this post includes:&lt;/h2&gt;
 
@@ -573,7 +573,7 @@ for name, pipeline in pipelines:
 
 &lt;h2 id=&#34;simplest-trick-gradient-accumulation&#34;&gt;Simplest trick: gradient accumulation.&lt;/h2&gt;
 
-&lt;p&gt;Here, I mainly use &lt;strong&gt;&lt;em&gt;Pytorch&lt;/em&gt;&lt;/strong&gt; as the back-end framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,&lt;/p&gt;
+&lt;p&gt;Here, I mainly use &lt;strong&gt;&lt;em&gt;Pytorch&lt;/em&gt;&lt;/strong&gt; as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;for i, (inputs, label) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -585,7 +585,7 @@ for name, pipeline in pipelines:
 	optimizer.step()         				  
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;the &lt;em&gt;gradient accumulation&lt;/em&gt; looks like below:&lt;/p&gt;
+&lt;p&gt;the &lt;span style=&#34;color:blue&#34;&gt;gradient accumulation&lt;/span&gt; looks like below:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;for i, (inputs, labels) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -607,7 +607,7 @@ for name, pipeline in pipelines:
 
 &lt;h2 id=&#34;torch-utils-checkpoint&#34;&gt;Torch.utils.checkpoint&lt;/h2&gt;
 
-&lt;p&gt;When a model is too large for a single GPU, is there a way to implement the training? &lt;strong&gt;Yes, but it has a cost. It costs computing over GPU usage.&lt;/strong&gt; The trick is to use the checkpoint function in Pytorch. If you would like to know what exactly it does in details, check &lt;a href=&#34;https://pytorch.org/docs/stable/checkpoint.html&#34;&gt;here&lt;/a&gt;, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what &lt;code&gt;torch.utils.checkpoint&lt;/code&gt; can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below&lt;/p&gt;
+&lt;p&gt;When a model is too large for a single GPU, is there a way to implement the training? &lt;span style=&#34;color:red&#34;&gt;Yes, but it has a cost. It costs computing over GPU usage&lt;/span&gt;. The trick is to use the &lt;strong&gt;&lt;em&gt;checkpoint&lt;/em&gt;&lt;/strong&gt; function in Pytorch. If you would like to know what exactly it does in details, check &lt;a href=&#34;https://pytorch.org/docs/stable/checkpoint.html&#34;&gt;here&lt;/a&gt;, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what &lt;code&gt;torch.utils.checkpoint&lt;/code&gt; can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# pseudo 1000 layers model
 layers = [nn.Linear(10, 10) for _ in range(1000)]
@@ -635,11 +635,11 @@ optimizer.step()
 predictions = parallel_model(inputs)          
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from &lt;strong&gt;zhihu&lt;/strong&gt; is like this&lt;/p&gt;
+&lt;p&gt;However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from &lt;em&gt;zhihu&lt;/em&gt; is like this&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As step 4 of the Forward pass (top-right) shows the results of &lt;em&gt;ALL&lt;/em&gt; the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len= 21128. If we do batch_size=32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.&lt;/p&gt;
+&lt;p&gt;As step 4 of the Forward pass (top-right) shows the results of &lt;em&gt;ALL&lt;/em&gt; the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len = 21128. If we do batch_size = 32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.&lt;/p&gt;
 
 &lt;p&gt;What can we do then?&lt;/p&gt;
 
@@ -665,7 +665,7 @@ optimizer.step()
 predictions = parallel_model(inputs)      
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The difference between &lt;code&gt;DataParallelModel&lt;/code&gt; and &lt;code&gt;torch.nn.DataParallel&lt;/code&gt; is just that the output of the forward pass (predictions) is not gathered on GPU-1 and is thus a tuple of n_gpu tensors, each tensor being located on a respective GPU.&lt;/p&gt;
+&lt;p&gt;The difference between &lt;span style=&#34;color:red&#34;&gt;DataParallelModel&lt;/span&gt; and &lt;span style=&#34;color:red&#34;&gt;torch.nn.DataParallel&lt;/span&gt; is just that the output of the forward pass (predictions) is not gathered on &lt;em&gt;GPU-1&lt;/em&gt; and is thus a tuple of multiple gpu, &lt;em&gt;n_gpu&lt;/em&gt;, tensors, each tensor being located on a respective GPU.&lt;/p&gt;
 
 &lt;p&gt;The DataParallelCriterion takes input the tuple of n_gpu tensors and the target labels tensor. It computes the loss function in parallel on each GPU, splitting the target label tensor the same way the model input was chunked by DataParallel. A related illustration become like below&lt;/p&gt;
 
@@ -675,7 +675,7 @@ predictions = parallel_model(inputs)
 
 &lt;p&gt;Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on MNIST dataset looks like&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 2 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
@@ -683,7 +683,7 @@ python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
 
 &lt;p&gt;A good code to implement is like below:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;from __future__ import print_function
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from __future__ import print_function
 import argparse
 import torch
 import torch.nn as nn
@@ -834,10 +834,10 @@ print(&amp;quot;Total time= {:.3f}s&amp;quot;.format(tot_time))
 &lt;h2 id=&#34;conclusion&#34;&gt;Conclusion:&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;If you want to try a larger batch size in one GPU machine, try &lt;em&gt;gradient accumulation&lt;/em&gt;;&lt;/li&gt;
-&lt;li&gt;If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try &lt;em&gt;gradient checkpoint&lt;/em&gt;;&lt;/li&gt;
-&lt;li&gt;If you have multi-GPU, try &lt;em&gt;DataParallel&lt;/em&gt; from Pytorch or provided link;&lt;/li&gt;
-&lt;li&gt;If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try &lt;em&gt;Distributed Computing&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;If you want to try a larger batch size in one GPU machine, try &lt;span style=&#34;color:blue&#34;&gt;gradient accumulation&lt;/span&gt;;&lt;/li&gt;
+&lt;li&gt;If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try &lt;span style=&#34;color:red&#34;&gt;gradient checkpoint&lt;/span&gt;;&lt;/li&gt;
+&lt;li&gt;If you have multi-GPU, try &lt;span style=&#34;color:red&#34;&gt;DataParallel&lt;/span&gt; from Pytorch or provided link;&lt;/li&gt;
+&lt;li&gt;If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try &lt;span style=&#34;color:blue&#34;&gt;Distributed Computing&lt;/span&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Good luck for all of you to any case you would like to implement deep learning algorithms.&lt;/p&gt;

@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "Training on Large Batches",
     "headline" : "Training on Large Batches",
-    "description" : "According to Sebastian Ruder\x26rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT,Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter open-gpt2 with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
+    "description" : "According to Sebastian Ruder\x26rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT, Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter Open-GPT2 with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-06-17 12:21:44 -0400 EDT",
     "dateModified" : "2019-06-17 12:21:44 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/training_nn_on_large_batches\/",
-    "wordCount" : "1619",
+    "wordCount" : "1625",
     "keywords" : [ "deep learning","training tricks", "Moyan\x27s Website"]
 }
 </script>
@@ -154,7 +154,7 @@
 
           
 
-<p>According to Sebastian Ruder&rsquo;s blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the ImageNet moment of NLP has arrived. Especially, models like e.g <code>BERT</code>, <code>ELMO</code>, <code>UlMFIT</code>,<code>Open-GPT</code>, <code>Transformer-XL</code> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter <code>open-gpt2</code> with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <code>Leafy</code> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
+<p>According to Sebastian Ruder&rsquo;s blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the ImageNet moment of NLP has arrived. Especially, models like e.g <span style="color:blue">BERT</span>, <span style="color:blue">ELMO</span>, <span style="color:blue">UlMFIT</span>, <span style="color:blue">Open-GPT</span>, <span style="color:blue">Transformer-XL</span> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter <span style="color:blue">Open-GPT2</span> with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <strong><em>Leafy</em></strong> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
 
 <h2 id="in-particular-this-post-includes">In particular, this post includes:</h2>
 
@@ -166,7 +166,7 @@
 
 <h2 id="simplest-trick-gradient-accumulation">Simplest trick: gradient accumulation.</h2>
 
-<p>Here, I mainly use <strong><em>Pytorch</em></strong> as the back-end framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
+<p>Here, I mainly use <strong><em>Pytorch</em></strong> as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
 
 <pre><code>for i, (inputs, label) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -178,7 +178,7 @@
 	optimizer.step()         				  
 </code></pre>
 
-<p>the <em>gradient accumulation</em> looks like below:</p>
+<p>the <span style="color:blue">gradient accumulation</span> looks like below:</p>
 
 <pre><code>for i, (inputs, labels) in enumerate(training_set):
 	outputs = model(inputs)               
@@ -200,7 +200,7 @@
 
 <h2 id="torch-utils-checkpoint">Torch.utils.checkpoint</h2>
 
-<p>When a model is too large for a single GPU, is there a way to implement the training? <strong>Yes, but it has a cost. It costs computing over GPU usage.</strong> The trick is to use the checkpoint function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
+<p>When a model is too large for a single GPU, is there a way to implement the training? <span style="color:red">Yes, but it has a cost. It costs computing over GPU usage</span>. The trick is to use the <strong><em>checkpoint</em></strong> function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
 
 <pre><code class="language-python"># pseudo 1000 layers model
 layers = [nn.Linear(10, 10) for _ in range(1000)]
@@ -228,11 +228,11 @@ optimizer.step()
 predictions = parallel_model(inputs)          
 </code></pre>
 
-<p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <strong>zhihu</strong> is like this</p>
+<p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <em>zhihu</em> is like this</p>
 
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
 
-<p>As step 4 of the Forward pass (top-right) shows the results of <em>ALL</em> the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len= 21128. If we do batch_size=32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.</p>
+<p>As step 4 of the Forward pass (top-right) shows the results of <em>ALL</em> the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len = 21128. If we do batch_size = 32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.</p>
 
 <p>What can we do then?</p>
 
@@ -258,7 +258,7 @@ optimizer.step()
 predictions = parallel_model(inputs)      
 </code></pre>
 
-<p>The difference between <code>DataParallelModel</code> and <code>torch.nn.DataParallel</code> is just that the output of the forward pass (predictions) is not gathered on GPU-1 and is thus a tuple of n_gpu tensors, each tensor being located on a respective GPU.</p>
+<p>The difference between <span style="color:red">DataParallelModel</span> and <span style="color:red">torch.nn.DataParallel</span> is just that the output of the forward pass (predictions) is not gathered on <em>GPU-1</em> and is thus a tuple of multiple gpu, <em>n_gpu</em>, tensors, each tensor being located on a respective GPU.</p>
 
 <p>The DataParallelCriterion takes input the tuple of n_gpu tensors and the target labels tensor. It computes the loss function in parallel on each GPU, splitting the target label tensor the same way the model input was chunked by DataParallel. A related illustration become like below</p>
 
@@ -268,7 +268,7 @@ predictions = parallel_model(inputs)
 
 <p>Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on MNIST dataset looks like</p>
 
-<pre><code>python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
+<pre><code class="language-bash">python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 2 --world-size 2
 python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
@@ -276,7 +276,7 @@ python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
 
 <p>A good code to implement is like below:</p>
 
-<pre><code>from __future__ import print_function
+<pre><code class="language-python">from __future__ import print_function
 import argparse
 import torch
 import torch.nn as nn
@@ -427,10 +427,10 @@ print(&quot;Total time= {:.3f}s&quot;.format(tot_time))
 <h2 id="conclusion">Conclusion:</h2>
 
 <ol>
-<li>If you want to try a larger batch size in one GPU machine, try <em>gradient accumulation</em>;</li>
-<li>If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try <em>gradient checkpoint</em>;</li>
-<li>If you have multi-GPU, try <em>DataParallel</em> from Pytorch or provided link;</li>
-<li>If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try <em>Distributed Computing</em>.</li>
+<li>If you want to try a larger batch size in one GPU machine, try <span style="color:blue">gradient accumulation</span>;</li>
+<li>If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try <span style="color:red">gradient checkpoint</span>;</li>
+<li>If you have multi-GPU, try <span style="color:red">DataParallel</span> from Pytorch or provided link;</li>
+<li>If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try <span style="color:blue">Distributed Computing</span>.</li>
 </ol>
 
 <p>Good luck for all of you to any case you would like to implement deep learning algorithms.</p>
