@@ -5,27 +5,18 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Nov 2019 09:57:22 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Posts</title>
-      <link>https://mmy12580.github.io/posts/</link>
-      <pubDate>Fri, 01 Nov 2019 09:57:22 -0400</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>About</title>
       <link>https://mmy12580.github.io/about/</link>
-      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/about/</guid>
       <description>
 
-&lt;p&gt;I am Principal Scientist, NLP for &lt;a href=&#34;https://www.course5i.com&#34;&gt;Course5i AI Lab&lt;/a&gt;, currently focused on conducting applied research to build NLP solutions for marketing.&lt;/p&gt;
+&lt;p&gt;I am a Principal Scientist, NLP for &lt;a href=&#34;https://www.course5i.com&#34;&gt;Course5i AI Lab&lt;/a&gt;, Toronto. Currently, I lead NLP research team to conduct applied research to deliever NLP solutions for marketing. Our visions are building scalable and transferable NLU and NLG models for clients, e.g., Microsoft, Lenovo, Colgate Palmolive, and so on.&lt;/p&gt;
 
 &lt;p&gt;Preivously, I worked as a Machine Learning Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, and I have done projects in several areas, e.g., NLP, autoML, and recommendation system. In the meantime, I was also a NLP Scientist at &lt;a href=&#34;leafy.io&#34;&gt;Leafy.ai&lt;/a&gt; working on an work-efficiency App with NLP and NLU features.&lt;/p&gt;
 
@@ -39,6 +30,15 @@
 
 &lt;p&gt;Click the &lt;i class=&#34;fas fa-lightbulb&#34;&gt;&lt;/i&gt; on the top left of the web page to change the theme of the website.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Posts</title>
+      <link>https://mmy12580.github.io/posts/</link>
+      <pubDate>Fri, 01 Nov 2019 09:57:22 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/</guid>
+      <description></description>
     </item>
     
   </channel>
