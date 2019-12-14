@@ -146,22 +146,13 @@
           
           
 
-          
-
-<h1 id="intuition">Intuition</h1>
-
+          <h1 id="intuition">Intuition</h1>
 <p>Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can. So, what can we do?</p>
-
 <h1 id="faiss">Faiss</h1>
-
-<p>My solution is to use a powerful tool created by Facebook named as <strong>Faiss</strong>. If you are a nlper, you should actually use it before, maybe you just don&rsquo;t know since when you use it. 😄, no worries. I am going to explain it to you soon.</p>
-
+<p>My solution is to use a powerful tool created by Facebook named as <strong>Faiss</strong>. If you are a nlper, you should actually use it before, maybe you just don't know since when you use it. 😄, no worries. I am going to explain it to you soon.</p>
 <p>Let us look at a real case, when you build a word embedding i.e., trained from wiki data. If you would like to find the most similar 10 words to a given word, say, sushi, what do you normally do?</p>
-
 <h3 id="numpy-users">Numpy Users.</h3>
-
 <p><code>np.memmap</code> is a good trick to use when you have a large word embeddings to load to the memory.</p>
-
 <pre><code>import numpy as np 
 # define cosine distance
 def cosine_distance(vec1, vec2):
@@ -178,12 +169,8 @@ for item in embeds:
     results.append(eword, dist)
 # sort results
 print(sorted(results, key=lambda x: x[1])[:10])
-</code></pre>
-
-<h3 id="gensim-user">Gensim User.</h3>
-
+</code></pre><h3 id="gensim-user">Gensim User.</h3>
 <p>The key of Gensim to retrieve the most similar words for the query word is to use <a href="https://github.com/spotify/annoy">Annoy</a>, which creates large read-only file-based data sturctures that are mmapped into memory so that many processes may share the same data.</p>
-
 <pre><code>from gensim.similarities.index import AnnoyIndexer
 from gensim.models import KeyedVectors
 
@@ -197,21 +184,15 @@ mode.most_similar('sushi', topn=10, indexer=indexer)
  ('sashimi', 0.88),
  ('maki', 0.81),
  ('katsu', 0.64 )]
-</code></pre>
-
-<h3 id="any-thing-better">Any thing better?</h3>
-
+</code></pre><h3 id="any-thing-better">Any thing better?</h3>
 <p>Both methods work in some cirumstances. Nevertheless, it does not provide satistifactory results in production sometimes. Now, I am going to introduce the method I mentioned early that nlpers have useds, which is used in <strong>FastText</strong>. Recall the usuage of FastText, it conducts nearest neighbor queries like below:</p>
-
 <pre><code>./fasttext nn wiki200.bin 
 Query word? sushi
 sushi 1.0
 sashimi 0.88
 maki 0.81
 katsu 0.64
-</code></pre>
-
-<p>The nearest neighobour searching integrated on FastText is called <strong>Faiss</strong>, yet another super powerful tools for industrial solutions. It is also what we use in <strong>Leafy.ai</strong>.</p>
+</code></pre><p>The nearest neighobour searching integrated on FastText is called <strong>Faiss</strong>, yet another super powerful tools for industrial solutions. It is also what we use in <strong>Leafy.ai</strong>.</p>
 
     </div>
 

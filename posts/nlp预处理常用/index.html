@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "NlP预处理常用",
     "headline" : "NlP预处理常用",
-    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  \nimport re import sys import unicodedata # number number_regex = re.compile(r\x26quot;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(\\.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26quot;) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26quot;P\x26quot;)),\x26quot;\x26quot;) r4 = \x26quot;\\\\【.*?】\x2b|\\\\《.*?》\x2b|\\\\#.*?#\x2b|[.!\/_,$\x26amp;%^*()\x26lt;\x26gt;\x2b\x26quot;\x26quot;\x27?@|:~{}#]\x2b|[——！\\\\\\，。=？、：“”‘’￥……（）《》【】]\x26quot;  引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。\n# double quotes double_quotes = [\x26quot;«\x26quot;, \x26quot;‹\x26quot;, \x26quot;»\x26quot;, \x26quot;›\x26quot;, \x26quot;„\x26quot;, \x26quot;“\x26quot;, \x26quot;‟\x26quot;, \x26quot;”\x26quot;, \x26quot;❝\x26quot;, \x26quot;❞\x26quot;, \x26quot;❮\x26quot;, \x26quot;❯\x26quot;, \x26quot;〝\x26quot;, \x26quot;〞\x26quot;, \x26quot;〟\x26quot;,\x26quot;＂\x26quot;,] # single quotes single_quotes = [\x26quot;‘\x26quot;, \x26quot;‛\x26quot;, \x26quot;’\x26quot;, \x26quot;❛\x26quot;, \x26quot;❜\x26quot;, \x26quot;`\x26quot;, \x26quot;´\x26quot;, \x26quot;‘\x26quot;, \x26quot;’\x26quot;] # define related regex double_quote_regex = re.",
+    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  number number_regex = re.compile(r\x26rdquo;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26quot;)\npuncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26ldquo;P\x26rdquo;)),\x26quot;\x26quot;) r4 = \x26ldquo;\\【.?】\x2b|\\《.?》\x2b|\\#.?#\x2b|[.!\/_,$\x26amp;%^()\x26lt;\x26gt;\x2b\x26rdquo;\x26quot;\x27?@|:~{}#]\x2b|[——！\\\\，。=？、：“”‘’￥……（）《》【】]\x26rdquo;\n ## 引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现\x26lt;span style=\x26quot;color:red\x26quot;\x26gt;全角\x26lt;\/span\x26gt;和\x26lt;span style=\x26quot;color:red\x26quot;\x26gt;半角\x26lt;\/span\x26gt;的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。 ````python # double quotes double_quotes = [\x26quot;«\x26quot;, \x26quot;‹\x26quot;, \x26quot;»\x26quot;, \x26quot;›\x26quot;, \x26quot;„\x26quot;, \x26quot;“\x26quot;, \x26quot;‟\x26quot;, \x26quot;”\x26quot;, \x26quot;❝\x26quot;, \x26quot;❞\x26quot;, \x26quot;❮\x26quot;, \x26quot;❯\x26quot;, \x26quot;〝\x26quot;, \x26quot;〞\x26quot;, \x26quot;〟\x26quot;,\x26quot;＂\x26quot;,] # single quotes single_quotes = [\x26quot;‘\x26quot;, \x26quot;‛\x26quot;, \x26quot;’\x26quot;, \x26quot;❛\x26quot;, \x26quot;❜\x26quot;, \x26quot;`\x26quot;, \x26quot;´\x26quot;, \x26quot;‘\x26quot;, \x26quot;’\x26quot;] # define related regex double_quote_regex = re.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-09-19 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-09-19 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8\/",
-    "wordCount" : "436",
+    "wordCount" : "329",
     "keywords" : [ "natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -151,41 +151,28 @@
           
           
 
-          
-
-<p>NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。</p>
-
-<h2 id="去除非文本部分">去除非文本部分</h2>
-
-<p>这里要<span style="color:red">特意</span>说一句，如果你们在做的任务是<span style="color:blue">语言模型（language model)</span>, 或者是利用<span style="color:blue">预训练模型（pre-training)</span>, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据</p>
-
+          <p>NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。</p>
+<h2 id="heading">去除非文本部分</h2>
+<p>这里要<!-- raw HTML omitted -->特意<!-- raw HTML omitted -->说一句，如果你们在做的任务是<!-- raw HTML omitted -->语言模型（language model)<!-- raw HTML omitted -->, 或者是利用<!-- raw HTML omitted -->预训练模型（pre-training)<!-- raw HTML omitted -->, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据</p>
 <ol>
 <li>数字 (digit/number)</li>
 <li>括号内的内容 (content in brackets)</li>
 <li>标点符号 (punctuations)</li>
 <li>特殊符号（special symbols)</li>
 </ol>
+<!-- raw HTML omitted -->
+<h1 id="number">number</h1>
+<p>number_regex = re.compile(r&rdquo;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&quot;)</p>
+<h1 id="puncuation-with-unicode">puncuation with unicode</h1>
+<p>punct_regex = dict.fromkeys(
+(i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&ldquo;P&rdquo;)),&quot;&quot;)
+r4 =  &ldquo;\【.<em>?】+|\《.</em>?》+|\#.<em>?#+|[.!/_,$&amp;%^</em>()&lt;&gt;+&rdquo;&quot;'?@|:~{}#]+|[——！\\，。=？、：“”‘’￥……（）《》【】]&rdquo;</p>
+<pre><code>
 
-<p><br></p>
-
-<pre><code class="language-python">import re
-import sys
-import unicodedata
-
-# number 
-number_regex = re.compile(r&quot;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&quot;)
-
-# puncuation with unicode
-punct_regex = dict.fromkeys(
-    (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&quot;P&quot;)),&quot;&quot;)
-r4 =  &quot;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;%^*()&lt;&gt;+&quot;&quot;'?@|:~{}#]+|[——！\\\，。=？、：“”‘’￥……（）《》【】]&quot;
-</code></pre>
-
-<h2 id="引号转换">引号转换</h2>
-
-<p>由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现<span style="color:red">全角</span>和<span style="color:red">半角</span>的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。</p>
-
-<pre><code class="language-python"># double quotes
+## 引号转换
+由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现&lt;span style=&quot;color:red&quot;&gt;全角&lt;/span&gt;和&lt;span style=&quot;color:red&quot;&gt;半角&lt;/span&gt;的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。
+````python
+# double quotes
 double_quotes = [&quot;«&quot;, &quot;‹&quot;, &quot;»&quot;, &quot;›&quot;, &quot;„&quot;, &quot;“&quot;, &quot;‟&quot;, &quot;”&quot;, &quot;❝&quot;, &quot;❞&quot;,
 &quot;❮&quot;, &quot;❯&quot;, &quot;〝&quot;, &quot;〞&quot;, &quot;〟&quot;,&quot;＂&quot;,]
 
@@ -195,143 +182,80 @@ single_quotes = [&quot;‘&quot;, &quot;‛&quot;, &quot;’&quot;, &quot;❛&qu
 # define related regex
 double_quote_regex = re.compile(&quot;|&quot;.join(double_quotes))
 single_quote_regex = re.compile(&quot;|&quot;.join(single_quotes))
-</code></pre>
-
-<h2 id="unicode修复">Unicode修复</h2>
-
+</code></pre><h2 id="unicode">Unicode修复</h2>
 <p>简单的unicode修复，这里使用了第三方package <code>ftfy</code>。感兴趣的童鞋可以去<a href="https://pypi.org/project/ftfy/">ftfy pypi</a> 查询一些对你有用的预处理方案，这里就不详细介绍了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> ftfy <span style="color:#f92672">import</span> fix_text
 
-<pre><code class="language-python">from ftfy import fix_text
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fix_unicode</span>(text, method<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NFC</span><span style="color:#e6db74">&#39;</span>):
+	<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">Available methods: [</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NFC</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NFKC</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NFD</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">NFKD</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">]</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+	<span style="color:#66d9ef">try</span>:
+		text <span style="color:#f92672">=</span> text<span style="color:#f92672">.</span>encode()<span style="color:#f92672">.</span>decode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">unicode-escape</span><span style="color:#e6db74">&#39;</span>)
+	<span style="color:#66d9ef">except</span>:
+		<span style="color:#66d9ef">pass</span>
 
-def fix_unicode(text, method='NFC'):
-	&quot;&quot;&quot;Available methods: ['NFC', 'NFKC', 'NFD', 'NFKD']&quot;&quot;&quot;
-	try:
-		text = text.encode().decode('unicode-escape')
-	except:
-		pass
-
-	return fix_text(text, normalization=method)
-</code></pre>
-
-<h2 id="ascii-unicode转换">ascii-unicode转换</h2>
-
+	<span style="color:#66d9ef">return</span> fix_text(text, normalization<span style="color:#f92672">=</span>method)
+</code></pre></div><h2 id="ascii-unicode">ascii-unicode转换</h2>
 <p>这里需要注意的事情是，每一种语言有一些自己的错误。我大部分做的是中文和英文，所以很多时候不需要额外的处理一些太多的语言问题。但是，对于很多欧洲的语种，例如德语，是需要进行额外的特殊例的catch和修复.</p>
-
-<pre><code class="language-python">def to_ascii_unicode(text, lang=&quot;en&quot;):
-	&quot;&quot;&quot;A wrapper for unicode converting&quot;&quot;&quot;
-	return unidecode(text)
-</code></pre>
-
-<h2 id="空格清理">空格清理</h2>
-
-<p>空格清理是非常常见的。大概源于本身数据读取的特点，以及清理完数据后，将不需要的特殊符号换成空白，网络文件中多空格和无空格是一个我们经常需要处理的情况。这里也特地写了三种类型。需要<span style="color:red">注意</span>的是，这里只是给通用的数据处理并进行下游模型训练。如果你关注最新的NLP动态，其实可以参考一下<strong>BERT</strong>的预处理python<a href="https://github.com/google-research/bert/blob/master/tokenization.py">脚本</a>。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">to_ascii_unicode</span>(text, lang<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">en</span><span style="color:#e6db74">&#34;</span>):
+	<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">A wrapper for unicode converting</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+	<span style="color:#66d9ef">return</span> unidecode(text)
+</code></pre></div><h2 id="heading-1">空格清理</h2>
+<p>空格清理是非常常见的。大概源于本身数据读取的特点，以及清理完数据后，将不需要的特殊符号换成空白，网络文件中多空格和无空格是一个我们经常需要处理的情况。这里也特地写了三种类型。需要<!-- raw HTML omitted -->注意<!-- raw HTML omitted -->的是，这里只是给通用的数据处理并进行下游模型训练。如果你关注最新的NLP动态，其实可以参考一下<strong>BERT</strong>的预处理python<a href="https://github.com/google-research/bert/blob/master/tokenization.py">脚本</a>。</p>
 <ol>
 <li>分行处理 (linebreak)</li>
 <li>多空格处理 (mul_whitespace)</li>
 <li>不间断（增加空格）处理 (nonbreaking_space)</li>
 </ol>
+<!-- raw HTML omitted -->
+<h2 id="emoij">emoij清理</h2>
+<p>同样，这里需要有一个<!-- raw HTML omitted -->提醒<!-- raw HTML omitted -->，对于正在研究<!-- raw HTML omitted -->情感分析<!-- raw HTML omitted -->的童鞋。Emoji，在帮助判断情感类别的时候是可以起到一定量的作用的，甚至是在Aspect-based sentiment analysis (ABSA), 细粒度情感分析也是有一定作用的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> emoji
+<span style="color:#f92672">import</span> unicodedata
 
-<p><br></p>
+<span style="color:#75715e"># 第一种</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remove_emoji</span>(text):
+	<span style="color:#66d9ef">return</span> emoji<span style="color:#f92672">.</span>demojize(text)
 
-<pre><code class="language-python">linebreak_regex = re.compile(r&quot;((\r\n)|[\n\v])+&quot;)
-multi_whitespace_regex = re.compile(r&quot;\s+&quot;)
-nonbreaking_space_regex = re.compile(r&quot;(?!\n)\s+&quot;)
-</code></pre>
-
-<h2 id="emoij清理">emoij清理</h2>
-
-<p>同样，这里需要有一个<span style="color:red">提醒</span>，对于正在研究<span style="color:blue">情感分析</span>的童鞋。Emoji，在帮助判断情感类别的时候是可以起到一定量的作用的，甚至是在Aspect-based sentiment analysis (ABSA), 细粒度情感分析也是有一定作用的。</p>
-
-<pre><code class="language-python">import emoji
-import unicodedata
-
-# 第一种
-def remove_emoji(text):
-	return emoji.demojize(text)
-
-# 第二种, build-in unicode data
-def replace_emoji(self, input_string):
-    for character in input_string:
-        try:
-            character.encode(&quot;ascii&quot;)
-            return_string += character
-        except UnicodeEncodeError:
-            replaced = str(character)
-            if replaced != '':
-                return_string += replaced
-            else:
-                try:
-                    return_string += &quot;[&quot; + unicodedata.name(character) + &quot;]&quot;
-                except ValueError:
-                    return_string += &quot;[x]&quot;
-    return return_string
-</code></pre>
-
-<h2 id="常见的标签化清理">常见的标签化清理</h2>
-
+<span style="color:#75715e"># 第二种, build-in unicode data</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">replace_emoji</span>(self, input_string):
+    <span style="color:#66d9ef">for</span> character <span style="color:#f92672">in</span> input_string:
+        <span style="color:#66d9ef">try</span>:
+            character<span style="color:#f92672">.</span>encode(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ascii</span><span style="color:#e6db74">&#34;</span>)
+            return_string <span style="color:#f92672">+</span><span style="color:#f92672">=</span> character
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">UnicodeEncodeError</span>:
+            replaced <span style="color:#f92672">=</span> str(character)
+            <span style="color:#66d9ef">if</span> replaced <span style="color:#f92672">!=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>:
+                return_string <span style="color:#f92672">+</span><span style="color:#f92672">=</span> replaced
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">try</span>:
+                    return_string <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">+</span> unicodedata<span style="color:#f92672">.</span>name(character) <span style="color:#f92672">+</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">]</span><span style="color:#e6db74">&#34;</span>
+                <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+                    return_string <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[x]</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">return</span> return_string
+</code></pre></div><h2 id="heading-2">常见的标签化清理</h2>
 <ol>
 <li>链接 (url)</li>
 <li>邮件地址 (email address)</li>
 <li>电话号码 (phone numbers)</li>
 <li>货币转换 (currency exchange)</li>
 </ol>
+<!-- raw HTML omitted -->
+<h1 id="2-email-address">2. email address</h1>
+<p>email_regex = re.compile(r&rdquo;(?:^|(?&lt;=[^\w@.)]))(<a href=".(?!.)">\w+-</a>?)<em>?[\w+-]@(?:\w-?)</em>?\w+(.([a-z]{2,})){1,3}(?:$|(?=\b))&quot;, flags=re.IGNORECASE | re.UNICODE)</p>
+<h1 id="3-phone-number">3. phone number</h1>
+<p>phone_regex = re.compile(r&rdquo;(?:^|(?&lt;=[^\w)]))(+?1[ .-]?)?((?\d{3})?[ .-]?)?(\d{3}[ .-]?\d{4})(\s?(?:ext.?|[#x-])\s?\d{2,6})?(?:$|(?=\W))&quot;）</p>
+<h1 id="4-currency-exchange">4 currency exchange</h1>
+<p>currencies = {&ldquo;$&rdquo;: &ldquo;USD&rdquo;, &ldquo;zł&rdquo;: &ldquo;PLN&rdquo;, &ldquo;£&rdquo;: &ldquo;GBP&rdquo;, &ldquo;¥&rdquo;: &ldquo;JPY&rdquo;, &ldquo;฿&rdquo;: &ldquo;THB&rdquo;,
+&ldquo;₡&rdquo;: &ldquo;CRC&rdquo;, &ldquo;₦&rdquo;: &ldquo;NGN&rdquo;, &ldquo;₩&rdquo;: &ldquo;KRW&rdquo;, &ldquo;₪&rdquo;: &ldquo;ILS&rdquo;, &ldquo;₫&rdquo;: &ldquo;VND&rdquo;,
+&ldquo;€&rdquo;: &ldquo;EUR&rdquo;, &ldquo;₱&rdquo;: &ldquo;PHP&rdquo;, &ldquo;₲&rdquo;: &ldquo;PYG&rdquo;, &ldquo;₴&rdquo;: &ldquo;UAH&rdquo;,&ldquo;₹&rdquo;: &ldquo;INR&rdquo;}</p>
+<p>currency_regex = re.compile(&quot;({})+&rdquo;.format(&ldquo;|&rdquo;.join(re.escape(c) for c in CURRENCIES.keys())))</p>
+<pre><code>
+## 停用词处理 
 
-<p><br></p>
+在做text mining和一些visualization, e.g., word cloud（云图）会出现需要处理一些停用词。我目前做过的发现有三个NLP语言包通用很强，也想对比较丰富。当然，在domain-specific的情况下，还是需要你们自己整理，再加入到这个stopwords这个类里。
 
-<pre><code class="language-python"># 1. url, source: https://gist.github.com/dperini/729294
-url_regex= re.compile(
-    r&quot;(?:^|(?&lt;![\w\/\.]))&quot;
-    # protocol identifier
-    # r&quot;(?:(?:https?|ftp)://)&quot;  &lt;-- alt?
-    r&quot;(?:(?:https?:\/\/|ftp:\/\/|www\d{0,3}\.))&quot;
-    # user:pass authentication
-    r&quot;(?:\S+(?::\S*)?@)?&quot; r&quot;(?:&quot;
-    # IP address exclusion
-    # private &amp; local networks
-    r&quot;(?!(?:10|127)(?:\.\d{1,3}){3})&quot;
-    r&quot;(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})&quot;
-    r&quot;(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})&quot;
-    # IP address dotted notation octets
-    # excludes loopback network 0.0.0.0
-    # excludes reserved space &gt;= 224.0.0.0
-    # excludes network &amp; broadcast addresses
-    # (first &amp; last IP address of each class)
-    r&quot;(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])&quot;
-    r&quot;(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}&quot;
-    r&quot;(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))&quot;
-    r&quot;|&quot;
-    # host name
-    r&quot;(?:(?:[a-z\\u00a1-\\uffff0-9]-?)*[a-z\\u00a1-\\uffff0-9]+)&quot;
-    # domain name
-    r&quot;(?:\.(?:[a-z\\u00a1-\\uffff0-9]-?)*[a-z\\u00a1-\\uffff0-9]+)*&quot;
-    # TLD identifier
-    r&quot;(?:\.(?:[a-z\\u00a1-\\uffff]{2,}))&quot; r&quot;)&quot;
-    # port number
-    r&quot;(?::\d{2,5})?&quot;
-    # resource path
-    r&quot;(?:\/[^\)\]\}\s]*)?&quot;,
-    flags=re.UNICODE | re.IGNORECASE)
-
-# 2. email address
-email_regex = re.compile(r&quot;(?:^|(?&lt;=[^\w@.)]))([\w+-](\.(?!\.))?)*?[\w+-]@(?:\w-?)*?\w+(\.([a-z]{2,})){1,3}(?:$|(?=\b))&quot;, flags=re.IGNORECASE | re.UNICODE)
-
-# 3. phone number 
-phone_regex = re.compile(r&quot;(?:^|(?&lt;=[^\w)]))(\+?1[ .-]?)?(\(?\d{3}\)?[ .-]?)?(\d{3}[ .-]?\d{4})(\s?(?:ext\.?|[#x-])\s?\d{2,6})?(?:$|(?=\W))&quot;）
-
-# 4 currency exchange
-currencies = {&quot;$&quot;: &quot;USD&quot;, &quot;zł&quot;: &quot;PLN&quot;, &quot;£&quot;: &quot;GBP&quot;, &quot;¥&quot;: &quot;JPY&quot;, &quot;฿&quot;: &quot;THB&quot;,
-    		  &quot;₡&quot;: &quot;CRC&quot;, &quot;₦&quot;: &quot;NGN&quot;, &quot;₩&quot;: &quot;KRW&quot;, &quot;₪&quot;: &quot;ILS&quot;, &quot;₫&quot;: &quot;VND&quot;,
-    		  &quot;€&quot;: &quot;EUR&quot;, &quot;₱&quot;: &quot;PHP&quot;, &quot;₲&quot;: &quot;PYG&quot;, &quot;₴&quot;: &quot;UAH&quot;,&quot;₹&quot;: &quot;INR&quot;}
-
-currency_regex = re.compile(&quot;({})+&quot;.format(&quot;|&quot;.join(re.escape(c) for c in CURRENCIES.keys())))
-</code></pre>
-
-<h2 id="停用词处理">停用词处理</h2>
-
-<p>在做text mining和一些visualization, e.g., word cloud（云图）会出现需要处理一些停用词。我目前做过的发现有三个NLP语言包通用很强，也想对比较丰富。当然，在domain-specific的情况下，还是需要你们自己整理，再加入到这个stopwords这个类里。</p>
-
-<pre><code class="language-python"># 1. NLTK
+````python
+# 1. NLTK
 import nltk
 from nltk.corpus import stopwords
 nltk_stop_words = set(stopwords.words('english'))
@@ -346,12 +270,8 @@ gensim_stopwords = STOPWORDS
 
 # combine 
 all_stopwords = gensim_stopwords.union([nltk_top_words, spacy_stopwords])
-</code></pre>
-
-<h1 id="还有什么">还有什么？</h1>
-
+</code></pre><h1 id="heading-3">还有什么？</h1>
 <p>这里，我只介绍了，在很多NLP任务中常会需要的处理手段。还有一些，这里没包括但是对有些任务也有意义的方法，我在此给一个小的总结以及对应的code链接，需要的朋友可以去那边查找。</p>
-
 <ol>
 <li>词干提取 (<a href="https://www.cnblogs.com/no-tears-girl/p/6964910.html">Stemmning</a>)</li>
 <li>词干还原 (<a href="https://www.machinelearningplus.com/nlp/lemmatization-examples-python/">Lemmatization</a>)</li>

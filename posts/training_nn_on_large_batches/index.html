@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "Training on Large Batches",
     "headline" : "Training on Large Batches",
-    "description" : "According to Sebastian Ruder\x26rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT, Open-GPT, Transformer-XL have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter Open-GPT2 with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
+    "description" : "According to Sebastian Ruder\x27s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT, Open-GPT, Transformer-XLhave become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter Open-GPT2with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-06-17 12:21:44 -0400 EDT",
     "dateModified" : "2019-06-17 12:21:44 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/training_nn_on_large_batches\/",
-    "wordCount" : "1625",
+    "wordCount" : "1619",
     "keywords" : [ "deep learning","training tricks", "Moyan\x27s Website"]
 }
 </script>
@@ -152,22 +152,15 @@
           
           
 
-          
-
-<p>According to Sebastian Ruder&rsquo;s blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the ImageNet moment of NLP has arrived. Especially, models like e.g <span style="color:blue">BERT</span>, <span style="color:blue">ELMO</span>, <span style="color:blue">UlMFIT</span>, <span style="color:blue">Open-GPT</span>, <span style="color:blue">Transformer-XL</span> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter <span style="color:blue">Open-GPT2</span> with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <strong><em>Leafy</em></strong> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
-
+          <p>According to Sebastian Ruder's blog <a href="http://ruder.io/nlp-imagenet/">post</a>, the ImageNet moment of NLP has arrived. Especially, models like e.g <!-- raw HTML omitted -->BERT<!-- raw HTML omitted -->, <!-- raw HTML omitted -->ELMO<!-- raw HTML omitted -->, <!-- raw HTML omitted -->UlMFIT<!-- raw HTML omitted -->, <!-- raw HTML omitted -->Open-GPT<!-- raw HTML omitted -->, <!-- raw HTML omitted -->Transformer-XL<!-- raw HTML omitted --> have become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter <!-- raw HTML omitted -->Open-GPT2<!-- raw HTML omitted --> with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here. In <em><strong>Leafy</strong></em> projects, I was mainly dealing with more than 300GB text data, so feeding them into a sequence model takes a lot of work. Here, I am going to share you a post that how to train a neural network with large batches with different tricks.</p>
 <h2 id="in-particular-this-post-includes">In particular, this post includes:</h2>
-
 <ol>
 <li>Train a model on a single or multi GPU server with batches larger than the GPUs memory or when even a single training sample won’t fit</li>
 <li>Most efficient use of a multi-GPU machine</li>
 <li>The simplest way to train a model using several machines in a distributed setup.</li>
 </ol>
-
 <h2 id="simplest-trick-gradient-accumulation">Simplest trick: gradient accumulation.</h2>
-
-<p>Here, I mainly use <strong><em>Pytorch</em></strong> as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
-
+<p>Here, I mainly use <em><strong>Pytorch</strong></em> as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
 <pre><code>for i, (inputs, label) in enumerate(training_set):
 	outputs = model(inputs)               
 	loss = criterion(outputs labels) 
@@ -176,10 +169,7 @@
 	optimizer.zero_grad() # then reset gradients tensor
 	loss.backward()                           
 	optimizer.step()         				  
-</code></pre>
-
-<p>the <span style="color:blue">gradient accumulation</span> looks like below:</p>
-
+</code></pre><p>the <!-- raw HTML omitted -->gradient accumulation<!-- raw HTML omitted --> looks like below:</p>
 <pre><code>for i, (inputs, labels) in enumerate(training_set):
 	outputs = model(inputs)               
 	loss = criterion(outputs labels) 
@@ -194,59 +184,39 @@
 		optimizer.step()  # update all parameters
 		optimizer.zero_grad() # then reset gradients tensor
                        
-</code></pre>
+</code></pre><p>In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
+<h2 id="torchutilscheckpoint">Torch.utils.checkpoint</h2>
+<p>When a model is too large for a single GPU, is there a way to implement the training? <!-- raw HTML omitted -->Yes, but it has a cost. It costs computing over GPU usage<!-- raw HTML omitted -->. The trick is to use the <em><strong>checkpoint</strong></em> function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># pseudo 1000 layers model</span>
+layers <span style="color:#f92672">=</span> [nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>)]
+model <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Sequential(<span style="color:#f92672">*</span>layers)
 
-<p>In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
+<span style="color:#f92672">from</span> torch.utils.checkpoint <span style="color:#f92672">import</span> checkpoint_sequential
 
-<h2 id="torch-utils-checkpoint">Torch.utils.checkpoint</h2>
-
-<p>When a model is too large for a single GPU, is there a way to implement the training? <span style="color:red">Yes, but it has a cost. It costs computing over GPU usage</span>. The trick is to use the <strong><em>checkpoint</em></strong> function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
-
-<pre><code class="language-python"># pseudo 1000 layers model
-layers = [nn.Linear(10, 10) for _ in range(1000)]
-model = nn.Sequential(*layers)
-
-from torch.utils.checkpoint import checkpoint_sequential
-
-# split into two segments
-num_segments = 2
-x = checkpoint_sequential(model, num_segments, input)
-x.sum().backward() 
-</code></pre>
-
-<p>This concept has interactions with meta-learning, and it has been experimentally proved to be useful for sequence model.</p>
-
+<span style="color:#75715e"># split into two segments</span>
+num_segments <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+x <span style="color:#f92672">=</span> checkpoint_sequential(model, num_segments, input)
+x<span style="color:#f92672">.</span>sum()<span style="color:#f92672">.</span>backward() 
+</code></pre></div><p>This concept has interactions with meta-learning, and it has been experimentally proved to be useful for sequence model.</p>
 <h2 id="multi-gpu-utility-maximization">Multi-GPU Utility Maximization</h2>
-
 <p>Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great choice to yield faster training. Here, The top option is always the data parallelism.</p>
-
 <pre><code>parallel_model = torch.nn.DataParallel(model) 
 predictions = parallel_model(inputs)          
 loss = criterion(predictions, labels)     
 loss.backward()                               
 optimizer.step()                              
 predictions = parallel_model(inputs)          
-</code></pre>
-
-<p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <em>zhihu</em> is like this</p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
-
+</code></pre><p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <em>zhihu</em> is like this</p>
+<p><img src="https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png" alt=""></p>
 <p>As step 4 of the Forward pass (top-right) shows the results of <em>ALL</em> the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len = 21128. If we do batch_size = 32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.</p>
-
 <p>What can we do then?</p>
-
 <h2 id="balance-load-on-multi-gpu-machine">Balance load on multi-GPU machine</h2>
-
 <p>There are two main solution to the imbalanced GPU usage issue:</p>
-
 <ol>
 <li>computing the loss in the forward pass of your model</li>
 <li>computing the loss in a parallel fashion</li>
 </ol>
-
 <p>Thanks to <a href="https://hangzhang.org/">张航</a>, he solved the problems simply by creating his own version of data parallelism. If you are interested, download <a href="https://gist.github.com/thomwolf/7e2407fbd5945f07821adae3d9fd1312">here</a>, and then import them like normal torch.nn.utils.DataParallel.</p>
-
 <pre><code>from parallel import DataParallelModel, DataParallelCriterion
 
 parallel_model = DataParallelModel(model)             # solution 1
@@ -256,183 +226,169 @@ loss = parallel_loss(predictions, labels)
 loss.backward()                           
 optimizer.step()                          
 predictions = parallel_model(inputs)      
-</code></pre>
-
-<p>The difference between <span style="color:red">DataParallelModel</span> and <span style="color:red">torch.nn.DataParallel</span> is just that the output of the forward pass (predictions) is not gathered on <em>GPU-1</em> and is thus a tuple of multiple gpu, <em>n_gpu</em>, tensors, each tensor being located on a respective GPU.</p>
-
+</code></pre><p>The difference between <!-- raw HTML omitted -->DataParallelModel<!-- raw HTML omitted --> and <!-- raw HTML omitted -->torch.nn.DataParallel<!-- raw HTML omitted --> is just that the output of the forward pass (predictions) is not gathered on <em>GPU-1</em> and is thus a tuple of multiple gpu, <em>n_gpu</em>, tensors, each tensor being located on a respective GPU.</p>
 <p>The DataParallelCriterion takes input the tuple of n_gpu tensors and the target labels tensor. It computes the loss function in parallel on each GPU, splitting the target label tensor the same way the model input was chunked by DataParallel. A related illustration become like below</p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://cdn-images-1.medium.com/max/1600/1*F6SXjBp6BCoFTZ26RKnz9A.png" alt="" class="lazyload"><figcaption class="image-caption"></figcaption></figure></p>
-
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*F6SXjBp6BCoFTZ26RKnz9A.png" alt=""></p>
 <h2 id="distributed-computing">Distributed Computing</h2>
-
 <p>Well, if you are really lucky, you can even try distributed computing over severs and each server is a mulit-GPU device. In this case, you can try a even larger batch size. In case, readers do not know what distributed computing is, so I am here to explain a little bit. A simple way to understand the distributed computing is that you are training a model in a synchronized way by calling independent python training script on each node (sever), and each training script has its own optimizer and python interpreter. Simply put, the workflow is changed. In command line, training a CNN model on MNIST dataset looks like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python mnsit.py --init-method tcp://192.168.54.179:22225 --rank <span style="color:#ae81ff">0</span> --world-size <span style="color:#ae81ff">2</span>
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank <span style="color:#ae81ff">1</span> --world-size <span style="color:#ae81ff">2</span>
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank <span style="color:#ae81ff">2</span> --world-size <span style="color:#ae81ff">2</span>
+python mnsit.py --init-method tcp://192.168.54.179:22225 --rank <span style="color:#ae81ff">3</span> --world-size <span style="color:#ae81ff">2</span>
+</code></pre></div><p>A good code to implement is like below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> __future__ <span style="color:#f92672">import</span> print_function
+<span style="color:#f92672">import</span> argparse
+<span style="color:#f92672">import</span> torch
+<span style="color:#f92672">import</span> torch.nn <span style="color:#f92672">as</span> nn
+<span style="color:#f92672">import</span> time
 
-<pre><code class="language-bash">python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 0 --world-size 2
-python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 1 --world-size 2
-python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 2 --world-size 2
-python mnsit.py --init-method tcp://192.168.54.179:22225 --rank 3 --world-size 2
-</code></pre>
+<span style="color:#f92672">import</span> torch.nn.parallel
+<span style="color:#f92672">import</span> torch.nn.functional <span style="color:#f92672">as</span> F
+<span style="color:#f92672">import</span> torch.backends.cudnn <span style="color:#f92672">as</span> cudnn
+<span style="color:#f92672">import</span> torch.distributed <span style="color:#f92672">as</span> dist
+<span style="color:#f92672">import</span> torch.utils.data 
+<span style="color:#f92672">import</span> torch.utils.data.distributed
+<span style="color:#f92672">import</span> torch.optim <span style="color:#f92672">as</span> optim
+<span style="color:#f92672">from</span> torchvision <span style="color:#f92672">import</span> datasets, transforms
+<span style="color:#f92672">from</span> torch.autograd <span style="color:#f92672">import</span> Variable
 
-<p>A good code to implement is like below:</p>
+<span style="color:#75715e"># Training settings</span>
+parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser(description<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">PyTorch MNIST Example</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--batch-size</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int, default<span style="color:#f92672">=</span><span style="color:#ae81ff">1024</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">input batch size for training (default: 64)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--test-batch-size</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int, default<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">input batch size for testing (default: 1000)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--epochs</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int, default<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">number of epochs to train (default: 10)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--lr</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>float, default<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LR</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">learning rate (default: 0.01)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--momentum</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>float, default<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">M</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SGD momentum (default: 0.5)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--no-cuda</span><span style="color:#e6db74">&#39;</span>, action<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">store_true</span><span style="color:#e6db74">&#39;</span>, default<span style="color:#f92672">=</span>False,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">disables CUDA training</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--seed</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int, default<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">S</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">random seed (default: 1)</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--log-interval</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int, default<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, metavar<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">N</span><span style="color:#e6db74">&#39;</span>,
+                    help<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">how many batches to wait before logging training status</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--init-method</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>str, default<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tcp://127.0.0.1:23456</span><span style="color:#e6db74">&#39;</span>)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--rank</span><span style="color:#e6db74">&#39;</span>, type<span style="color:#f92672">=</span>int)
+parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">--world-size</span><span style="color:#e6db74">&#39;</span>,type<span style="color:#f92672">=</span>int)
 
-<pre><code class="language-python">from __future__ import print_function
-import argparse
-import torch
-import torch.nn as nn
-import time
+args <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+args<span style="color:#f92672">.</span>cuda <span style="color:#f92672">=</span> <span style="color:#f92672">not</span> args<span style="color:#f92672">.</span>no_cuda <span style="color:#f92672">and</span> torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>is_available()
 
-import torch.nn.parallel
-import torch.nn.functional as F
-import torch.backends.cudnn as cudnn
-import torch.distributed as dist
-import torch.utils.data 
-import torch.utils.data.distributed
-import torch.optim as optim
-from torchvision import datasets, transforms
-from torch.autograd import Variable
+<span style="color:#75715e"># initialization</span>
+dist<span style="color:#f92672">.</span>init_process_group(init_method<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>init_method,backend<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">gloo</span><span style="color:#e6db74">&#34;</span>,world_size<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>world_size,rank<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>rank,group_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">pytorch_test</span><span style="color:#e6db74">&#34;</span>)
 
-# Training settings
-parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
-parser.add_argument('--batch-size', type=int, default=1024, metavar='N',
-                    help='input batch size for training (default: 64)')
-parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
-                    help='input batch size for testing (default: 1000)')
-parser.add_argument('--epochs', type=int, default=20, metavar='N',
-                    help='number of epochs to train (default: 10)')
-parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
-                    help='learning rate (default: 0.01)')
-parser.add_argument('--momentum', type=float, default=0.5, metavar='M',
-                    help='SGD momentum (default: 0.5)')
-parser.add_argument('--no-cuda', action='store_true', default=False,
-                    help='disables CUDA training')
-parser.add_argument('--seed', type=int, default=1, metavar='S',
-                    help='random seed (default: 1)')
-parser.add_argument('--log-interval', type=int, default=10, metavar='N',
-                    help='how many batches to wait before logging training status')
-parser.add_argument('--init-method', type=str, default='tcp://127.0.0.1:23456')
-parser.add_argument('--rank', type=int)
-parser.add_argument('--world-size',type=int)
+torch<span style="color:#f92672">.</span>manual_seed(args<span style="color:#f92672">.</span>seed)
+<span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>cuda:
+    torch<span style="color:#f92672">.</span>cuda<span style="color:#f92672">.</span>manual_seed(args<span style="color:#f92672">.</span>seed)
 
-args = parser.parse_args()
-args.cuda = not args.no_cuda and torch.cuda.is_available()
-
-# initialization
-dist.init_process_group(init_method=args.init_method,backend=&quot;gloo&quot;,world_size=args.world_size,rank=args.rank,group_name=&quot;pytorch_test&quot;)
-
-torch.manual_seed(args.seed)
-if args.cuda:
-    torch.cuda.manual_seed(args.seed)
-
-train_dataset=datasets.MNIST('data', train=True, download=True,
-               transform=transforms.Compose([
-                   transforms.ToTensor(),
-                   transforms.Normalize((0.1307,), (0.3081,))
+train_dataset<span style="color:#f92672">=</span>datasets<span style="color:#f92672">.</span>MNIST(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">data</span><span style="color:#e6db74">&#39;</span>, train<span style="color:#f92672">=</span>True, download<span style="color:#f92672">=</span>True,
+               transform<span style="color:#f92672">=</span>transforms<span style="color:#f92672">.</span>Compose([
+                   transforms<span style="color:#f92672">.</span>ToTensor(),
+                   transforms<span style="color:#f92672">.</span>Normalize((<span style="color:#ae81ff">0.1307</span>,), (<span style="color:#ae81ff">0.3081</span>,))
                ]))
 
-# distirbuted sampling
-train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+<span style="color:#75715e"># distirbuted sampling</span>
+train_sampler <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>distributed<span style="color:#f92672">.</span>DistributedSampler(train_dataset)
 
-kwargs = {'num_workers': 1, 'pin_memory': True} if args.cuda else {}
+kwargs <span style="color:#f92672">=</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">num_workers</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">pin_memory</span><span style="color:#e6db74">&#39;</span>: True} <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>cuda <span style="color:#66d9ef">else</span> {}
 
-train_loader = torch.utils.data.DataLoader(train_dataset,
-    batch_size=args.batch_size, shuffle=True, **kwargs)
-test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('data', train=False, transform=transforms.Compose([
-                       transforms.ToTensor(),
-                       transforms.Normalize((0.1307,), (0.3081,))
+train_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(train_dataset,
+    batch_size<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>batch_size, shuffle<span style="color:#f92672">=</span>True, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+test_loader <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>utils<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>DataLoader(
+    datasets<span style="color:#f92672">.</span>MNIST(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">data</span><span style="color:#e6db74">&#39;</span>, train<span style="color:#f92672">=</span>False, transform<span style="color:#f92672">=</span>transforms<span style="color:#f92672">.</span>Compose([
+                       transforms<span style="color:#f92672">.</span>ToTensor(),
+                       transforms<span style="color:#f92672">.</span>Normalize((<span style="color:#ae81ff">0.1307</span>,), (<span style="color:#ae81ff">0.3081</span>,))
                    ])),
-    batch_size=args.test_batch_size, shuffle=True, **kwargs)
+    batch_size<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>test_batch_size, shuffle<span style="color:#f92672">=</span>True, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
 
 
-class Net(nn.Module):
-    def __init__(self):
-        super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
-        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
-        self.conv2_drop = nn.Dropout2d()
-        self.fc1 = nn.Linear(320, 50)
-        self.fc2 = nn.Linear(50, 10)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Net</span>(nn<span style="color:#f92672">.</span>Module):
+    <span style="color:#66d9ef">def</span> __init__(self):
+        super(Net, self)<span style="color:#f92672">.</span>__init__()
+        self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+        self<span style="color:#f92672">.</span>conv2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Conv2d(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, kernel_size<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+        self<span style="color:#f92672">.</span>conv2_drop <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Dropout2d()
+        self<span style="color:#f92672">.</span>fc1 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">320</span>, <span style="color:#ae81ff">50</span>)
+        self<span style="color:#f92672">.</span>fc2 <span style="color:#f92672">=</span> nn<span style="color:#f92672">.</span>Linear(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">10</span>)
 
-    def forward(self, x):
-        x = F.relu(F.max_pool2d(self.conv1(x), 2))
-        x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), 2))
-        x = x.view(-1, 320)
-        x = F.relu(self.fc1(x))
-        x = F.dropout(x, training=self.training)
-        x = self.fc2(x)
-        return F.log_softmax(x)
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self, x):
+        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>relu(F<span style="color:#f92672">.</span>max_pool2d(self<span style="color:#f92672">.</span>conv1(x), <span style="color:#ae81ff">2</span>))
+        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>relu(F<span style="color:#f92672">.</span>max_pool2d(self<span style="color:#f92672">.</span>conv2_drop(self<span style="color:#f92672">.</span>conv2(x)), <span style="color:#ae81ff">2</span>))
+        x <span style="color:#f92672">=</span> x<span style="color:#f92672">.</span>view(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">320</span>)
+        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>relu(self<span style="color:#f92672">.</span>fc1(x))
+        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>dropout(x, training<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>training)
+        x <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>fc2(x)
+        <span style="color:#66d9ef">return</span> F<span style="color:#f92672">.</span>log_softmax(x)
 
-model = Net()
-if args.cuda:
-    # to different cuda devices
-    model.cuda()
-    model = torch.nn.parallel.DistributedDataParallel(model)
-    # model = torch.nn.DataParallel(model,device_ids=[0,1,2,3]).cuda()
-    # model.cuda()
+model <span style="color:#f92672">=</span> Net()
+<span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>cuda:
+    <span style="color:#75715e"># to different cuda devices</span>
+    model<span style="color:#f92672">.</span>cuda()
+    model <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>parallel<span style="color:#f92672">.</span>DistributedDataParallel(model)
+    <span style="color:#75715e"># model = torch.nn.DataParallel(model,device_ids=[0,1,2,3]).cuda()</span>
+    <span style="color:#75715e"># model.cuda()</span>
 
-optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
+optimizer <span style="color:#f92672">=</span> optim<span style="color:#f92672">.</span>SGD(model<span style="color:#f92672">.</span>parameters(), lr<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>lr, momentum<span style="color:#f92672">=</span>args<span style="color:#f92672">.</span>momentum)
 
-def train(epoch):
-    model.train()
-    for batch_idx, (data, target) in enumerate(train_loader):
-        if args.cuda:
-            data, target = data.cuda(), target.cuda()
-        data, target = Variable(data), Variable(target)
-        optimizer.zero_grad()
-        output = model(data)
-        loss = F.nll_loss(output, target)
-        loss.backward()
-        optimizer.step()
-        if batch_idx % args.log_interval == 0:
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]tLoss: {:.6f}'.format(
-                epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader), loss.data[0]))
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">train</span>(epoch):
+    model<span style="color:#f92672">.</span>train()
+    <span style="color:#66d9ef">for</span> batch_idx, (data, target) <span style="color:#f92672">in</span> enumerate(train_loader):
+        <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>cuda:
+            data, target <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>cuda(), target<span style="color:#f92672">.</span>cuda()
+        data, target <span style="color:#f92672">=</span> Variable(data), Variable(target)
+        optimizer<span style="color:#f92672">.</span>zero_grad()
+        output <span style="color:#f92672">=</span> model(data)
+        loss <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>nll_loss(output, target)
+        loss<span style="color:#f92672">.</span>backward()
+        optimizer<span style="color:#f92672">.</span>step()
+        <span style="color:#66d9ef">if</span> batch_idx <span style="color:#f92672">%</span> args<span style="color:#f92672">.</span>log_interval <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Train Epoch: {} [{}/{} ({:.0f}</span><span style="color:#e6db74">%</span><span style="color:#e6db74">)]tLoss: {:.6f}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(
+                epoch, batch_idx <span style="color:#f92672">*</span> len(data), len(train_loader<span style="color:#f92672">.</span>dataset),
+                <span style="color:#ae81ff">100.</span> <span style="color:#f92672">*</span> batch_idx <span style="color:#f92672">/</span> len(train_loader), loss<span style="color:#f92672">.</span>data[<span style="color:#ae81ff">0</span>]))
 
-def test():
-    model.eval()
-    test_loss = 0
-    correct = 0
-    for data, target in test_loader:
-        if args.cuda:
-            data, target = data.cuda(), target.cuda()
-        data, target = Variable(data, volatile=True), Variable(target)
-        output = model(data)
-        test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
-        pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
-        correct += pred.eq(target.data.view_as(pred)).cpu().sum()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>():
+    model<span style="color:#f92672">.</span>eval()
+    test_loss <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    correct <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> data, target <span style="color:#f92672">in</span> test_loader:
+        <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>cuda:
+            data, target <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>cuda(), target<span style="color:#f92672">.</span>cuda()
+        data, target <span style="color:#f92672">=</span> Variable(data, volatile<span style="color:#f92672">=</span>True), Variable(target)
+        output <span style="color:#f92672">=</span> model(data)
+        test_loss <span style="color:#f92672">+</span><span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>nll_loss(output, target, size_average<span style="color:#f92672">=</span>False)<span style="color:#f92672">.</span>data[<span style="color:#ae81ff">0</span>] <span style="color:#75715e"># sum up batch loss</span>
+        pred <span style="color:#f92672">=</span> output<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>max(<span style="color:#ae81ff">1</span>, keepdim<span style="color:#f92672">=</span>True)[<span style="color:#ae81ff">1</span>] <span style="color:#75715e"># get the index of the max log-probability</span>
+        correct <span style="color:#f92672">+</span><span style="color:#f92672">=</span> pred<span style="color:#f92672">.</span>eq(target<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>view_as(pred))<span style="color:#f92672">.</span>cpu()<span style="color:#f92672">.</span>sum()
 
-    test_loss /= len(test_loader.dataset)
-    print('nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)n'.format(
-        test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+    test_loss <span style="color:#f92672">/</span><span style="color:#f92672">=</span> len(test_loader<span style="color:#f92672">.</span>dataset)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}</span><span style="color:#e6db74">%</span><span style="color:#e6db74">)n</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(
+        test_loss, correct, len(test_loader<span style="color:#f92672">.</span>dataset),
+        <span style="color:#ae81ff">100.</span> <span style="color:#f92672">*</span> correct <span style="color:#f92672">/</span> len(test_loader<span style="color:#f92672">.</span>dataset)))
 
-tot_time=0;
+tot_time<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
 
-for epoch in range(1, args.epochs + 1):
-    # set epoch for gathering same epoch info over synchronized jobs
-    train_sampler.set_epoch(epoch)
-    start_cpu_secs = time.time()
-    #long running
+<span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, args<span style="color:#f92672">.</span>epochs <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+    <span style="color:#75715e"># set epoch for gathering same epoch info over synchronized jobs</span>
+    train_sampler<span style="color:#f92672">.</span>set_epoch(epoch)
+    start_cpu_secs <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+    <span style="color:#75715e">#long running</span>
     train(epoch)
-    end_cpu_secs = time.time()
-    print(&quot;Epoch {} of {} took {:.3f}s&quot;.format(
-        epoch , args.epochs , end_cpu_secs - start_cpu_secs))
-    tot_time+=end_cpu_secs - start_cpu_secs
+    end_cpu_secs <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Epoch {} of {} took {:.3f}s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(
+        epoch , args<span style="color:#f92672">.</span>epochs , end_cpu_secs <span style="color:#f92672">-</span> start_cpu_secs))
+    tot_time<span style="color:#f92672">+</span><span style="color:#f92672">=</span>end_cpu_secs <span style="color:#f92672">-</span> start_cpu_secs
     test()
 
-print(&quot;Total time= {:.3f}s&quot;.format(tot_time))
-</code></pre>
-
-<h2 id="conclusion">Conclusion:</h2>
-
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Total time= {:.3f}s</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(tot_time))
+</code></pre></div><h2 id="conclusion">Conclusion:</h2>
 <ol>
-<li>If you want to try a larger batch size in one GPU machine, try <span style="color:blue">gradient accumulation</span>;</li>
-<li>If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try <span style="color:red">gradient checkpoint</span>;</li>
-<li>If you have multi-GPU, try <span style="color:red">DataParallel</span> from Pytorch or provided link;</li>
-<li>If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try <span style="color:blue">Distributed Computing</span>.</li>
+<li>If you want to try a larger batch size in one GPU machine, try <!-- raw HTML omitted -->gradient accumulation<!-- raw HTML omitted -->;</li>
+<li>If you want to try a very very deep model on one GPU machine and want to fit samples in sequence model, try <!-- raw HTML omitted -->gradient checkpoint<!-- raw HTML omitted -->;</li>
+<li>If you have multi-GPU, try <!-- raw HTML omitted -->DataParallel<!-- raw HTML omitted --> from Pytorch or provided link;</li>
+<li>If you are lucky, servers and multi-gpu machine, and want to try batch_size like 10000, try <!-- raw HTML omitted -->Distributed Computing<!-- raw HTML omitted -->.</li>
 </ol>
-
 <p>Good luck for all of you to any case you would like to implement deep learning algorithms.</p>
 
     </div>

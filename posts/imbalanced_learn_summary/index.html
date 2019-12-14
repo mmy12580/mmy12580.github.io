@@ -57,7 +57,7 @@
     "datePublished": "2019-06-18 11:28:17 -0400 EDT",
     "dateModified" : "2019-06-18 11:28:17 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/imbalanced_learn_summary\/",
-    "wordCount" : "884",
+    "wordCount" : "878",
     "keywords" : [ "machine learning","data", "Moyan\x27s Website"]
 }
 </script>
@@ -152,65 +152,44 @@
           
           
 
-          
-
-<p>Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class. However, the interest of classification is normally the minority class. Sadly 😔, they are normally a short amount of data or low quality data. Therefore, learning from classification methods from imbalanced dataset can divide into two approaches:</p>
-
+          <p>Data imbalance occurs when the sample size in the data classes are unevenly distributed. Such situation is encountered in many applications in industry. Sometimes, it could be extremely imbalanced e.g click-through rate prediction, fraud detection, or cancer diagnosis etc. Most of machine learning techniques work well with balanced training data but they face challenges when the dataset classes are imbalanced. In such situation, classification methods tend to be biased towards the majority class. However, the interest of classification is normally the minority class. Sadly 😔, they are normally a short amount of data or low quality data. Therefore, learning from classification methods from imbalanced dataset can divide into two approaches:</p>
 <ol>
-<li><strong>data-level strategies</strong><br /></li>
+<li><strong>data-level strategies</strong></li>
 <li><strong>algorithmic strategies</strong></li>
 </ol>
-
 <p>In this blog, I will show what problems caused the learning difficult, and their state-of-the-art solutions.</p>
-
 <h2 id="why-is-it-difficult">Why is it difficult?</h2>
-
 <p>Before introducing the summary of solutions about imbalanced data, let us look at what makes the imbalanced learning difficult? Given a series of research about imbalanced classification, there are mainly four types of problems:</p>
-
 <ol>
 <li>Most of the minority class samples happen to be in high-density majority class samples</li>
 <li>There is a huge overlap between different class distributions</li>
 <li>Data is noisy, especially minority data</li>
 <li>Sparsity on minority data and small disjuncts situation</li>
 </ol>
-
 <h3 id="illustrations">Illustrations:</h3>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/04clover5z-800-7-30-BI.png" alt="Case 1: minority samples show up in high-density majority samples" class="lazyload"><figcaption class="image-caption">Case 1: minority samples show up in high-density majority samples</figcaption></figure></p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/post_imgs/overlap.jpg" alt="Case 2: overlap" class="lazyload"><figcaption class="image-caption">Case 2: overlap</figcaption></figure></p>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/custom_data_small_disjunct_3.png" alt="Case 4: small disjuncts" class="lazyload"><figcaption class="image-caption">Case 4: small disjuncts</figcaption></figure></p>
-
+<p><img src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/04clover5z-800-7-30-BI.png" alt="Case 1: minority samples show up in high-density majority samples"></p>
+<p><img src="/post_imgs/overlap.jpg" alt="Case 2: overlap"></p>
+<p><img src="https://sci2s.ugr.es/sites/default/files/files/ComplementaryMaterial/imbalanced/custom_data_small_disjunct_3.png" alt="Case 4: small disjuncts"></p>
 <h2 id="data-level-strategy">Data-level Strategy</h2>
-
 <p>The most intuitive way is to re-sample the data to make them somehow &lsquo;balanced&rsquo; because in this case, we can still perform normal machine learning techniques on them. There are generally three types methods:</p>
-
 <ol>
-<li><span style="color:blue">Down-sampling from majority class</span> e.g RUS, NearMiss, ENN, Tomeklink</li>
-<li><span style="color:blue">Over-sampling from minority class</span> e.g SMOTE, ADASYN, Borderline-SMOTE</li>
-<li><span style="color:blue">Hybrid method </span> e.g Smote + ENN</li>
+<li><!-- raw HTML omitted -->Down-sampling from majority class<!-- raw HTML omitted --> e.g RUS, NearMiss, ENN, Tomeklink</li>
+<li><!-- raw HTML omitted -->Over-sampling from minority class<!-- raw HTML omitted --> e.g SMOTE, ADASYN, Borderline-SMOTE</li>
+<li><!-- raw HTML omitted -->Hybrid method <!-- raw HTML omitted --> e.g Smote + ENN</li>
 </ol>
-
 <p>There are pros and cons from data-level strategy.</p>
-
 <h3 id="pros">Pros:</h3>
-
 <ol>
 <li>Boost the performance of classifiers by removing some noise data</li>
 <li>Down-sampling can remove some samples so it is helpful for faster computation</li>
 </ol>
-
 <h3 id="cons">Cons:</h3>
-
 <ol>
-<li>Re-sampling method is generally finding neighborhood samples from distances. <span style="color:red">Curse of dimensionality happens! </span>. It wont be helpful for large-scale data.</li>
+<li>Re-sampling method is generally finding neighborhood samples from distances. <!-- raw HTML omitted -->Curse of dimensionality happens! <!-- raw HTML omitted -->. It wont be helpful for large-scale data.</li>
 <li>Unreasonable re-sampling caused by noise may not accurately capture the distribution information, thus, yields bad performance.</li>
 <li>Not applicable to some complex dataset since distance metric is inapplicable</li>
 </ol>
-
 <p>Data-level strategy can be easily achieved by using python package, <a href="https://imbalanced-learn.readthedocs.io/en/stable/introduction.html">imbalanced-learn</a>, which you can build a pipeline just like scikit-learn interface.</p>
-
 <pre><code>from imblearn.over_sampling import ADASYN, SMOTE, RandomOverSampler
 from imblearn.pipeline import make_pipeline
 
@@ -249,31 +228,21 @@ for name, pipeline in pipelines:
     mean_tpr /= cv.get_n_splits(X, y)
     mean_tpr[-1] = 1.0
     mean_auc = auc(mean_fpr, mean_tpr)
-</code></pre>
-
-<h2 id="algorithmic-strategy">Algorithmic strategy</h2>
-
+</code></pre><h2 id="algorithmic-strategy">Algorithmic strategy</h2>
 <h3 id="cost-sensitive-learning">Cost-sensitive learning</h3>
-
-<p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <span style="color:blue"> cost-sensitive learning </span>. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
-
+<p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <!-- raw HTML omitted --> cost-sensitive learning <!-- raw HTML omitted -->. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
 <p>Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.</p>
-
 <h3 id="ensemble-learning">Ensemble learning</h3>
-
 <p>Another method that seems to be getting more and more popular for solving data imbalance is ensembles such as SMOTEBoost, SMOTEBagging, Easy Ensemble or BalanceCascade. As far as I observe from my work, ensemble learning seems to the currently best method to solve data imbalance case; nevertheless, it requires more computational power and time to implement, and it might lead to non-robust classifiers.</p>
-
 <h2 id="experience">Experience</h2>
-
 <ol>
-<li>Down-sampling: It is able to remove some noise and it is very fast to implement. <span style="color:blue">Random Downsampling</span> can be used in any situation, but it might be harmful for high imbalanced ratio cases. <span style="color:blue">NearMiss</span> is very sensitive to noisy data. To remove noise of data, you can try <span style="color:blue">tomeklink</span>, <span style="color:blue">AllKNN</span>.</li>
-<li>Oversampling: It is very easy to overfit the data. <span style="color:blue">SMOTE</span> and <span style="color:blue">ADASYN</span> could be helpful for small data.</li>
+<li>Down-sampling: It is able to remove some noise and it is very fast to implement. <!-- raw HTML omitted -->Random Downsampling<!-- raw HTML omitted --> can be used in any situation, but it might be harmful for high imbalanced ratio cases. <!-- raw HTML omitted -->NearMiss<!-- raw HTML omitted --> is very sensitive to noisy data. To remove noise of data, you can try <!-- raw HTML omitted -->tomeklink<!-- raw HTML omitted -->, <!-- raw HTML omitted -->AllKNN<!-- raw HTML omitted -->.</li>
+<li>Oversampling: It is very easy to overfit the data. <!-- raw HTML omitted -->SMOTE<!-- raw HTML omitted --> and <!-- raw HTML omitted -->ADASYN<!-- raw HTML omitted --> could be helpful for small data.</li>
 <li>Hybrid sampling: Also helpful for small dataset</li>
 <li>Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.</li>
 <li>Bagging is normally better than Boosting based ensemble method.</li>
 </ol>
-
-<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&rsquo;s <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <span style="color:blue"> focal loss </span>  .</p>
+<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He's <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <!-- raw HTML omitted --> focal loss <!-- raw HTML omitted -->  .</p>
 
     </div>
 
