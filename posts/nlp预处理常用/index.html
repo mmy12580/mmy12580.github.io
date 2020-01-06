@@ -152,7 +152,7 @@
           
 
           <p>NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。</p>
-<h2 id="heading">去除非文本部分</h2>
+<h2 id="去除非文本部分">去除非文本部分</h2>
 <p>这里要<!-- raw HTML omitted -->特意<!-- raw HTML omitted -->说一句，如果你们在做的任务是<!-- raw HTML omitted -->语言模型（language model)<!-- raw HTML omitted -->, 或者是利用<!-- raw HTML omitted -->预训练模型（pre-training)<!-- raw HTML omitted -->, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据</p>
 <ol>
 <li>数字 (digit/number)</li>
@@ -182,7 +182,7 @@ single_quotes = [&quot;‘&quot;, &quot;‛&quot;, &quot;’&quot;, &quot;❛&qu
 # define related regex
 double_quote_regex = re.compile(&quot;|&quot;.join(double_quotes))
 single_quote_regex = re.compile(&quot;|&quot;.join(single_quotes))
-</code></pre><h2 id="unicode">Unicode修复</h2>
+</code></pre><h2 id="unicode修复">Unicode修复</h2>
 <p>简单的unicode修复，这里使用了第三方package <code>ftfy</code>。感兴趣的童鞋可以去<a href="https://pypi.org/project/ftfy/">ftfy pypi</a> 查询一些对你有用的预处理方案，这里就不详细介绍了。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> ftfy <span style="color:#f92672">import</span> fix_text
 
@@ -194,12 +194,12 @@ single_quote_regex = re.compile(&quot;|&quot;.join(single_quotes))
 		<span style="color:#66d9ef">pass</span>
 
 	<span style="color:#66d9ef">return</span> fix_text(text, normalization<span style="color:#f92672">=</span>method)
-</code></pre></div><h2 id="ascii-unicode">ascii-unicode转换</h2>
+</code></pre></div><h2 id="ascii-unicode转换">ascii-unicode转换</h2>
 <p>这里需要注意的事情是，每一种语言有一些自己的错误。我大部分做的是中文和英文，所以很多时候不需要额外的处理一些太多的语言问题。但是，对于很多欧洲的语种，例如德语，是需要进行额外的特殊例的catch和修复.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">to_ascii_unicode</span>(text, lang<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">en</span><span style="color:#e6db74">&#34;</span>):
 	<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">A wrapper for unicode converting</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
 	<span style="color:#66d9ef">return</span> unidecode(text)
-</code></pre></div><h2 id="heading-1">空格清理</h2>
+</code></pre></div><h2 id="空格清理">空格清理</h2>
 <p>空格清理是非常常见的。大概源于本身数据读取的特点，以及清理完数据后，将不需要的特殊符号换成空白，网络文件中多空格和无空格是一个我们经常需要处理的情况。这里也特地写了三种类型。需要<!-- raw HTML omitted -->注意<!-- raw HTML omitted -->的是，这里只是给通用的数据处理并进行下游模型训练。如果你关注最新的NLP动态，其实可以参考一下<strong>BERT</strong>的预处理python<a href="https://github.com/google-research/bert/blob/master/tokenization.py">脚本</a>。</p>
 <ol>
 <li>分行处理 (linebreak)</li>
@@ -207,7 +207,7 @@ single_quote_regex = re.compile(&quot;|&quot;.join(single_quotes))
 <li>不间断（增加空格）处理 (nonbreaking_space)</li>
 </ol>
 <!-- raw HTML omitted -->
-<h2 id="emoij">emoij清理</h2>
+<h2 id="emoij清理">emoij清理</h2>
 <p>同样，这里需要有一个<!-- raw HTML omitted -->提醒<!-- raw HTML omitted -->，对于正在研究<!-- raw HTML omitted -->情感分析<!-- raw HTML omitted -->的童鞋。Emoji，在帮助判断情感类别的时候是可以起到一定量的作用的，甚至是在Aspect-based sentiment analysis (ABSA), 细粒度情感分析也是有一定作用的。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> emoji
 <span style="color:#f92672">import</span> unicodedata
@@ -232,7 +232,7 @@ single_quote_regex = re.compile(&quot;|&quot;.join(single_quotes))
                 <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
                     return_string <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">[x]</span><span style="color:#e6db74">&#34;</span>
     <span style="color:#66d9ef">return</span> return_string
-</code></pre></div><h2 id="heading-2">常见的标签化清理</h2>
+</code></pre></div><h2 id="常见的标签化清理">常见的标签化清理</h2>
 <ol>
 <li>链接 (url)</li>
 <li>邮件地址 (email address)</li>
@@ -270,7 +270,7 @@ gensim_stopwords = STOPWORDS
 
 # combine 
 all_stopwords = gensim_stopwords.union([nltk_top_words, spacy_stopwords])
-</code></pre><h1 id="heading-3">还有什么？</h1>
+</code></pre><h1 id="还有什么">还有什么？</h1>
 <p>这里，我只介绍了，在很多NLP任务中常会需要的处理手段。还有一些，这里没包括但是对有些任务也有意义的方法，我在此给一个小的总结以及对应的code链接，需要的朋友可以去那边查找。</p>
 <ol>
 <li>词干提取 (<a href="https://www.cnblogs.com/no-tears-girl/p/6964910.html">Stemmning</a>)</li>
@@ -337,7 +337,7 @@ all_stopwords = gensim_stopwords.union([nltk_top_words, spacy_stopwords])
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2019</span>
+        <span itemprop="copyrightYear">2020</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 

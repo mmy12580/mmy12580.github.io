@@ -19,7 +19,7 @@
       <guid>https://mmy12580.github.io/posts/normalization_for_dl/</guid>
       <description>Introduction Batch Normalization (BN) has been treated as one of the standard &amp;ldquo;plug-in&amp;rdquo; tool to deep neural networks since its first release. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:
  faster training higher learning rate easier initialization more activations support deeper but simpler architecture regularization  Algorithms:
-Here, $\gamma$ and $\beta$ are the parameters to be learned, the parameters update is based on chain rule like followings:</description>
+\begin{aligned} &amp;amp;{\text { Input: Values of } x \text { over a mini-batch: } \mathcal{B}=\left{x_{1 \ldots m}\right}} \</description>
     </item>
     
     <item>

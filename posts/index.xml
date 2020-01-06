@@ -22,7 +22,7 @@
  缺乏思考 没有系统知识 虚假成就感以及优越感  缺乏思考是显然意见的，对于这种碎片信息，基本属于一味地接受，并且容易对知识产生了一种“掌控性”的错觉，认为对于这个知识是懂的，而且是认为其可以传播的。而在很多事实论证，以及知识运用上，并不能成为一个网络结构中的结点一样，延伸到其他点，从而运用知识。也可以称之为不系统的”知识“，从而，也就没有系统知识的优点，可延展，可类比，可进步。实际上，在有一些需要运用到这种知识的情况下，会发现其代表的只是知道一些 名词 + 一些简单口语化的概念而已。在《精进》里，这种碎片化知识获取被定义为短半衰期，低收益的行为。短半衰期是指当下非常容易获得快感，但是过后就会忘却，比如刷抖音小视频，今日头条新闻流。而低收益就是对自身影响。感兴趣的同学可以入手一本精进。
 当然，大佬推荐或者亚马逊热门推荐也会提供非常好的书给你，比如比尔盖茨每年的书单，或者亚马逊年度书单,《今日简史》等。如果你本身也有一定的积累，这是没有任何问题的。这里只是想提出一些常见的问题如果通过简单的方法。比如有些推荐的好书确实晦涩难懂，硬着头皮看完，除了头皮发麻，就是一脸懵，这样很浪费时间。对于这种情况，我一般是建议，直接不读，放在边上，去找下一本。因为晦涩难懂也无非两种情况，第一，积累还不够达到读懂这本书，第二，没有带着作者的使命感去读，也不能理解作者真正想表达的是什么。而解决这两种问题的方法，回到了最初的主题，如何选，读一本书？最终再回到这本书，就会发现，豁然开朗。
 那么，接下来我们将走入正题，如何选，读一本书？
-介绍： 对于这个问题，我想起了去年看到过一些在市面上流传的书籍，秋叶的畅销书《如何高效读懂一本书》，奥野宣之的《如何有效阅读一本书》，还有印南敦史的《快速阅读术》以及1940年阿德勒所写的《How to read a book?》。对于这些书，我认为对于培养一个</description>
+介绍： 对于这个问题，我想起了去年看到过一些在市面上流传的书籍，秋叶的畅销书《如何高效读懂一本书》，奥野宣之的《如何有效阅读一本书》，还有印南敦史的《快速阅读术》以及1940年阿德勒所写的《How to read a book?》。对于这些书，我认为对于培养一个 普通的</description>
     </item>
     
     <item>
@@ -46,7 +46,7 @@ $[4]$ Young, T., Hazarika, D., Poria, S., &amp;amp; Cambria, E. (2017). Recent T
       <guid>https://mmy12580.github.io/posts/normalization_for_dl/</guid>
       <description>Introduction Batch Normalization (BN) has been treated as one of the standard &amp;ldquo;plug-in&amp;rdquo; tool to deep neural networks since its first release. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:
  faster training higher learning rate easier initialization more activations support deeper but simpler architecture regularization  Algorithms:
-Here, $\gamma$ and $\beta$ are the parameters to be learned, the parameters update is based on chain rule like followings:</description>
+\begin{aligned} &amp;amp;{\text { Input: Values of } x \text { over a mini-batch: } \mathcal{B}=\left{x_{1 \ldots m}\right}} \</description>
     </item>
     
     <item>
