@@ -161,30 +161,30 @@
 </ol>
 <h2 id="simplest-trick-gradient-accumulation">Simplest trick: gradient accumulation.</h2>
 <p>Here, I mainly use <em><strong>Pytorch</strong></em> as the backend framework due to its simplicity and its advantage, dynamic language programming. (Of course, you can consider eager mode on Tensorflow as dynamic, but Pytorch is natural). Comparing to standard optimization which looks like below,</p>
-<pre><code>for i, (inputs, label) in enumerate(training_set):
-	outputs = model(inputs)               
-	loss = criterion(outputs labels) 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i, (inputs, label) <span style="color:#f92672">in</span> enumerate(training_set):
+	outputs <span style="color:#f92672">=</span> model(inputs)               
+	loss <span style="color:#f92672">=</span> criterion(outputs labels) 
 
-	# backward
-	optimizer.zero_grad() # then reset gradients tensor
-	loss.backward()                           
-	optimizer.step()         				  
-</code></pre><p>the <!-- raw HTML omitted -->gradient accumulation<!-- raw HTML omitted --> looks like below:</p>
-<pre><code>for i, (inputs, labels) in enumerate(training_set):
-	outputs = model(inputs)               
-	loss = criterion(outputs labels) 
+	<span style="color:#75715e"># backward</span>
+	optimizer<span style="color:#f92672">.</span>zero_grad() <span style="color:#75715e"># then reset gradients tensor</span>
+	loss<span style="color:#f92672">.</span>backward()                           
+	optimizer<span style="color:#f92672">.</span>step()         				  
+</code></pre></div><p>the <!-- raw HTML omitted -->gradient accumulation<!-- raw HTML omitted --> looks like below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> i, (inputs, labels) <span style="color:#f92672">in</span> enumerate(training_set):
+	outputs <span style="color:#f92672">=</span> model(inputs)               
+	loss <span style="color:#f92672">=</span> criterion(outputs labels) 
 
-	# backward
-	# loss normalization 
-	loss = loss / accumulation_steps # taking average loss over accumulated steps
-	# back propagation
-	loss.backward()                                 
-	# update parameters
-	if (i+1) % accumulation_steps == 0:             
-		optimizer.step()  # update all parameters
-		optimizer.zero_grad() # then reset gradients tensor
+	<span style="color:#75715e"># backward</span>
+	<span style="color:#75715e"># loss normalization </span>
+	loss <span style="color:#f92672">=</span> loss <span style="color:#f92672">/</span> accumulation_steps <span style="color:#75715e"># taking average loss over accumulated steps</span>
+	<span style="color:#75715e"># back propagation</span>
+	loss<span style="color:#f92672">.</span>backward()                                 
+	<span style="color:#75715e"># update parameters</span>
+	<span style="color:#66d9ef">if</span> (i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> accumulation_steps <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:             
+		optimizer<span style="color:#f92672">.</span>step()  <span style="color:#75715e"># update all parameters</span>
+		optimizer<span style="color:#f92672">.</span>zero_grad() <span style="color:#75715e"># then reset gradients tensor</span>
                        
-</code></pre><p>In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
+</code></pre></div><p>In summary, gradient accumulation is essentially accumulating gradients in K batches, and then update and reset. It works for large batch size since it intuitively increases 1 batch to K batches. This is a good trick for limited GPU memory usage. Note that learning rate needs to be larger too related to the choice of K accumulation steps.</p>
 <h2 id="torchutilscheckpoint">Torch.utils.checkpoint</h2>
 <p>When a model is too large for a single GPU, is there a way to implement the training? <!-- raw HTML omitted -->Yes, but it has a cost. It costs computing over GPU usage<!-- raw HTML omitted -->. The trick is to use the <em><strong>checkpoint</strong></em> function in Pytorch. If you would like to know what exactly it does in details, check <a href="https://pytorch.org/docs/stable/checkpoint.html">here</a>, the official documentation, for explanation. Here is an example, say u have a 1000 layers model. It is too large to fit in GPU, so what <code>torch.utils.checkpoint</code> can do is to split the model into N segments. Intuitively, backward propagation only needs to perform over each segment at time, so it doest not need to run over all the parameters of a model once per time. The code to achieve it is like below</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># pseudo 1000 layers model</span>
@@ -200,13 +200,13 @@ x<span style="color:#f92672">.</span>sum()<span style="color:#f92672">.</span>ba
 </code></pre></div><p>This concept has interactions with meta-learning, and it has been experimentally proved to be useful for sequence model.</p>
 <h2 id="multi-gpu-utility-maximization">Multi-GPU Utility Maximization</h2>
 <p>Well, if you are lucky to have at least 4 GPUs in the same time, parallel computing is a great choice to yield faster training. Here, The top option is always the data parallelism.</p>
-<pre><code>parallel_model = torch.nn.DataParallel(model) 
-predictions = parallel_model(inputs)          
-loss = criterion(predictions, labels)     
-loss.backward()                               
-optimizer.step()                              
-predictions = parallel_model(inputs)          
-</code></pre><p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <em>zhihu</em> is like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">parallel_model <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>nn<span style="color:#f92672">.</span>DataParallel(model) 
+predictions <span style="color:#f92672">=</span> parallel_model(inputs)          
+loss <span style="color:#f92672">=</span> criterion(predictions, labels)     
+loss<span style="color:#f92672">.</span>backward()                               
+optimizer<span style="color:#f92672">.</span>step()                              
+predictions <span style="color:#f92672">=</span> parallel_model(inputs)          
+</code></pre></div><p>However, there is only one issue, the imbalanced GPU usage in the forward passing. A better illustration I found from <em>zhihu</em> is like this</p>
 <p><img src="https://cdn-images-1.medium.com/max/2400/1*FpDHkWJhkLL7KxU01Lf9Lw.png" alt=""></p>
 <p>As step 4 of the Forward pass (top-right) shows the results of <em>ALL</em> the parallel computations are gathered on GPU-1. When training a language model, it is very painful though. A quick example can be BERT base-chinese model, which has max_len = 512, vocab_len = 21128. If we do batch_size = 32 (4 bytes to store each element) in memory, so the model takes about 1,44 GB. We need to double that to store the associated gradient tensors, our model output thus requires 2,88 GB of memory! It is a quite big portion of a typical 8 GB GTX 1080 memory and means that GPU-1 will be over-used so it limits the effect of parallelism.</p>
 <p>What can we do then?</p>
@@ -217,16 +217,16 @@ predictions = parallel_model(inputs)
 <li>computing the loss in a parallel fashion</li>
 </ol>
 <p>Thanks to <a href="https://hangzhang.org/">张航</a>, he solved the problems simply by creating his own version of data parallelism. If you are interested, download <a href="https://gist.github.com/thomwolf/7e2407fbd5945f07821adae3d9fd1312">here</a>, and then import them like normal torch.nn.utils.DataParallel.</p>
-<pre><code>from parallel import DataParallelModel, DataParallelCriterion
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> parallel <span style="color:#f92672">import</span> DataParallelModel, DataParallelCriterion
 
-parallel_model = DataParallelModel(model)             # solution 1
-parallel_loss  = DataParallelCriterion(loss_function) # solution 2
-predictions = parallel_model(inputs)      
-loss = parallel_loss(predictions, labels) 
-loss.backward()                           
-optimizer.step()                          
-predictions = parallel_model(inputs)      
-</code></pre><p>The difference between <!-- raw HTML omitted -->DataParallelModel<!-- raw HTML omitted --> and <!-- raw HTML omitted -->torch.nn.DataParallel<!-- raw HTML omitted --> is just that the output of the forward pass (predictions) is not gathered on <em>GPU-1</em> and is thus a tuple of multiple gpu, <em>n_gpu</em>, tensors, each tensor being located on a respective GPU.</p>
+parallel_model <span style="color:#f92672">=</span> DataParallelModel(model)             <span style="color:#75715e"># solution 1</span>
+parallel_loss  <span style="color:#f92672">=</span> DataParallelCriterion(loss_function) <span style="color:#75715e"># solution 2</span>
+predictions <span style="color:#f92672">=</span> parallel_model(inputs)      
+loss <span style="color:#f92672">=</span> parallel_loss(predictions, labels) 
+loss<span style="color:#f92672">.</span>backward()                           
+optimizer<span style="color:#f92672">.</span>step()                          
+predictions <span style="color:#f92672">=</span> parallel_model(inputs)      
+</code></pre></div><p>The difference between <!-- raw HTML omitted -->DataParallelModel<!-- raw HTML omitted --> and <!-- raw HTML omitted -->torch.nn.DataParallel<!-- raw HTML omitted --> is just that the output of the forward pass (predictions) is not gathered on <em>GPU-1</em> and is thus a tuple of multiple gpu, <em>n_gpu</em>, tensors, each tensor being located on a respective GPU.</p>
 <p>The DataParallelCriterion takes input the tuple of n_gpu tensors and the target labels tensor. It computes the loss function in parallel on each GPU, splitting the target label tensor the same way the model input was chunked by DataParallel. A related illustration become like below</p>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*F6SXjBp6BCoFTZ26RKnz9A.png" alt=""></p>
 <h2 id="distributed-computing">Distributed Computing</h2>

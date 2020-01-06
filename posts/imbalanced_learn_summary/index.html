@@ -190,45 +190,45 @@
 <li>Not applicable to some complex dataset since distance metric is inapplicable</li>
 </ol>
 <p>Data-level strategy can be easily achieved by using python package, <a href="https://imbalanced-learn.readthedocs.io/en/stable/introduction.html">imbalanced-learn</a>, which you can build a pipeline just like scikit-learn interface.</p>
-<pre><code>from imblearn.over_sampling import ADASYN, SMOTE, RandomOverSampler
-from imblearn.pipeline import make_pipeline
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> imblearn.over_sampling <span style="color:#f92672">import</span> ADASYN, SMOTE, RandomOverSampler
+<span style="color:#f92672">from</span> imblearn.pipeline <span style="color:#f92672">import</span> make_pipeline
 
-X = data.data[idxs]
-y = data.target[idxs]
-y[y == majority_person] = 0
-y[y == minority_person] = 1
+X <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>data[idxs]
+y <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>target[idxs]
+y[y <span style="color:#f92672">==</span> majority_person] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+y[y <span style="color:#f92672">==</span> minority_person] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 
-classifier = ['3NN', neighbors.KNeighborsClassifier(3)]
+classifier <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">3NN</span><span style="color:#e6db74">&#39;</span>, neighbors<span style="color:#f92672">.</span>KNeighborsClassifier(<span style="color:#ae81ff">3</span>)]
 
-samplers = [
-    ['Standard', DummySampler()],
-    ['ADASYN', ADASYN(random_state=RANDOM_STATE)],
-    ['ROS', RandomOverSampler(random_state=RANDOM_STATE)],
-    ['SMOTE', SMOTE(random_state=RANDOM_STATE)],
+samplers <span style="color:#f92672">=</span> [
+    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Standard</span><span style="color:#e6db74">&#39;</span>, DummySampler()],
+    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ADASYN</span><span style="color:#e6db74">&#39;</span>, ADASYN(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
+    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ROS</span><span style="color:#e6db74">&#39;</span>, RandomOverSampler(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
+    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SMOTE</span><span style="color:#e6db74">&#39;</span>, SMOTE(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
 ]
 
-# create a pipeline with sampling methods
-pipelines = [
-    ['{}-{}'.format(sampler[0], classifier[0]),
-     make_pipeline(sampler[1], classifier[1])]
-    for sampler in samplers
+<span style="color:#75715e"># create a pipeline with sampling methods</span>
+pipelines <span style="color:#f92672">=</span> [
+    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}-{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(sampler[<span style="color:#ae81ff">0</span>], classifier[<span style="color:#ae81ff">0</span>]),
+     make_pipeline(sampler[<span style="color:#ae81ff">1</span>], classifier[<span style="color:#ae81ff">1</span>])]
+    <span style="color:#66d9ef">for</span> sampler <span style="color:#f92672">in</span> samplers
 ]
 
-# train
-for name, pipeline in pipelines:
-    mean_tpr = 0.0
-    mean_fpr = np.linspace(0, 1, 100)
-    for train, test in cv.split(X, y):
-        probas_ = pipeline.fit(X[train], y[train]).predict_proba(X[test])
-        fpr, tpr, thresholds = roc_curve(y[test], probas_[:, 1])
-        mean_tpr += interp(mean_fpr, fpr, tpr)
-        mean_tpr[0] = 0.0
-        roc_auc = auc(fpr, tpr)
+<span style="color:#75715e"># train</span>
+<span style="color:#66d9ef">for</span> name, pipeline <span style="color:#f92672">in</span> pipelines:
+    mean_tpr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+    mean_fpr <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">100</span>)
+    <span style="color:#66d9ef">for</span> train, test <span style="color:#f92672">in</span> cv<span style="color:#f92672">.</span>split(X, y):
+        probas_ <span style="color:#f92672">=</span> pipeline<span style="color:#f92672">.</span>fit(X[train], y[train])<span style="color:#f92672">.</span>predict_proba(X[test])
+        fpr, tpr, thresholds <span style="color:#f92672">=</span> roc_curve(y[test], probas_[:, <span style="color:#ae81ff">1</span>])
+        mean_tpr <span style="color:#f92672">+</span><span style="color:#f92672">=</span> interp(mean_fpr, fpr, tpr)
+        mean_tpr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+        roc_auc <span style="color:#f92672">=</span> auc(fpr, tpr)
 
-    mean_tpr /= cv.get_n_splits(X, y)
-    mean_tpr[-1] = 1.0
-    mean_auc = auc(mean_fpr, mean_tpr)
-</code></pre><h2 id="algorithmic-strategy">Algorithmic strategy</h2>
+    mean_tpr <span style="color:#f92672">/</span><span style="color:#f92672">=</span> cv<span style="color:#f92672">.</span>get_n_splits(X, y)
+    mean_tpr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+    mean_auc <span style="color:#f92672">=</span> auc(mean_fpr, mean_tpr)
+</code></pre></div><h2 id="algorithmic-strategy">Algorithmic strategy</h2>
 <h3 id="cost-sensitive-learning">Cost-sensitive learning</h3>
 <p>In stead of touching data, we can also work on algorithms. The most intuitive way is the <!-- raw HTML omitted --> cost-sensitive learning <!-- raw HTML omitted -->. Due to the cost of mis-classifying minority class (our interest) is higher than the cost of mis-classifying majority class, so the easiest way is to use Tree based method e.g decision tree, random forest, boosting or SVM methods by setting their weights as something like {&lsquo;majority&rsquo;: 1, &lsquo;minority&rsquo;: 10}.</p>
 <p>Cost-sensitive learning doest not increase model complexity and it is flexible to use to any type of classification cases as. binary or multi-class classification by setting weights for cost. However, it requires some prior knowledges to build the cost matrix, and it dost not guarantee to have the optimal performance. In addition, it cant generalize among different tasks since the cost is designed for a specific tasks. Last but not least, it dost not help mini-batch training. The gradient update of a network will easily push optimizer to local minima or saddle point, so it is not effective to learn a neural network.</p>

@@ -57,7 +57,7 @@
     "datePublished": "2019-01-23 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-01-23 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/activation\/",
-    "wordCount" : "918",
+    "wordCount" : "1052",
     "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -170,17 +170,16 @@ $$
 The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldquo;S&rdquo;-shaped curve.</p>
 <h3 id="advantages">Advantages:</h3>
 <ul>
-<li>
-<p>Mapping values to (0, 1) so it wont blow up activation</p>
-</li>
-<li>
-<p>Can be used as the output layer to give credible value</p>
-</li>
-<li>
-<p>Easy derivatives:</p>
-<!-- raw HTML omitted -->
-</li>
+<li>Mapping values to (0, 1) so it wont blow up activation</li>
+<li>Can be used as the output layer to give credible value</li>
+<li>Easy derivatives:</li>
 </ul>
+<p>\begin{align*}
+\sigma&rsquo;(x) &amp;= - \frac{1}{(1 + e^{-x})^2} (-e^{-x}) \<br>
+&amp;= \frac{1}{1 + e^{-x}} \frac{e^{-x}}{1 + e^{-x}} \<br>
+&amp;= \frac{1}{1 + e^{-x}} \frac{1 + e^{-x} - 1}{1 + e^{-x}} \<br>
+&amp;= \sigma(x)(1 - \sigma(x))
+\end{align*}</p>
 <h3 id="disadvantages">Disadvantages:</h3>
 <ul>
 <li><strong>Gradient Vanishing</strong>: When $\sigma(x) \rightarrow 0$ or $\sigma(x) \rightarrow 1$, the $\frac{\partial \sigma}{\partial x} \rightarrow 0$. Another intuitive reason is that the $\max f&rsquo;(x) = 0.25$ when $x=0.5$. That means every time the gradient signal flows through a sigmoid gate, its magnitude always diminishes by one quarter (or more);</li>
@@ -192,14 +191,15 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 <p>$$ \tanh(x) = 2\sigma(2x -1) = \frac{1 - e^{-2x}}{1 + e^{-2x}} $$</p>
 <h3 id="advantages-1">Advantages:</h3>
 <ul>
-<li>
-<p>Zero-centered output: Release the burden of initialization in some degree; Also, it fasters the convergence.</p>
-</li>
-<li>
-<p>Easy derivatives:</p>
-<!-- raw HTML omitted -->
-</li>
+<li>Zero-centered output: Release the burden of initialization in some degree; Also, it fasters the convergence.</li>
+<li>Easy derivatives:</li>
 </ul>
+<p>\begin{align*}
+\tanh&rsquo;(x) &amp;= \frac{\partial \tanh}{\partial x} = (\frac{\sin x}{\cos x})&rsquo; \<br>
+&amp;= \frac{\sin'x \cos x + \sin x \cos'x}{\cos^2 x} \<br>
+&amp;= \frac{\cos^2 x - sin^2 x}{\cos^2 x}\<br>
+&amp;= 1 - \frac{\sin^2 x}{\cos^2 x} = 1 - \tanh^2(x)
+\end{align*}</p>
 <h3 id="disadvantages-1">Disadvantages:</h3>
 <ul>
 <li>Gradient Vanishing: When $\tanh(x) \rightarrow 1$ or $\tanh(x) \rightarrow -1$, $\tanh&rsquo;(x) \rightarrow 0$</li>
@@ -234,7 +234,10 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 <p>Note: Even both methods are designed to solve ReLU problems, it is <strong>NOT</strong> guaranteed they will perform better than ReLU. Also, due to the tiny changes, they do not converge as fast as ReLU.</p>
 <h2 id="elu">ELU</h2>
 <p>What slows down the learning is the bias shift which is present in ReLUs. Those who have mean activation larger than zero and learning causes bias shift for the following layers. <strong>ELU</strong> is designed as an alternative of ReLU to reduce the bias shift by pushing the mean activation toward zero.</p>
-<!-- raw HTML omitted -->
+<p>\begin{split}
+ELU(x) &amp;= \alpha (\exp(x) - 1), &amp;&amp; \quad x \le 0 \<br>
+&amp;= x, &amp;&amp;  \quad  x &gt; 0<br>
+\end{split}</p>
 <h3 id="advantages-3">Advantages:</h3>
 <ul>
 <li>Zero-Centered outputs</li>
@@ -248,28 +251,33 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 </ul>
 <h2 id="selu">SELU</h2>
 <p>The last common non-linear activation function is <strong>SELU</strong>, scaled exponential linear unit. It has self-normalizing properties because the activations that are close to zero mean and unit variance, propagated through network layers, will converge towards zero mean and unit variance. This, in particular, makes the learning highly robust and allows to train networks that have many layers.</p>
-<!-- raw HTML omitted -->
+<p>\begin{split}
+SELU(x) &amp;= \lambda \alpha (\exp(x) - 1), &amp;&amp; \quad x \le 0 \<br>
+&amp;= \lambda x, &amp;&amp;  \quad  x &gt; 0<br>
+\end{split}</p>
 <p>which has gradient</p>
-<!-- raw HTML omitted -->
+<p>\begin{split}
+\frac{\partial d}{\partial x}  SELU(x) &amp;= SELU(x) + \lambda \alpha, &amp;&amp; \quad x \le 0 \<br>
+&amp;= \lambda, &amp;&amp;  \quad  x &gt; 0<br>
+\end{split}</p>
 <p>where $\alpha = 1.6733$ and $\lambda = 1.0507$.</p>
 <p><em><strong>Question</strong></em>: Would SELU, ELU be more useful than Batch Normalization?</p>
 <h1 id="activation-functions-on-nlp">Activation functions on NLP</h1>
 <p>Here, I will list a few activations used on state-of-the-art NLP models, such as BERTetc.</p>
 <h2 id="gelu">GELU</h2>
 <p>Since BERT was released in December, all the NLP tasks benchmark scores have been updated, such as SQuad machine understanding, CoLLN 2003 named entity recognition, etc. By exploring tricks and theory behind BERT, BERT uses <strong>GELU</strong>, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.</p>
-<pre><code>def gelu(input_tensor):
-  &quot;&quot;&quot;Gaussian Error Linear Unit.
-  This is a smoother version of the RELU.
-  Original paper: https://arxiv.org/abs/1606.08415
-  Args:
-    input_tensor: float Tensor to perform activation.
-  Returns:
-    `input_tensor` with the GELU activation applied.
-  &quot;&quot;&quot;
-  cdf = 0.5 * (1.0 + tf.erf(input_tensor / tf.sqrt(2.0)))
-  return input_tensor * cdf
-</code></pre><!-- raw HTML omitted -->
-<h1 id="extension">Extension:</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gelu</span>(input_tensor):
+  <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">Gaussian Error Linear Unit.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">  This is a smoother version of the RELU.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">  Original paper: https://arxiv.org/abs/1606.08415</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">  Args:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    input_tensor: float Tensor to perform activation.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">  Returns:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    `input_tensor` with the GELU activation applied.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">  </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+  cdf <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> tf<span style="color:#f92672">.</span>erf(input_tensor <span style="color:#f92672">/</span> tf<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2.0</span>)))
+  <span style="color:#66d9ef">return</span> input_tensor <span style="color:#f92672">*</span> cdf
+</code></pre></div><h1 id="extension">Extension:</h1>
 <p>I found a masterpiece from a data scientist via github which has a great way of visualizing varieties of activation functions. Try to play with it. It might help you remember it more. Click <a href="https://dashee87.github.io/deep%20learning/visualising-activation-functions-in-neural-networks/">here</a> to his website.</p>
 
     </div>
