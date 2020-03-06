@@ -57,7 +57,7 @@
     "datePublished": "2019-03-01 11:27:28 -0500 EST",
     "dateModified" : "2019-03-01 11:27:28 -0500 EST",
     "url" : "https:\/\/mmy12580.github.io\/posts\/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo\x2bgithub-page\x2bhttps\/",
-    "wordCount" : "281",
+    "wordCount" : "282",
     "keywords" : [ "github","hugo", "Moyan\x27s Website"]
 }
 </script>
@@ -251,18 +251,18 @@ hugo -t Serif
 <li>付费域名 e.g Godaddy, Domain.com,各种</li>
 </ol>
 <p>因为一致做机器学习，所以看到.ml很合适，我就选择了freenom，申请了自己<a href="moyan.ml">博客</a>的地址。申请很简单，直接按照官网步骤走，弄好之后，
-我们来连接xxx.github.io以及自己的域名例如xxx.io。</p>
+我们来连接xxx.github.io以及自己的域名例如xxx.ml。</p>
 <pre><code># 进入github.io即为public的文件夹下
 cd blog/public
 
 # 创立一个文件并将申请的域名写入
-echo xxx.io &gt; CNAME
+echo xxx.ml &gt; CNAME
 
 # 复制github.io对应的地址
 ping xxx.github.io
 </code></pre><p>然后我们进入freenom网站，添加一下xxx.github.io和xxx.io的关系。
-先进入MyDomains -&gt; Manage Domain -&gt; Management Tools -&gt; NameServers把DNSPod中刚刚生成出的两个记录例如192.30.252.153 和 192.30.252.154
-以A类写入。刚刚生成的CNAME自动会将xxx.github.io转为刚刚申请的xxx.io。保存后过几个小时，点开xxx.io即可使用。</p>
+先进入MyDomains -&gt; Manage Domain -&gt; Management Tools -&gt; NameServers把DNSPod中刚刚生成出的两个记录例如 A:192.30.252.153 和 CNAME:xxx.github.io
+以A类写入。刚刚生成的CNAME自动会将xxx.github.io转为刚刚申请的xxx.ml。保存后过几个小时，点开xxx.io即可使用。</p>
 <h3 id="添加https">添加https</h3>
 <p>建议使用<a href="cloudxns.net">cloudxns</a>.完全免费，没有任何复杂的东西。其实添加https意义并不大，个人主页基本上其实也是分享一些东西。几乎也不会有任何攻击。
 感兴趣的同学可以查看<a href="https://blog.csdn.net/luckytanggu/article/details/83089655">教程</a>.</p>
