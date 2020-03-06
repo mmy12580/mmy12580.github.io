@@ -57,7 +57,7 @@
     "datePublished": "2019-03-01 11:27:28 -0500 EST",
     "dateModified" : "2019-03-01 11:27:28 -0500 EST",
     "url" : "https:\/\/mmy12580.github.io\/posts\/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo\x2bgithub-page\x2bhttps\/",
-    "wordCount" : "282",
+    "wordCount" : "294",
     "keywords" : [ "github","hugo", "Moyan\x27s Website"]
 }
 </script>
@@ -259,13 +259,12 @@ cd blog/public
 echo xxx.ml &gt; CNAME
 
 # 复制github.io对应的地址
-ping xxx.github.io
-</code></pre><p>然后我们进入freenom网站，添加一下xxx.github.io和xxx.io的关系。
-先进入MyDomains -&gt; Manage Domain -&gt; Management Tools -&gt; NameServers把DNSPod中刚刚生成出的两个记录例如 A:192.30.252.153 和 CNAME:xxx.github.io
-以A类写入。刚刚生成的CNAME自动会将xxx.github.io转为刚刚申请的xxx.ml。保存后过几个小时，点开xxx.io即可使用。</p>
+ping xxx.github.ml
+</code></pre><p>然后我们进入freenom网站，添加一下xxx.github.io和xxx.ml的关系。
+先进入MyDomains -&gt; Manage Domain -&gt; Management Tools -&gt; NameServers把DNSPod中刚刚生成出的两个记录例如 A:192.30.252.153 和 CNAME:xxx.ml。刚刚生成的CNAME自动会将xxx.github.io转为刚刚申请的xxx.ml。保存后过，运气好的话10分钟，否则可能是几个小时，点开xxx.ml即可使用。如果你登陆过发现，当时显示404无法访问之类的错误，删除cookie,重新登录，就可以进入你的网站了。</p>
+<p>Notes: Freenom一年免费，然后你可以免费续，邮箱会在最后一个月收到。</p>
 <h3 id="添加https">添加https</h3>
-<p>建议使用<a href="cloudxns.net">cloudxns</a>.完全免费，没有任何复杂的东西。其实添加https意义并不大，个人主页基本上其实也是分享一些东西。几乎也不会有任何攻击。
-感兴趣的同学可以查看<a href="https://blog.csdn.net/luckytanggu/article/details/83089655">教程</a>.</p>
+<p>我用的<a href="https://www.cloudflare.com/en-ca/">cloudflaree</a>, 完全免费，步骤非常简单。首先注册账户，然后添加你的网站xxx.ml, cloudfiare会自动搜索到你的网站，然后你就下一步。选择always https为True, 然后下一步，生成完毕后。会在最后一页提供给你新的name sever, 你再次进入freenom的use custom nameservers，将这些新的name sever复制粘贴上去。直到cloudflare给你发邮件你的xxx.ml is active. 其实添加https意义并不大，个人主页基本上其实也是分享一些东西，几乎也不会有任何攻击，可能更多是某些浏览器添加了一些防病毒以及网页保护的工具，会因为不是https无法访问。当然，写博客还是希望大家能看到的，所以费一点时，能给自己和大家带来不必要的麻烦。</p>
 
     </div>
 
