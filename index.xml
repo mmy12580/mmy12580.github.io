@@ -5,22 +5,22 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>About</title>
       <link>https://mmy12580.github.io/about/</link>
-      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/about/</guid>
-      <description>&lt;p&gt;I am a Principal Scientist, NLP for &lt;a href=&#34;https://www.course5i.com&#34;&gt;Course5i AI Lab&lt;/a&gt;, Toronto. Currently, I lead NLP research team to conduct applied research to deliever NLP solutions for marketing. Our visions are building scalable and transferable NLU and NLG models for clients, e.g., Microsoft, Lenovo, Colgate Palmolive, and so on.&lt;/p&gt;
-&lt;p&gt;Preivously, I worked as a Machine Learning Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, and I have done projects in several areas, e.g., NLP, autoML, and recommendation system. In the meantime, I was also a NLP Scientist at &lt;a href=&#34;leafy.io&#34;&gt;Leafy.ai&lt;/a&gt; working on an work-efficiency App with NLP and NLU features.&lt;/p&gt;
-&lt;p&gt;Even earlier, I was a Data Scientist on a fast growing start-up company in Vancouver, &lt;a href=&#34;https://twitter.com/istuary&#34;&gt;Istuary Innovation Group&lt;/a&gt;. At Istuary Innovation Group, I was mainly developing deep learning algorithms on two products. First is a computer vision related product, the &lt;em&gt;smart camera&lt;/em&gt; for &lt;strong&gt;Yunnan Department of Public Security&lt;/strong&gt; e.g., facial recognition, face verification, and face alignment. Second, I was trying to provide NLP features to a Chinese &lt;em&gt;News app&lt;/em&gt; in which you input a keyword e.g., &lt;code&gt;internet of thing&lt;/code&gt;, the semantic similar news and their automatic summarization will be fetched and presented.&lt;/p&gt;
-&lt;p&gt;My &lt;strong&gt;main interest&lt;/strong&gt; is in practical applications that can be beneficial to people, such as transfer learning, multi-task learning, and light-weighted models. If you are interested in my experience or my website, have a look at my &lt;a href=&#34;https://mmy12580.github.io/resume/moyan_resume.pdf&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;p&gt;I created this website not only to help me refresh my memory about engineering details, theory behind models, training tricks, and optimization techniques but also to communicate with people who read and share what they know so we can expand our own &amp;ldquo;knowledge&amp;rdquo; base. Feel free to reach me out from any accessible source, e.g., email or wechat, at my &lt;a href=&#34;https://moyan.ml&#34;&gt;homepage&lt;/a&gt;. I am looking forward to any interesting topic discussions or feedbacks. Thanks.&lt;/p&gt;
+      <description>&lt;h2 id=&#34;about-me&#34;&gt;About Me&lt;/h2&gt;
+&lt;p&gt;I am now working as Principal Scientist for &lt;a href=&#34;https://www.course5i.com&#34;&gt;Course5i AI Lab&lt;/a&gt;, Toronto. My main focus is to build scalable and transferable B2B AI products and services to more than 20 countries and regions, e.g., Microsoft, Lenovo, Colgate Palmolive, and so on.&lt;/p&gt;
+&lt;p&gt;My &lt;strong&gt;main interest&lt;/strong&gt; is to build an &amp;ldquo;end-to-end&amp;rdquo; human-computer interaction system given kinds of &amp;ldquo;knowledge&amp;rdquo;, including transfer learning, MTL, meta-learning, and self-supervised learning etc.  If you are interested in my experience or the website, have a look at my &lt;a href=&#34;https://mmy12580.github.io/resume/moyan_resume.pdf&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;h2 id=&#34;why-the-blog&#34;&gt;Why the blog?&lt;/h2&gt;
+&lt;p&gt;I created this blog not only to help me refresh my memory about engineering details, theory behind models, training tricks, and optimization techniques, but also to communicate with people who read and share what they know or think, so we can expand our own &amp;ldquo;knowledge&amp;rdquo; base togeter. Feel free to reach me out from any accessible source, e.g., email or wechat, at my &lt;a href=&#34;https://moyan.ml&#34;&gt;homepage&lt;/a&gt;. I am looking forward to any interesting topic discussions or feedbacks. Thanks😄.&lt;/p&gt;
 &lt;h2 id=&#34;just-for-fun&#34;&gt;Just for fun&lt;/h2&gt;
-&lt;p&gt;Click the &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; on the top left of the web page to change the theme of the website.&lt;/p&gt;
+&lt;p&gt;Click the &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; on the top left of the web page to switch the theme of the website.&lt;/p&gt;
 </description>
     </item>
     
