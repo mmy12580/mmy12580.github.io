@@ -112,7 +112,7 @@ import time import numpy as np from matplotlib import pyplot as plt from concurr
       <pubDate>Sat, 02 Mar 2019 01:55:11 -0500</pubDate>
       
       <guid>https://mmy12580.github.io/posts/faiss_dev/</guid>
-      <description>Intuition Imagine a case, you are developing a facial recognition algorithm for Canadian Custom. They would like to use it to detect suspects. The accuracy and speed are needed to track a person effciently. Let us say you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a vary large database (40 million population in Canada), searching a feature vector (extracted from a CNN model) over the huge databse can be very very time-consuming, and then it may not be as effective as you can.</description>
+      <description>Intuition Imagine a case, you are developing a facial recognition algorithm for Canadian Custom, and they would like to use it to identify different scenarios, e.g., criminals. Precision and speed of your models are higly demanded. Let us assume you have already tried your best to provide a promising performence of identifying every visitor, however, due to it is a trained on vary large database (40 million population in Canada), searching an image over the huge databse can be very time-consuming, so, what can we do?</description>
     </item>
     
     <item>
