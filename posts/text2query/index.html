@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/text2query/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           A quick summary: Text-to-SQL | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="A quick summary: Text-to-SQL | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "A quick summary: Text-to-SQL",
+    "headline" : "A quick summary: Text-to-SQL",
+    "description" : "Definition Given relational database (or table), users provide the question, the algorithms generates the correct SQL syntax. Below example is an illustration from Spider Dataset.\nPublic Dataset:  ATIS \x26amp; GeoQuery: flight tickets reserving system WikiSQL: 80654 training data  Single table single column query Aggregation Condition Operation Github: https:\/\/github.com\/salesforce\/WikiSQL   Spider: a. more domains; b. more complex SQL syntax;  Complex, Cross-domain and Zero-shot Multi tables and columns Aggregation Join Where Ranking SQL connection Github: https:\/\/github.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-18 17:36:33 -0400 EDT",
+    "dateModified" : "2020-03-18 17:36:33 -0400 EDT",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/text2query\/",
+    "wordCount" : "1545",
+    "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">A quick summary: Text-to-SQL</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2020-03-18 itemprop="datePublished">March 18, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/nlp/"> nlp </a>
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h2 id="definition">Definition</h2>
+<p>Given relational database (or table), users provide the question, the algorithms generates the correct SQL syntax. Below example is an illustration from <em><strong>Spider Dataset</strong></em>.</p>
+<p><img src="/post_imgs/text2query1.png" alt=""></p>
+<h1 id="public-dataset">Public Dataset:</h1>
+<ol>
+<li><strong><code>ATIS &amp; GeoQuery</code></strong>: flight tickets reserving system</li>
+<li><strong><code>WikiSQL</code></strong>: 80654 training data
+<ul>
+<li>Single table single column query</li>
+<li>Aggregation</li>
+<li>Condition</li>
+<li>Operation</li>
+<li>Github: <a href="https://github.com/salesforce/WikiSQL">https://github.com/salesforce/WikiSQL</a></li>
+</ul>
+</li>
+<li><strong><code>Spider</code></strong>: a. more domains; b. more complex SQL syntax;
+<ul>
+<li>Complex, Cross-domain and Zero-shot</li>
+<li>Multi tables and columns</li>
+<li>Aggregation</li>
+<li>Join</li>
+<li>Where</li>
+<li>Ranking</li>
+<li>SQL connection</li>
+<li>Github: <a href="https://github.com/taoyds/spider">https://github.com/taoyds/spider</a></li>
+</ul>
+</li>
+<li><strong><code>Sparc</code></strong>: Context-dependent and Multi-turn version of the Spider task
+<ul>
+<li>Home: <a href="https://yale-lily.github.io/sparc">https://yale-lily.github.io/sparc</a></li>
+</ul>
+</li>
+<li><strong><code>CoSQL</code></strong>: Cross-domain Conversational, the Dialog version of the Spider and SParC tasks
+<ul>
+<li>Home: <a href="https://yale-lily.github.io/cosql">https://yale-lily.github.io/cosql</a></li>
+</ul>
+</li>
+<li>Chinese related
+<ul>
+<li>Chinese <strong><code>Spider</code></strong>
+<ul>
+<li>Github: <a href="https://github.com/taolusi/chisp">https://github.com/taolusi/chisp</a></li>
+</ul>
+</li>
+<li><strong><code>TableQA</code></strong>
+<ul>
+<li>Chinese version WikiQA</li>
+<li>Single table multiple columns</li>
+<li>Aggregation</li>
+<li>Condition</li>
+<li>Operation</li>
+<li>Github: <a href="https://github.com/ZhuiyiTechnology/nl2sql_baseline">https://github.com/ZhuiyiTechnology/nl2sql_baseline</a></li>
+</ul>
+</li>
+<li><strong><code>DuSQL</code></strong> (2020)
+<ul>
+<li>200 Database and 23K (question, SQL query), 18K train, 2K validation, 3K test set</li>
+<li>Home: <a href="https://aistudio.baidu.com/aistudio/competition/detail/30?isFromCcf=true">https://aistudio.baidu.com/aistudio/competition/detail/30?isFromCcf=true</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Statistics</strong>:</p>
+<p><img src="/post_imgs/text2query2.png" alt=""></p>
+<h1 id="evaluation-metrics">Evaluation Metrics:</h1>
+<ol>
+<li>Exact match</li>
+<li>Execution accuracy</li>
+</ol>
+<p>Note that WikiSQL takes both, while Spider only uses first one.</p>
+<h1 id="sota-models">SOTA Models:</h1>
+<p>Basically, all models adapt an encoder-decoder mechanism. In encoder's direction, textual alignment or mapping is very important among NL question and database. In other words, the key information of  questions, e.g., entities, SQL condition, and others. On the other hand, decoder cleares the boundaries of semantics, and it makes SQL format consistent based on representations of natural language questions. Traditional seq2seq models are not able to learn based on above mentioned requirements. Thus, in general, streaming models are based on following aspects:</p>
+<ol>
+<li><strong>More contextualized representation</strong> i.e., BERT, XLNET;</li>
+<li>Better structure explicitly enhance alignment, such as GNN;</li>
+<li>Improve accuracy of SQL execution by <strong>scaling down search space</strong> e.g., tree-based decoding, and slots-filling decoding;</li>
+<li>Provide <strong>more abstract intermediate layers representation</strong>;</li>
+<li>Reranking returns based on defining <strong>new feature alignment</strong>;</li>
+<li>Efficient data augmentation.</li>
+</ol>
+<h2 id="1-pointer-network">1. Pointer Network</h2>
+<p>Traditional seq2seq models employ decoders with fixed vocabulary. Unlike seq2seq models, text-to-sql outputs sequences may include a) words/phrases in question; b) SQL key words; c) Column and row names correspond to database.</p>
+<p>Pointer Network solves above issues since its outputs vary given vocabulary based on inputs. More specifically, attention mechanism directly helps taking words from inputs to be part of outputs.</p>
+<h2 id="2-seq2sql">2. Seq2SQL</h2>
+<p>One of the main drawbacks from Pointer Network is that it does not use the information based on the query language. Seq2SQL divides the generated sequences into three parts, which are aggregation (e.g., sum, count, min, and max etc.), select, and condition where.</p>
+<p>Select and aggregation parts employ attention mechanisms for text classification, and where condition adopts pointer network. However, where condition syntax is not unique, such as</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span> <span style="color:#66d9ef">AND</span> gender <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">male</span><span style="color:#e6db74">&#34;</span>;
+
+<span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">male</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">AND</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span>;
+</code></pre></div><p>This can directly leads outputs to be incorrect given natural language question. Therefore, the author proposes a scoring system with RL over generated outputs.</p>
+<p><img src="/post_imgs/text2query3.png" alt=""></p>
+<h2 id="3-sqlnet">3. SQLNet</h2>
+<p>Even though RL is a good idea to select the <code>best</code> results from candidate SQL syntax, it is not doing properly as expected. SQLNet introduces slots-filling tasks for select and where parts. Unlike Seq2SQL, SQLNet adapts <code>sequence-to-set</code> mechanism to select possible where condition candidates on target SQL syntax. It calculates the top k highest probability over candidates, and at final outputs values for symbols and conditions.</p>
+<p><img src="/post_imgs/text2query4.png" alt=""></p>
+<h2 id="4-typesql">4. TypeSQL</h2>
+<p>It considers an more obvious methods, block filling. The idea is to obtain the numbers and unregistered entities. Simply put, TypeSQL gives very word a pre-defined type.</p>
+<p>The process of recognizing:</p>
+<ol>
+<li>Splits the question (Q) to n-grams (n from 2 to 6);</li>
+<li>Search n-grams in database;</li>
+<li>For matched cases, provides columns values, e.g., INTEGER、FLOAT、DATE、YEAR</li>
+<li>For entities, search over <code>FREEBASE</code>, to identify 5 types: PERSON，PLACE，COUNTREY，ORGANIZATION，SPORT</li>
+</ol>
+<p>TypeSQL consider dependency and similarity among key information, such as <code>SELECT_COL</code>, <code> </code>COND_COL<code> and number of conditions (</code>#COND`). In summary, there are three independent models for predicting values in blocks:</p>
+<ol>
+<li><code>MODEL_COL：SELECT_COL，#COND，COND_COL</code></li>
+<li><code>MODEL_AGG：AGG</code></li>
+<li><code>MODEL_OPVAL：OP, COND_VAL</code></li>
+</ol>
+<p><img src="/post_imgs/text2query5.png" alt=""></p>
+<h2 id="5-syntaxsqlnet">5. SyntaxSQLNet</h2>
+<p>All above methods outputs a linear text from decoder, while a tree based structure can be more informative. In the original paper, it is been proved to improve the accuracy about 14.8%.</p>
+<p>![](/post_imgs/text2query6.png</p>
+<p>SyntaxSQLNet takes 9 modules to predict the final SQL syntax, and each module represents one component of SQL syntax. Below are 9 modules:</p>
+<ol>
+<li><strong>IUEN</strong>: INTERCEPT、UNION、EXCEPT、NONE</li>
+<li><strong>KeyWords</strong>: WHERE、GROUP BY、ORDER BY、SELECT</li>
+<li><strong>Column</strong>: column names</li>
+<li><strong>Operation</strong>: &gt;, &lt;, BETWEEN, LIKE</li>
+<li>Aggregation: MAX, MIN, SUM, COUNT, etc.</li>
+<li>Root/Terminal/Module: sub-search and termination symbol</li>
+<li>AND/OR: relationship between expressions</li>
+<li>DESC/ASC/LIMIT: keywords related to ORDERBY</li>
+<li>HAVING: Having condition expression</li>
+</ol>
+<p>Besides, the authors also proposed a cross-domain augmentation method. The specific implementation wont be introduced here. Go check <a href="https://github.com/taoyds/syntaxSQL/blob/master/generate_wikisql_augment.py">here</a> for <code>Python</code> implementation.</p>
+<h2 id="6-irnet">6. IRNet</h2>
+<p>Similar to SyntaxSQLNet, IRNet also defines a series of modules, and convert the SQL syntax as tree based structure. <code>SemQL</code> parses the SQL syntax as below</p>
+<p><img src="/post_imgs/text2query7.png" alt=""></p>
+<p>Another improvement is called <code>scheme-linking</code>, which shows how to find cell values and columns from the given question. Author summaries the common entities as three categories, table names, column names, and cell values. Based on this three kinds entities, use a) n-gram to match table names and column names; b) Employed ConceptNet for related cell values and columns names. Illustration is as below</p>
+<p><img src="/post_imgs/text2query8.png" alt=""></p>
+<h2 id="7-global-gnn">7. Global-GNN</h2>
+<p>To better investigate structure information under relational database, BenBogin, et al. proposed a graph based neural network. As illustration below, bold circles represent table, while non-bold nodes represent column names. Bidirectional edges represent the subordinate relationship of tables and column names; red and blue edges represent primary and foreign key relationships. Orange nodes represent problem-related results, and light colors are irrelevant.</p>
+<p><img src="/post_imgs/text2query9.png" alt=""></p>
+<p>In addition, they also propose a reranking algorithm based on global information, named as <code>global reasoning</code>. An example illustrated below is that it is not clear that the name points to the singer or the song, but we are able to observe nation shows up only in singer, so it should be singer. It is used to dissolve ambiguity. The pipeline of Global-GNN is</p>
+<p><img src="/post_imgs/text2query10.png" alt=""></p>
+<h2 id="8-rat-sql">8. RAT-SQL</h2>
+<p>Unlike Global-GNN, RAT-SQL adds questions nodes in the graph, and enrich edge types with string matching, e.g., regex. The new edges are given</p>
+<p><img src="/post_imgs/text2query11.png" alt=""></p>
+<h2 id="more">More?</h2>
+<p>Absolutely yes. Below is what I found good to look at</p>
+<h3 id="weakly-supervised">Weakly Supervised</h3>
+<p>Do not apply SQL syntax as signals for training.</p>
+<p><code>Paper</code></p>
+<ul>
+<li><input disabled="" type="checkbox">Min S, Chen D, Hajishirzi H, et al. <a href="https://www.cs.princeton.edu/~danqic/papers/emnlp2019.pdf">A discrete hard em approach for weakly supervised question answering</a>[C]. EMNLP-IJCNLP 2019.</li>
+<li><input disabled="" type="checkbox">Agarwal R, Liang C, Schuurmans D, et al. <a href="https://arxiv.org/pdf/1902.07198.pdf">Learning to Generalize from Sparse and Underspecified Rewards</a>. 2019.</li>
+<li><input disabled="" type="checkbox">Liang C, Norouzi M, Berant J, et al. <a href="https://papers.nips.cc/paper/8204-memory-augmented-policy-optimization-for-program-synthesis-and-semantic-parsing.pdf">Memory augmented policy optimization for program synthesis and semantic parsing</a>[C].NeurIPS, 2018: 9994-10006.</li>
+</ul>
+<p><code>Code</code></p>
+<ul>
+<li><a href="https://github.com/shmsw25/qa-hard-em">https://github.com/shmsw25/qa-hard-em</a></li>
+<li><a href="https://github.com/google-research/google-research/tree/master/meta_reward_learning">https://github.com/google-research/google-research/tree/master/meta_reward_learning</a></li>
+</ul>
+<p><code>Score</code></p>
+<table>
+<thead>
+<tr>
+<th>Hard-EM</th>
+<th>84.4</th>
+<th>83.9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MeRL</td>
+<td>74.9</td>
+<td>74.8</td>
+</tr>
+<tr>
+<td>MAPO</td>
+<td>72.2</td>
+<td>72.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="executionguided">ExecutionGuided</h3>
+<p>Execution Guided filters out the non-sense sql syntaxes, and fix some minor errors.
+Three common execution errors</p>
+<ol>
+<li>Syntax Error</li>
+<li>Run-time error, e.g., SUM over strings</li>
+<li>Null errors, beam search could help</li>
+</ol>
+<p><code>Paper</code></p>
+<ul>
+<li><input disabled="" type="checkbox">Wang C, Huang P S, Polozov A, et al. <a href="https://arxiv.org/pdf/1807.03100.pdf">Robust Text-to-SQL Generation with Execution-Guided Decoding</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox">Wang C, Brockschmidt M, Singh R. <a href="https://openreview.net/pdf?id=BkUDW_lCb">Pointing out SQL queries from text</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox">Dong L, Lapata M. <a href="https://arxiv.org/pdf/1805.04793.pdf">Coarse-to-fine decoding for neural semantic parsing</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox">Huang P S, Wang C, Singh R, et al. <a href="https://arxiv.org/pdf/1803.02400.pdf">Natural language to structured query generation via meta-learning</a>[J]. 2018.</li>
+</ul>
+<p><code>Code</code></p>
+<ul>
+<li><a href="https://github.com/microsoft/PointerSQL">https://github.com/microsoft/PointerSQL</a></li>
+<li><a href="https://github.com/donglixp/coarse2fine">https://github.com/donglixp/coarse2fine</a></li>
+</ul>
+<p><code>Score</code></p>
+<table>
+<thead>
+<tr>
+<th>Coarse2Fine + EG</th>
+<th>84.0</th>
+<th>83.8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coarse2Fine</td>
+<td>79.0</td>
+<td>78.5</td>
+</tr>
+<tr>
+<td>Pointer-SQL + EG</td>
+<td>78.4</td>
+<td>78.3</td>
+</tr>
+<tr>
+<td>Pointer-SQL</td>
+<td>72.5</td>
+<td>71.9</td>
+</tr>
+</tbody>
+</table>
+<h3 id="extension-to-sqlnet">Extension to SQLNet</h3>
+<p><code>Paper</code></p>
+<ul>
+<li><input disabled="" type="checkbox">Xu X, Liu C, Song D. <a href="https://arxiv.org/pdf/1711.04436.pdf">SQLNet: Generating structured queries from natural language without reinforcement learning</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox">Hwang W, Yim J, Park S, et al. <a href="https://arxiv.org/pdf/1902.01069.pdf">A Comprehensive Exploration on WikiSQL with Table-Aware Word Contextualization</a>[J]. 2019.</li>
+<li><input disabled="" type="checkbox">He P, Mao Y, Chakrabarti K, et al. <a href="https://arxiv.org/pdf/1908.08113.pdf">X-SQL: reinforce schema representation with context</a>[J]. 2019.</li>
+</ul>
+<p><code>Code</code></p>
+<ul>
+<li><a href="https://github.com/naver/sqlova">https://github.com/naver/sqlova</a></li>
+<li><a href="https://github.com/xiaojunxu/SQLNet">https://github.com/xiaojunxu/SQLNet</a></li>
+</ul>
+<p><code>Score</code></p>
+<table>
+<thead>
+<tr>
+<th>BERT-XSQL-Attention + EG</th>
+<th>92.3</th>
+<th>91.8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BERT-XSQL-Attention</td>
+<td>89.5</td>
+<td>88.7</td>
+</tr>
+<tr>
+<td>BERT-SQLova-LSTM</td>
+<td>87.2</td>
+<td>86.2</td>
+</tr>
+<tr>
+<td>BERT-SQLova-LSTM + EG</td>
+<td>90.2</td>
+<td>89.6</td>
+</tr>
+<tr>
+<td>GloVe-SQLNet-BiLSTM</td>
+<td>69.8</td>
+<td>68.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="model-interactive">Model Interactive</h3>
+<p>Iteratively generate correct sql by clarifying users intention.</p>
+<p><code>Paper</code></p>
+<ul>
+<li><input disabled="" type="checkbox">Yao Z, Su Y, Sun H, et al. <a href="https://arxiv.org/pdf/1910.05389.pdf">Model-based Interactive Semantic Parsing: A Unified Framework and A Text-to-SQL Case Study</a>[C]. EMNLP-IJCNLP 2019.</li>
+</ul>
+<p><code>Code</code></p>
+<ul>
+<li><a href="https://github.com/sunlab-osu/MISP">https://github.com/sunlab-osu/MISP</a></li>
+</ul>
+<h3 id="editsql">EditSQL</h3>
+<p><code>Paper</code></p>
+<ul>
+<li><input disabled="" type="checkbox">Zhang R, Yu T, Er H Y, et al. <a href="https://arxiv.org/pdf/1909.00786.pdf">Editing-Based SQL Query Generation for Cross-Domain Context-Dependent Questions</a>[C]. EMNLP-IJCNLP 2019.</li>
+</ul>
+<p><code>Code</code></p>
+<ul>
+<li><a href="https://github.com/ryanzhumich/editsql">https://github.com/ryanzhumich/editsql</a></li>
+</ul>
+<p><code>Score</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">EditSQL + BERT</th>
+<th align="center">57.6</th>
+<th align="center">53.4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">EditSQL</td>
+<td align="center">36.4</td>
+<td align="center">32.9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References</h2>
+<p>[1] Seq2sql: Generating structured queries fromnatural language using reinforcement learning (Victor Zhong, Caiming Xiong,Richard Socher. CoRR2017)</p>
+<p>[2] Towards Complex Text-to-SQL in Cross-DomainDatabase with Intermediate Representation (Jiaqi Guo, Zecheng Zhan, Yan Gao,Yan Xiao, Jian-Guang Lou, Ting Liu, and Dongmei Zhang. ACL2019)</p>
+<p>[3] SParC: Cross-Domain Semantic Parsing in Context(Tao Yu, Rui Zhang, Michihiro Yasunaga, Yi Chern Tan, Xi Victoria Lin, Suyi Li,Heyang Er, Irene Li, Bo Pang, Tao Chen, Emily Ji, Shreya Dixit, David Proctor,Sungrok Shim, Jonathan Kraft, Vincent Zhang, Caiming Xiong, Richard Socher,Dragomir Radev. ACL2019)</p>
+<p>[4] Pointer Networks （OriolVinyals, Meire Fortunato, Navdeep Jaitly. NIPS2015）</p>
+<p>[5] SQLNet: Generating Structured Queries FromNatural Language Without Reinforcement Learning (Xiaojun Xu, Chang Liu, DawnSong. ICLR2018)</p>
+<p>[6] TypeSQL: Knowledge-based Type-Aware NeuralText-to-SQL Generation (Tao Yu, Zifan Li, Zilin Zhang, Rui Zhang, DragomirRadev. NAACL2018)</p>
+<p>[7] SyntaxSQLNet: Syntax Tree Networks for Complexand Cross-DomainT ext-to-SQL Task. (Tao Yu, Michihiro Yasunaga, Kai Yang, RuiZhang, Dongxu Wang, Zifan Li, and Dragomir Radev. EMNLP2018)</p>
+<p>[8] Global Reasoning over Database Structures forText-to-SQL Parsing (Ben Bogin, Matt Gardner, Jonathan Berant. EMNLP2019)</p>
+<p>[9] RAT-SQL: Relation-Aware Schema Encoding andLinking for Text-to-SQL Parsers (Bailin Wang, Richard Shin, Xiaodong Liu,Oleksandr Polozov, Matthew Richardson. Submitted to ACL2020)</p>
+<p>[10] A Pilot Study for Chinese SQL Semantic Parsing(Qingkai Min , Yuefeng Shi and Yue Zhang EMNLP2019)</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/text2query/>https://mmy12580.github.io/posts/text2query/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/" class="prev" rel="prev" title="选，读一本书"><i class="iconfont icon-left"></i>&nbsp;选，读一本书</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

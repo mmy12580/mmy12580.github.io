@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Nov 2019 09:57:22 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>deep learning</title>
+      <link>https://mmy12580.github.io/tags/deep-learning/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>natural language processing</title>
+      <link>https://mmy12580.github.io/tags/natural-language-processing/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/tags/natural-language-processing/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Reading</title>
@@ -21,29 +39,11 @@
     </item>
     
     <item>
-      <title>deep learning</title>
-      <link>https://mmy12580.github.io/tags/deep-learning/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>machine learning</title>
       <link>https://mmy12580.github.io/tags/machine-learning/</link>
       <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>natural language processing</title>
-      <link>https://mmy12580.github.io/tags/natural-language-processing/</link>
-      <pubDate>Thu, 19 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/tags/natural-language-processing/</guid>
       <description></description>
     </item>
     

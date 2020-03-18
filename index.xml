@@ -5,8 +5,17 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Posts</title>
+      <link>https://mmy12580.github.io/posts/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>About</title>
@@ -22,15 +31,6 @@
 &lt;h2 id=&#34;just-for-fun&#34;&gt;Just for fun&lt;/h2&gt;
 &lt;p&gt;Click the &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; on the top left of the web page to switch the theme of the website.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Posts</title>
-      <link>https://mmy12580.github.io/posts/</link>
-      <pubDate>Fri, 01 Nov 2019 09:57:22 -0400</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/</guid>
-      <description></description>
     </item>
     
   </channel>

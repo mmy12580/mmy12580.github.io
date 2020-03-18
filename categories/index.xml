@@ -6,10 +6,28 @@
     <description>Recent content in Categories on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Nov 2019 09:57:22 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>deep learning</title>
+      <link>https://mmy12580.github.io/categories/deep-learning/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/categories/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nlp</title>
+      <link>https://mmy12580.github.io/categories/nlp/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/categories/nlp/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Reading</title>
@@ -21,20 +39,11 @@
     </item>
     
     <item>
-      <title>deep learning</title>
-      <link>https://mmy12580.github.io/categories/deep-learning/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
+      <title>machine learning</title>
+      <link>https://mmy12580.github.io/categories/machine-learning/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://mmy12580.github.io/categories/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>nlp</title>
-      <link>https://mmy12580.github.io/categories/nlp/</link>
-      <pubDate>Thu, 19 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/categories/nlp/</guid>
+      <guid>https://mmy12580.github.io/categories/machine-learning/</guid>
       <description></description>
     </item>
     
@@ -44,15 +53,6 @@
       <pubDate>Thu, 19 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine learning</title>
-      <link>https://mmy12580.github.io/categories/machine-learning/</link>
-      <pubDate>Tue, 18 Jun 2019 11:28:17 -0400</pubDate>
-      
-      <guid>https://mmy12580.github.io/categories/machine-learning/</guid>
       <description></description>
     </item>
     

@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Nov 2019 09:57:22 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A quick summary: Text-to-SQL</title>
+      <link>https://mmy12580.github.io/posts/text2query/</link>
+      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/text2query/</guid>
+      <description>Definition Given relational database (or table), users provide the question, the algorithms generates the correct SQL syntax. Below example is an illustration from Spider Dataset.
+Public Dataset:  ATIS &amp;amp; GeoQuery: flight tickets reserving system WikiSQL: 80654 training data  Single table single column query Aggregation Condition Operation Github: https://github.com/salesforce/WikiSQL   Spider: a. more domains; b. more complex SQL syntax;  Complex, Cross-domain and Zero-shot Multi tables and columns Aggregation Join Where Ranking SQL connection Github: https://github.</description>
+    </item>
     
     <item>
       <title>选，读一本书</title>
