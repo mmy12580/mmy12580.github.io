@@ -57,7 +57,7 @@
     "datePublished": "2020-03-18 17:36:33 -0400 EDT",
     "dateModified" : "2020-03-18 17:36:33 -0400 EDT",
     "url" : "https:\/\/mmy12580.github.io\/posts\/text2query\/",
-    "wordCount" : "1545",
+    "wordCount" : "1544",
     "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -225,7 +225,7 @@
 </ol>
 <p>Note that WikiSQL takes both, while Spider only uses first one.</p>
 <h1 id="sota-models">SOTA Models:</h1>
-<p>Basically, all models adapt an encoder-decoder mechanism. In encoder's direction, textual alignment or mapping is very important among NL question and database. In other words, the key information of  questions, e.g., entities, SQL condition, and others. On the other hand, decoder cleares the boundaries of semantics, and it makes SQL format consistent based on representations of natural language questions. Traditional seq2seq models are not able to learn based on above mentioned requirements. Thus, in general, streaming models are based on following aspects:</p>
+<p>Basically, all models adapt an encoder-decoder mechanism. In encoder&rsquo;s direction, textual alignment or mapping is very important among NL question and database. In other words, the key information of  questions, e.g., entities, SQL condition, and others. On the other hand, decoder cleares the boundaries of semantics, and it makes SQL format consistent based on representations of natural language questions. Traditional seq2seq models are not able to learn based on above mentioned requirements. Thus, in general, streaming models are based on following aspects:</p>
 <ol>
 <li><strong>More contextualized representation</strong> i.e., BERT, XLNET;</li>
 <li>Better structure explicitly enhance alignment, such as GNN;</li>
@@ -240,9 +240,9 @@
 <h2 id="2-seq2sql">2. Seq2SQL</h2>
 <p>One of the main drawbacks from Pointer Network is that it does not use the information based on the query language. Seq2SQL divides the generated sequences into three parts, which are aggregation (e.g., sum, count, min, and max etc.), select, and condition where.</p>
 <p>Select and aggregation parts employ attention mechanisms for text classification, and where condition adopts pointer network. However, where condition syntax is not unique, such as</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span> <span style="color:#66d9ef">AND</span> gender <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">male</span><span style="color:#e6db74">&#34;</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span> <span style="color:#66d9ef">AND</span> gender <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;male&#34;</span>;
 
-<span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">male</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">AND</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span>;
+<span style="color:#66d9ef">SELECT</span> name <span style="color:#66d9ef">FROM</span> insurance <span style="color:#66d9ef">WHERE</span> gender <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;male&#34;</span><span style="color:#66d9ef">AND</span> age <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">18</span>;
 </code></pre></div><p>This can directly leads outputs to be incorrect given natural language question. Therefore, the author proposes a scoring system with RL over generated outputs.</p>
 <p><img src="/post_imgs/text2query3.png" alt=""></p>
 <h2 id="3-sqlnet">3. SQLNet</h2>
@@ -299,9 +299,9 @@
 <p>Do not apply SQL syntax as signals for training.</p>
 <p><code>Paper</code></p>
 <ul>
-<li><input disabled="" type="checkbox">Min S, Chen D, Hajishirzi H, et al. <a href="https://www.cs.princeton.edu/~danqic/papers/emnlp2019.pdf">A discrete hard em approach for weakly supervised question answering</a>[C]. EMNLP-IJCNLP 2019.</li>
-<li><input disabled="" type="checkbox">Agarwal R, Liang C, Schuurmans D, et al. <a href="https://arxiv.org/pdf/1902.07198.pdf">Learning to Generalize from Sparse and Underspecified Rewards</a>. 2019.</li>
-<li><input disabled="" type="checkbox">Liang C, Norouzi M, Berant J, et al. <a href="https://papers.nips.cc/paper/8204-memory-augmented-policy-optimization-for-program-synthesis-and-semantic-parsing.pdf">Memory augmented policy optimization for program synthesis and semantic parsing</a>[C].NeurIPS, 2018: 9994-10006.</li>
+<li><input disabled="" type="checkbox"> Min S, Chen D, Hajishirzi H, et al. <a href="https://www.cs.princeton.edu/~danqic/papers/emnlp2019.pdf">A discrete hard em approach for weakly supervised question answering</a>[C]. EMNLP-IJCNLP 2019.</li>
+<li><input disabled="" type="checkbox"> Agarwal R, Liang C, Schuurmans D, et al. <a href="https://arxiv.org/pdf/1902.07198.pdf">Learning to Generalize from Sparse and Underspecified Rewards</a>. 2019.</li>
+<li><input disabled="" type="checkbox"> Liang C, Norouzi M, Berant J, et al. <a href="https://papers.nips.cc/paper/8204-memory-augmented-policy-optimization-for-program-synthesis-and-semantic-parsing.pdf">Memory augmented policy optimization for program synthesis and semantic parsing</a>[C].NeurIPS, 2018: 9994-10006.</li>
 </ul>
 <p><code>Code</code></p>
 <ul>
@@ -340,10 +340,10 @@ Three common execution errors</p>
 </ol>
 <p><code>Paper</code></p>
 <ul>
-<li><input disabled="" type="checkbox">Wang C, Huang P S, Polozov A, et al. <a href="https://arxiv.org/pdf/1807.03100.pdf">Robust Text-to-SQL Generation with Execution-Guided Decoding</a>[J]. 2018.</li>
-<li><input disabled="" type="checkbox">Wang C, Brockschmidt M, Singh R. <a href="https://openreview.net/pdf?id=BkUDW_lCb">Pointing out SQL queries from text</a>[J]. 2018.</li>
-<li><input disabled="" type="checkbox">Dong L, Lapata M. <a href="https://arxiv.org/pdf/1805.04793.pdf">Coarse-to-fine decoding for neural semantic parsing</a>[J]. 2018.</li>
-<li><input disabled="" type="checkbox">Huang P S, Wang C, Singh R, et al. <a href="https://arxiv.org/pdf/1803.02400.pdf">Natural language to structured query generation via meta-learning</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox"> Wang C, Huang P S, Polozov A, et al. <a href="https://arxiv.org/pdf/1807.03100.pdf">Robust Text-to-SQL Generation with Execution-Guided Decoding</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox"> Wang C, Brockschmidt M, Singh R. <a href="https://openreview.net/pdf?id=BkUDW_lCb">Pointing out SQL queries from text</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox"> Dong L, Lapata M. <a href="https://arxiv.org/pdf/1805.04793.pdf">Coarse-to-fine decoding for neural semantic parsing</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox"> Huang P S, Wang C, Singh R, et al. <a href="https://arxiv.org/pdf/1803.02400.pdf">Natural language to structured query generation via meta-learning</a>[J]. 2018.</li>
 </ul>
 <p><code>Code</code></p>
 <ul>
@@ -380,9 +380,9 @@ Three common execution errors</p>
 <h3 id="extension-to-sqlnet">Extension to SQLNet</h3>
 <p><code>Paper</code></p>
 <ul>
-<li><input disabled="" type="checkbox">Xu X, Liu C, Song D. <a href="https://arxiv.org/pdf/1711.04436.pdf">SQLNet: Generating structured queries from natural language without reinforcement learning</a>[J]. 2018.</li>
-<li><input disabled="" type="checkbox">Hwang W, Yim J, Park S, et al. <a href="https://arxiv.org/pdf/1902.01069.pdf">A Comprehensive Exploration on WikiSQL with Table-Aware Word Contextualization</a>[J]. 2019.</li>
-<li><input disabled="" type="checkbox">He P, Mao Y, Chakrabarti K, et al. <a href="https://arxiv.org/pdf/1908.08113.pdf">X-SQL: reinforce schema representation with context</a>[J]. 2019.</li>
+<li><input disabled="" type="checkbox"> Xu X, Liu C, Song D. <a href="https://arxiv.org/pdf/1711.04436.pdf">SQLNet: Generating structured queries from natural language without reinforcement learning</a>[J]. 2018.</li>
+<li><input disabled="" type="checkbox"> Hwang W, Yim J, Park S, et al. <a href="https://arxiv.org/pdf/1902.01069.pdf">A Comprehensive Exploration on WikiSQL with Table-Aware Word Contextualization</a>[J]. 2019.</li>
+<li><input disabled="" type="checkbox"> He P, Mao Y, Chakrabarti K, et al. <a href="https://arxiv.org/pdf/1908.08113.pdf">X-SQL: reinforce schema representation with context</a>[J]. 2019.</li>
 </ul>
 <p><code>Code</code></p>
 <ul>
@@ -425,7 +425,7 @@ Three common execution errors</p>
 <p>Iteratively generate correct sql by clarifying users intention.</p>
 <p><code>Paper</code></p>
 <ul>
-<li><input disabled="" type="checkbox">Yao Z, Su Y, Sun H, et al. <a href="https://arxiv.org/pdf/1910.05389.pdf">Model-based Interactive Semantic Parsing: A Unified Framework and A Text-to-SQL Case Study</a>[C]. EMNLP-IJCNLP 2019.</li>
+<li><input disabled="" type="checkbox"> Yao Z, Su Y, Sun H, et al. <a href="https://arxiv.org/pdf/1910.05389.pdf">Model-based Interactive Semantic Parsing: A Unified Framework and A Text-to-SQL Case Study</a>[C]. EMNLP-IJCNLP 2019.</li>
 </ul>
 <p><code>Code</code></p>
 <ul>
@@ -434,7 +434,7 @@ Three common execution errors</p>
 <h3 id="editsql">EditSQL</h3>
 <p><code>Paper</code></p>
 <ul>
-<li><input disabled="" type="checkbox">Zhang R, Yu T, Er H Y, et al. <a href="https://arxiv.org/pdf/1909.00786.pdf">Editing-Based SQL Query Generation for Cross-Domain Context-Dependent Questions</a>[C]. EMNLP-IJCNLP 2019.</li>
+<li><input disabled="" type="checkbox"> Zhang R, Yu T, Er H Y, et al. <a href="https://arxiv.org/pdf/1909.00786.pdf">Editing-Based SQL Query Generation for Cross-Domain Context-Dependent Questions</a>[C]. EMNLP-IJCNLP 2019.</li>
 </ul>
 <p><code>Code</code></p>
 <ul>
@@ -461,7 +461,7 @@ Three common execution errors</p>
 <p>[1] Seq2sql: Generating structured queries fromnatural language using reinforcement learning (Victor Zhong, Caiming Xiong,Richard Socher. CoRR2017)</p>
 <p>[2] Towards Complex Text-to-SQL in Cross-DomainDatabase with Intermediate Representation (Jiaqi Guo, Zecheng Zhan, Yan Gao,Yan Xiao, Jian-Guang Lou, Ting Liu, and Dongmei Zhang. ACL2019)</p>
 <p>[3] SParC: Cross-Domain Semantic Parsing in Context(Tao Yu, Rui Zhang, Michihiro Yasunaga, Yi Chern Tan, Xi Victoria Lin, Suyi Li,Heyang Er, Irene Li, Bo Pang, Tao Chen, Emily Ji, Shreya Dixit, David Proctor,Sungrok Shim, Jonathan Kraft, Vincent Zhang, Caiming Xiong, Richard Socher,Dragomir Radev. ACL2019)</p>
-<p>[4] Pointer Networks （OriolVinyals, Meire Fortunato, Navdeep Jaitly. NIPS2015）</p>
+<p>[4] Pointer Networks（OriolVinyals, Meire Fortunato, Navdeep Jaitly. NIPS2015）</p>
 <p>[5] SQLNet: Generating Structured Queries FromNatural Language Without Reinforcement Learning (Xiaojun Xu, Chang Liu, DawnSong. ICLR2018)</p>
 <p>[6] TypeSQL: Knowledge-based Type-Aware NeuralText-to-SQL Generation (Tao Yu, Zifan Li, Zilin Zhang, Rui Zhang, DragomirRadev. NAACL2018)</p>
 <p>[7] SyntaxSQLNet: Syntax Tree Networks for Complexand Cross-DomainT ext-to-SQL Task. (Tao Yu, Michihiro Yasunaga, Kai Yang, RuiZhang, Dongxu Wang, Zifan Li, and Dragomir Radev. EMNLP2018)</p>

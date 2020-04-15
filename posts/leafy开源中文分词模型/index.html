@@ -200,7 +200,7 @@
 </span><span style="color:#e6db74">  (&#39;</span>个<span style="color:#e6db74">&#39;, &#39;</span>E-MQ<span style="color:#e6db74">&#39;),
 </span><span style="color:#e6db74">  (&#39;</span>成<span style="color:#e6db74">&#39;, &#39;</span>B-N<span style="color:#e6db74">&#39;),
 </span><span style="color:#e6db74">  (&#39;</span>员<span style="color:#e6db74">&#39;, &#39;</span>I-N<span style="color:#e6db74">&#39;),
-</span><span style="color:#e6db74">  (&#39;</span>国<span style="color:#e6db74">&#39;, &#39;</span>E-N<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">]</span><span style="color:#f92672">]</span>
+</span><span style="color:#e6db74">  (&#39;</span>国<span style="color:#e6db74">&#39;, &#39;</span>E-N<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)]]</span>
 </code></pre></div><p>每个句子输入的长度最大值为150， 长度不足150的部分会被padding补齐。我们可以看一下配置过的具体的超参数(hyper-parameters)与其他的配置文件。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">epochs <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span> <span style="color:#75715e"># 多少轮训练</span>
 steps_per_epoch <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span> <span style="color:#75715e"># 每轮训练需要的次数</span>
@@ -208,20 +208,20 @@ num_gpu <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span
 
 <span style="color:#75715e"># configuration</span>
 config <span style="color:#f92672">=</span> {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">src_vocab_size</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">6864</span>
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">tgt_vocab_size</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">339</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_seq_len</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">150</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">max_depth</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">2</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">model_dim</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">256</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">embedding_size_word</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">300</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">embedding_dropout</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">0.0</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">residual_dropout</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">0.1</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">attention_dropout</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">0.1</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">l2_reg_penalty</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">1e-6</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">confidence_penalty_weight</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">0.1</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">compression_window_size</span><span style="color:#e6db74">&#39;</span>: None,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">num_heads</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">2</span>,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">use_crf</span><span style="color:#e6db74">&#39;</span>: True
+        <span style="color:#e6db74">&#39;src_vocab_size&#39;</span>: <span style="color:#ae81ff">6864</span>
+        <span style="color:#e6db74">&#39;tgt_vocab_size&#39;</span>: <span style="color:#ae81ff">339</span>,
+        <span style="color:#e6db74">&#39;max_seq_len&#39;</span>: <span style="color:#ae81ff">150</span>,
+        <span style="color:#e6db74">&#39;max_depth&#39;</span>: <span style="color:#ae81ff">2</span>,
+        <span style="color:#e6db74">&#39;model_dim&#39;</span>: <span style="color:#ae81ff">256</span>,
+        <span style="color:#e6db74">&#39;embedding_size_word&#39;</span>: <span style="color:#ae81ff">300</span>,
+        <span style="color:#e6db74">&#39;embedding_dropout&#39;</span>: <span style="color:#ae81ff">0.0</span>,
+        <span style="color:#e6db74">&#39;residual_dropout&#39;</span>: <span style="color:#ae81ff">0.1</span>,
+        <span style="color:#e6db74">&#39;attention_dropout&#39;</span>: <span style="color:#ae81ff">0.1</span>,
+        <span style="color:#e6db74">&#39;l2_reg_penalty&#39;</span>: <span style="color:#ae81ff">1e-6</span>,
+        <span style="color:#e6db74">&#39;confidence_penalty_weight&#39;</span>: <span style="color:#ae81ff">0.1</span>,
+        <span style="color:#e6db74">&#39;compression_window_size&#39;</span>: None,
+        <span style="color:#e6db74">&#39;num_heads&#39;</span>: <span style="color:#ae81ff">2</span>,
+        <span style="color:#e6db74">&#39;use_crf&#39;</span>: True
     }
 
 </code></pre></div><p><img src="/post_imgs/cws_model.png" alt="cws model"></p>

@@ -169,8 +169,8 @@
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">naive_add</span>(x):
     start <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
     count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>):
-        count <span style="color:#f92672">+</span><span style="color:#f92672">=</span> i
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">8</span>):
+        count <span style="color:#f92672">+=</span> i
     stop <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
     <span style="color:#66d9ef">return</span> start, stop
 
@@ -192,25 +192,25 @@
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visualize_runtimes</span>(results, title):
     start, stop <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(results)<span style="color:#f92672">.</span>T
     plt<span style="color:#f92672">.</span>barh(range(len(start)), stop <span style="color:#f92672">-</span> start)
-    plt<span style="color:#f92672">.</span>grid(axis<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)
-    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Tasks</span><span style="color:#e6db74">&#34;</span>)
-    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Seconds</span><span style="color:#e6db74">&#34;</span>)
+    plt<span style="color:#f92672">.</span>grid(axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tasks&#34;</span>)
+    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Seconds&#34;</span>)
     plt<span style="color:#f92672">.</span>xlim(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">28</span>)
     ytks <span style="color:#f92672">=</span> range(len(results))
-    plt<span style="color:#f92672">.</span>yticks(ytks, [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">job {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(exp) <span style="color:#66d9ef">for</span> exp <span style="color:#f92672">in</span> ytks])
+    plt<span style="color:#f92672">.</span>yticks(ytks, [<span style="color:#e6db74">&#39;job {}&#39;</span><span style="color:#f92672">.</span>format(exp) <span style="color:#66d9ef">for</span> exp <span style="color:#f92672">in</span> ytks])
     plt<span style="color:#f92672">.</span>title(title)
     <span style="color:#66d9ef">return</span> stop[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> start[<span style="color:#ae81ff">0</span>]    
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compare</span>(workers, jobs):
 	<span style="color:#75715e"># plot </span>
 	plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)	
-	visualize_runtimes(multithreading(naive_add, range(jobs), workers), <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Multi-Threading</span><span style="color:#e6db74">&#39;</span>)
+	visualize_runtimes(multithreading(naive_add, range(jobs), workers), <span style="color:#e6db74">&#39;Multi-Threading&#39;</span>)
 	plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
-	visualize_runtimes(multiprocessing(naive_add, range(jobs), workers), <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Multi-Processing</span><span style="color:#e6db74">&#39;</span>)
+	visualize_runtimes(multiprocessing(naive_add, range(jobs), workers), <span style="color:#e6db74">&#39;Multi-Processing&#39;</span>)
 	plt<span style="color:#f92672">.</span>show()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
 	compare(workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, jobs<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
 </code></pre></div><p>结果如下图，多线程需要大概24s的计算时间，而多进程只需要5s的计算时间，近乎5倍的速度。很明显，多线程并不等于多进程。</p>
 <p><img src="/post_imgs/thres_vs_process.png" alt="RunTime Comparison"></p>
@@ -224,7 +224,7 @@
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">live_tracker</span>(x):
     reference <span style="color:#f92672">=</span> time<span style="color:#f92672">.</span>time()
     l <span style="color:#f92672">=</span> []
-    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#f92672">*</span><span style="color:#ae81ff">6</span>):
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">6</span>):
         l<span style="color:#f92672">.</span>append(time<span style="color:#f92672">.</span>time() <span style="color:#f92672">-</span> reference)
     <span style="color:#66d9ef">return</span> l
 
@@ -232,25 +232,25 @@
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">visualize_live_runtimes</span>(results, title):
     <span style="color:#66d9ef">for</span> i, exp <span style="color:#f92672">in</span> enumerate(results):
         <span style="color:#66d9ef">print</span>(i)
-        plt<span style="color:#f92672">.</span>scatter(exp, np<span style="color:#f92672">.</span>ones(len(exp)) <span style="color:#f92672">*</span> i, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>, c<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">red</span><span style="color:#e6db74">&#39;</span>, edgecolors<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">none</span><span style="color:#e6db74">&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+        plt<span style="color:#f92672">.</span>scatter(exp, np<span style="color:#f92672">.</span>ones(len(exp)) <span style="color:#f92672">*</span> i, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.8</span>, c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;red&#39;</span>, edgecolors<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;none&#39;</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
 
-    plt<span style="color:#f92672">.</span>grid(axis<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">x</span><span style="color:#e6db74">&#39;</span>)
-    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Tasks</span><span style="color:#e6db74">&#34;</span>)
+    plt<span style="color:#f92672">.</span>grid(axis<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;x&#39;</span>)
+    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#34;Tasks&#34;</span>)
     ytks <span style="color:#f92672">=</span> range(len(results))
-    plt<span style="color:#f92672">.</span>yticks(ytks, [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">job {}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(exp) <span style="color:#66d9ef">for</span> exp <span style="color:#f92672">in</span> ytks])
-    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Seconds</span><span style="color:#e6db74">&#34;</span>)
+    plt<span style="color:#f92672">.</span>yticks(ytks, [<span style="color:#e6db74">&#39;job {}&#39;</span><span style="color:#f92672">.</span>format(exp) <span style="color:#66d9ef">for</span> exp <span style="color:#f92672">in</span> ytks])
+    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#34;Seconds&#34;</span>)
     plt<span style="color:#f92672">.</span>title(title)
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compare</span>(workers, jobs):
 	plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>)
-	visualize_live_runtimes(multithreading(live_tracker, range(jobs), workers), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Multithreading</span><span style="color:#e6db74">&#34;</span>)
+	visualize_live_runtimes(multithreading(live_tracker, range(jobs), workers), <span style="color:#e6db74">&#34;Multithreading&#34;</span>)
 	plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
-	visualize_live_runtimes(multiprocessing(live_tracker, range(jobs), workers), <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Multiprocessing</span><span style="color:#e6db74">&#34;</span>)
+	visualize_live_runtimes(multiprocessing(live_tracker, range(jobs), workers), <span style="color:#e6db74">&#34;Multiprocessing&#34;</span>)
 	plt<span style="color:#f92672">.</span>show()
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
 	comapre(workers<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>, jobs<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
 </code></pre></div><p><img src="/post_imgs/thres_vs_process2.png" alt="Live RunTime Comparision"></p>
 <h3 id="这里有一个非常有意思的结论">这里有一个非常有意思的结论！</h3>

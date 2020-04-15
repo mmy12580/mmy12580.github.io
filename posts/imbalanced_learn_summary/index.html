@@ -198,18 +198,18 @@ y <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>t
 y[y <span style="color:#f92672">==</span> majority_person] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 y[y <span style="color:#f92672">==</span> minority_person] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
 
-classifier <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">3NN</span><span style="color:#e6db74">&#39;</span>, neighbors<span style="color:#f92672">.</span>KNeighborsClassifier(<span style="color:#ae81ff">3</span>)]
+classifier <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;3NN&#39;</span>, neighbors<span style="color:#f92672">.</span>KNeighborsClassifier(<span style="color:#ae81ff">3</span>)]
 
 samplers <span style="color:#f92672">=</span> [
-    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Standard</span><span style="color:#e6db74">&#39;</span>, DummySampler()],
-    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ADASYN</span><span style="color:#e6db74">&#39;</span>, ADASYN(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
-    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ROS</span><span style="color:#e6db74">&#39;</span>, RandomOverSampler(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
-    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">SMOTE</span><span style="color:#e6db74">&#39;</span>, SMOTE(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
+    [<span style="color:#e6db74">&#39;Standard&#39;</span>, DummySampler()],
+    [<span style="color:#e6db74">&#39;ADASYN&#39;</span>, ADASYN(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
+    [<span style="color:#e6db74">&#39;ROS&#39;</span>, RandomOverSampler(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
+    [<span style="color:#e6db74">&#39;SMOTE&#39;</span>, SMOTE(random_state<span style="color:#f92672">=</span>RANDOM_STATE)],
 ]
 
 <span style="color:#75715e"># create a pipeline with sampling methods</span>
 pipelines <span style="color:#f92672">=</span> [
-    [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}-{}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(sampler[<span style="color:#ae81ff">0</span>], classifier[<span style="color:#ae81ff">0</span>]),
+    [<span style="color:#e6db74">&#39;{}-{}&#39;</span><span style="color:#f92672">.</span>format(sampler[<span style="color:#ae81ff">0</span>], classifier[<span style="color:#ae81ff">0</span>]),
      make_pipeline(sampler[<span style="color:#ae81ff">1</span>], classifier[<span style="color:#ae81ff">1</span>])]
     <span style="color:#66d9ef">for</span> sampler <span style="color:#f92672">in</span> samplers
 ]
@@ -221,11 +221,11 @@ pipelines <span style="color:#f92672">=</span> [
     <span style="color:#66d9ef">for</span> train, test <span style="color:#f92672">in</span> cv<span style="color:#f92672">.</span>split(X, y):
         probas_ <span style="color:#f92672">=</span> pipeline<span style="color:#f92672">.</span>fit(X[train], y[train])<span style="color:#f92672">.</span>predict_proba(X[test])
         fpr, tpr, thresholds <span style="color:#f92672">=</span> roc_curve(y[test], probas_[:, <span style="color:#ae81ff">1</span>])
-        mean_tpr <span style="color:#f92672">+</span><span style="color:#f92672">=</span> interp(mean_fpr, fpr, tpr)
+        mean_tpr <span style="color:#f92672">+=</span> interp(mean_fpr, fpr, tpr)
         mean_tpr[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
         roc_auc <span style="color:#f92672">=</span> auc(fpr, tpr)
 
-    mean_tpr <span style="color:#f92672">/</span><span style="color:#f92672">=</span> cv<span style="color:#f92672">.</span>get_n_splits(X, y)
+    mean_tpr <span style="color:#f92672">/=</span> cv<span style="color:#f92672">.</span>get_n_splits(X, y)
     mean_tpr[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
     mean_auc <span style="color:#f92672">=</span> auc(mean_fpr, mean_tpr)
 </code></pre></div><h2 id="algorithmic-strategy">Algorithmic strategy</h2>
@@ -242,7 +242,7 @@ pipelines <span style="color:#f92672">=</span> [
 <li>Cost-sensitive: It takes time to pre-determine the cost-matrix, and it might work well by good settings and work badly by bad settings.</li>
 <li>Bagging is normally better than Boosting based ensemble method.</li>
 </ol>
-<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He's <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <!-- raw HTML omitted --> focal loss <!-- raw HTML omitted -->  .</p>
+<p>If you are solving deep learning case, especially compute vision based projects. To spend 20 mins reading Kaimin He&rsquo;s <a href="chrome-extension://oemmndcbldboiebfnladdacbdfmadadm/https://arxiv.org/pdf/1708.02002.pdf">paper</a>, you will benefit a lot, and it can be used in other applications such as <a href="https://www.kaggle.com/ntnu-testimon/paysim1">fraud detection dataset on Kaggle</a>, and you can check this <a href="https://github.com/Tony607/Focal_Loss_Keras">github</a> to have a practice with <!-- raw HTML omitted --> focal loss <!-- raw HTML omitted -->  .</p>
 
     </div>
 
