@@ -22,10 +22,10 @@
   <title>
        
        
-           Activation is important! | Moyan&#39;s Website
+           Activation:  | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Activation is important! | Moyan&#39;s Website">
+  <meta name="title" content="Activation:  | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,8 +44,8 @@
          "@id": "https:\/\/mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Activation is important!",
-    "headline" : "Activation is important!",
+    "name" : "Activation: ",
+    "headline" : "Activation: ",
     "description" : "Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-01-23 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-01-23 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/activation\/",
-    "wordCount" : "1061",
+    "wordCount" : "1402",
     "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -120,7 +120,7 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Activation is important!</h1>
+        <h1 class="post-title" itemprop="name headline">Activation: </h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
@@ -155,7 +155,7 @@
 <h1 id="properties">Properties</h1>
 <p><strong>In general</strong>, activation functions have properties as followings:</p>
 <ol>
-<li><strong>non-linearity</strong>: The non-linear activations functions are used not only to stimulate like real brains but also to enhance the ability of representation to approximate the data distribution. In other words, it increases large capacity  of model to generalize the data better;</li>
+<li><strong>non-linearity</strong>: The non-linear activations functions are used not only to stimulate like real brains but also to enhance the ability of representation to approximate the data distribution. In other words, it increases large capacity of model to generalize the data better;</li>
 <li><strong>differentiable</strong>: Due to the non-convex optimization problem, deep learning considers back-propagation which is essentially chain rule of derivatives;</li>
 <li><strong>monotonic</strong>: Monotonic guarantees single layer is convex;</li>
 <li>$f(x) \approx x$: When activation function satisfies this property, if values after initialization is small, the training efficiency will increase; if not, initialization needs to be carefully set;</li>
@@ -175,15 +175,15 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 <li>Easy derivatives:</li>
 </ul>
 <p>\begin{align*}
-\sigma&rsquo;(x) &amp;= - \frac{1}{(1 + e^{-x})^2} (-e^{-x}) \<br>
-&amp;= \frac{1}{1 + e^{-x}} \frac{e^{-x}}{1 + e^{-x}} \<br>
-&amp;= \frac{1}{1 + e^{-x}} \frac{1 + e^{-x} - 1}{1 + e^{-x}} \<br>
+\sigma&rsquo;(x) &amp;= - \frac{1}{(1 + e^{-x})^2} (-e^{-x}) \newline
+&amp;= \frac{1}{1 + e^{-x}} \frac{e^{-x}}{1 + e^{-x}} \newline
+&amp;= \frac{1}{1 + e^{-x}} \frac{1 + e^{-x} - 1}{1 + e^{-x}} \newline
 &amp;= \sigma(x)(1 - \sigma(x))
 \end{align*}</p>
 <h3 id="disadvantages">Disadvantages:</h3>
 <ul>
 <li><strong>Gradient Vanishing</strong>: When $\sigma(x) \rightarrow 0$ or $\sigma(x) \rightarrow 1$, the $\frac{\partial \sigma}{\partial x} \rightarrow 0$. Another intuitive reason is that the $\max f&rsquo;(x) = 0.25$ when $x=0.5$. That means every time the gradient signal flows through a sigmoid gate, its magnitude always diminishes by one quarter (or more);</li>
-<li>Non-zero centered output: Imagine if x is all positive and all negative, what result will $f&rsquo;(x)$ has? It slowers the convergence rate;</li>
+<li>Non-zero centered output: Imagine if x is all positive and all negative, what result will $f&rsquo;(x)$ has? It sloweres the convergence rate;</li>
 <li>Slow: Exponential computation is relatively slower comparing to ReLu</li>
 </ul>
 <h2 id="tanh">Tanh</h2>
@@ -191,13 +191,13 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 <p>$$ \tanh(x) = 2\sigma(2x -1) = \frac{1 - e^{-2x}}{1 + e^{-2x}} $$</p>
 <h3 id="advantages-1">Advantages:</h3>
 <ul>
-<li>Zero-centered output: Release the burden of initialization in some degree; Also, it fasters the convergence.</li>
+<li>$\color{blue}{Zero-centered}$ output: Release the burden of initialization in some degree; Also, it fasters the convergence.</li>
 <li>Easy derivatives:</li>
 </ul>
 <p>\begin{align*}
-\tanh&rsquo;(x) &amp;= \frac{\partial \tanh}{\partial x} = (\frac{\sin x}{\cos x})&rsquo; \<br>
-&amp;= \frac{\sin&rsquo;x \cos x + \sin x \cos&rsquo;x}{\cos^2 x} \<br>
-&amp;= \frac{\cos^2 x - sin^2 x}{\cos^2 x}\<br>
+\tanh&rsquo;(x) &amp;= \frac{\partial \tanh}{\partial x} = (\frac{\sin x}{\cos x})&rsquo; \newline
+&amp;= \frac{\sin&rsquo;x \cos x + \sin x \cos&rsquo;x}{\cos^2 x} \newline
+&amp;= \frac{\cos^2 x - sin^2 x}{\cos^2 x} \newline
 &amp;= 1 - \frac{\sin^2 x}{\cos^2 x} = 1 - \tanh^2(x)
 \end{align*}</p>
 <h3 id="disadvantages-1">Disadvantages:</h3>
@@ -208,76 +208,101 @@ The name &ldquo;sigmoid&rdquo; comes from its shape, which we normally call &ldq
 <h2 id="relu">ReLU</h2>
 <p><strong>ReLU</strong> has become the most popular method in deep learning applications. The idea behind is very simple,</p>
 <p>$$ReLu(x) = \max(0, x)$$</p>
-<h4 id="advantages-2">Advantages:</h4>
+<h3 id="advantages-2">Advantages:</h3>
 <ul>
 <li>Solves gradient vanishing problem</li>
 <li>Faster computation leads to faster convergence</li>
 <li>Even simpler derivative</li>
 </ul>
-<h4 id="disadvantages-2">Disadvantages:</h4>
+<h3 id="disadvantages-2">Disadvantages:</h3>
 <ul>
 <li>Non-zero centered</li>
 <li><strong>Dead ReLU problem</strong>: Some of the neurons wont be activated. Possible reasons: 1. Unlucky initialization 2. Learning rate is too high. (Small learning rate, Xavier Initialization and Batch Normalization help).</li>
 </ul>
-<h2 id="lrelu-and-prelu">LReLU and PReLU</h2>
-<p>To solve ReLU problems, there are few work proposed to solve dead area and non-zero centerd problems.</p>
-<h3 id="lrelu">LReLU</h3>
+<h3 id="how-does-relu-solves-gradient-vanish-problem">How does ReLU solves gradient vanish problem?</h3>
+<p>Assume a DNN with 3 layers and activation function as $S$. Given inputs $x$ and weights $W_i$ and bias $b_i$, the output of third layer is $f_3 =S(W_3 * S(W_2 * S(W_1 * x + b_1)+ b_2)+b_3)$, and the derivative of $W_1$ is</p>
+<p>\begin{aligned}
+\frac{\partial L}{\partial W_{1}} &amp;=\frac{\partial L}{\partial f_{3}} \cdot \frac{\partial S\left(W_{3} S\left(W_{2} S\left(W_{1} x+b_{1}\right)+b_{2}\right)+b_{3}\right)}{\partial W_{1}} \newline
+&amp;=\frac{\partial L}{\partial f_{3}} \cdot \frac{\partial S}{\partial a_{3}} \cdot \frac{\partial W_{3} S\left(W_{2} S\left(W_{1} x+b_{1}\right)+b_{2}\right)+b_{3}}{\partial W_{1}} \newline
+&amp;=\frac{\partial L}{\partial f_{3}} \cdot \frac{\partial S}{\partial a_{3}} \cdot W_{3} \cdot \frac{\partial S\left(W_{2} S\left(W_{1} x+b_{1}\right)+b_{2}\right)}{\partial W_{1}} \newline
+&amp;=\cdots \newline
+&amp;=\frac{\partial L}{\partial f_{3}} \cdot \frac{\partial S}{\partial a_{3}} \cdot W_{3} \cdot \frac{\partial S}{\partial a_{2}} \cdot W_{2} \cdot \frac{\partial S}{\partial a_{1}} \cdot \frac{\partial a_{1}}{\partial W_{1}}
+\end{aligned}</p>
+<p>where $a_i$ is the linear combination before activation for layer $i$. As it is shown above, <strong>the partial derivatives $\partial S / \partial a_i$ is the reason of gradient vanish</strong> because</p>
+<p>\begin{align*}
+f^{\prime}(x)=\frac{e^{-x}}{\left(1+e^{-x}\right)^{2}} \quad \in\left(0, \frac{1}{4}\right]
+\end{align*}</p>
+<p>so that $0&lt; \partial S/ \partial a_1≤0.25$，$0 &lt; \partial S/ \partial a_2≤0.25$， $0 &lt; \partial S/\partial a_3 ≤ 0.25$, the product will be</p>
+<p>\begin{align*}
+0&lt;\frac{\partial S}{\partial a_{3}} \frac{\partial S}{\partial a_{2}} \frac{\partial S}{\partial a_{1}} \leq 0.015625
+\end{align*}</p>
+<p>If there are 20 layers, then</p>
+<p>\begin{align*}
+0&lt;\frac{\partial S}{\partial a_{20}} \frac{\partial S}{\partial a_{19}} \ldots \frac{\partial S}{\partial a_{1}} \leq 0.25^{20}=9.094 \times 10^{-13}
+\end{align*}</p>
+<p><strong>ReLu&rsquo;s derivative is either 0 or 1</strong>, so as long as the derivative on a path in the gradient of the neural network is 1, then no matter how many layers the network has, the gradient of the next few layers of the network can be propagated to the first few layers of the network.</p>
+<h2 id="leakyrelu">LeakyReLU</h2>
+<p>To solve ReLU problems, LeakyReLU is proposed to solve dead area and non-zero centers problems. The only changes is that when $x \le 0$, activation is then calculated as $f(x) = a * x$. The derivatives will be either 1 or $a$, and normally $a$ is set to be smaller than 1, e.g., $a = 0.2%.</p>
+<h3 id="advantages-3">Advantages:</h3>
 <ul>
-<li>$f(x) = max(bx, x)$</li>
-<li>Normally, b = 0.01 or 0.3</li>
+<li>Solves dead area problem by allowing a small value $a$</li>
+<li>Fast since no exponential calculation is included</li>
 </ul>
-<h3 id="prelu">PReLU</h3>
+<h3 id="disadvantages-3">Disadvantages:</h3>
 <ul>
-<li>$f(x) = max(\alpha x, x)$</li>
-<li>$\alpha$ is a learnable parameter</li>
+<li>Still non-zero centered output</li>
+<li>Cant avoid gradient explosion</li>
+<li>May not converge as fast as ReLU</li>
 </ul>
-<p>Note: Even both methods are designed to solve ReLU problems, it is <strong>NOT</strong> guaranteed they will perform better than ReLU. Also, due to the tiny changes, they do not converge as fast as ReLU.</p>
+<p>A quick adjustment on LeaykRelu is to parameterize the value of $a$, so the choice of $a$ can be learned from the data. This method is called PReLU, and it converges fast and have good generalization.</p>
 <h2 id="elu">ELU</h2>
 <p>What slows down the learning is the bias shift which is present in ReLUs. Those who have mean activation larger than zero and learning causes bias shift for the following layers. <strong>ELU</strong> is designed as an alternative of ReLU to reduce the bias shift by pushing the mean activation toward zero.</p>
 <p>\begin{split}
 ELU(x) &amp;= \alpha (\exp(x) - 1), &amp;&amp; \quad x \le 0 \<br>
 &amp;= x, &amp;&amp;  \quad  x &gt; 0<br>
 \end{split}</p>
-<h3 id="advantages-3">Advantages:</h3>
+<h3 id="advantages-4">Advantages:</h3>
 <ul>
 <li>Zero-Centered outputs</li>
 <li>No Dead ReLU issues</li>
 <li>Seems to be a merged version of LReLU and PReLU</li>
 </ul>
-<h4 id="disadvantages-3">Disadvantages:</h4>
+<h3 id="disadvantages-4">Disadvantages:</h3>
 <ul>
-<li>Slow</li>
+<li>Slow due to exponential calculation</li>
 <li>Saturates for the large negative values</li>
 </ul>
 <h2 id="selu">SELU</h2>
-<p>The last common non-linear activation function is <strong>SELU</strong>, scaled exponential linear unit. It has self-normalizing properties because the activations that are close to zero mean and unit variance, propagated through network layers, will converge towards zero mean and unit variance. This, in particular, makes the learning highly robust and allows to train networks that have many layers.</p>
+<p>The last common non-linear activation function is <strong>SELU</strong>, scaled exponential linear unit. It has <strong>self-normalizing properties</strong> because the activations that are close to zero mean and unit variance, propagated through network layers, will converge towards zero mean and unit variance. This, in particular, makes the learning highly robust and allows to train networks that have many layers.</p>
 <p>\begin{split}
 SELU(x) &amp;= \lambda \alpha (\exp(x) - 1), &amp;&amp; \quad x \le 0 \<br>
 &amp;= \lambda x, &amp;&amp;  \quad  x &gt; 0<br>
 \end{split}</p>
-<p>which has gradient</p>
+<p>which has gradient as</p>
 <p>\begin{split}
-\frac{\partial d}{\partial x}  SELU(x) &amp;= SELU(x) + \lambda \alpha, &amp;&amp; \quad x \le 0 \<br>
+\frac{\partial d}{\partial x} SELU(x) &amp;= SELU(x) + \lambda \alpha, &amp;&amp; \quad x \le 0 \<br>
 &amp;= \lambda, &amp;&amp;  \quad  x &gt; 0<br>
 \end{split}</p>
 <p>where $\alpha = 1.6733$ and $\lambda = 1.0507$.</p>
-<p><em><strong>Question</strong></em>: Would SELU, ELU be more useful than Batch Normalization?</p>
+<h3 id="advantages-5">Advantages:</h3>
+<ul>
+<li>Self-normalizing is faster than external normalization e.g, batch normalization.</li>
+<li>Avoids gradient vanish or explosion (proved in paper by theorem 2 and 3)</li>
+</ul>
+<p>$\color{blue}{Question}$: Would SELU, ELU be more useful than Batch Normalization?</p>
 <h1 id="activation-functions-on-nlp">Activation functions on NLP</h1>
-<p>Here, I will list a few activations used on state-of-the-art NLP models, such as BERTetc.</p>
-<h2 id="gelu">GELU</h2>
-<p>Since BERT was released in December, all the NLP tasks benchmark scores have been updated, such as SQuad machine understanding, CoLLN 2003 named entity recognition, etc. By exploring tricks and theory behind BERT, BERT uses <strong>GELU</strong>, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gelu</span>(input_tensor):
-  <span style="color:#e6db74">&#34;&#34;&#34;Gaussian Error Linear Unit.
-</span><span style="color:#e6db74">  This is a smoother version of the RELU.
-</span><span style="color:#e6db74">  Original paper: https://arxiv.org/abs/1606.08415
-</span><span style="color:#e6db74">  Args:
-</span><span style="color:#e6db74">    input_tensor: float Tensor to perform activation.
-</span><span style="color:#e6db74">  Returns:
-</span><span style="color:#e6db74">    `input_tensor` with the GELU activation applied.
-</span><span style="color:#e6db74">  &#34;&#34;&#34;</span>
-  cdf <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> tf<span style="color:#f92672">.</span>erf(input_tensor <span style="color:#f92672">/</span> tf<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2.0</span>)))
-  <span style="color:#66d9ef">return</span> input_tensor <span style="color:#f92672">*</span> cdf
-</code></pre></div><h2 id="mish">MISH</h2>
+<p>Here, I will list frequently used activations in state-of-the-art NLP models, such as BERT etc.</p>
+<h2 id="gelu">GeLU</h2>
+<p>All the NLP benchmarks scores have been updated since BERT was released. Pre-training method becomes the standard way of solving NLP downstream tasks, such as entity recognition, Q&amp;A systems, sentiment analysis, and so on. BERT applied a new activation method, <strong>GELU</strong>, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.Gaussian distribution</p>
+<p>\begin{align*}
+GELU(x)=0.5 x\left(1+\tanh \left(\sqrt{2 / \pi}\left(x+0.044715 x^{3}\right)\right)\right)
+\end{align*}</p>
+<p>Its derivative is caculated then by</p>
+<p>\begin{array}{c}
+\mathrm{GELU}^{\prime}(x)=0.5 \tanh \left(0.0356774 x^{3}+0.797885 x\right) \<br>
++\left(0.0535161 x^{3}+0.398942 x\right) \sec^{2}\left(0.0356774 x^{3}+0.797885 x\right)+0.5
+\end{array}</p>
+<h2 id="mish">MISH</h2>
 <h2 id="swish">SWISH</h2>
 <h1 id="extension">Extension:</h1>
 <p>I found a masterpiece from a data scientist via github which has a great way of visualizing varieties of activation functions. Try to play with it. It might help you remember it more. Click <a href="https://dashee87.github.io/deep%20learning/visualising-activation-functions-in-neural-networks/">here</a> to his website.</p>
