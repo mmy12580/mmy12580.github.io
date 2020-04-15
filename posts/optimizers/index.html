@@ -9,8 +9,8 @@
   <meta name="description" content="Moyan&#39;s personal website">
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
-  <link rel="prev" href="https://mmy12580.github.io/posts/activation/" />
-  <link rel="next" href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" />
+  <link rel="prev" href="https://mmy12580.github.io/posts/text2query/" />
+  
   <link rel="canonical" href="https://mmy12580.github.io/posts/optimizers/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Amazing Optimizer until 2019.3 | Moyan&#39;s Website
+           Optimizer matters the most! | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Amazing Optimizer until 2019.3 | Moyan&#39;s Website">
+  <meta name="title" content="Optimizer matters the most! | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,20 +44,20 @@
          "@id": "https:\/\/mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Amazing Optimizer until 2019.3",
-    "headline" : "Amazing Optimizer until 2019.3",
-    "description" : "Introduction As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate The learning rate is one of the most important things need to be taken care of.",
+    "name" : "Optimizer matters the most!",
+    "headline" : "Optimizer matters the most!",
+    "description" : "Introduction As a researcher, most time of my job is to build an appropriate AI prototype for specific tasks. To achieve a satisfactory result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. The most deterministic component of deep learning practice is choosing the appropriate optimization algorithms, which directly affect the training speed and the final predictive performance. To date, there is no theory that adequately explains how to make this choice.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
     "publisher": "Moyan Mei",
     "accountablePerson" : "Moyan Mei",
     "copyrightHolder" : "Moyan Mei",
-    "copyrightYear" : "2019",
-    "datePublished": "2019-01-25 11:18:47 -0500 EST",
-    "dateModified" : "2019-01-25 11:18:47 -0500 EST",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-04-15 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2020-04-15 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/optimizers\/",
-    "wordCount" : "282",
+    "wordCount" : "2482",
     "keywords" : [ "optimization","machine learning","deep learning", "Moyan\x27s Website"]
 }
 </script>
@@ -120,19 +120,26 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Amazing Optimizer until 2019.3</h1>
+        <h1 class="post-title" itemprop="name headline">Optimizer matters the most!</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
-                on <time datetime=2019-01-25 itemprop="datePublished">January 25, 2019</time>
+                on <time datetime=2020-04-15 itemprop="datePublished">April 15, 2020</time>
                 </span>
                 in
-                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/optimization/"> optimization </a>
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
         </div>
     </header>
     <div class="post-content">
         
 
+        
+            
         
 
         
@@ -146,18 +153,298 @@
           
           
 
-          
+          <h1 id="introduction">Introduction</h1>
+<p>As a researcher, most time of my job is to build an appropriate AI prototype for specific tasks. To achieve a satisfactory result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. The most deterministic component of deep learning practice is choosing the appropriate optimization algorithms, which directly affect the training speed and the final predictive performance. To date, there is no theory that adequately explains how to make this choice.</p>
+<p><strong>Adam</strong> and <strong>SGD</strong> optimizers ave played a key role in the literature of deep learning, and they were treated as a breakthrough to optimize a <strong>large volume</strong> of data based <strong>non-convex cases</strong>. However, which one performs better is still debatable. Adam has shown its advantage i.e., surprising fast converging, while SGD and its extension SGD + momentum are proved to yield a better or sometimes way better performance, i.e., higher accuracy on new data. There is a ton of studies of new optimizers by taking advantages of both optimizers. Here, in this blog, I will present varieties of optimizers.</p>
+<h2 id="adagrad">AdaGrad</h2>
+<p>The momentum method relies on exponentially weighted moving average to make the update direction of independent variables more consistent, thereby reducing the possibility of divergence. However, it is not $\color{red}{flexible}$ enough for optimization. A simple example is illustrated. At learning rate $\eta$, variables $x1$ and $x2$ are updated by</p>
+<p>\begin{align*}
+x_{1} \leftarrow x_{1}-\eta \frac{\partial f}{\partial x_{1}}, \quad x_{2} \leftarrow x_{2}-\eta \frac{\partial f}{\partial x_{2}}
+\end{align*}</p>
+<p>When the gradient values ​​of $x_1$ and $x_2$ are significantly different, e.g., $\eta \frac{\partial f}{\partial x_{1}} - \eta \frac{\partial f}{\partial x_{2}}$, you need to choose a learning rate small enough so that the independent variable does not diverge in the dimension with a large gradient value, but this will cause the independent variable to iterate in the dimension with a small gradient value slow.</p>
+<p>AdaGrad is therefore introduced since it adjusts the learning rate in each dimension according to the size of the gradient value of the independent variable in each dimension.</p>
+<p>\begin{align*}
+n_{t}=n_{t-1}+g_{t}^{2} \newline
+\Delta \theta_{t}=-\frac{\eta}{\sqrt{n_{t}+\epsilon}} * g_{t}
+\end{align*}</p>
+<p>Essentially, AdaGrad behaves like a regularizer on gradients $g_t$ by multiplying $\frac{1}{\sqrt{n_{t}+\epsilon}}$ where $\epsilon$ is used to guarantee the denominator is non-zero.</p>
+<h3 id="features">Features:</h3>
+<ul>
+<li>At early stage, $g_t$ is small, regularizer is large, they can enlarge gradients;</li>
+<li>At later stage, $g_t$ is large, regularizer is small, they can shorten gradients;</li>
+<li>Appropriate to deal with $\color{blue}{sparse}$ gradients.</li>
+</ul>
+<h3 id="drawbacks">Drawbacks:</h3>
+<ul>
+<li>From formula given above, manual setting a global learning rate is necessary.</li>
+<li>If $eta$ is too large, regularizer will be very sensitive, so as the adjustment on gradient.</li>
+<li>In the middle and late stages, the accumulation of the gradient squares on the denominator will become larger and larger, e.g., $g_t \rightarrow 0$, making the training end early.</li>
+</ul>
+<h2 id="adadelta">AdaDelta</h2>
+<p>AdaDelta is an extension of AdaGrad. The initial solution is still to adaptively constrain the learning rate, but it is simplified in calculation. AdaGrad accumulates all the squared gradients before update, <strong>while AdaDelta only accumulates fixed-size items, and does not directly store these items, just approximate the corresponding average value.</strong></p>
+<p>\begin{align*}
+n_{t}=\nu * n_{t-1}+(1-\nu) * g_{t}^{2} \newline
+\Delta \theta_{t}=-\frac{\eta}{\sqrt{n_{t}+\epsilon}} * g_{t}
+\end{align*}</p>
+<p>Here, AdaDelta still depends on the global learning rate. To avoid that, the author has done a series of changes to approximate second order Newton method</p>
+<p>\begin{align*}
+E\left|g^{2}\right|_{t} =\rho * E\left|g^{2}\right|_{t-1}+(1-\rho) * g_{t}^{2} \newline
+\Delta \theta_t =-\frac{\sqrt{\sum_{r=1}^{t-1} \Delta \theta_{r}}}{\sqrt{E\left|g^{2}\right|_{t}+\epsilon}}
+\end{align*}</p>
+<h3 id="features-1">Features</h3>
+<ul>
+<li>AdaDelta no longer depends on manual setting global learning rate.</li>
+<li>Very effective acceleration in the early and middle training.</li>
+<li>Later in training, jitter repeatedly around the local minimum.</li>
+</ul>
+<h3 id="special-case">Special Case</h3>
+<p>When $\rho=0.5$, the expectation term $E\left|g^{2}\right|_{t}$ becomes the average of the squared gradients. By taking square root,</p>
+<p>\begin{align*}
+RMS|g|_{t}=\sqrt{E\left|g^{2}\right|_{t}+\epsilon} \newline
+\theta_t = -\frac{\eta}{RMS|g|_{t}} * g_t
+\end{align*}</p>
+<p>The special case of AdaDelta is named as <strong>RMSprop</strong>, and it is suitable for handling non-stationary targets, which works well for Recurrent Neural Network (RNN).</p>
+<p><strong>Note</strong> that Adam is essentially RMSprop with momentums, and it uses first-order moment estimation and second-order moment estimation to dynamically adjust the learning rate of each parameter. The main advantage of Adam is that after offset correction, each iteration learning rate has a certain range, making the parameters relatively stable.</p>
+<h2 id="adamw">AdamW</h2>
+<p>One of the reason why Adam sometimes perform worse than SGD + momentum in generalization is that L2 regularization is not performing effectively in Adam than SGD. To mention that particularly,</p>
+<ol>
+<li>L2 regularization is <strong>not</strong> equal to weight decay in self-adapt learning. Only in stand SGD case, L2 regularization can be treated as weight decay. In self-adapt learning methods, e.g., Adam, L2 regularization leads to smaller shrinkage in weights than weight decay method.</li>
+<li>Adam optimization with L2 regularization may not be effective. Due to the accumulation of the subtraction term divided by the square of the gradient in the Adam calculation step, the subtraction term with a larger gradient is smaller, so that the weight with a large gradient will not be regularized as the decoupling weight decay. This leads to the inequality of L2 and decoupling weight attenuation regularization of the adaptive gradient algorithm.</li>
+</ol>
+<p><img src="/post_imgs/adamw.jpeg" alt=""></p>
+<h2 id="lazyadam">LazyAdam</h2>
+<p>Unlike computer vision and other fields, NLP tasks have limited words sampled by each batch, and the gradient estimation of embedding is sparse. For momentum based optimizers, they will overfit embedding easily since it uses the current momentum to update all words even if these words have not been sampled in the dozens of steps.</p>
+<p>LazyAdam is a variant of Adam, and it merges the <strong>sparse</strong> and <strong>dense</strong> Adam optimizers. It only updates moving-average accumulators for sparse variable indices that appear in the current batch, rather than updating the accumulators for all indices. The implementation in Pytorch is as below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> math
+<span style="color:#f92672">import</span> torch
+<span style="color:#f92672">from</span> torch.optim.optimizer <span style="color:#f92672">import</span> Optimizer
 
-<h1 id="introduction">Introduction</h1>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LazyAdam</span>(Optimizer):
 
-<p>As a researcher, most time of my job is to build an approriate AI prototype for specific tasks. To achieve a satisfactoring result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. One of the hyper-parameters has the most impactul effects on the results. Sometime, it is able to determine the direction of research or indutrial deployment, which is learning rate
-The learning rate is one of the most important things need to be taken care of. It not only helps better convergence e.g hit a better local minima or luckly global minima, but also faster the process of convergence.</p>
+    <span style="color:#66d9ef">def</span> __init__(self, params, lr<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-3</span>, betas<span style="color:#f92672">=</span>(<span style="color:#ae81ff">0.9</span>, <span style="color:#ae81ff">0.999</span>), eps<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-8</span>):
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0.0</span> <span style="color:#f92672">&lt;</span> lr:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid learning rate: {}&#34;</span><span style="color:#f92672">.</span>format(lr))
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0.0</span> <span style="color:#f92672">&lt;</span> eps:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid epsilon value: {}&#34;</span><span style="color:#f92672">.</span>format(eps))
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0.0</span> <span style="color:#f92672">&lt;=</span> betas[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid beta parameter at index 0: {}&#34;</span><span style="color:#f92672">.</span>format(betas[<span style="color:#ae81ff">0</span>]))
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0.0</span> <span style="color:#f92672">&lt;=</span> betas[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Invalid beta parameter at index 1: {}&#34;</span><span style="color:#f92672">.</span>format(betas[<span style="color:#ae81ff">1</span>]))
 
-<p>Apparently, the most popular choices are <strong>adam</strong> and <strong>sgd</strong> optimizers. They have played a key role in the literature of deep learning, and some traditional machine learning algorithms. It is treated as a breathough to optimize a large volume of data based non-convex cases. However, which one is to use is still debatable. Adam has shown its advantage i.e., suprising fast converging, while sgd and its extention sgd + momentum are proved to yield a better or sometimes way better performance, i.e., higher accuracy on new data. A lot of researchers are trying to create a <strong>fast</strong> and <strong>good</strong> optmizer, so the work which can be descrbited as a variety of mutation method on Adam or sgd have been studied. Aa far as I concern, there are few works are really promising. I would like to share it with you. Luckily, the code of the works is released too, and it can be easilly add to your model, so to have a faster experience in training and get a promising results in generalization.</p>
+        defaults <span style="color:#f92672">=</span> dict(lr<span style="color:#f92672">=</span>lr, betas<span style="color:#f92672">=</span>betas, eps<span style="color:#f92672">=</span>eps)
+        super(LazyAdam, self)<span style="color:#f92672">.</span>__init__(params, defaults)
 
-<h3 id="adamw">AdamW</h3>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">step</span>(self, closure<span style="color:#f92672">=</span>None):
+        <span style="color:#e6db74">&#34;&#34;&#34;Performs a single optimization step.
+</span><span style="color:#e6db74">        Arguments:
+</span><span style="color:#e6db74">            closure (callable, optional): A closure that reevaluates the model
+</span><span style="color:#e6db74">                and returns the loss.
+</span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
 
-<h3 id="adamg">AdamG</h3>
+        loss <span style="color:#f92672">=</span> None
+        <span style="color:#66d9ef">if</span> closure <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            loss <span style="color:#f92672">=</span> closure()
+
+        <span style="color:#66d9ef">for</span> group <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>param_groups:
+            <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> group[<span style="color:#e6db74">&#39;params&#39;</span>]:
+
+                <span style="color:#66d9ef">if</span> p<span style="color:#f92672">.</span>grad <span style="color:#f92672">is</span> None:
+                    <span style="color:#66d9ef">continue</span>
+                grad <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>grad<span style="color:#f92672">.</span>data
+
+                <span style="color:#66d9ef">if</span> grad<span style="color:#f92672">.</span>is_sparse:
+                    self<span style="color:#f92672">.</span>sparse_step(group, p, grad)
+                <span style="color:#66d9ef">else</span>:
+                    self<span style="color:#f92672">.</span>dense_step(group, p, grad)                
+
+        <span style="color:#66d9ef">return</span> loss
+
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sparse_step</span>(self, group, param, grad):
+        state <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>state[param]
+
+        <span style="color:#75715e"># State initialization</span>
+        <span style="color:#66d9ef">if</span> len(state) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            state[<span style="color:#e6db74">&#39;step&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#75715e"># Exponential moving average of gradient values</span>
+            state[<span style="color:#e6db74">&#39;exp_avg&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>zeros_like(param<span style="color:#f92672">.</span>data)
+            <span style="color:#75715e"># Exponential moving average of squared gradient values</span>
+            state[<span style="color:#e6db74">&#39;exp_avg_sq&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>zeros_like(param<span style="color:#f92672">.</span>data)
+
+        state[<span style="color:#e6db74">&#39;step&#39;</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+        grad <span style="color:#f92672">=</span> grad<span style="color:#f92672">.</span>coalesce()  <span style="color:#75715e"># the update is non-linear so indices must be unique</span>
+        grad_indices <span style="color:#f92672">=</span> grad<span style="color:#f92672">.</span>_indices()
+        grad_values <span style="color:#f92672">=</span> grad<span style="color:#f92672">.</span>_values()
+        size <span style="color:#f92672">=</span> grad<span style="color:#f92672">.</span>size()
+
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_sparse</span>(values):
+            constructor <span style="color:#f92672">=</span> grad<span style="color:#f92672">.</span>new
+            <span style="color:#66d9ef">if</span> grad_indices<span style="color:#f92672">.</span>dim() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> values<span style="color:#f92672">.</span>dim() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                <span style="color:#66d9ef">return</span> constructor()<span style="color:#f92672">.</span>resize_as_(grad)
+            <span style="color:#66d9ef">return</span> constructor(grad_indices, values, size)
+
+        exp_avg, exp_avg_sq <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;exp_avg&#39;</span>], state[<span style="color:#e6db74">&#39;exp_avg_sq&#39;</span>]
+        beta1, beta2 <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#39;betas&#39;</span>]
+
+        <span style="color:#75715e"># Decay the first and second moment running average coefficient</span>
+        <span style="color:#75715e">#      old &lt;- b * old + (1 - b) * new</span>
+        <span style="color:#75715e"># &lt;==&gt; old += (1 - b) * (new - old)</span>
+        old_exp_avg_values <span style="color:#f92672">=</span> exp_avg<span style="color:#f92672">.</span>sparse_mask(grad)<span style="color:#f92672">.</span>_values()
+        exp_avg_update_values <span style="color:#f92672">=</span> grad_values<span style="color:#f92672">.</span>sub(old_exp_avg_values)<span style="color:#f92672">.</span>mul_(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta1)
+        exp_avg<span style="color:#f92672">.</span>add_(make_sparse(exp_avg_update_values))
+        old_exp_avg_sq_values <span style="color:#f92672">=</span> exp_avg_sq<span style="color:#f92672">.</span>sparse_mask(grad)<span style="color:#f92672">.</span>_values()
+        exp_avg_sq_update_values <span style="color:#f92672">=</span> grad_values<span style="color:#f92672">.</span>pow(<span style="color:#ae81ff">2</span>)<span style="color:#f92672">.</span>sub_(old_exp_avg_sq_values)<span style="color:#f92672">.</span>mul_(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta2)
+        exp_avg_sq<span style="color:#f92672">.</span>add_(make_sparse(exp_avg_sq_update_values))
+
+        <span style="color:#75715e"># Dense addition again is intended, avoiding another sparse_mask</span>
+        numer <span style="color:#f92672">=</span> exp_avg_update_values<span style="color:#f92672">.</span>add_(old_exp_avg_values)
+        exp_avg_sq_update_values<span style="color:#f92672">.</span>add_(old_exp_avg_sq_values)
+        denom <span style="color:#f92672">=</span> exp_avg_sq_update_values<span style="color:#f92672">.</span>sqrt_()<span style="color:#f92672">.</span>add_(group[<span style="color:#e6db74">&#39;eps&#39;</span>])
+        <span style="color:#66d9ef">del</span> exp_avg_update_values, exp_avg_sq_update_values
+
+        bias_correction1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta1 <span style="color:#f92672">**</span> state[<span style="color:#e6db74">&#39;step&#39;</span>]
+        bias_correction2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta2 <span style="color:#f92672">**</span> state[<span style="color:#e6db74">&#39;step&#39;</span>]
+        step_size <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#39;lr&#39;</span>] <span style="color:#f92672">*</span> math<span style="color:#f92672">.</span>sqrt(bias_correction2) <span style="color:#f92672">/</span> bias_correction1
+
+        param<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>add_(make_sparse(<span style="color:#f92672">-</span>step_size <span style="color:#f92672">*</span> numer<span style="color:#f92672">.</span>div_(denom)))
+
+    
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dense_step</span>(self, group, param, grad):
+        state <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>state[param]
+
+        <span style="color:#75715e"># State initialization</span>
+        <span style="color:#66d9ef">if</span> len(state) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            state[<span style="color:#e6db74">&#39;step&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+            <span style="color:#75715e"># Exponential moving average of gradient values</span>
+            state[<span style="color:#e6db74">&#39;exp_avg&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>zeros_like(param<span style="color:#f92672">.</span>data)
+            <span style="color:#75715e"># Exponential moving average of squared gradient values</span>
+            state[<span style="color:#e6db74">&#39;exp_avg_sq&#39;</span>] <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>zeros_like(param<span style="color:#f92672">.</span>data)
+
+        exp_avg, exp_avg_sq <span style="color:#f92672">=</span> state[<span style="color:#e6db74">&#39;exp_avg&#39;</span>], state[<span style="color:#e6db74">&#39;exp_avg_sq&#39;</span>]
+        beta1, beta2 <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#39;betas&#39;</span>]
+
+        state[<span style="color:#e6db74">&#39;step&#39;</span>] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+        bias_correction1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta1 <span style="color:#f92672">**</span> state[<span style="color:#e6db74">&#39;step&#39;</span>]
+        bias_correction2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta2 <span style="color:#f92672">**</span> state[<span style="color:#e6db74">&#39;step&#39;</span>]
+
+        <span style="color:#75715e"># Decay the first and second moment running average coefficient</span>
+        exp_avg<span style="color:#f92672">.</span>mul_(beta1)<span style="color:#f92672">.</span>add_(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta1, grad)
+        exp_avg_sq<span style="color:#f92672">.</span>mul_(beta2)<span style="color:#f92672">.</span>addcmul_(<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> beta2, grad, grad)
+        
+        denom <span style="color:#f92672">=</span> (exp_avg_sq<span style="color:#f92672">.</span>sqrt() <span style="color:#f92672">/</span> math<span style="color:#f92672">.</span>sqrt(bias_correction2))<span style="color:#f92672">.</span>add_(group[<span style="color:#e6db74">&#39;eps&#39;</span>])
+
+        step_size <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#39;lr&#39;</span>] <span style="color:#f92672">/</span> bias_correction1
+
+        param<span style="color:#f92672">.</span>data<span style="color:#f92672">.</span>addcdiv_(<span style="color:#f92672">-</span>step_size, exp_avg, denom)
+</code></pre></div><h3 id="features-2">Features</h3>
+<ul>
+<li>More efficient way to handle sparse update.</li>
+<li>Avoids overfiting in some degree.</li>
+<li>Large improvements in model training throughput for some applications</li>
+</ul>
+<h3 id="drawbacks-1">Drawbacks</h3>
+<ul>
+<li>Its semantics is slightly different from Adam, so it may lead to different empirical output.</li>
+<li>Might be slower than Adam method.</li>
+</ul>
+<h2 id="adabound">AdaBound</h2>
+<p>Self-adaptive training methods have very unstable output at later stage. In other words, the learning rate is particularly large in some dimensions, and the learning rate in some dimensions is particularly small. AdaBound applies dynamic clipping over learning rate, and it limits the learning rate between $\eta_{l}$ and $\eta_{u}$.</p>
+<p><img src="/post_imgs/adabound.png" alt=""></p>
+<p>It is easy to find that SGD and Adam are special cases for AdaBound. SGD can be viewed as $\eta_l = \eta_u = \alpha^*$, and Adam is $\eta_l =0$ and $\eta_u = \inf$. Due to this setting, AdaBound behaves more like Adam (fast) in the early stage, and it acts like SGD (better convergence) at later stage.</p>
+<h3 id="features-3">Features</h3>
+<ul>
+<li>Not sensitive to hyper parameters, so save a lot of time for training.</li>
+<li>More flexible boundary functions.</li>
+<li>Smooth transformation from Adam to SGD instead of hard transformation.</li>
+</ul>
+<h2 id="adafactor">AdaFactor</h2>
+<p>State-of-the-art pre-training methods, such as Bert, GPT2, or T5, are quite large. Albert applied decomposition to save lot of parameters, however, the calculation of gradients still requires a lot of resources. That is also why a lot smaller model doest mean a lot faster. Adam update process is given as below</p>
+<p>\begin{aligned}&amp;g_t = \nabla_{\theta} L(\theta_t) \newline
+&amp;m_t = \beta_1 m_{t-1} + \left(1 - \beta_1\right) g_t \newline
+&amp;v_t = \beta_2 v_{t-1} + \left(1 - \beta_2\right) g_t^2 \newline
+&amp;\hat{m}_t = m_t\left/\left(1 - \beta_1^t\right)\right. \newline
+&amp;\hat{v}_t = v_t\left/\left(1 - \beta_2^t\right)\right. \newline
+&amp;\theta_t = \theta_{t-1} - \alpha_t \hat{m}_t\left/\sqrt{\hat{v}_t + \epsilon}\right.
+\end{aligned}</p>
+<p>It costs less memory by dropping momentums in Adam,</p>
+<p>\begin{aligned}&amp;g_t = \nabla_{\theta} L(\theta_t) \newline
+&amp;v_t = \beta_2 v_{t-1} + \left(1 - \beta_2\right) g_t^2 \newline
+&amp;\hat{v}_t = v_t\left/\left(1 - \beta_2^t\right)\right. \newline
+&amp;\theta_t = \theta_{t-1} - \alpha_t \hat{m}_t\left/\sqrt{\hat{v}_t + \epsilon}\right.
+\end{aligned}</p>
+<p>To further reduce the memory cost, low rank decomposition helps approximation of $\hat{v}_t$. Also, new decaying strategy is applied as below</p>
+<p>\begin{equation}\hat{\beta}_{2,t} =1 - \frac{1}{t^c}\label{eq:beta2}\end{equation}.</p>
+<p>Eventually, AdaFactor is formulated then</p>
+<p>\begin{aligned}
+&amp;g_{i, j, t}=\nabla_{\theta} L\left(\theta_{i, j ; t}\right) \newline
+&amp;\hat{\beta}_{2, t}=1-t^{-c} \newline
+&amp;v_{i ; t}^{(r)}=\hat{\beta}_{2, t} v_{t-1 ; i}^{(r)}+\left(1-\hat{\beta}_{2, t}\right) \sum_{j}\left(g_{i, j ; t}^{2}+\epsilon_{1}\right) \newline
+&amp;v_{j, t}^{(c)}=\hat{\beta}_{2, t} v_{t-1 ; j}^{(c)}+\left(1-\hat{\beta}_{2, t}\right) \sum_{i}\left(g_{i, j, t}^{2}+\epsilon_{1}\right) \newline
+&amp;\hat{v}_{i j, t}=v_{i, t}^{(r)} v_{j, t}^{(c)} / \sum_{j} v_{j, t}^{(c)} \newline
+&amp;u_{t}=g_{t} / \sqrt{\hat{v}_{t}} \newline
+&amp;\hat{u}_{t}=u_{t} / \max \left(1, R M S\left(u_{t}\right) / d\right) \times \max \left(\epsilon_{2}, R M S\left(\theta_{t-1}\right)\right)\newline
+&amp;\boldsymbol{\theta}_{t}=\boldsymbol{\theta}_{t-1}-\boldsymbol{\alpha}_{t} \hat{\boldsymbol{u}}_{t}
+\end{aligned}</p>
+<p>The default parameters are</p>
+<p>\begin{array}{c|c}
+\epsilon_1 &amp; 10^{-30} \newline
+\epsilon_2 &amp; 10^{-3} \newline
+d &amp; 1 \newline
+\hat{\beta}_{2,t} &amp; 1 - t^{-0.8} \newline
+\end{array}</p>
+<p>When parameters is a one dimensional vector instead of a matrix, $\hat{v}^t$ is then updated by</p>
+<p>\begin{align*}
+\hat{v}_t = \hat{\beta}_{2,t} v_{t-1} + \left(1 - \hat{\beta}_{2,t}\right) \left(g_t^2+\epsilon_1\right).
+\end{align*}</p>
+<p>Also, if no learning is defined, the default learning rate will be $a_t = \min\left(10^{-2},\frac{1}{\sqrt{t}}\right)$</p>
+<h3 id="features-4">Features</h3>
+<ul>
+<li>Faster training</li>
+<li>Less memory cost in GPU</li>
+<li>Better convergence</li>
+</ul>
+<h2 id="lamb">Lamb</h2>
+<p>When Bert came out, the recorded training time is about 3 days with a cluster of TPUs. LAMB is then introduced to reduce the training time from 3 days to 76 minutes.</p>
+<p><img src="/post_imgs/lamb.png" alt=""></p>
+<p>Normally, large batch training will have following problems</p>
+<ul>
+<li>result in the loss of test accuracy, so you need to adjust the hyper-parameters, such as the learning rate. Thus, it is necessary to increase the learning rate linearly or square root as the batch size increases;</li>
+<li>large learning rate will cause unstable training at beginning, warm-up is needed;</li>
+<li>generalization gap problem: large batch training models will tend to converge to a sharp local minimum point, which will cause training to easily achieve a higher training accuracy, but it is difficult to obtain better test accuracy.</li>
+</ul>
+<h3 id="features-5">Features</h3>
+<ul>
+<li>Stabilize large batch training</li>
+<li>Fast</li>
+</ul>
+<h2 id="lookahead">LookAhead</h2>
+<p>LookAhead is found different from other optimizers since it is orthogonal to other optimizers, which means that lookahead can be used to enhance other optimizers. Lookahead optimizer maintains two set of weights, <strong>slow weights</strong> and <strong>fast weights</strong>. Lookahead first updates $k$ iterations of fast weights in the inner loop, and then update slow weights in the direction of the last weights. It is why called lookahead. When Lookahead oscillates in the direction of high curvature, fast weights update quickly advances in the direction of low curvature, and slow weights smoothes the oscillation through parameter interpolation. <strong>The combination of fast weights and slow weights improves learning in the direction of high curvature, reduces variance, and makes Lookahead achieve faster convergence in practice.</strong></p>
+<p><img src="/post_imgs/lookahead.png" alt=""></p>
+<h3 id="features-6">Features</h3>
+<ul>
+<li><strong>Lower variance</strong></li>
+<li>Robust to hyper-parameters</li>
+</ul>
+<h2 id="ranger">Ranger</h2>
+<p>RAdam (did not introduce here) can be said to be the best foundation that optimizers establish at the beginning of training (CV aspect). RAdam uses a dynamic rectifier to adjust Adam&rsquo;s adaptive momentum according to the variance, and effectively provides automatic warm-up, customized according to the current data set to ensure a solid training start. LookAhead is inspired by the latest advances in the loss of surface understanding of deep neural networks and provides breakthroughs in robust and stable exploration throughout the training period. The combination of RAdam and LookAhead in one optimizer is called Ranger.</p>
+<p>The newest Ranger includes <strong>gradient centralization</strong>, which can be viewed as a projected gradient descent method with a constrained loss function. Gradient centralization is not only able to regularize the weight space and output feature space for improving generalization, but also provide efficient training by improving lipschitzness of loss function and its gradients.</p>
+<h3 id="features-7">Features</h3>
+<ul>
+<li>Include warm-up for training</li>
+<li>Robust to hyper-parameters</li>
+</ul>
+<h2 id="references">References</h2>
+<p>[1] Duchi, J., Hazan, E., &amp; Singer, Y. (2011). Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul), 2121-2159.
+[2] Zeiler, M. D. (2012). ADADELTA: an adaptive learning rate method. arXiv preprint arXiv:1212.5701.
+[3] Tieleman, T., &amp; Hinton, G. (2012). Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 4(2), 26-31.
+[4] Kingma, D. P., &amp; Ba, J. (2014). Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980.
+[5] Liyuan Liu, Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng Gao, and Jiawei Han. &ldquo;On the Variance of the Adaptive Learning Rate and Beyond.&rdquo; arXiv preprint arXiv:1908.03265 (2019).
+[6] Loshchilov, Ilya and Frank Hutter. “Decoupled Weight Decay Regularization.” ICLR (2019).
+[7] Michael R. Zhang, James Lucas, Geoffrey Hinton, Jimmy Ba. Lookahead Optimizer: k steps forward, 1 step back. [Arxiv]
+[8] Leslie N. Smith, Nicholay Topin Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates
+[9] Yang You, Jing Li, Sashank Reddi, Jonathan Hseu, Sanjiv Kumar, Srinadh Bhojanapalli, Xiaodan Song, James Demmel, Kurt Keutzer, Cho-Jui Hsieh Large Batch Optimization for Deep Learning: Training BERT in 76 minutes
+[10] Pavel Izmailov, Dmitrii Podoprikhin, Timur Garipov, Dmitry Vetrov, Andrew Gordon Wilson Averaging Weights Leads to Wider Optima and Better Generalization</p>
 
     </div>
 
@@ -203,10 +490,8 @@ The learning rate is one of the most important things need to be taken care of. 
 
     <div class="post-nav">
         
-        <a href="https://mmy12580.github.io/posts/activation/" class="prev" rel="prev" title="Activation is important!"><i class="iconfont icon-left"></i>&nbsp;Activation is important!</a>
+        <a href="https://mmy12580.github.io/posts/text2query/" class="prev" rel="prev" title="A quick summary: Text-to-SQL"><i class="iconfont icon-left"></i>&nbsp;A quick summary: Text-to-SQL</a>
          
-        
-        <a href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" class="next" rel="next" title="网站搭建:hugo&#43;github">网站搭建:hugo&#43;github&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 
@@ -222,7 +507,7 @@ The learning rate is one of the most important things need to be taken care of. 
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2019</span>
+        <span itemprop="copyrightYear">2020</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
@@ -275,8 +560,9 @@ The learning rate is one of the most important things need to be taken care of. 
 
 
     
-    
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
   
 

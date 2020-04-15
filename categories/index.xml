@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>deep learning</title>
       <link>https://mmy12580.github.io/categories/deep-learning/</link>
-      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/categories/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>optimization</title>
+      <link>https://mmy12580.github.io/categories/optimization/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/categories/optimization/</guid>
       <description></description>
     </item>
     

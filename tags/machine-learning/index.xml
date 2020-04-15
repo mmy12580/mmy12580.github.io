@@ -6,10 +6,19 @@
     <description>Recent content in machine learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Jun 2019 11:28:17 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Optimizer matters the most!</title>
+      <link>https://mmy12580.github.io/posts/optimizers/</link>
+      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/optimizers/</guid>
+      <description>Introduction As a researcher, most time of my job is to build an appropriate AI prototype for specific tasks. To achieve a satisfactory result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. The most deterministic component of deep learning practice is choosing the appropriate optimization algorithms, which directly affect the training speed and the final predictive performance. To date, there is no theory that adequately explains how to make this choice.</description>
+    </item>
     
     <item>
       <title>A quick summary for imbalanced data</title>
