@@ -31,6 +31,15 @@ Public Dataset:  ATIS &amp;amp; GeoQuery: flight tickets reserving system WikiSQ
     </item>
     
     <item>
+      <title>Activation: magician of deep learning</title>
+      <link>https://mmy12580.github.io/posts/activation/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/activation/</guid>
+      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
+    </item>
+    
+    <item>
       <title>选，读一本书</title>
       <link>https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/</link>
       <pubDate>Fri, 01 Nov 2019 09:57:22 -0400</pubDate>
@@ -134,15 +143,6 @@ brew install git 安装我们需要的网站建立的框架
 brew install hugo 选择管理blog的位置,例如我的桌面，然后建立新项目e.g myblog, 并进入blog文件夹
 cd ~/Desktop hugo new site myblog cd myblog 尝试建立内容为”hello world&amp;quot;的post, 将其命名为myfirst_post.md
 hugo new posts/myfirst_post echo &amp;quot;hello world&amp;quot; &amp;gt; content/posts/myfirst_post.md 启动hugo的静态服务:</description>
-    </item>
-    
-    <item>
-      <title>Activation: </title>
-      <link>https://mmy12580.github.io/posts/activation/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/activation/</guid>
-      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
     </item>
     
   </channel>

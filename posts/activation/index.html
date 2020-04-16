@@ -9,8 +9,8 @@
   <meta name="description" content="Moyan&#39;s personal website">
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
-  
-  <link rel="next" href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" />
+  <link rel="prev" href="https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/" />
+  <link rel="next" href="https://mmy12580.github.io/posts/text2query/" />
   <link rel="canonical" href="https://mmy12580.github.io/posts/activation/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -22,10 +22,10 @@
   <title>
        
        
-           Activation:  | Moyan&#39;s Website
+           Activation: magician of deep learning | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Activation:  | Moyan&#39;s Website">
+  <meta name="title" content="Activation: magician of deep learning | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,8 +44,8 @@
          "@id": "https:\/\/mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Activation: ",
-    "headline" : "Activation: ",
+    "name" : "Activation: magician of deep learning",
+    "headline" : "Activation: magician of deep learning",
     "description" : "Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
@@ -54,10 +54,10 @@
     "accountablePerson" : "Moyan Mei",
     "copyrightHolder" : "Moyan Mei",
     "copyrightYear" : "2019",
-    "datePublished": "2019-01-23 00:00:00 \x2b0000 UTC",
-    "dateModified" : "2019-01-23 00:00:00 \x2b0000 UTC",
+    "datePublished": "2019-11-23 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2019-11-23 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/activation\/",
-    "wordCount" : "1402",
+    "wordCount" : "2148",
     "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -120,11 +120,11 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Activation: </h1>
+        <h1 class="post-title" itemprop="name headline">Activation: magician of deep learning</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
-                on <time datetime=2019-01-23 itemprop="datePublished">January 23, 2019</time>
+                on <time datetime=2019-11-23 itemprop="datePublished">November 23, 2019</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
@@ -242,7 +242,7 @@ f^{\prime}(x)=\frac{e^{-x}}{\left(1+e^{-x}\right)^{2}} \quad \in\left(0, \frac{1
 \end{align*}</p>
 <p><strong>ReLu&rsquo;s derivative is either 0 or 1</strong>, so as long as the derivative on a path in the gradient of the neural network is 1, then no matter how many layers the network has, the gradient of the next few layers of the network can be propagated to the first few layers of the network.</p>
 <h2 id="leakyrelu">LeakyReLU</h2>
-<p>To solve ReLU problems, LeakyReLU is proposed to solve dead area and non-zero centers problems. The only changes is that when $x \le 0$, activation is then calculated as $f(x) = a * x$. The derivatives will be either 1 or $a$, and normally $a$ is set to be smaller than 1, e.g., $a = 0.2%.</p>
+<p>To solve ReLU problems, <em>LeakyReLU</em> is proposed to solve dead area and non-zero centers problems. The only changes is that when $x \le 0$, activation is then calculated as $f(x) = a * x$. The derivatives will be either 1 or $a$, and normally $a$ is set to be smaller than 1, e.g., $a = 0.2$.</p>
 <h3 id="advantages-3">Advantages:</h3>
 <ul>
 <li>Solves dead area problem by allowing a small value $a$</li>
@@ -289,21 +289,77 @@ SELU(x) &amp;= \lambda \alpha (\exp(x) - 1), &amp;&amp; \quad x \le 0 \<br>
 <li>Self-normalizing is faster than external normalization e.g, batch normalization.</li>
 <li>Avoids gradient vanish or explosion (proved in paper by theorem 2 and 3)</li>
 </ul>
-<p>$\color{blue}{Question}$: Would SELU, ELU be more useful than Batch Normalization?</p>
-<h1 id="activation-functions-on-nlp">Activation functions on NLP</h1>
-<p>Here, I will list frequently used activations in state-of-the-art NLP models, such as BERT etc.</p>
-<h2 id="gelu">GeLU</h2>
-<p>All the NLP benchmarks scores have been updated since BERT was released. Pre-training method becomes the standard way of solving NLP downstream tasks, such as entity recognition, Q&amp;A systems, sentiment analysis, and so on. BERT applied a new activation method, <strong>GELU</strong>, Gaussian error linear unit. Essentially, GELU uses a random error follows Gaussian distribution.Gaussian distribution</p>
+<p>$\color{blue}{Question}$: Would <em>SELU</em>, <em>ELU</em> be more useful than <strong>Batch Normalization</strong>?</p>
+<h1 id="activation-functions-on-advanced-nlp">Activation functions on advanced NLP</h1>
+<h2 id="swish">Swish</h2>
+<p>Swish is another activation trying to solve ReLU problems, and its defined as</p>
 <p>\begin{align*}
-GELU(x)=0.5 x\left(1+\tanh \left(\sqrt{2 / \pi}\left(x+0.044715 x^{3}\right)\right)\right)
+\text{swish}(x)=x\cdot\sigma(x)=\frac{x}{1+e^{-x}}
 \end{align*}</p>
-<p>Its derivative is caculated then by</p>
+<p>The idea of Swish is very similar to GLU, and GLU&rsquo;s formula is given as</p>
+<p>\begin{align*}
+(\boldsymbol{W}_1\boldsymbol{x}+\boldsymbol{b}_1)\otimes \sigma(\boldsymbol{W}_2\boldsymbol{x}+\boldsymbol{b}_2)
+\end{align*}</p>
+<p>GLU is a production of two set of parameters with one of them activated by sigmoid, which performs like a gate to control the output. It is also why named as GLU. Swish can be viewed as those two set of parameters are equal, therefore only one set of parameters needs to be trained.</p>
+<h3 id="why-it-works">Why it works?</h3>
+<p>Swish is not saturated near the origin, only the negative area is far away from the origin area is saturated, and ReLu is also saturated in half of the space near the origin (positive area). When we train a model, the initialization parameters generally follow uniform initialization or normal distribution. Hence, the average value is generally 0. That is to say, half of the initialization parameters are in the ReLu saturation region. In the beginning, half of the parameters were not used. Especially due to strategies such as batch normalization, the output automatically approximates the normal distribution with a mean of 0, so in these cases, half of the parameters are located in the ReLu saturation region. In contrast, Swish is a little better, because it also has a certain unsaturated zone on the negative half, so the utilization of the parameters is greater.</p>
+<h2 id="gelu">GeLU</h2>
+<p>All the NLP benchmarks scores have been updated since BERT was released. Pre-training method becomes the standard way of solving NLP downstream tasks, such as entity recognition, Q&amp;A systems, sentiment analysis, and so on. BERT applied a new activation method, <em>GELU</em>, Gaussian error linear unit. Essentially, GELU uses Gaussian distribution to be have like a Bernoulli trial, so that when input $x$ is small, it is more easier to be set to zero. <strong>Isn&rsquo;t this very similar to idea of Swish?</strong></p>
+<p>\begin{align*}
+GELU(x) &amp;= x * P(X \le x) \newline<br>
+&amp;=  x * \Phi(x) \newline
+&amp;\approx 0.5 x\left(1+\tanh \left(\sqrt{2 / \pi}\left(x+0.044715 x^{3}\right)\right)\right)
+\end{align*}</p>
+<p>Its derivative is then calculated as</p>
 <p>\begin{array}{c}
 \mathrm{GELU}^{\prime}(x)=0.5 \tanh \left(0.0356774 x^{3}+0.797885 x\right) \<br>
 +\left(0.0535161 x^{3}+0.398942 x\right) \sec^{2}\left(0.0356774 x^{3}+0.797885 x\right)+0.5
 \end{array}</p>
-<h2 id="mish">MISH</h2>
-<h2 id="swish">SWISH</h2>
+<p>In code wise, gelu is performed differently among pre-training methods</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># OpenAI version</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">openai_gpt_gelu</span>(x):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> torch<span style="color:#f92672">.</span>tanh(math<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> math<span style="color:#f92672">.</span>pi) <span style="color:#f92672">*</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.044715</span> <span style="color:#f92672">*</span> torch<span style="color:#f92672">.</span>pow(x, <span style="color:#ae81ff">3</span>))))
+
+<span style="color:#75715e"># original BERT</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_gelu_python</span>(x):
+    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1.0</span> <span style="color:#f92672">+</span> torch<span style="color:#f92672">.</span>erf(x <span style="color:#f92672">/</span> math<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2.0</span>)))
+
+<span style="color:#75715e"># more popular choice (default)</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">gelu_new</span>(x):
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.5</span> <span style="color:#f92672">*</span> x <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> torch<span style="color:#f92672">.</span>tanh(math<span style="color:#f92672">.</span>sqrt(<span style="color:#ae81ff">2</span> <span style="color:#f92672">/</span> math<span style="color:#f92672">.</span>pi) <span style="color:#f92672">*</span> (x <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.044715</span> <span style="color:#f92672">*</span> torch<span style="color:#f92672">.</span>pow(x, <span style="color:#ae81ff">3</span>))))
+</code></pre></div><h2 id="mish">Mish</h2>
+<p>Inspired by <em>Swish</em>, <strong>Mish</strong> is a Self Regularized Non-Monotonic Neural Activation Function, and its mathematically formula is presented as</p>
+<p>\begin{align*}
+f(x)=x \tanh \left(\ln \left(1+e^{x}\right)\right)
+\end{align*}</p>
+<p>and it can be also presented by using <em>SoftPlus</em> function as</p>
+<p>\begin{array}{l}
+f(x)=x \tanh (s(x)) \newline
+s(x)= SoftPlus(x)=\ln \left(1+e^{x}\right)
+\end{array}</p>
+<p>Its $1_{st}$ and $2_{nd}$ derivatives are</p>
+<p>\begin{aligned}
+f^{\prime}(x) &amp;=\frac{e^{x} \omega}{\delta^{2}} \newline
+f^{\prime \prime}(x) &amp;=\frac{e^{x}\left(e^{x}(4 x+6)+4 e^{x}+8 e^{2 x}+3 e^{3 x}+4\right)}{\delta^{2}}-\frac{2 e^{x}\left(2 e^{x}+2 e^{2 x}\right) \omega}{\delta^{3}}+\frac{e^{x} \omega}{\delta^{2}}
+\end{aligned}</p>
+<p>where</p>
+<p>\begin{aligned}
+&amp;\delta=2 e^{x}+e^{2 x}+2 \newline
+&amp;\omega=4(x+1)+4 e^{2 x}+e^{3 x}+e^{x}(4 x+6)
+\end{aligned}</p>
+<p>The Taylor Series Expansion of <em>Mish</em> at $0$ and $\inf$ is calculated respectively as</p>
+<p>\begin{align*}
+&amp; 3 x / 5+8 x^{2} / 25-2 x^{3} / 125-86 x^{4} / 1875-7 x^{5} / 18750+O\left(x^{6}\right)  \newline
+&amp; \frac{e^{x}\left(e^{x}\left(x+O\left((1 / x)^{1 / 7}\right)\right)+\left(2 x+O\left((1 / x)^{1 / 7}\right)\right)\right)}{2 e^{x}+e^{2 x}+2}
+\end{align*}</p>
+<p>Therefore, <em>Mish</em> ranges between $-0.31% to infinity. <em>Mish</em> is largely used in any kind of benchmark test, and it has been proved empirically as a better choice of Swish or ReLU by providing smoother gradients. The only drawback we can see already from the formula given above is that it is definitely more computationally expensive than either Swish or ReLU.</p>
+<h1 id="short-summary">Short summary</h1>
+<p>At present, there are a total of 50+ types of activation functions, but there is no unified or clear standard to measure the quality of activation functions. The most fundamental reason is that the neural network through training is essentially to fit the non-linear distribution of training data. However, in reality, the distribution of data cannot be described by statistics, so it is impossible to deduce which activation function can be fitted better by theory, so most papers are tested by dozens of empirical studies for judgment. In spite of that, it is still able to see that a good activation function should have three properties</p>
+<ul>
+<li>$\color{red}{Unboundedness}$ (x &gt; 0): Both <em>Sigmoid</em> and <em>Tanh</em> have saturated area, an appropriate initialization is needed to guarantee the input data distribute in unsaturated region. Otherwise, the gradient generated in the saturated region is too small will affect the convergence rate.</li>
+<li>$\color{red}{Negatives}$: ReLU has dead issue by setting all negatives to be zero. Its variants, e.g., <em>LeakyReLU</em>, <em>PReLU</em>, <em>ELU</em>, <em>GLU</em>, <em>Swish</em>, <em>Mish</em>, <em>GELU</em> and so on allow partial negative outputs to improve the robustness of the model</li>
+<li>$\color{red}{Smoothness}$: <em>Relu</em>, <em>PReLU</em>, and <em>RReLU</em> are all step functions. The most obvious characteristics of the step function is the fault which is not as good as smooth activation function e.g., <em>Swish</em>, <em>GELU</em>, and <em>Mish</em>, for gradient updates.</li>
+</ul>
 <h1 id="extension">Extension:</h1>
 <p>I found a masterpiece from a data scientist via github which has a great way of visualizing varieties of activation functions. Try to play with it. It might help you remember it more. Click <a href="https://dashee87.github.io/deep%20learning/visualising-activation-functions-in-neural-networks/">here</a> to his website.</p>
 
@@ -347,9 +403,11 @@ GELU(x)=0.5 x\left(1+\tanh \left(\sqrt{2 / \pi}\left(x+0.044715 x^{3}\right)\rig
     </div>
 
     <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/" class="prev" rel="prev" title="选，读一本书"><i class="iconfont icon-left"></i>&nbsp;选，读一本书</a>
          
         
-        <a href="https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/" class="next" rel="next" title="网站搭建:hugo&#43;github">网站搭建:hugo&#43;github&nbsp;<i class="iconfont icon-right"></i></a>
+        <a href="https://mmy12580.github.io/posts/text2query/" class="next" rel="next" title="A quick summary: Text-to-SQL">A quick summary: Text-to-SQL&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

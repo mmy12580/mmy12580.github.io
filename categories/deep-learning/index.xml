@@ -31,6 +31,15 @@ Public Dataset:  ATIS &amp;amp; GeoQuery: flight tickets reserving system WikiSQ
     </item>
     
     <item>
+      <title>Activation: magician of deep learning</title>
+      <link>https://mmy12580.github.io/posts/activation/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/activation/</guid>
+      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
+    </item>
+    
+    <item>
       <title>NlPer路线图</title>
       <link>https://mmy12580.github.io/posts/nlp-roadmap/</link>
       <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
@@ -61,15 +70,6 @@ $[4]$ Young, T., Hazarika, D., Poria, S., &amp;amp; Cambria, E. (2017). Recent T
       
       <guid>https://mmy12580.github.io/posts/training_nn_on_large_batches/</guid>
       <description>According to Sebastian Ruder&amp;rsquo;s blog post, the ImageNet moment of NLP has arrived. Especially, models like e.g BERT, ELMO, UlMFIT, Open-GPT, Transformer-XLhave become the main stream choice of most downstream NLP tasks. However, it is still quite difficult to conduct a transfer learning task from a pre-training model such as 345 millions parameter Open-GPT2with a large batch say 256. Certainly, if your NLP tasks is with small datasets, and you are able to use batch_size = 8, and wait for 2-4 hours to do it, that is none of the cases I am talking about here.</description>
-    </item>
-    
-    <item>
-      <title>Activation: </title>
-      <link>https://mmy12580.github.io/posts/activation/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/activation/</guid>
-      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
     </item>
     
   </channel>

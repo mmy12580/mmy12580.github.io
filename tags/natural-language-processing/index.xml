@@ -22,6 +22,15 @@ Public Dataset:  ATIS &amp;amp; GeoQuery: flight tickets reserving system WikiSQ
     </item>
     
     <item>
+      <title>Activation: magician of deep learning</title>
+      <link>https://mmy12580.github.io/posts/activation/</link>
+      <pubDate>Sat, 23 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/activation/</guid>
+      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
+    </item>
+    
+    <item>
       <title>NlPer路线图</title>
       <link>https://mmy12580.github.io/posts/nlp-roadmap/</link>
       <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
@@ -44,15 +53,6 @@ $[4]$ Young, T., Hazarika, D., Poria, S., &amp;amp; Cambria, E. (2017). Recent T
 去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据
  数字 (digit/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  number number_regex = re.compile(r&amp;#34;(?:^|(?&amp;lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&amp;#34;) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(&amp;#34;P&amp;#34;)),&amp;#34;&amp;#34;) r4 = &amp;#34;\\【.*?】+|\\《.*?》+|\\#.*?#+|[.!/_,$&amp;amp;%^*()&amp;lt;&amp;gt;+&amp;#34;&amp;#34;&amp;#39;?@|:~{}#]+|[——！\\\，。=？、：“”‘’￥……（）《》【】]&amp;#34; 引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。
 # double quotes double_quotes = [&amp;#34;«&amp;#34;, &amp;#34;‹&amp;#34;, &amp;#34;»&amp;#34;, &amp;#34;›&amp;#34;, &amp;#34;„&amp;#34;, &amp;#34;“&amp;#34;, &amp;#34;‟&amp;#34;, &amp;#34;”&amp;#34;, &amp;#34;❝&amp;#34;, &amp;#34;❞&amp;#34;, &amp;#34;❮&amp;#34;, &amp;#34;❯&amp;#34;, &amp;#34;〝&amp;#34;, &amp;#34;〞&amp;#34;, &amp;#34;〟&amp;#34;,&amp;#34;＂&amp;#34;,] # single quotes single_quotes = [&amp;#34;‘&amp;#34;, &amp;#34;‛&amp;#34;, &amp;#34;’&amp;#34;, &amp;#34;❛&amp;#34;, &amp;#34;❜&amp;#34;, &amp;#34;`&amp;#34;, &amp;#34;´&amp;#34;, &amp;#34;‘&amp;#34;, &amp;#34;’&amp;#34;] # define related regex double_quote_regex = re.</description>
-    </item>
-    
-    <item>
-      <title>Activation: </title>
-      <link>https://mmy12580.github.io/posts/activation/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://mmy12580.github.io/posts/activation/</guid>
-      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
     </item>
     
   </channel>
