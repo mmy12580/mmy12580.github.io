@@ -57,7 +57,7 @@
     "datePublished": "2019-09-23 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-09-23 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/normalization_for_dl\/",
-    "wordCount" : "1436",
+    "wordCount" : "2501",
     "keywords" : [ "deep learning","nlp", "Moyan\x27s Website"]
 }
 </script>
@@ -181,16 +181,15 @@
 \frac{\partial \ell}{\partial \gamma} &amp;=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}} \cdot \widehat{x}_{i} \newline
 \frac{\partial \ell}{\partial \beta} &amp;=\sum_{i=1}^{m} \frac{\partial \ell}{\partial y_{i}}
 \end{align*}</p>
-<p>Basically, a short summary for BN is that it is designed to solve $\color{blue}{\text{gradient vanish/explosion}}$ by scaling (normalizing) the $\color{red}{\text{net activation}}$ (output before activation) to values with mean equal to $0$ and variance $1$. Furthermore, It increases the model capacity in some degree. Due to scaled distribution of the output, so BN is normally applied before activation function (think about $RELU(x) = max(0, x)$).
-Note that it is <strong>also applicable</strong> to put BN after activation according to other research work, and the performance may be even better.</p>
-<p>Certainly, even though BN can be very helpful to be included in deep learning models, BN is not a universal solution. It has some drawbacks due to its nature,</p>
+<p>Basically, a short summary for BN is that it is designed to solve $\color{blue}{\text{gradient vanish/explosion}}$ by scaling (normalizing) the $\color{red}{\text{net activation}}$ (output before activation) to values with mean equal to $0$ and variance $1$. Hence, it stabilizes the distribution at each layer. Additionally, It increases the <strong>model capacity</strong> in some degree. Intuitively speaking, BN is naturally applied before activation function (think about $RELU(x) = max(0, x)$) for having scaled distribution of the output. <strong>Note</strong> that it is also applicable to put BN after activation to achieve better performance according to some empirical studies.</p>
+<p>Certainly, BN is not a universal solution due to its drawbacks from its nature,</p>
 <ol>
 <li>when batch size is small, the performance is significantly worse;</li>
 <li>for some fine-grain tasks, BN will bring negative effects;</li>
 <li>it is not designed for &ldquo;dynamic&rdquo; network, e.g., sequence model;</li>
 <li>statistics are different between training stage and inference stage.</li>
 </ol>
-<p>Therefore, the variety of BN $[1]$ has been proposed, e.g., $\color{blue}{\text{layer normalization}} [2]$ , $\color{blue}{\text{group normalization}} [4]$, $\color{blue}{\text{weight normalization}} [5]$ , and $\color{blue}{\text{instance normalization}} [3]$ .</p>
+<p>Therefore, the variety of BN $[1]$ has been proposed, e.g., $\color{blue}{\text{layer normalization}} [2]$ , $\color{blue}{\text{group normalization}} [4]$, $\color{blue}{\text{weight normalization}} [5]$ , $\color{blue}{\text{instance normalization}} [3]$, and $\color{blue}{\text{PowerNorm}} [6]$.</p>
 <p><img src="/post_imgs/normalization.png" alt="normalization"></p>
 <h2 id="layer-normalization">Layer Normalization</h2>
 <p>Layer normalization (LN) is very commonly to be used in NLP applications. For the design of BERT, both encoders and decoders have applied transformers, which is a block that LN is applied after a multi-head attention mechanism. As I just summarized, BN is not designed for dynamic networks such as RNN, transformers since each batch has different size (text length) and some are really small (like drawback 1 above). Certainly, if large batch is allowed, we can still apply $\color{blue}{\text{bucket sampling}}$ to sort the input texts based on its length, and then apply BN as well. A more natural solution is to apply normalization on layers instead of batches.</p>
@@ -213,9 +212,122 @@ y_{t i j k}=\frac{x_{t i j k}-\mu_{t i}}{\sqrt{\sigma_{t i}^{2}+\epsilon}} \qqua
 <p>the main difference between BN and IN is that BN normalizes the data across the batch and spatial locations (CNN based), while IN normalizes each batch independently. In other words, BN computes one mean and standard deviation from batch, while IN computes $T$ of them not jointly.</p>
 <p>It is not hard to find out that the beauty of IN is that it is used for <strong>small batch</strong> and <strong>fine-grain</strong> cases since it does not calculate across channels and batches, which will include random noise.</p>
 <h2 id="group-normalization">Group Normalization</h2>
-<p>A method proposed by Kaimin takes the advantage from both BN and IN, which is group normalization (GN).For example, the batch input data, e.g., image can be decribed into 4 dimensions, $[N, C, H, W]$, where $N$ is the batch size, $C$ is the channel, and $H$ and $W$ are the feature shape, i.e., hight and weight. What GN does is that it firstly divide channels into groups, and then normalize on groups. In symbolized version, the original shape $[N, C, H, W]$ will be reshaped by group normalization to $[N, G, C//G, H, W]$, where $G$ stands for group.</p>
-<p>The idea behind GN is pretty intuitve. Acoording to CNN method, the extracted feature after filters have the property, invariance. In other words, the features learned from the same data has the same ditribution, so the same features can be put in to the same group, which can be undertood such as HOG or GIST feature which are group representing features with physical meanings.</p>
-<h2 id="weight-normalization">Weight Normalization</h2>
+<p>A method proposed by Kaimin takes the advantage from both BN and IN, which is group normalization (GN). For example, the batch input data, e.g., image can be described into 4 dimensions, $[N, C, H, W]$, where $N$ is the batch size, $C$ is the channel, and $H$, $W$ are the feature shape, i.e., hight and weight. <strong>What GN does is that it firstly divide channels into groups, and then normalize on groups.</strong> In symbolized version, the original shape $[N, C, H, W]$ will be reshaped by group normalization to $[N, G, C//G, H, W]$, where $G$ stands for group.</p>
+<p>The idea behind GN is pretty intuitive. According to CNN method, the extracted feature after filters have the property, invariance. In other words, the features learned from the same data has the same distribution, so the same features can be put in to the same group, which can be understood such as HOG or GIST feature which are group representing features with physical meanings. GN handles cases when batch size matters, and it essentially does the same thing as BN but in group perspective.</p>
+<p>Pytorch code is given</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> torch
+<span style="color:#f92672">import</span> torch.nn.functional <span style="color:#f92672">as</span> F
+<span style="color:#f92672">from</span> torch.nn.modules.batchnorm <span style="color:#f92672">import</span> _BatchNorm
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">group_norm</span>(input, group, running_mean, running_var, weight<span style="color:#f92672">=</span>None, bias<span style="color:#f92672">=</span>None,
+                  use_input_stats<span style="color:#f92672">=</span>True, momentum<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>, eps<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>):
+    <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;&#34;&#34;Applies Group Normalization for channels in the same group in each data sample in a
+</span><span style="color:#e6db74">    batch.
+</span><span style="color:#e6db74">    See :class:`~torch.nn.GroupNorm1d`, :class:`~torch.nn.GroupNorm2d`,
+</span><span style="color:#e6db74">    :class:`~torch.nn.GroupNorm3d` for details.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> use_input_stats <span style="color:#f92672">and</span> (running_mean <span style="color:#f92672">is</span> None <span style="color:#f92672">or</span> running_var <span style="color:#f92672">is</span> None):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#39;Expected running_mean and running_var to be not None when use_input_stats=False&#39;</span>)
+
+    b, c <span style="color:#f92672">=</span> input<span style="color:#f92672">.</span>size(<span style="color:#ae81ff">0</span>), input<span style="color:#f92672">.</span>size(<span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">if</span> weight <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        weight <span style="color:#f92672">=</span> weight<span style="color:#f92672">.</span>repeat(b)
+    <span style="color:#66d9ef">if</span> bias <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+        bias <span style="color:#f92672">=</span> bias<span style="color:#f92672">.</span>repeat(b)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_instance_norm</span>(input, group, running_mean<span style="color:#f92672">=</span>None, running_var<span style="color:#f92672">=</span>None, weight<span style="color:#f92672">=</span>None,
+                       bias<span style="color:#f92672">=</span>None, use_input_stats<span style="color:#f92672">=</span>None, momentum<span style="color:#f92672">=</span>None, eps<span style="color:#f92672">=</span>None):
+        <span style="color:#75715e"># Repeat stored stats and affine transform params if necessary</span>
+        <span style="color:#66d9ef">if</span> running_mean <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            running_mean_orig <span style="color:#f92672">=</span> running_mean
+            running_mean <span style="color:#f92672">=</span> running_mean_orig<span style="color:#f92672">.</span>repeat(b)
+        <span style="color:#66d9ef">if</span> running_var <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            running_var_orig <span style="color:#f92672">=</span> running_var
+            running_var <span style="color:#f92672">=</span> running_var_orig<span style="color:#f92672">.</span>repeat(b)
+
+        <span style="color:#75715e">#norm_shape = [1, b * c / group, group]</span>
+        <span style="color:#75715e">#print(norm_shape)</span>
+        <span style="color:#75715e"># Apply instance norm</span>
+        input_reshaped <span style="color:#f92672">=</span> input<span style="color:#f92672">.</span>contiguous()<span style="color:#f92672">.</span>view(<span style="color:#ae81ff">1</span>, int(b <span style="color:#f92672">*</span> c<span style="color:#f92672">/</span>group), group, <span style="color:#f92672">*</span>input<span style="color:#f92672">.</span>size()[<span style="color:#ae81ff">2</span>:])
+
+        out <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>batch_norm(
+            input_reshaped, running_mean, running_var, weight<span style="color:#f92672">=</span>weight, bias<span style="color:#f92672">=</span>bias,
+            training<span style="color:#f92672">=</span>use_input_stats, momentum<span style="color:#f92672">=</span>momentum, eps<span style="color:#f92672">=</span>eps)
+
+        <span style="color:#75715e"># Reshape back</span>
+        <span style="color:#66d9ef">if</span> running_mean <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            running_mean_orig<span style="color:#f92672">.</span>copy_(running_mean<span style="color:#f92672">.</span>view(b, int(c<span style="color:#f92672">/</span>group))<span style="color:#f92672">.</span>mean(<span style="color:#ae81ff">0</span>, keepdim<span style="color:#f92672">=</span>False))
+        <span style="color:#66d9ef">if</span> running_var <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+            running_var_orig<span style="color:#f92672">.</span>copy_(running_var<span style="color:#f92672">.</span>view(b, int(c<span style="color:#f92672">/</span>group))<span style="color:#f92672">.</span>mean(<span style="color:#ae81ff">0</span>, keepdim<span style="color:#f92672">=</span>False))
+
+        <span style="color:#66d9ef">return</span> out<span style="color:#f92672">.</span>view(b, c, <span style="color:#f92672">*</span>input<span style="color:#f92672">.</span>size()[<span style="color:#ae81ff">2</span>:])
+    <span style="color:#66d9ef">return</span> _instance_norm(input, group, running_mean<span style="color:#f92672">=</span>running_mean,
+                          running_var<span style="color:#f92672">=</span>running_var, weight<span style="color:#f92672">=</span>weight, bias<span style="color:#f92672">=</span>bias,
+                          use_input_stats<span style="color:#f92672">=</span>use_input_stats, momentum<span style="color:#f92672">=</span>momentum,
+                          eps<span style="color:#f92672">=</span>eps)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_GroupNorm</span>(_BatchNorm):
+    <span style="color:#66d9ef">def</span> __init__(self, num_features, num_groups<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, eps<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-5</span>, momentum<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+                 affine<span style="color:#f92672">=</span>False, track_running_stats<span style="color:#f92672">=</span>False):
+        self<span style="color:#f92672">.</span>num_groups <span style="color:#f92672">=</span> num_groups
+        self<span style="color:#f92672">.</span>track_running_stats <span style="color:#f92672">=</span> track_running_stats
+        super(_GroupNorm, self)<span style="color:#f92672">.</span>__init__(int(num_features<span style="color:#f92672">/</span>num_groups), eps,
+                                         momentum, affine, track_running_stats)
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_check_input_dim</span>(self, input):
+        <span style="color:#66d9ef">return</span> NotImplemented
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self, input):
+        self<span style="color:#f92672">.</span>_check_input_dim(input)
+
+        <span style="color:#66d9ef">return</span> group_norm(
+            input, self<span style="color:#f92672">.</span>num_groups, self<span style="color:#f92672">.</span>running_mean, self<span style="color:#f92672">.</span>running_var, self<span style="color:#f92672">.</span>weight, self<span style="color:#f92672">.</span>bias,
+            self<span style="color:#f92672">.</span>training <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> self<span style="color:#f92672">.</span>track_running_stats, self<span style="color:#f92672">.</span>momentum, self<span style="color:#f92672">.</span>eps)
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GroupNorm2d</span>(_GroupNorm):
+    <span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;&#34;&#34;Applies Group Normalization over a 4D input (a mini-batch of 2D inputs
+</span><span style="color:#e6db74">    with additional channel dimension) as described in the paper
+</span><span style="color:#e6db74">    https://arxiv.org/pdf/1803.08494.pdf
+</span><span style="color:#e6db74">    `Group Normalization`_ .
+</span><span style="color:#e6db74">    Args:
+</span><span style="color:#e6db74">        num_features: :math:`C` from an expected input of size
+</span><span style="color:#e6db74">            :math:`(N, C, H, W)`
+</span><span style="color:#e6db74">        num_groups:
+</span><span style="color:#e6db74">        eps: a value added to the denominator for numerical stability. Default: 1e-5
+</span><span style="color:#e6db74">        momentum: the value used for the running_mean and running_var computation. Default: 0.1
+</span><span style="color:#e6db74">        affine: a boolean value that when set to ``True``, this module has
+</span><span style="color:#e6db74">            learnable affine parameters. Default: ``True``
+</span><span style="color:#e6db74">        track_running_stats: a boolean value that when set to ``True``, this
+</span><span style="color:#e6db74">            module tracks the running mean and variance, and when set to ``False``,
+</span><span style="color:#e6db74">            this module does not track such statistics and always uses batch
+</span><span style="color:#e6db74">            statistics in both training and eval modes. Default: ``False``
+</span><span style="color:#e6db74">    Shape:
+</span><span style="color:#e6db74">        - Input: :math:`(N, C, H, W)`
+</span><span style="color:#e6db74">        - Output: :math:`(N, C, H, W)` (same shape as input)
+</span><span style="color:#e6db74">    Examples:
+</span><span style="color:#e6db74">        &gt;&gt;&gt; # Without Learnable Parameters
+</span><span style="color:#e6db74">        &gt;&gt;&gt; m = GroupNorm2d(100, 4)
+</span><span style="color:#e6db74">        &gt;&gt;&gt; # With Learnable Parameters
+</span><span style="color:#e6db74">        &gt;&gt;&gt; m = GroupNorm2d(100, 4, affine=True)
+</span><span style="color:#e6db74">        &gt;&gt;&gt; input = torch.randn(20, 100, 35, 45)
+</span><span style="color:#e6db74">        &gt;&gt;&gt; output = m(input)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_check_input_dim</span>(self, input):
+        <span style="color:#66d9ef">if</span> input<span style="color:#f92672">.</span>dim() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">4</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#39;expected 4D input (got {}D input)&#39;</span>
+                             <span style="color:#f92672">.</span>format(input<span style="color:#f92672">.</span>dim()))
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GroupNorm3d</span>(_GroupNorm):
+    <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">        Assume the data format is (B, C, D, H, W)
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_check_input_dim</span>(self, input):
+        <span style="color:#66d9ef">if</span> input<span style="color:#f92672">.</span>dim() <span style="color:#f92672">!=</span> <span style="color:#ae81ff">5</span>:
+            <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#39;expected 5D input (got {}D input)&#39;</span>
+                             <span style="color:#f92672">.</span>format(input<span style="color:#f92672">.</span>dim()))
+</code></pre></div><h2 id="weight-normalization">Weight Normalization</h2>
 <p>An alternative method to BN and LN is the weight normalization (WN). BN and LN normalize data, while WN normlize on weights. The idea of WN is to decompose weights vector $w$ into a parameter vector $v$ and a parameter scalar $g$, the math form is</p>
 <p>\begin{align*}
 w = \frac{g}{|v|} \ v
@@ -232,13 +344,13 @@ $$</p>
 <p>\begin{array}{c}{\nabla_{\mathbf{v}} L=\frac{g}{|\mathbf{v}|} \nabla_{\mathbf{w}} L-\frac{g \nabla_{g} L}{|\mathbf{v}|^{2}} \mathbf{v}} \ {=\frac{g}{|\mathbf{v}|} \nabla_{\mathbf{w}} L-\frac{g}{|\mathbf{v}|^{2}} \frac{\nabla_{\mathbf{w}} L \cdot \mathbf{v}}{|\mathbf{v}|} \mathbf{v}} \ {=\frac{g}{|\mathbf{v}|}\left(I-\frac{\mathbf{v} \mathbf{v}^{\prime}}{|\mathbf{v}|^{2}}\right) \nabla_{\mathbf{w}} L} \ {=\frac{g}{|\mathbf{v}|}\left(I-\frac{\mathbf{w} \mathbf{w}^{\prime}}{|\mathbf{w}|^{2}}\right) \nabla_{\mathbf{w}} L} \ {=\frac{g}{|\mathbf{v}|} M_{\mathbf{w}} \nabla_{\mathbf{w}} L}\end{array}</p>
 <p>Two key parts are reflected from above process,</p>
 <ol>
-<li>WN will scale down weights&rsquo; graidents by $\frac{g}{|v|}$;</li>
+<li>WN will scale down weights&rsquo; gradients by $\frac{g}{|v|}$;</li>
 <li>WN will project gradients into a direction far away from $\nabla_w L$.</li>
 </ol>
 <p>Therefore, they faster model convergence.</p>
-<h3 id="equalivance-to-bn">Equalivance to BN</h3>
-<p>When neural netowrk only has one layer and the batch follows independent mean 0 and vairance 1 distribution, WN is equivant to BN.</p>
-<h3 id="initliazation">Initliazation</h3>
+<h3 id="equivalence-to-bn">Equivalence to BN</h3>
+<p>When neural network only has one layer and the batch follows independent mean 0 and variance 1 distribution, WN is equivalent to BN.</p>
+<h3 id="initialization">Initialization</h3>
 <p>The method of intializing WN is different from BN, and it is suggested from the original paper,</p>
 <ul>
 <li>$v$ follows normal distirbution with mean 0 and standard deviation 0.05</li>
@@ -249,21 +361,54 @@ $$</p>
 <p>A quick summary of WN advantages is:</p>
 <ul>
 <li>faster convergence</li>
-<li>more robostness</li>
-<li>applicable to dynamic netowrks, RNN</li>
+<li>more robustness</li>
+<li>applicable to dynamic networks, RNN</li>
 <li>not sensitive to noise, can be used in GAN and RL</li>
 </ul>
-<h2 id="extension">Extension</h2>
-<p>Those mehtods are released for couple years, and they have been proved to be useful in different applications. However, a theory that there is no free lunch is still applicable to any of the normalization cases. A recent work published by <em><strong>SenseTime Research</strong></em> $[6]$ takes advantages over multiple methods introduced above. It is called Switchable Normalization, and its illustration is</p>
-<p><img src="https://raw.githubusercontent.com/switchablenorms/Switchable-Normalization/master/teaser.png" alt=""></p>
-<p>A great blog related to that in Chinese can be found in <a href="https://zhuanlan.zhihu.com/p/39296570?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=70591319113728">here</a>.</p>
+<h2 id="powernorm">PowerNorm</h2>
+<p>Batch Normalization (BN) is widely adopted in CC, but it leads to significant performance degradation when naively used in NLP. Instead, Layer Normalization (LN) is the standard normalization scheme used in NLP, especially transformers based models. It is still not clear why BN performs worse and LN works better. Research $[7]$ presents the idea of &ldquo;Internal Covariate Shift&rdquo; was viewed as incorrect/incomplete. In particular, the recent study of $[8]$ argued that the underlying reason that BN helps training is that it results in a smoother loss landscape, and it was confirmed in $[9]$.</p>
+<p>Author illustrates what will happen after replacing BN with LN in transformers as below</p>
+<p><img src="https://pic4.zhimg.com/80/v2-30cf484e6c4e4ffe498daf52c4935a8f_1440w.jpg" alt=""></p>
+<p>In the above picture, blue is the result of ResNet20&rsquo;s image classification in Cifar-10, and orange is the result of Transformer + BN&rsquo;s translation in IWSLT14. The X-axis is the training time, and the Y-axis is the Euclidean distance based on the statistical value of the batch and its corresponding moving average. It can be seen that the fluctuation of ResNet20 on the Cifar-10 task is very small, while the Transformer with BN not only oscillates violently, but also has extreme outliers, which will lead to inaccurate estimates of $\mu$ and $\sigma$. Hence, generalization decreases due to inconsistency among training and testing. What an interesting findings from the results!</p>
+<p>BN forces the data following a normal distribution with a mean of 0 and a variance of 1. However, in the case where the mean variance of the data itself oscillates violently, forcing the moving average will have a bad effect. Therefore, the author proposes a new scale method, only forcing the data to have <strong>unit quadratic mean</strong>, PN-V:</p>
+<p>\begin{array}{c}
+\psi_{B}^{2}=\frac{1}{B} \sum x_{i}^{2} \newline
+\hat{X}=\frac{X}{\psi_{B}} \newline
+Y=\gamma \cdot \hat{X}+\beta
+\end{array}</p>
+<p>Now, only one statistic is used in forward pass, and backward pass requires only $g_{\psi}^2$ to update,</p>
+<p>\begin{align*}
+\frac{\partial \mathcal{L}}{\partial x_{i}}=\frac{1}{\psi_{B} \gamma} \frac{\partial \mathcal{L}}{\partial y_{i}}-\frac{1}{\psi_{B} \gamma B} \sum_{i \in B}\left(\frac{\partial \mathcal{L}}{\partial y_{j}} \hat{x}_{i} \hat{x_{j}}\right)
+\end{align*}</p>
+<p>and the oscillate is significantly reduced</p>
+<p><img src="https://pic2.zhimg.com/80/v2-3acbbfe411b07ac3fd15cf8f804286dd_1440w.jpg" alt=""></p>
+<p>As the plot shown above, it is easy to find that there are still some outliers. To help that, Author suggested moving average to calculate $\psi$,</p>
+<p>\begin{align*}
+\hat{X}_{t}=\frac{X_{t}}{\psi_{t-1}} \newline
+Y_{t}=\gamma \cdot \hat{X}_{t}+\beta \newline
+\psi_{t}^{2}=\alpha \psi_{t-1}^{2}+(1-\alpha) \psi_{B}^{2}
+\end{align*}</p>
+<h2 id="other-extensions">Other Extensions</h2>
+<ul>
+<li>$\color{blue}{\text{Switchable Normalization [10]}}$, proposed by <em><strong>SenseTime Research</strong></em>.
+<img src="https://raw.githubusercontent.com/switchablenorms/Switchable-Normalization/master/teaser.png" alt="">Chinese version, click <a href="https://zhuanlan.zhihu.com/p/39296570?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=70591319113728">here</a>.</li>
+<li>For <strong>small batch</strong> and <strong>non-i.i.d. data</strong>, e.g., image segmentation, $\color{blue}{\text{EvalNorm [11]}}$ corrects normalization statistics to improve performances.</li>
+<li>$\color{blue}{\text{Moving Average Batch Normalization (MABN) [12]}}$ replaces batch statistics from small batch with moving averages.</li>
+<li></li>
+</ul>
 <h2 id="references">References</h2>
-<p>$[1]$: <a href="https://arxiv.org/abs/1502.03167v3">https://arxiv.org/abs/1502.03167v3</a></p>
-<p>$[2]$: <a href="https://arxiv.org/abs/1607.06450">https://arxiv.org/abs/1607.06450</a></p>
-<p>$[3]$: <a href="https://arxiv.org/abs/1607.08022">https://arxiv.org/abs/1607.08022</a></p>
-<p>$[4]$: <a href="https://arxiv.org/abs/1803.08494">https://arxiv.org/abs/1803.08494</a></p>
-<p>$[5]$: <a href="https://arxiv.org/abs/1602.07868">https://arxiv.org/abs/1602.07868</a></p>
-<p>$[6]$: <a href="https://arxiv.org/abs/1806.10779">https://arxiv.org/abs/1806.10779</a></p>
+<p>$[1]$: Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.</p>
+<p>$[2]$: Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E Hinton. Layer normalization. arXiv preprint arXiv:1607.06450, 2016.</p>
+<p>$[3]$: Dmitry Ulyanov, Andrea Vedaldi, and Victor Lempit- sky. Instance normalization: The missing ingredient for fast stylization. arXiv preprint arXiv:1607.08022, 2016.</p>
+<p>$[4]$: Yuxin Wu and Kaiming He. Group normalization. In Proceedings of the European Conference on Computer Vision (ECCV), pages 3–19, 2018.</p>
+<p>$[5]$: Salimans, T., Kingma, D.~P. (2016) Weight Normalization: A Simple Reparameterization to Accelerate Training of Deep Neural Networks. arXiv e-prints arXiv:1602.07868.</p>
+<p>$[6]$: Shen, S., Yao, Z., Gholami, A., Mahoney, M., Keutzer, K. (2020) Rethinking Batch Normalization in Transformers. arXiv e-prints arXiv:2003.07845.</p>
+<p>$[7]$: Sergey Ioffe and Christian Szegedy. Batch nor- malization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.</p>
+<p>$[8]$: Shibani Santurkar, Dimitris Tsipras, Andrew Ilyas, and Aleksander Madry. How does batch normalization help optimization? In Advances in Neural Information Processing Systems, pages 2483–2493, 2018.</p>
+<p>$[9]$: Zhewei Yao, Amir Gholami, Kurt Keutzer, and Michael W Mahoney. PyHessian: Neural networks through the lens of the Hessian. arXiv preprint arXiv:1912.07145, 2019.</p>
+<p>$[10]$: Luo, P., Ren, J., Peng, Z., Zhang, R., Li, J. (2018) Differentiable Learning-to-Normalize via Switchable Normalization. arXiv e-prints arXiv:1806.10779.</p>
+<p>$[11]$: Saurabh Singh and Abhinav Shrivastava. EvalNorm: Estimating batch normalization statistics for evaluation. In Proceedings of the IEEE International Conference on Computer Vision, pages 3633–3641, 2019.</p>
+<p>$[12]$: Junjie Yan, Ruosi Wan, Xiangyu Zhang, Wei Zhang, Yichen Wei, and Jian Sun. Towards stabilizing batch statistics in backward propagation of batch normalization. arXiv preprint arXiv:2001.06838, 2020.</p>
 
     </div>
 
