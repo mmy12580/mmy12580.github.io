@@ -22,10 +22,10 @@
   <title>
        
        
-           Normalization in Deep Learning | Moyan&#39;s Website
+           Self-adapting techniques: normalization | Moyan&#39;s Website
        
   </title>
-  <meta name="title" content="Normalization in Deep Learning | Moyan&#39;s Website">
+  <meta name="title" content="Self-adapting techniques: normalization | Moyan&#39;s Website">
     
   
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -44,8 +44,8 @@
          "@id": "https:\/\/mmy12580.github.io"
     },
     "articleSection" : "posts",
-    "name" : "Normalization in Deep Learning",
-    "headline" : "Normalization in Deep Learning",
+    "name" : "Self-adapting techniques: normalization",
+    "headline" : "Self-adapting techniques: normalization",
     "description" : "Introduction $\\color{blue}{\\text{Batch Normalization (BN)}}$ has been treated as one of the standard \x26ldquo;plug-in\x26rdquo; tool to deep neural networks since its first release. It is been proved to be very helpful in a tons of machine learning applications due to its several advantages as followings:\n faster training higher learning rate easier initialization more activations support deeper but simpler architecture regularization  Algorithms:\n\\begin{align*} \x26amp;{\\text { Input: Values of } x \\text { over a mini-batch: } \\mathcal{B}= {x_{1 \\ldots m}}} \\newline \x26amp;{\\text { Output: } {y_{i}=\\mathrm{B} \\mathrm{N}_{\\gamma, \\beta} (x_{i})}} \\newline \x26amp;{\\mu_{\\mathcal{B}} \\leftarrow \\frac{1}{m} \\sum_{i=1}^{m} x_{i} \\qquad \\text { \/\/ min-batch mean}} \\newline \x26amp;{\\sigma_{\\mathcal{B}}^{2} \\leftarrow \\frac{1}{m} \\sum_{i=1}^{m}\\left(x_{i}-\\mu_{\\mathcal{B}}\\right)^{2} \\qquad \\text { \/\/ mini-batch variance }} \\newline \x26amp;{\\hat{x}_{i} \\leftarrow \\frac{x_{i}-\\mu_{\\mathcal{B}}}{\\sqrt{\\sigma_{\\mathcal{B}}^{2}\x2b\\epsilon}} \\qquad \\text { \/\/ normalize }} \\newline \x26amp;{y_{i} \\leftarrow \\gamma \\widehat{x}_{i}\x2b\\beta \\equiv \\mathrm{B} \\mathrm{N}_{\\gamma, \\beta}\\left(x_{i}\\right) \\qquad \\text { \/\/ scale and shift }} \\end{align*}",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
@@ -120,7 +120,7 @@
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Normalization in Deep Learning</h1>
+        <h1 class="post-title" itemprop="name headline">Self-adapting techniques: normalization</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
                 <span class="post-time">
@@ -394,7 +394,6 @@ Y_{t}=\gamma \cdot \hat{X}_{t}+\beta \newline
 <img src="https://raw.githubusercontent.com/switchablenorms/Switchable-Normalization/master/teaser.png" alt="">Chinese version, click <a href="https://zhuanlan.zhihu.com/p/39296570?utm_source=wechat_session&amp;utm_medium=social&amp;utm_oi=70591319113728">here</a>.</li>
 <li>For <strong>small batch</strong> and <strong>non-i.i.d. data</strong>, e.g., image segmentation, $\color{blue}{\text{EvalNorm [11]}}$ corrects normalization statistics to improve performances.</li>
 <li>$\color{blue}{\text{Moving Average Batch Normalization (MABN) [12]}}$ replaces batch statistics from small batch with moving averages.</li>
-<li></li>
 </ul>
 <h2 id="references">References</h2>
 <p>$[1]$: Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.</p>
