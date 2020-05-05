@@ -157,12 +157,12 @@
 <p>As a researcher, most time of my job is to build an appropriate AI prototype for specific tasks. To achieve a satisfactory result, an expected large amount of work i.e tuning hyper-parameters, balancing data, augmentation etc are needed. The most deterministic component of deep learning practice is choosing the appropriate optimization algorithms, which directly affect the training speed and the final predictive performance. To date, there is no theory that adequately explains how to make this choice.</p>
 <p><strong>Adam</strong> and <strong>SGD</strong> optimizers ave played a key role in the literature of deep learning, and they were treated as a breakthrough to optimize a <strong>large volume</strong> of data based <strong>non-convex cases</strong>. However, which one performs better is still debatable. Adam has shown its advantage i.e., surprising fast converging, while SGD and its extension SGD + momentum are proved to yield a better or sometimes way better performance, i.e., higher accuracy on new data. There is a ton of studies of new optimizers by taking advantages of both optimizers. Here, in this blog, I will present varieties of optimizers.</p>
 <h2 id="adagrad">AdaGrad</h2>
-<p>The momentum method relies on exponentially weighted moving average to make the update direction of independent variables more consistent, thereby reducing the possibility of divergence. However, it is not $\color{red}{flexible}$ enough for optimization. A simple example is illustrated. At learning rate $\eta$, variables $x1$ and $x2$ are updated by</p>
+<p>The momentum method relies on exponentially weighted moving average to make the update direction of independent variables more consistent, thereby reducing the possibility of divergence. However, it is not $\color{red}{flexible}$ enough for optimization. A simple example is illustrated. At learning rate $\eta$, variables $x_1$ and $x_2$ are updated by</p>
 <p>\begin{align*}
 x_{1} \leftarrow x_{1}-\eta \frac{\partial f}{\partial x_{1}}, \quad x_{2} \leftarrow x_{2}-\eta \frac{\partial f}{\partial x_{2}}
 \end{align*}</p>
 <p>When the gradient values ​​of $x_1$ and $x_2$ are significantly different, e.g., $\eta \frac{\partial f}{\partial x_{1}} - \eta \frac{\partial f}{\partial x_{2}}$, you need to choose a learning rate small enough so that the independent variable does not diverge in the dimension with a large gradient value, but this will cause the independent variable to iterate in the dimension with a small gradient value slow.</p>
-<p>AdaGrad is therefore introduced since it adjusts the learning rate in each dimension according to the size of the gradient value of the independent variable in each dimension.</p>
+<p><strong>AdaGrad</strong> is therefore introduced since it adjusts the learning rate in each dimension according to the size of the gradient value of the independent variable in each dimension.</p>
 <p>\begin{align*}
 n_{t}=n_{t-1}+g_{t}^{2} \newline
 \Delta \theta_{t}=-\frac{\eta}{\sqrt{n_{t}+\epsilon}} * g_{t}
@@ -172,7 +172,7 @@ n_{t}=n_{t-1}+g_{t}^{2} \newline
 <ul>
 <li>At early stage, $g_t$ is small, regularizer is large, they can enlarge gradients;</li>
 <li>At later stage, $g_t$ is large, regularizer is small, they can shorten gradients;</li>
-<li>Appropriate to deal with $\color{blue}{sparse}$ gradients.</li>
+<li>Appropriate to deal with $\color{blue}{\text{sparse gradients}}$.</li>
 </ul>
 <h3 id="drawbacks">Drawbacks:</h3>
 <ul>
@@ -181,12 +181,12 @@ n_{t}=n_{t-1}+g_{t}^{2} \newline
 <li>In the middle and late stages, the accumulation of the gradient squares on the denominator will become larger and larger, e.g., $g_t \rightarrow 0$, making the training end early.</li>
 </ul>
 <h2 id="adadelta">AdaDelta</h2>
-<p>AdaDelta is an extension of AdaGrad. The initial solution is still to adaptively constrain the learning rate, but it is simplified in calculation. AdaGrad accumulates all the squared gradients before update, <strong>while AdaDelta only accumulates fixed-size items, and does not directly store these items, just approximate the corresponding average value.</strong></p>
+<p><strong>AdaDelta</strong> is an extension of AdaGrad. The initial solution is still to adaptively constrain the learning rate, but it is simplified in calculation. AdaGrad accumulates all the squared gradients before update, <strong>while AdaDelta only accumulates fixed-size items, and does not directly store these items, just approximate the corresponding average value.</strong></p>
 <p>\begin{align*}
 n_{t}=\nu * n_{t-1}+(1-\nu) * g_{t}^{2} \newline
 \Delta \theta_{t}=-\frac{\eta}{\sqrt{n_{t}+\epsilon}} * g_{t}
 \end{align*}</p>
-<p>Here, AdaDelta still depends on the global learning rate. To avoid that, the author has done a series of changes to approximate second order Newton method</p>
+<p>Here, AdaDelta still depends on the global learning rate. To avoid that, the author has done a series of changes to approximate second order Newton&rsquo;s method</p>
 <p>\begin{align*}
 E\left|g^{2}\right|_{t} =\rho * E\left|g^{2}\right|_{t-1}+(1-\rho) * g_{t}^{2} \newline
 \Delta \theta_t =-\frac{\sqrt{\sum_{r=1}^{t-1} \Delta \theta_{r}}}{\sqrt{E\left|g^{2}\right|_{t}+\epsilon}}
@@ -208,7 +208,7 @@ RMS|g|_{t}=\sqrt{E\left|g^{2}\right|_{t}+\epsilon} \newline
 <h2 id="adamw">AdamW</h2>
 <p>One of the reason why Adam sometimes perform worse than SGD + momentum in generalization is that L2 regularization is not performing effectively in Adam than SGD. To mention that particularly,</p>
 <ol>
-<li>L2 regularization is <strong>not</strong> equal to weight decay in self-adapt learning. Only in stand SGD case, L2 regularization can be treated as weight decay. In self-adapt learning methods, e.g., Adam, L2 regularization leads to smaller shrinkage in weights than weight decay method.</li>
+<li>L2 regularization is $\color{red}{\text{not}}$ equal to weight decay in self-adapt learning. Only in stand SGD case, L2 regularization can be treated as weight decay. In self-adapt learning methods, e.g., Adam, L2 regularization leads to smaller shrinkage in weights than weight decay method.</li>
 <li>Adam optimization with L2 regularization may not be effective. Due to the accumulation of the subtraction term divided by the square of the gradient in the Adam calculation step, the subtraction term with a larger gradient is smaller, so that the weight with a large gradient will not be regularized as the decoupling weight decay. This leads to the inequality of L2 and decoupling weight attenuation regularization of the adaptive gradient algorithm.</li>
 </ol>
 <p><img src="/post_imgs/adamw.jpeg" alt=""></p>
