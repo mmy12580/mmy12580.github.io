@@ -6,10 +6,19 @@
     <description>Recent content in deep learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NLG Decoding Strategies</title>
+      <link>https://mmy12580.github.io/posts/decoding_2020/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/decoding_2020/</guid>
+      <description>Generic Issue Although the development of pre-trained methods have led to a qualitative advance in the field of natural language modeling, the quality of natural language generation continues to be questionable. One of the main reasons found in empirical study (Holtzman et al., 2019) is that maximization-based decoding methods leads to degeneration. In other words, the output text is bland, incoherent, or in a repetitive cycle. These problems can&amp;rsquo;t be solved by simply increasing the amount of training data, e.</description>
+    </item>
     
     <item>
       <title>Optimizer matters the most!</title>

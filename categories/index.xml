@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>natural language processing</title>
+      <link>https://mmy12580.github.io/categories/natural-language-processing/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/categories/natural-language-processing/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>deep learning</title>

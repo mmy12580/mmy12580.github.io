@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/optimizers/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/decoding_2020/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           NLG Decoding Strategies | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="NLG Decoding Strategies | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "NLG Decoding Strategies",
+    "headline" : "NLG Decoding Strategies",
+    "description" : "Generic Issue Although the development of pre-trained methods have led to a qualitative advance in the field of natural language modeling, the quality of natural language generation continues to be questionable. One of the main reasons found in empirical study (Holtzman et al., 2019) is that maximization-based decoding methods leads to degeneration. In other words, the output text is bland, incoherent, or in a repetitive cycle. These problems can\x26rsquo;t be solved by simply increasing the amount of training data, e.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-05-07 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2020-05-07 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/decoding_2020\/",
+    "wordCount" : "2559",
+    "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">NLG Decoding Strategies</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2020-05-07 itemprop="datePublished">May 7, 2020</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/natural-language-processing/"> natural language processing </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="generic-issue">Generic Issue</h1>
+<p>Although the development of pre-trained methods have led to a qualitative advance in the field of natural language modeling, the quality of natural language generation continues to be questionable. One of the main reasons found in empirical study (Holtzman et al., 2019) is that maximization-based decoding methods leads to <strong>degeneration</strong>. In other words, the output text is <strong>bland</strong>, <strong>incoherent</strong>, or in a <strong>repetitive</strong> cycle. These problems can&rsquo;t be solved by simply increasing the amount of training data, e.g., large-scale GPT-2 (Radford et al., 2019) present the same issues. In the next part of this blog, I will $\color{red}{\text{focus on}}$ how decoding strategy helps. In the extension section, I will mention other methods than decoding strategies for better language generation.</p>
+<h1 id="deterministic-decoding">Deterministic Decoding</h1>
+<p>Two widely used deterministic decoding approaches are $\color{blue}{\text{greedy search}}$ and $\color{blue}{\text{beam search}}$. The most intuitive decoding approach is greedy search due to the assumption of language model that the probability distribution of a word sequence can be decomposed into the product of conditional next word distributions:</p>
+<p>\begin{align*}
+P(w_{1}:_{T} | W_{0})=\prod_{t=1}^{T} P(w_{t} | w_{1: t-1}, W_{0})
+\end{align*}</p>
+<p>where $W_0$ is the initial context word sequence. Greedy search simply selects the word with highest probability as its next word at each timestep $t$.</p>
+<p>\begin{align*}
+w_t = argmax_wP(w|w_{1:t-1})
+\end{align*}</p>
+<p>One obvious drawback of greedy search is that it often produces a sub-optimal output sequence by missing high conditional probability words, e.g., $p(w_{32} | w_{22}) &gt; p(w_{31} | w_{21})$ with $p(w_{22}) &lt; p(w_{21})$. Here, $w_{ij}$ is the candidate word $j$ at timestep $i$.</p>
+<p><strong>Beam search</strong> is then introduced to reduce the risk of omitting hidden high probability word sequences by retaining the most likely hypothesis at each time step and ultimately selecting the hypothesis with the highest overall probability. Mathematically, at time step $t$, beam search maintains a set of $K$ hypothesis $\mathcal{H}_t$:</p>
+<p>\begin{align*}
+\mathcal{H}_{t}= \{ (w_{1}^{1}, \ldots, w_{t}^{1}), \ldots, (w_{1}^{K}, \ldots, w_{t}^{K}) \}.
+\end{align*}</p>
+<p>Each hypothesis $\tilde(h)_{w_t^i}^i \in \{1, \ldots, K \}$ from $\mathcal{H}_t$ is expanded with all possible next tokens $v$ from the vocabulary $V$ to from candidate hypothesis, and it is formulated as</p>
+<p>\begin{align*}
+\tilde{h}_{v}^{i}=h_{w_{t}}^{i} |(v)= (w_{1}^{i}, \ldots, w_{t}^{i}, v).
+\end{align*}</p>
+<p>The score assigned to it will be</p>
+<p>\begin{align*}
+s_{\tilde{h}_{v}^{i}} = s_{\tilde{h}_{w_t}^{i}} + \log p(v | w_{1:t}^i)
+\end{align*}</p>
+<p>and a new hypothesis set of $K$ hypothesis is then constructed as</p>
+<p>\begin{align*}
+\mathcal{H}_{t+1}=\underset{i, v}{\text{arg-top-k}} \space s_{\tilde{h}_{v}^{i}}
+\end{align*}</p>
+<p>At finaly, we generate a set of candidate output sequence $\mathcal{M}_t$:</p>
+<p>\begin{align*}
+\mathcal{M}_{t}= \{h_{v}^{i} \in \mathcal{H}_{t+1} | v= &lt;eos&gt; \}
+\end{align*}</p>
+<p>where $v= &lt;eos&gt;$ is the termination signal of beam search. Certainly, we can introduce other <strong>early stopping</strong> rules for beam search termination.</p>
+<p>It is not hard to find that <strong>beam search will always output a sequence with higher joint probability than greedy search, but it does not guarantee to output the most reasonable (fluent, no repetition) one</strong>.</p>
+<h2 id="n-gram-penalty">N-gram Penalty</h2>
+<p>A simple remedy is to add $\color{blue}{\text{n-gram penalty}}$ or $\color{blue}{\text{n-gram blocking}}$ to beam search, as introduced by Paulus et al. (2017) and Klein et al. (2017). The idea of it is that it makes sure that no n-gram appears twice by manually setting the probably of next words that could create an already seen n-gram towards 0. In coding, an extremely small value $-10e20$ will be applied for log probability instead.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">block_ngram_repeats</span>(sequences, log_probs, block_ngram_repeat<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>):
+    total_path, cur_len <span style="color:#f92672">=</span> sequence<span style="color:#f92672">.</span>shape
+    <span style="color:#66d9ef">for</span> path_idx <span style="color:#f92672">in</span> range(total_path):
+        <span style="color:#75715e"># skip BOS</span>
+        hyp <span style="color:#f92672">=</span> alive_seq[path_idx] <span style="color:#75715e"># [batch_size, seq_len]</span>
+        ngrams <span style="color:#f92672">=</span> set()
+        fail <span style="color:#f92672">=</span> False
+        gram <span style="color:#f92672">=</span> []
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(cur_len <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>):
+            <span style="color:#75715e"># Last n tokens, n = block_ngram_repeat</span>
+            gram <span style="color:#f92672">=</span> (gram <span style="color:#f92672">+</span> [hyp[i]])[<span style="color:#f92672">-</span>block_ngram_repeat:]
+            <span style="color:#75715e"># print(&#34;gram:&#34;, gram) </span>
+            <span style="color:#75715e"># skip the blocking if any token in gram is excluded</span>
+            <span style="color:#66d9ef">if</span> set(gram) <span style="color:#f92672">&amp;</span> exclusion_tokens:
+                <span style="color:#66d9ef">continue</span>
+            <span style="color:#66d9ef">if</span> tuple(gram) <span style="color:#f92672">in</span> ngrams:
+                fail <span style="color:#f92672">=</span> True
+            ngrams<span style="color:#f92672">.</span>add(tuple(gram))
+        <span style="color:#66d9ef">if</span> fail:
+            log_probs[path_idx] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">10e20</span>
+</code></pre></div><p>Although n-gram penalties can be used to avoid repeating n-grams, it can affect generation with specific n-grams, like <code>entities</code>, Yangzi River, British Columbia, and Macbook Pro. Finding a good trade-off between forced &lsquo;no-repetition&rsquo; like n-gram penalty and looping the same n-grams over and over requires a lot of fine-tuning. Thus, we need better methods for decoding.</p>
+<h2 id="variants-of-beam-search">Variants of Beam Search</h2>
+<p>Holtzman et al. (2018) found that original beam search leads to <strong>limited diversity</strong> in the beam and therefore cannot exploit the strength of models. Instead, they score the current hypotheses in the beam with the full decoding objective</p>
+<ul>
+<li>First, each hypothesis is expanded by selecting the $k$ highest scoring next words e.g., k = 10</li>
+<li>Second, $k$ sequences are sampled from the $k^2$ candidates according to the (Softmax normalized) distribution over the candidate scores given by the full decoding objective.</li>
+<li>At last, temperature is introduce.</li>
+</ul>
+<p>The algorithm is illustrated as</p>
+<p><img src="/post_imgs/holtzman_beam_search.png" alt=""></p>
+<p>$\color{blue}{\text{Diverse beam search}}$(DBS) (Vijayakuma et al., 2018) produces sequences with significant variability by incorporating diversity constraints in the candidate sequence groups at decoding. In addition, it does this with minimal computational or memory overhead.</p>
+<p><img src="/post_imgs/diverse_beam_search.png" alt=""></p>
+<p>Number of groups $G$ and diversity strength $\lambda$ are hyper-parameters. When $G=1$, DBS becomes normal beam search. The diversity strength $\lambda$ specifies the trade-off between the model score and diversity terms. A higher value of $\lambda$ produces a more diverse list, however, very large $\lambda$ values can make the model score too high, resulting in grammatically incorrect output.</p>
+<p>Kulikov et al. (2018) used $\color{blue}{\text{iterative beam search}}$, which relaxes the inclusion criterion. It ensures that partial hypothesis set of beam search in $l$-th iteration has minimum overlap with any part of the search space previously explored in the $l-1$ iteration of the beam search. After running multiple iterations, the best one is selected according to the log probability assigned by the model.</p>
+<h1 id="stochastic-decoding">Stochastic Decoding</h1>
+<p>Alternative approach to deterministic decoding algorithm is sampling from the model at generation time. This means language generation is not deterministic anymore. Currently available sampling methods:</p>
+<ul>
+<li>Temperature Sampling</li>
+<li>$\color{blue}{\text{Top-k sampling}}$ (Fan et al., 2018)</li>
+<li>$\color{blue}{\text{Nucleus sampling}}$ (Holtzman et al., 2019)</li>
+<li>$\color{blue}{\text{Stochastic beam search}}$ (Kool et al., 2019)</li>
+<li>$\color{blue}{\text{Entamax sampling}}$ (Martins et al., 2020)</li>
+</ul>
+<h2 id="temperature-sampling">Temperature Sampling</h2>
+<p>A temperature $t$ is included in Softmax to change the vocabulary probability distribution in favor of high probability words:</p>
+<p>\begin{align*}
+P(w | w_{1: t-1})=\frac{\exp (u_{t} / t)}{\sum_{t^{\prime}} \exp (u_{t^{\prime}} / t)}, \text { and } t \in [0,1)
+\end{align*}</p>
+<p>When $t$ -&gt; $0$, it becomes greedy search; when $t$ -&gt; $\inf$, it becomes uniform sampling. It can avoid sampling from tail distribution by finding an appropriate value of $t$.</p>
+<h2 id="top-k-sampling">Top-K Sampling</h2>
+<p>A even more effective and simpler method so called <strong>Top-k Sampling</strong> is proposed. In generation stage, it selects top $k$ tokens with the highest probability first, and then transform the distribution by dividing its sum</p>
+<p>\begin{align*}
+P&rsquo;(w | w_{1: t-1}) &amp;= P(w | w_{1: t-1}) / p, \newline
+p&rsquo; &amp;= \sum P(w| w_{1: t-1})
+\end{align*}
+At end, we draw samples from $P&rsquo;(w | w_{1: t-1})$ as output tokens. The problem with Top-k Sampling is that $k$ is pre-given as a constant, and for sentences of varying length and size with different contexts, we may sometimes need more (or less) tokens than $k$. An quick example is given as below. The first prefix can be followed by diverse options, and at this point 10 tokens may not be enough to cover all possible options; while the second prefix only has few options followed, so that 10 tokens might be too much to lead the model draw samples from tail distribution.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+<span style="color:#f92672">&gt;</span> prefix1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;She said, &#39;I never&#34;</span>
+<span style="color:#f92672">&gt;</span> prefix2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;I ate the pizza while it was still&#34;</span>
+
+<span style="color:#f92672">&gt;</span> top_k_candidates(prefix1, k)
+[[<span style="color:#e6db74">&#39;thought&#39;</span>, <span style="color:#e6db74">&#39;knew&#39;</span>, <span style="color:#e6db74">&#39;had&#39;</span>, <span style="color:#e6db74">&#39;saw&#39;</span>, <span style="color:#e6db74">&#39;did&#39;</span>, <span style="color:#e6db74">&#39;said&#39;</span>, <span style="color:#e6db74">&#39;wanted&#39;</span>, <span style="color:#e6db74">&#39;told&#39;</span>, <span style="color:#e6db74">&#39;liked&#39;</span>, <span style="color:#e6db74">&#39;got&#39;</span>],
+[<span style="color:#ae81ff">0.92</span>, <span style="color:#ae81ff">0.934</span>, <span style="color:#ae81ff">0.873</span>, <span style="color:#ae81ff">0.834</span>, <span style="color:#ae81ff">0.803</span>, <span style="color:#ae81ff">0.720</span>, <span style="color:#ae81ff">0.643</span>, <span style="color:#ae81ff">0.539</span>, <span style="color:#ae81ff">0.485</span>, <span style="color:#ae81ff">0.433</span>]]
+<span style="color:#f92672">&gt;</span> top_k_candidates(prefix2, k)
+[<span style="color:#e6db74">&#39;hot&#39;</span>, <span style="color:#e6db74">&#39;warm&#39;</span>, <span style="color:#e6db74">&#39;cooling&#39;</span>, <span style="color:#e6db74">&#39;on&#39;</span>, <span style="color:#e6db74">&#39;heating&#39;</span>, <span style="color:#e6db74">&#39;fresh&#39;</span>, <span style="color:#e6db74">&#39;cold&#39;</span>, <span style="color:#e6db74">&#39;warming&#39;</span>, <span style="color:#e6db74">&#39;burning&#39;</span>, <span style="color:#e6db74">&#39;cooking&#39;</span>]
+[<span style="color:#ae81ff">0.903</span>, <span style="color:#ae81ff">0.845</span>, <span style="color:#ae81ff">0.833</span>, <span style="color:#ae81ff">0.712</span>, <span style="color:#ae81ff">0.644</span>, <span style="color:#ae81ff">0.634</span>, <span style="color:#ae81ff">0.587</span>, <span style="color:#ae81ff">0.512</span>, <span style="color:#ae81ff">0.435</span>, <span style="color:#ae81ff">0.289</span>]]
+</code></pre></div><h2 id="nucleus-sampling">Nucleus Sampling</h2>
+<p>Nucleus Sampling, or Top-p Sampling (often called), is then proposed to solve the problem with Top-K Sampling as described above. In the Top-p sample, instead of sampling only the most likely K words, we select the smallest set of words with cumulative probability exceeding probability $p$ and redistribute the probability mass across this set of words. In this way, the size of the phrase (that is, the number of words in the phrase) can dynamically increase and decrease according to the probability distribution of the next word.</p>
+<p>Mathematically, Top-p sampling replaces $p&rsquo; = \sum P(w| w_{1: t-1})$ from Top-K sampling with a constant defined as $p&rsquo; \in (0,1)$. Let us define $p$ = 0.85, then the candidates will be [&lsquo;thought&rsquo;, &lsquo;knew&rsquo;, &lsquo;had&rsquo;] for the first prefix, and only [&lsquo;hot&rsquo;] for the second prefix from above examples.</p>
+<p>In applications, Top-p and Top-k sampling can be used together. The source code built in <code>transformers</code> is provided as</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">top_k_top_p_filtering</span>(logits, top_k<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, top_p<span style="color:#f92672">=</span><span style="color:#ae81ff">1.0</span>, filter_value<span style="color:#f92672">=-</span>float(<span style="color:#e6db74">&#34;Inf&#34;</span>), min_tokens_to_keep<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+    <span style="color:#e6db74">&#34;&#34;&#34; Filter a distribution of logits using top-k and/or nucleus (top-p) filtering
+</span><span style="color:#e6db74">        Args:
+</span><span style="color:#e6db74">            logits: logits distribution shape (batch size, vocabulary size)
+</span><span style="color:#e6db74">            if top_k &gt; 0: keep only top k tokens with highest probability (top-k filtering).
+</span><span style="color:#e6db74">            if top_p &lt; 1.0: keep the top tokens with cumulative probability &gt;= top_p (nucleus filtering).
+</span><span style="color:#e6db74">                Nucleus filtering is described in Holtzman et al. (http://arxiv.org/abs/1904.09751)
+</span><span style="color:#e6db74">            Make sure we keep at least min_tokens_to_keep per batch example in the output
+</span><span style="color:#e6db74">        From: https://gist.github.com/thomwolf/1a5a29f6962089e871b94cbd09daf317
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">if</span> top_k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+        top_k <span style="color:#f92672">=</span> min(max(top_k, min_tokens_to_keep), logits<span style="color:#f92672">.</span>size(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># Safety check</span>
+        <span style="color:#75715e"># Remove all tokens with a probability less than the last token of the top-k</span>
+        indices_to_remove <span style="color:#f92672">=</span> logits <span style="color:#f92672">&lt;</span> torch<span style="color:#f92672">.</span>topk(logits, top_k)[<span style="color:#ae81ff">0</span>][<span style="color:#f92672">...</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, None]
+        logits[indices_to_remove] <span style="color:#f92672">=</span> filter_value
+
+    <span style="color:#66d9ef">if</span> top_p <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1.0</span>:
+        sorted_logits, sorted_indices <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>sort(logits, descending<span style="color:#f92672">=</span>True)
+        cumulative_probs <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cumsum(F<span style="color:#f92672">.</span>softmax(sorted_logits, dim<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>), dim<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)
+
+        <span style="color:#75715e"># Remove tokens with cumulative probability above the threshold (token with 0 are kept)</span>
+        sorted_indices_to_remove <span style="color:#f92672">=</span> cumulative_probs <span style="color:#f92672">&gt;</span> top_p
+        <span style="color:#66d9ef">if</span> min_tokens_to_keep <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+            <span style="color:#75715e"># Keep at least min_tokens_to_keep (set to min_tokens_to_keep-1 because we add the first one below)</span>
+            sorted_indices_to_remove[<span style="color:#f92672">...</span>, :min_tokens_to_keep] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#75715e"># Shift the indices to the right to keep also the first token above the threshold</span>
+        sorted_indices_to_remove[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">1</span>:] <span style="color:#f92672">=</span> sorted_indices_to_remove[<span style="color:#f92672">...</span>, :<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>clone()
+        sorted_indices_to_remove[<span style="color:#f92672">...</span>, <span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+        <span style="color:#75715e"># scatter sorted tensors to original indexing</span>
+        indices_to_remove <span style="color:#f92672">=</span> sorted_indices_to_remove<span style="color:#f92672">.</span>scatter(<span style="color:#ae81ff">1</span>, sorted_indices, sorted_indices_to_remove)
+        logits[indices_to_remove] <span style="color:#f92672">=</span> filter_value
+    <span style="color:#66d9ef">return</span> logits
+</code></pre></div><p>Essentially, both Top-K sampling and Top-p sampling are sampling tokens from truncated vocabulary distribution, but the main difference is sampling from different confidence interval.</p>
+<h2 id="stochastic-beam-search">Stochastic Beam Search</h2>
+<p>Another way to improve Top-k sampling is to implicitly apply the Gumbel-Top-k trick for sampling without replacement, also known as stochastic beam search. The algorithm establishes a theoretical link between sampling and (deterministic) beam search and can serve as a principled intermediate alternative. Algorithm is attached, and source code are be found in</p>
+<p><img src="/post_imgs/sbs1.png" alt=""></p>
+<p><a href="https://github.com/wouterkool/stochastic-beam-search">Click here for source code</a>.</p>
+<h2 id="entamax-sampling">Entamax sampling</h2>
+<p>Martins et al. (2020) points out all of above methods create a mismatch between training and testing conditions. To avoid this mismatch, they applied Entmax (sparse transformation and entmax sampling) to train and sample from a natively sparse language model like GPT-2. Entmax transforms a vector of scores into a <strong>sparse probability distribution</strong>, preventing implausible words from receiving any probability mass. In addition, it comes with a well-defined loss function that allows it to automatically learn its sparsity from the data during the training process.</p>
+<p>Given a set $\mathcal{S}$ of training sentences, the usual strategy for learning the language model parameters $\theta$ is to minimize the negative log-likelihood:</p>
+<p>\begin{equation}
+\mathcal{L}(\theta)=-\sum_{i=1}^{|\mathcal{S}|} \sum_{t=1}^{T_{i}} \log p_{\theta} (x_{t}^{i} | x_{1:t}^{i})
+\end{equation}</p>
+<p>The standard option to model $p_{\theta} (x_{t}^{i} | x_{1:t}^{i})$ in equation (1) is to compute a score vector $z_t$ by conditioning on the context $x_{1:t}$, and then applying a Softmax transformation. In entmax setting, $\alpha$-entmax is used for sparse transformation,</p>
+<p>\begin{equation}
+\alpha \text{-entmax} (z_t):= \underset{\boldsymbol{p} \in \Delta^d}{\operatorname{argmax}} p^T z_t + \mathrm{H}_{\alpha}(\boldsymbol{p}).
+\end{equation}</p>
+<p>where $\Delta^{d}:=\{\boldsymbol{p} \in \mathbb{R}^{d} | \sum_{i=1}^{d} p_{i}=1, \boldsymbol{p} \geq \mathbf{0} \}$ is the probability simplex, and $\mathrm{H}_{\alpha}$ is the Tsaills $\alpha$-entropy. Blondel et al. (2019) have shown that, for $\alpha &gt; 1$, entmax is able to output sparse probability distributions, where some words get **exactly zero probability**, whereas softmax
+($\alpha = 1$) does not have this capability. By modifying Eq.(1) with $\alpha$-entmax, the negative log-likelihood loss then becomes</p>
+<p>\begin{equation}
+\mathcal{L}(\theta)=\sum^{|\mathcal{S}|} \sum^{T_{i}} \ell_{\alpha}(\boldsymbol{z}_{t}(\theta, x_{1:t}), x_{t})
+\end{equation}</p>
+<p>where $\ell_{\alpha}(\boldsymbol{z}_t, x)$ is the $\alpha$-entmax loss in Eq. (2). When $\alpha=1$, it recovers the negative log-likelihood; when $\alpha=2$, this corresponds to sparse-max loss. Entamax Sampling performs sampling from categorical distribution obtained by applying the entmax transformation to scores $z_t$ given by the model:</p>
+<p>\begin{align*}
+x_{t} \sim p_{\theta} (\cdot | x_{1:t}) = \alpha \text {-entmax }(z_t (\theta, x_{1:t}))
+\end{align*}</p>
+<p>Comparing to other sampling schemes, it does not require ad-hoc modification, and it considers a varying number of tokens depending on the context.</p>
+<p>Available package in python, <a href="https://github.com/deep-spin/entmax">click here for more</a>.</p>
+<h1 id="conclusions-and-extensions">Conclusions and Extensions</h1>
+<p>In general, decoding objective based on maximization are not appropriate for open-ended text generation, e.g., storytelling, dialogue, etc. In other words, those models degenerate. As a comparison, stochastic decoding methods (Top-K, Top-P, SBS, Entmax) seem to produce more fluent text than deterministic search on open-ended language generation. One of the main reason deterministic decoding methods generate repetitive word sequence are caused by model, especially the way the model is trained, rather than decoding method (Welleck et al., 2019). Therefore, <strong>beam search can generate more fluent text than Top-p sampling when adapting the model&rsquo;s training objective</strong>. In later research of Welleck et al. (2020) found that stochastic decoding methods, Top-K and Top-p, also suffer from generating repetitive word sequence. <strong>What can do we do then?</strong></p>
+<p>Decoding strategies are helpful to rectify issues described in the introduction. However, the core issue is not addressed: <strong>the model’s underlying sequence probabilities are clearly not correct</strong>.
+Welleck et al. (2019) show that the primary factor of text degeneration is the use of likelihood, and they proposed a new objective, <strong>unlikelihood training</strong>, which forces unlikely generations to be assigned lower probability by the model. For details, check <a href="https://arxiv.org/pdf/1908.04319.pdf">here</a>.</p>
+<h1 id="references">References</h1>
+<p>Romain Paulus, Caiming Xiong, and Richard Socher. 2017. A deep reinforced model for abstractive
+summarization. arXiv preprint arXiv:1705.04304.</p>
+<p>Guillaume Klein, Yoon Kim, Yuntian Deng, Jean Senellart, and Alexander M Rush. 2017. Opennmt: Open-source toolkit for neural machine translation. arXiv preprint arXiv:1701.02810.</p>
+<p>Ari Holtzman, Jan Buys, Maxwell Forbes, Antoine Bosselut, David Golub, and Yejin Choi. 2018. Learning to write with cooperative discriminators. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1638–1649. Association for Computational Linguistics.</p>
+<p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasaath R Selvaraju, Qing Sun, Stefan Lee, David Crandall, and Dhruv Batra. 2018. Diverse beam search for improved description of complex scenes. In Thirty-Second AAAI Conference on Artificial Intelligence.</p>
+<p>Ilya Kulikov, Alexander H Miller, Kyunghyun Cho, and Jason Weston. 2018. Importance of a search strategy in neural dialogue modelling. arXiv preprint arXiv:1811.00907.</p>
+<p>ngela Fan, Mike Lewis, and Yann Dauphin. 2018. Hierarchical neural story generation. arXiv preprint arXiv:1805.04833</p>
+<p>Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI Blog, 1(8).</p>
+<p>Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin Choi. 2019. The curious case of neural text degeneration. arXiv preprint arXiv:1904.09751. International Conference on Machine Learning.</p>
+<p>Kool Wouter, Van Hoof Herke, and Welling Max. 2019.  Stochastic Beams and Where to Find Them: The Gumbel-Top-k Trick for Sampling Sequences Without Replacement.</p>
+<p>Welleck S., Kulikov I., Roller S., Dinan E., Cho K., Weston J., 2019. Neural Text Generation with Unlikelihood Training. arXiv preprint arXiv:1908.04319.</p>
+<p>Martins P.H., Marinho Z., Martins A.F.T., 2020. Sparse Text Generation. arXiv preprint arXiv:2004.02644.</p>
+<p>Welleck S., Kulikov I., Kim J., Yuanzhe Pang R., Cho K., 2020. Consistency of a Recurrent Language Model With Respect to Incomplete Decoding. arXiv preprint arXiv:2002.02492.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/decoding_2020/>https://mmy12580.github.io/posts/decoding_2020/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/optimizers/" class="prev" rel="prev" title="Optimizer matters the most!"><i class="iconfont icon-left"></i>&nbsp;Optimizer matters the most!</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

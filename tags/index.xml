@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>deep learning</title>
       <link>https://mmy12580.github.io/tags/deep-learning/</link>
-      <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>natural language processing</title>
+      <link>https://mmy12580.github.io/tags/natural-language-processing/</link>
+      <pubDate>Thu, 07 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/tags/natural-language-processing/</guid>
       <description></description>
     </item>
     
@@ -35,15 +44,6 @@
       <pubDate>Wed, 15 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/tags/optimization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>natural language processing</title>
-      <link>https://mmy12580.github.io/tags/natural-language-processing/</link>
-      <pubDate>Wed, 18 Mar 2020 17:36:33 -0400</pubDate>
-      
-      <guid>https://mmy12580.github.io/tags/natural-language-processing/</guid>
       <description></description>
     </item>
     
