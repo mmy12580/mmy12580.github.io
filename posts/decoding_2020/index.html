@@ -10,7 +10,7 @@
   <meta name="keywords" content="deep learning, machine learning, natural language processing">
   
   <link rel="prev" href="https://mmy12580.github.io/posts/optimizers/" />
-  
+  <link rel="next" href="https://mmy12580.github.io/posts/gpt-family/" />
   <link rel="canonical" href="https://mmy12580.github.io/posts/decoding_2020/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -57,7 +57,7 @@
     "datePublished": "2020-05-07 00:00:00 \x2b0000 UTC",
     "dateModified" : "2020-05-07 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/decoding_2020\/",
-    "wordCount" : "2559",
+    "wordCount" : "2571",
     "keywords" : [ "deep learning","natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -322,19 +322,19 @@ x_{t} \sim p_{\theta} (\cdot | x_{1:t}) = \alpha \text {-entmax }(z_t (\theta, x
 <p>Decoding strategies are helpful to rectify issues described in the introduction. However, the core issue is not addressed: <strong>the model’s underlying sequence probabilities are clearly not correct</strong>.
 Welleck et al. (2019) show that the primary factor of text degeneration is the use of likelihood, and they proposed a new objective, <strong>unlikelihood training</strong>, which forces unlikely generations to be assigned lower probability by the model. For details, check <a href="https://arxiv.org/pdf/1908.04319.pdf">here</a>.</p>
 <h1 id="references">References</h1>
-<p>Romain Paulus, Caiming Xiong, and Richard Socher. 2017. A deep reinforced model for abstractive
+<p>[1] Romain Paulus, Caiming Xiong, and Richard Socher. 2017. A deep reinforced model for abstractive
 summarization. arXiv preprint arXiv:1705.04304.</p>
-<p>Guillaume Klein, Yoon Kim, Yuntian Deng, Jean Senellart, and Alexander M Rush. 2017. Opennmt: Open-source toolkit for neural machine translation. arXiv preprint arXiv:1701.02810.</p>
-<p>Ari Holtzman, Jan Buys, Maxwell Forbes, Antoine Bosselut, David Golub, and Yejin Choi. 2018. Learning to write with cooperative discriminators. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1638–1649. Association for Computational Linguistics.</p>
-<p>Ashwin K Vijayakumar, Michael Cogswell, Ramprasaath R Selvaraju, Qing Sun, Stefan Lee, David Crandall, and Dhruv Batra. 2018. Diverse beam search for improved description of complex scenes. In Thirty-Second AAAI Conference on Artificial Intelligence.</p>
-<p>Ilya Kulikov, Alexander H Miller, Kyunghyun Cho, and Jason Weston. 2018. Importance of a search strategy in neural dialogue modelling. arXiv preprint arXiv:1811.00907.</p>
-<p>ngela Fan, Mike Lewis, and Yann Dauphin. 2018. Hierarchical neural story generation. arXiv preprint arXiv:1805.04833</p>
-<p>Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI Blog, 1(8).</p>
-<p>Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin Choi. 2019. The curious case of neural text degeneration. arXiv preprint arXiv:1904.09751. International Conference on Machine Learning.</p>
-<p>Kool Wouter, Van Hoof Herke, and Welling Max. 2019.  Stochastic Beams and Where to Find Them: The Gumbel-Top-k Trick for Sampling Sequences Without Replacement.</p>
-<p>Welleck S., Kulikov I., Roller S., Dinan E., Cho K., Weston J., 2019. Neural Text Generation with Unlikelihood Training. arXiv preprint arXiv:1908.04319.</p>
-<p>Martins P.H., Marinho Z., Martins A.F.T., 2020. Sparse Text Generation. arXiv preprint arXiv:2004.02644.</p>
-<p>Welleck S., Kulikov I., Kim J., Yuanzhe Pang R., Cho K., 2020. Consistency of a Recurrent Language Model With Respect to Incomplete Decoding. arXiv preprint arXiv:2002.02492.</p>
+<p>[2] Guillaume Klein, Yoon Kim, Yuntian Deng, Jean Senellart, and Alexander M Rush. 2017. Opennmt: Open-source toolkit for neural machine translation. arXiv preprint arXiv:1701.02810.</p>
+<p>[3] Ari Holtzman, Jan Buys, Maxwell Forbes, Antoine Bosselut, David Golub, and Yejin Choi. 2018. Learning to write with cooperative discriminators. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1638–1649. Association for Computational Linguistics.</p>
+<p>[4] Ashwin K Vijayakumar, Michael Cogswell, Ramprasaath R Selvaraju, Qing Sun, Stefan Lee, David Crandall, and Dhruv Batra. 2018. Diverse beam search for improved description of complex scenes. In Thirty-Second AAAI Conference on Artificial Intelligence.</p>
+<p>[5] Ilya Kulikov, Alexander H Miller, Kyunghyun Cho, and Jason Weston. 2018. Importance of a search strategy in neural dialogue modelling. arXiv preprint arXiv:1811.00907.</p>
+<p>[6] Angela Fan, Mike Lewis, and Yann Dauphin. 2018. Hierarchical neural story generation. arXiv preprint arXiv:1805.04833</p>
+<p>[7] Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. OpenAI Blog, 1(8).</p>
+<p>[8] Ari Holtzman, Jan Buys, Maxwell Forbes, and Yejin Choi. 2019. The curious case of neural text degeneration. arXiv preprint arXiv:1904.09751. International Conference on Machine Learning.</p>
+<p>[9] Kool Wouter, Van Hoof Herke, and Welling Max. 2019.  Stochastic Beams and Where to Find Them: The Gumbel-Top-k Trick for Sampling Sequences Without Replacement.</p>
+<p>[10] Welleck S., Kulikov I., Roller S., Dinan E., Cho K., Weston J., 2019. Neural Text Generation with Unlikelihood Training. arXiv preprint arXiv:1908.04319.</p>
+<p>[11] Martins P.H., Marinho Z., Martins A.F.T., 2020. Sparse Text Generation. arXiv preprint arXiv:2004.02644.</p>
+<p>[12] Welleck S., Kulikov I., Kim J., Yuanzhe Pang R., Cho K., 2020. Consistency of a Recurrent Language Model With Respect to Incomplete Decoding. arXiv preprint arXiv:2002.02492.</p>
 
     </div>
 
@@ -379,6 +379,8 @@ summarization. arXiv preprint arXiv:1705.04304.</p>
         
         <a href="https://mmy12580.github.io/posts/optimizers/" class="prev" rel="prev" title="Optimizer matters the most!"><i class="iconfont icon-left"></i>&nbsp;Optimizer matters the most!</a>
          
+        
+        <a href="https://mmy12580.github.io/posts/gpt-family/" class="next" rel="next" title="Talk aboout GPT Family">Talk aboout GPT Family&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

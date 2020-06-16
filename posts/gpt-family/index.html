@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/decoding_2020/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/gpt-family/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Talk aboout GPT Family | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Talk aboout GPT Family | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Talk aboout GPT Family",
+    "headline" : "Talk aboout GPT Family",
+    "description" : "Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or Auto-Denosing (AE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q \x26amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the adavantages of both types of models, i.e., XLNet, MASS, UniLM, etc.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-06-16 00:00:00 \x2b0000 UTC",
+    "dateModified" : "2020-06-16 00:00:00 \x2b0000 UTC",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/gpt-family\/",
+    "wordCount" : "950",
+    "keywords" : [  "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Talk aboout GPT Family</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2020-06-16 itemprop="datePublished">June 16, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or Auto-Denosing (AE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q &amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the adavantages of both types of models, i.e., XLNet, MASS, UniLM, etc. What is evident for sure from recent empirical work is that there is a growing effort to adapt the <em><strong><code>bi-directional</code></strong></em> transformer (AE) rather than the <em><strong><code>uni-directional</code></strong></em> transformer (AR) as <em><strong><code>backbone</code></strong></em>, and one of the main reason is that bi-directional transfromers can extract content information, whereas uni-directional tranformers can only extract information from left to right, as below figure presents.</p>
+<p><img src="https://www.researchgate.net/publication/334413801/figure/fig1/AS:779821865000960@1562935429820/The-Difference-Between-BERT-and-Open-GPT-extracted-from-Devlin-et-al-2-Figure-1.ppm" alt=""></p>
+<p>Does that mean there is no future of uni-directional PLM models, such as GPT or GPT-2? $\color{red}{\text{Absolutely not!!!!!}}$ The newest paper released on June 3, 2020, <a href="https://arxiv.org/abs/2005.14165">GPT-3</a> still adapts the uni-direcitonal transformer, and it acheieves state-of-the-art (SOTA) results. More importantly, GPT family can perform down-stream tasks in $\color{red}{\text{zero-shot}}$, $\color{red}{\text{one-shot}}$, or few shot settings – without any parameter or architecture modification. In this blog, I will mainly talk about GPT (genreative pre-training) and its evoluation, and I will share some thoughts at the end.</p>
+<h2 id="framework">Framework</h2>
+<p>General transformer structure contains a stack of encoders and decoders, and encoder-decoder attention is applied to connect them. In GPT, only encoders (paper called <code>decoders</code>) are used as figure showed below. Unlike normal encoders, GPT takes $\color{blue}{\text{masked multi-head attention}}$ mechanisms instead of multi-head attention.</p>
+<p><img src="https://pic3.zhimg.com/80/v2-9cac0e2d9ded9e8352a88f0e644b624e_1440w.jpg" alt=""></p>
+<p>As a matter of fact, $\color{red}{\text{including language modeling as an auxiliary objective}}$ in fine-tuning stage helps (1) improving generalization of the supervised model, and (2) accelerating convergence. In the ablation study, it suggests that larger datasets benefit from the auxiliary objective but smaller datasets do not. Specifically, the overall objective is optimized as</p>
+<p>\begin{align*}
+\sum_{(x, y)} \log P(y | x^{1}, \ldots, x^{m}) + \lambda \sum_{i} \log P(x_{i} | x_{i-k}, \ldots, x_{i-1}),
+\end{align*}</p>
+<p>where the left part of the plus sign is the objective of the target task, and the right part of the plus sign is the objective of the language modeling. After pre-training stage, GPT takes supervised fine-tuning for target tasks. Besides, $\color{blue}{\text{inputs need to be transformed for specific tasks}}$. The details is shown as following</p>
+<p><img src="/post_imgs/gpt_input.png" alt=""></p>
+<p>In 2019 Febuary, an improved version of GPT so called GPT-2 is released. The idea behind the <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">paper</a> is to find out if it is possible to be as beneficial as multi-task learning fashion, but without explictly implementing multi-task learning. It turns out that language models are unsupervised multi-task learneres. Hence, it is valuable to apply language models for pre-training.</p>
+<p>Here, let us talk about <strong>changes</strong> from GPT to GPT-2:</p>
+<ol>
+<li>GPT-2 alters its transformer by adding layer normalization before each sub-block and after self-attention. Check <a href="https://pic4.zhimg.com/80/v2-6bcf3a98562b49f6b8030683ed819507_1440w.jpg">this</a> for illustraion;</li>
+<li>The second stage of supervised fine-tuning is replaced with unsupervised training of specific NLP tasks, thus making the structure of pre-training and Fine-tuning identical;
+<ul>
+<li>$\color{blue}{\text{How to do other language tasks rather than language modeling?}}$ Adding task-specific token after text. For examle, paragraph + &ldquo;TL：DR&rdquo; is used for summarizaiton.</li>
+<li>$\color{blue}{\text{Why not supervised fine-tuning?}}$ With this modification, the knowledge learned in GPT-2 is highly generalizable. (before GPT-3 out answer)</li>
+</ul>
+</li>
+<li>More data: 40GB crawled data;</li>
+<li>Deeper and wider network.</li>
+</ol>
+<h2 id="deeper-thought-gpt-3">Deeper thought: GPT-3</h2>
+<p>In above section, I wrote a question $\color{blue}{\text{Why not supervised fine-tuning?}}$ in GPT-2. I have sort of seen what the authors wanted to prove, which was that the knowledge learned in the first phase of pre-training on a large unsupervised corpus could be generalized on an unsupervised task. About a month ago, they came out with the latest version of GPT, GPT-3, a 175 billion parameter autoregressive Language model. In the abstract of the paper, they have given the answer.</p>
+<blockquote>
+<p><em><strong>While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions – something which current NLP systems still largely struggle to do.</strong></em></p>
+</blockquote>
+<p>In other words, GPT-3 focus on developing a more $\color{red}{\text{generic}}$ NLP model by requiring $\color{red}{\text{less domain data}}$ and $\color{red}{\text{no gradient updates or fine-tuning}}$ for downstream tasks. This is a <strong>very very very</strong> interesting finding; however to achieve that, it costs huge data, space and money.</p>
+<p>To distinguish from terms of few-shots, authors specifically define as below. The illustraion plot is also given for usage</p>
+<ol>
+<li><strong>Few-Shot</strong>: Few examples (normally 10-100) are given for demonstration but does not allow for gradients updates. The main advantage of it is that it greatly reduces the need for task-specific data and reduced likelihood of overfitting. The main drawback is that so far the results of this approach are much worse than the latest fine-tuning models. Also, a small amount of task-specific data is still required.</li>
+<li><strong>One-Shot</strong>: Only one example is allowed for demonstration. Gradient updates are not allowed.</li>
+<li><strong>Zero-Shot</strong>: No illustraitve examples.</li>
+</ol>
+<p><img src="/post_imgs/gpt3_few_shots.png" alt=""></p>
+<p>Let us check the perfomance.</p>
+<p><img src="/post_imgs/gpt3_per.png" alt=""></p>
+<p>The first plot shows the few-shot setting of a simple task, which requires the model to remove extraneous symbols from a word. Model performance improves with the addition of natural language task descriptions and $K$ number of examples in the model context. In addition, few-shot learning improves dramatically with model size.</p>
+<p><img src="/post_imgs/gpt3_avg.png" alt=""></p>
+<p>The second plot illustrates the average performace over different settings with model sizes. Zero-shot performance steadily increased as model size increased, while few-shots peformances improve rapidly. They are more expriments have implemented, here is only few selected for illustraion. Go check the <a href="https://arxiv.org/abs/2005.14165">paper</a> for more, or go to their waiting list for trying their <a href="https://openai.com/blog/openai-api">openai-api</a>.</p>
+<h2 id="what-else-can-we-do-">What else can we do ?</h2>
+<p>Even though</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/gpt-family/>https://mmy12580.github.io/posts/gpt-family/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/decoding_2020/" class="prev" rel="prev" title="NLG Decoding Strategies"><i class="iconfont icon-left"></i>&nbsp;NLG Decoding Strategies</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+ 
+
+    <script type="text/javascript" async
+      src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>
+      MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+      });
+      MathJax.Hub.Queue(function() {
+        
+        
+        
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+
+      MathJax.Hub.Config({
+      
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>    
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

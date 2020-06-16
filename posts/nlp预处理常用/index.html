@@ -46,7 +46,7 @@
     "articleSection" : "posts",
     "name" : "NlP预处理常用",
     "headline" : "NlP预处理常用",
-    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要特意说一句，如果你们在做的任务是语言模型（language model), 或者是利用预训练模型（pre-training), e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  number number_regex = re.compile(r\x26#34;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(\\.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26#34;) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26#34;P\x26#34;)),\x26#34;\x26#34;) r4 = \x26#34;\\\\【.*?】\x2b|\\\\《.*?》\x2b|\\\\#.*?#\x2b|[.!\/_,$\x26amp;%^*()\x26lt;\x26gt;\x2b\x26#34;\x26#34;\x26#39;?@|:~{}#]\x2b|[——！\\\\\\，。=？、：“”‘’￥……（）《》【】]\x26#34; 引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现全角和半角的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。\n# double quotes double_quotes = [\x26#34;«\x26#34;, \x26#34;‹\x26#34;, \x26#34;»\x26#34;, \x26#34;›\x26#34;, \x26#34;„\x26#34;, \x26#34;“\x26#34;, \x26#34;‟\x26#34;, \x26#34;”\x26#34;, \x26#34;❝\x26#34;, \x26#34;❞\x26#34;, \x26#34;❮\x26#34;, \x26#34;❯\x26#34;, \x26#34;〝\x26#34;, \x26#34;〞\x26#34;, \x26#34;〟\x26#34;,\x26#34;＂\x26#34;,] # single quotes single_quotes = [\x26#34;‘\x26#34;, \x26#34;‛\x26#34;, \x26#34;’\x26#34;, \x26#34;❛\x26#34;, \x26#34;❜\x26#34;, \x26#34;`\x26#34;, \x26#34;´\x26#34;, \x26#34;‘\x26#34;, \x26#34;’\x26#34;] # define related regex double_quote_regex = re.",
+    "description" : "NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。\n去除非文本部分 这里要$\\color{red}{\\text{特意}}$说一句，如果你们在做的任务是$\\color{blue}{\\text{语言模型（language model)}}$, 或者是利用$\\color{blue}{\\text{预训练模型（pre-training)}}$, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据\n 数字 (digit\/number) 括号内的内容 (content in brackets) 标点符号 (punctuations) 特殊符号（special symbols)  import re import sys import unicodedata # number  ````python number_regex = re.compile(r\x26#34;(?:^|(?\x26lt;=[^\\w,.]))[\x2b–-]?(([1-9]\\d{0,2}(,\\d{3})\x2b(\\.\\d*)?)|([1-9]\\d{0,2}([ .]\\d{3})\x2b(,\\d*)?)|(\\d*?[.,]\\d\x2b)|\\d\x2b)(?:$|(?=\\b))\x26#34;) # puncuation with unicode punct_regex = dict.fromkeys( (i for i in range(sys.maxunicode) if unicodedata.category(chr(i)).startswith(\x26#34;P\x26#34;)),\x26#34;\x26#34;) r4 = \x26#34;\\\\【.*?】\x2b|\\\\《.*?》\x2b|\\\\#.*?#\x2b|[.!\/_,$\x26amp;%^*()\x26lt;\x26gt;\x2b\x26#34;\x26#34;\x26#39;?@|:~{}#]\x2b|[——！\\\\\\，。=？、：“”‘’￥……（）《》【】]\x26#34; 引号转换 由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现$\\color{red}{\\text{全角}}$和$\\color{red}{\\text{半角}}$的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。\n# double quotes double_quotes = [\x26#34;«\x26#34;, \x26#34;‹\x26#34;, \x26#34;»\x26#34;, \x26#34;›\x26#34;, \x26#34;„\x26#34;, \x26#34;“\x26#34;, \x26#34;‟\x26#34;, \x26#34;”\x26#34;, \x26#34;❝\x26#34;, \x26#34;❞\x26#34;, \x26#34;❮\x26#34;, \x26#34;❯\x26#34;, \x26#34;〝\x26#34;, \x26#34;〞\x26#34;, \x26#34;〟\x26#34;,\x26#34;＂\x26#34;,] # single quotes single_quotes = [\x26#34;‘\x26#34;, \x26#34;‛\x26#34;, \x26#34;’\x26#34;, \x26#34;❛\x26#34;, \x26#34;❜\x26#34;, \x26#34;`\x26#34;, \x26#34;´\x26#34;, \x26#34;‘\x26#34;, \x26#34;’\x26#34;] # define related regex double_quote_regex = re.",
     "inLanguage" : "en-us",
     "author" : "Moyan Mei",
     "creator" : "Moyan Mei",
@@ -57,7 +57,7 @@
     "datePublished": "2019-09-19 00:00:00 \x2b0000 UTC",
     "dateModified" : "2019-09-19 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/nlp%E9%A2%84%E5%A4%84%E7%90%86%E5%B8%B8%E7%94%A8\/",
-    "wordCount" : "429",
+    "wordCount" : "437",
     "keywords" : [ "natural language processing", "Moyan\x27s Website"]
 }
 </script>
@@ -153,23 +153,28 @@
 
           <p>NLP的下游任务(downstream)，需要对应的预处理工作。在不同的语言之间，也有不同的处理方式。在我的一些工作中，我能发现，一个灵活可拓展的预处理方案，可以在调节模型的情况下，增加很多的效率。在这里我会列举一些常用的预处理方案，感兴趣的童鞋，可以直接从对应的code section中获取，以便于你们设计自己的NLP项目。</p>
 <h2 id="去除非文本部分">去除非文本部分</h2>
-<p>这里要<!-- raw HTML omitted -->特意<!-- raw HTML omitted -->说一句，如果你们在做的任务是<!-- raw HTML omitted -->语言模型（language model)<!-- raw HTML omitted -->, 或者是利用<!-- raw HTML omitted -->预训练模型（pre-training)<!-- raw HTML omitted -->, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据</p>
+<p>这里要$\color{red}{\text{特意}}$说一句，如果你们在做的任务是$\color{blue}{\text{语言模型（language model)}}$, 或者是利用$\color{blue}{\text{预训练模型（pre-training)}}$, e.g., Bert, Xlnet, ERNIE, Ulmfit, Elmo, etc.，可能有些非文本部分是需要保留的，首先我们来看看哪些是非文本类型数据</p>
 <ol>
 <li>数字 (digit/number)</li>
 <li>括号内的内容 (content in brackets)</li>
 <li>标点符号 (punctuations)</li>
 <li>特殊符号（special symbols)</li>
 </ol>
-<!-- raw HTML omitted -->
-<h1 id="number">number</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">number_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&#34;</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> re
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> unicodedata
+
+<span style="color:#75715e"># number </span>
+
+<span style="color:#e6db74">````</span>python
+number_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(?:^|(?&lt;=[^\w,.]))[+–-]?(([1-9]\d{0,2}(,\d{3})+(\.\d*)?)|([1-9]\d{0,2}([ .]\d{3})+(,\d*)?)|(\d*?[.,]\d+)|\d+)(?:$|(?=\b))&#34;</span>)
 
 <span style="color:#75715e"># puncuation with unicode</span>
 punct_regex <span style="color:#f92672">=</span> dict<span style="color:#f92672">.</span>fromkeys(
     (i <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(sys<span style="color:#f92672">.</span>maxunicode) <span style="color:#66d9ef">if</span> unicodedata<span style="color:#f92672">.</span>category(chr(i))<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#34;P&#34;</span>)),<span style="color:#e6db74">&#34;&#34;</span>)
 r4 <span style="color:#f92672">=</span>  <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">【.*?】+|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">《.*?》+|</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">#.*?#+|[.!/_,$&amp;%^*()&lt;&gt;+&#34;&#34;&#39;?@|:~{}#]+|[——！</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">\，。=？、：“”‘’￥……（）《》【】]&#34;</span>
 </code></pre></div><h2 id="引号转换">引号转换</h2>
-<p>由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现<!-- raw HTML omitted -->全角<!-- raw HTML omitted -->和<!-- raw HTML omitted -->半角<!-- raw HTML omitted -->的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。</p>
+<p>由于输入的问题，很多文字在非英语的一些情况下会出现不同的引号。比如中文输入法里，会出现$\color{red}{\text{全角}}$和$\color{red}{\text{半角}}$的两种选择。一种是跟英文一样，另一种会出现不同的类型，这里也全部概括了。可用于多类型的处理。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># double quotes</span>
 double_quotes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;«&#34;</span>, <span style="color:#e6db74">&#34;‹&#34;</span>, <span style="color:#e6db74">&#34;»&#34;</span>, <span style="color:#e6db74">&#34;›&#34;</span>, <span style="color:#e6db74">&#34;„&#34;</span>, <span style="color:#e6db74">&#34;“&#34;</span>, <span style="color:#e6db74">&#34;‟&#34;</span>, <span style="color:#e6db74">&#34;”&#34;</span>, <span style="color:#e6db74">&#34;❝&#34;</span>, <span style="color:#e6db74">&#34;❞&#34;</span>,
 <span style="color:#e6db74">&#34;❮&#34;</span>, <span style="color:#e6db74">&#34;❯&#34;</span>, <span style="color:#e6db74">&#34;〝&#34;</span>, <span style="color:#e6db74">&#34;〞&#34;</span>, <span style="color:#e6db74">&#34;〟&#34;</span>,<span style="color:#e6db74">&#34;＂&#34;</span>,]
@@ -198,7 +203,7 @@ single_quote_regex <span style="color:#f92672">=</span> re<span style="color:#f9
 	<span style="color:#e6db74">&#34;&#34;&#34;A wrapper for unicode converting&#34;&#34;&#34;</span>
 	<span style="color:#66d9ef">return</span> unidecode(text)
 </code></pre></div><h2 id="空格清理">空格清理</h2>
-<p>空格清理是非常常见的。大概源于本身数据读取的特点，以及清理完数据后，将不需要的特殊符号换成空白，网络文件中多空格和无空格是一个我们经常需要处理的情况。这里也特地写了三种类型。需要<!-- raw HTML omitted -->注意<!-- raw HTML omitted -->的是，这里只是给通用的数据处理并进行下游模型训练。如果你关注最新的NLP动态，其实可以参考一下<strong>BERT</strong>的预处理python<a href="https://github.com/google-research/bert/blob/master/tokenization.py">脚本</a>。</p>
+<p>空格清理是非常常见的。大概源于本身数据读取的特点，以及清理完数据后，将不需要的特殊符号换成空白，网络文件中多空格和无空格是一个我们经常需要处理的情况。这里也特地写了三种类型。需要$\color{red}{\text{注意}}$的是，这里只是给通用的数据处理并进行下游模型训练。如果你关注最新的NLP动态，其实可以参考一下<strong>BERT</strong>的预处理python<a href="https://github.com/google-research/bert/blob/master/tokenization.py">脚本</a>。</p>
 <ol>
 <li>分行处理 (linebreak)</li>
 <li>多空格处理 (mul_whitespace)</li>
@@ -208,7 +213,7 @@ single_quote_regex <span style="color:#f92672">=</span> re<span style="color:#f9
 multi_whitespace_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;\s+&#34;</span>)
 nonbreaking_space_regex <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;(?!\n)\s+&#34;</span>)
 </code></pre></div><h2 id="emoij清理">emoij清理</h2>
-<p>同样，这里需要有一个<!-- raw HTML omitted -->提醒<!-- raw HTML omitted -->，对于正在研究<!-- raw HTML omitted -->情感分析<!-- raw HTML omitted -->的童鞋。Emoji，在帮助判断情感类别的时候是可以起到一定量的作用的，甚至是在Aspect-based sentiment analysis (ABSA), 细粒度情感分析也是有一定作用的。</p>
+<p>同样，这里需要有一个$\color{red}{\text{提醒}}$，对于正在研究$\color{blue}{\text{情感分析}}$的童鞋。Emoji，在帮助判断情感类别的时候是可以起到一定量的作用的，甚至是在Aspect-based sentiment analysis (ABSA), $\color{blue}{\text{细粒度情感分析}}$也是有一定作用的。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> emoji
 <span style="color:#f92672">import</span> unicodedata
 
@@ -308,7 +313,7 @@ all_stopwords <span style="color:#f92672">=</span> gensim_stopwords<span style="
 <li>词干提取 (<a href="https://www.cnblogs.com/no-tears-girl/p/6964910.html">Stemmning</a>)</li>
 <li>词干还原 (<a href="https://www.machinelearningplus.com/nlp/lemmatization-examples-python/">Lemmatization</a>)</li>
 <li><a href="http://www.albertauyeung.com/post/generating-ngrams-python/">N-gram</a></li>
-<li>TF-IDF(<a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html</a>)</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">TF-IDF</a></li>
 <li>稀缺词处理: 小噪音，可以根据词频直接过滤掉</li>
 </ol>
 
