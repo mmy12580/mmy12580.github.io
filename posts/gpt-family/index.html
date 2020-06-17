@@ -57,7 +57,7 @@
     "datePublished": "2020-06-16 00:00:00 \x2b0000 UTC",
     "dateModified" : "2020-06-16 00:00:00 \x2b0000 UTC",
     "url" : "https:\/\/mmy12580.github.io\/posts\/gpt-family\/",
-    "wordCount" : "950",
+    "wordCount" : "955",
     "keywords" : [  "Moyan\x27s Website"]
 }
 </script>
@@ -153,7 +153,7 @@
 <p>Does that mean there is no future of uni-directional PLM models, such as GPT or GPT-2? $\color{red}{\text{Absolutely not!!!!!}}$ The newest paper released on June 3, 2020, <a href="https://arxiv.org/abs/2005.14165">GPT-3</a> still adapts the uni-direcitonal transformer, and it acheieves state-of-the-art (SOTA) results. More importantly, GPT family can perform down-stream tasks in $\color{red}{\text{zero-shot}}$, $\color{red}{\text{one-shot}}$, or few shot settings – without any parameter or architecture modification. In this blog, I will mainly talk about GPT (genreative pre-training) and its evoluation, and I will share some thoughts at the end.</p>
 <h2 id="framework">Framework</h2>
 <p>General transformer structure contains a stack of encoders and decoders, and encoder-decoder attention is applied to connect them. In GPT, only encoders (paper called <code>decoders</code>) are used as figure showed below. Unlike normal encoders, GPT takes $\color{blue}{\text{masked multi-head attention}}$ mechanisms instead of multi-head attention.</p>
-<p><img src="https://pic3.zhimg.com/80/v2-9cac0e2d9ded9e8352a88f0e644b624e_1440w.jpg" alt=""></p>
+<p><img src="/post_imgs/gpt.png" alt=""></p>
 <p>As a matter of fact, $\color{red}{\text{including language modeling as an auxiliary objective}}$ in fine-tuning stage helps (1) improving generalization of the supervised model, and (2) accelerating convergence. In the ablation study, it suggests that larger datasets benefit from the auxiliary objective but smaller datasets do not. Specifically, the overall objective is optimized as</p>
 <p>\begin{align*}
 \sum_{(x, y)} \log P(y | x^{1}, \ldots, x^{m}) + \lambda \sum_{i} \log P(x_{i} | x_{i-k}, \ldots, x_{i-1}),
@@ -163,7 +163,11 @@
 <p>In 2019 Febuary, an improved version of GPT so called GPT-2 is released. The idea behind the <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">paper</a> is to find out if it is possible to be as beneficial as multi-task learning fashion, but without explictly implementing multi-task learning. It turns out that language models are unsupervised multi-task learneres. Hence, it is valuable to apply language models for pre-training.</p>
 <p>Here, let us talk about <strong>changes</strong> from GPT to GPT-2:</p>
 <ol>
-<li>GPT-2 alters its transformer by adding layer normalization before each sub-block and after self-attention. Check <a href="https://pic4.zhimg.com/80/v2-6bcf3a98562b49f6b8030683ed819507_1440w.jpg">this</a> for illustraion;</li>
+<li>GPT-2 alters its transformer by adding layer normalization before each sub-block and after self-attention.
+<ul>
+<li><img src="/post_imgs/gpt2.png" alt=""></li>
+</ul>
+</li>
 <li>The second stage of supervised fine-tuning is replaced with unsupervised training of specific NLP tasks, thus making the structure of pre-training and Fine-tuning identical;
 <ul>
 <li>$\color{blue}{\text{How to do other language tasks rather than language modeling?}}$ Adding task-specific token after text. For examle, paragraph + &ldquo;TL：DR&rdquo; is used for summarizaiton.</li>
@@ -178,7 +182,7 @@
 <blockquote>
 <p><em><strong>While typically task-agnostic in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions – something which current NLP systems still largely struggle to do.</strong></em></p>
 </blockquote>
-<p>In other words, GPT-3 focus on developing a more $\color{red}{\text{generic}}$ NLP model by requiring $\color{red}{\text{less domain data}}$ and $\color{red}{\text{no gradient updates or fine-tuning}}$ for downstream tasks. This is a <strong>very very very</strong> interesting finding; however to achieve that, it costs huge data, space and money.</p>
+<p>In other words, GPT-3 focus on developing a more $\color{red}{\text{generic}}$ NLP model by requiring $\color{red}{\text{less domain data}}$ and $\color{red}{\text{no gradient updates or fine-tuning}}$ for downstream tasks. This is a <strong>very very very</strong> interesting finding; however to achieve that, it costs huge data (700GB), space and money (approximately 12 million ！！！). Only few companies in the world are feasible to do that.</p>
 <p>To distinguish from terms of few-shots, authors specifically define as below. The illustraion plot is also given for usage</p>
 <ol>
 <li><strong>Few-Shot</strong>: Few examples (normally 10-100) are given for demonstration but does not allow for gradients updates. The main advantage of it is that it greatly reduces the need for task-specific data and reduced likelihood of overfitting. The main drawback is that so far the results of this approach are much worse than the latest fine-tuning models. Also, a small amount of task-specific data is still required.</li>
@@ -191,8 +195,7 @@
 <p>The first plot shows the few-shot setting of a simple task, which requires the model to remove extraneous symbols from a word. Model performance improves with the addition of natural language task descriptions and $K$ number of examples in the model context. In addition, few-shot learning improves dramatically with model size.</p>
 <p><img src="/post_imgs/gpt3_avg.png" alt=""></p>
 <p>The second plot illustrates the average performace over different settings with model sizes. Zero-shot performance steadily increased as model size increased, while few-shots peformances improve rapidly. They are more expriments have implemented, here is only few selected for illustraion. Go check the <a href="https://arxiv.org/abs/2005.14165">paper</a> for more, or go to their waiting list for trying their <a href="https://openai.com/blog/openai-api">openai-api</a>.</p>
-<h2 id="what-else-can-we-do-">What else can we do ?</h2>
-<p>Even though</p>
+<h2 id="extensions">Extensions</h2>
 
     </div>
 
