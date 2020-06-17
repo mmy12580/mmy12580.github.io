@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Talk aboout GPT Family</title>
+      <title>Talk about the GPT Family</title>
       <link>https://mmy12580.github.io/posts/gpt-family/</link>
       <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/posts/gpt-family/</guid>
-      <description>Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or Auto-Denosing (AE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q &amp;amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the adavantages of both types of models, i.e., XLNet, MASS, UniLM, etc.</description>
+      <description>Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or De-noising Auto-Encoder (DAE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q &amp;amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the advantages of both types of models, i.e., XLNet, MASS, UniLM, etc.</description>
     </item>
     
     <item>
