@@ -1,0 +1,1699 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  18 OCT 2020 12:58
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**/Users/moyanm/blog/content/posts/7habits.md
+(/Users/moyanm/blog/content/posts/7habits.md
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-03-06>
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 -
+     --
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no " in font nullfont!
+
+! Package inputenc Error: Unicode character 重 (U+91CD)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重
+               新整理：高效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 新 (U+65B0)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新
+                  整理：高效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 整 (U+6574)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整
+                     理：高效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 理 (U+7406)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理
+                        ：高效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ： (U+FF1A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：
+                           高效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 高 (U+9AD8)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高
+                              效能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 效 (U+6548)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效
+                                 能人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 能 (U+80FD)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效能
+                                    人事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 人 (U+4EBA)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效能人
+                                       事的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 事 (U+4E8B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效能人事
+                                          的七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 的 (U+7684)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效能人事的
+                                             七个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 七 (U+4E03)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 title: "重新整理：高效能人事的七
+                                                个习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 个 (U+4E2A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 ...e: "重新整理：高效能人事的七个
+                                                  习惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 习 (U+4E60)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 ..."重新整理：高效能人事的七个习
+                                                  惯"
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 惯 (U+60EF)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2 ...�新整理：高效能人事的七个习惯
+                                                  "
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no " in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no 8 in font nullfont!
+Missing character: There is no T in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no 2 in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no 7 in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no 5 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 4 in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no : in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no - in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 1--6
+[]
+ []
+
+
+! Package inputenc Error: Unicode character 转 (U+8F6C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转
+       眼又是三到四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 眼 (U+773C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼
+          又是三到四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 又 (U+53C8)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又
+             是三到四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 是 (U+662F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是
+                三到四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 三 (U+4E09)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三
+                   到四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 到 (U+5230)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到
+                      四个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 四 (U+56DB)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四
+                         个月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 个 (U+4E2A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个
+                            月没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 月 (U+6708)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月
+                               没有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 没 (U+6CA1)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没
+                                  有更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 有 (U+6709)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没有
+                                     更新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 更 (U+66F4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没有更
+                                        新博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 新 (U+65B0)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没有更新
+                                           博客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 博 (U+535A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没有更新博
+                                              客了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 客 (U+5BA2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 转眼又是三到四个月没有更新博客
+                                                 了。与其说是我懒，...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 了 (U+4E86)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�又是三到四个月没有更新博客了
+                                                  。与其说是我懒，�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 。 (U+3002)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�是三到四个月没有更新博客了。
+                                                  与其说是我懒，不�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 与 (U+4E0E)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�三到四个月没有更新博客了。与
+                                                  其说是我懒，不如�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 其 (U+5176)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�到四个月没有更新博客了。与其
+                                                  说是我懒，不如说�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 说 (U+8BF4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�四个月没有更新博客了。与其说
+                                                  是我懒，不如说我�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 是 (U+662F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�个月没有更新博客了。与其说是
+                                                  我懒，不如说我是�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 我 (U+6211)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�月没有更新博客了。与其说是我
+                                                  懒，不如说我是在�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 懒 (U+61D2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�没有更新博客了。与其说是我懒
+                                                  ，不如说我是在总�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�有更新博客了。与其说是我懒，
+                                                  不如说我是在总结�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 不 (U+4E0D)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�更新博客了。与其说是我懒，不
+                                                  如说我是在总结，�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 如 (U+5982)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�新博客了。与其说是我懒，不如
+                                                  说我是在总结，最�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 说 (U+8BF4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�博客了。与其说是我懒，不如说
+                                                  我是在总结，最近�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 我 (U+6211)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�客了。与其说是我懒，不如说我
+                                                  是在总结，最近模�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 是 (U+662F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�了。与其说是我懒，不如说我是
+                                                  在总结，最近模型�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 在 (U+5728)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�。与其说是我懒，不如说我是在
+                                                  总结，最近模型搞�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 总 (U+603B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�与其说是我懒，不如说我是在总
+                                                  结，最近模型搞出�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 结 (U+7ED3)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�其说是我懒，不如说我是在总结
+                                                  ，最近模型搞出了�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�说是我懒，不如说我是在总结，
+                                                  最近模型搞出了很�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 最 (U+6700)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�是我懒，不如说我是在总结，最
+                                                  近模型搞出了很多�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 近 (U+8FD1)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�我懒，不如说我是在总结，最近
+                                                  模型搞出了很多新�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 模 (U+6A21)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�懒，不如说我是在总结，最近模
+                                                  型搞出了很多新东�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 型 (U+578B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�，不如说我是在总结，最近模型
+                                                  搞出了很多新东西�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 搞 (U+641E)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�不如说我是在总结，最近模型搞
+                                                  出了很多新东西，�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 出 (U+51FA)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�如说我是在总结，最近模型搞出
+                                                  了很多新东西，效�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 了 (U+4E86)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�说我是在总结，最近模型搞出了
+                                                  很多新东西，效果�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 很 (U+5F88)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�我是在总结，最近模型搞出了很
+                                                  多新东西，效果也�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 多 (U+591A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�是在总结，最近模型搞出了很多
+                                                  新东西，效果也不�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 新 (U+65B0)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�在总结，最近模型搞出了很多新
+                                                  东西，效果也不错�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 东 (U+4E1C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�总结，最近模型搞出了很多新东
+                                                  西，效果也不错，�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 西 (U+897F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�结，最近模型搞出了很多新东西
+                                                  ，效果也不错，趁�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�，最近模型搞出了很多新东西，
+                                                  效果也不错，趁着�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 效 (U+6548)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�最近模型搞出了很多新东西，效
+                                                  果也不错，趁着有�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 果 (U+679C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�近模型搞出了很多新东西，效果
+                                                  也不错，趁着有空�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 也 (U+4E5F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�模型搞出了很多新东西，效果也
+                                                  不错，趁着有空，�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 不 (U+4E0D)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�型搞出了很多新东西，效果也不
+                                                  错，趁着有空，想�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 错 (U+9519)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�搞出了很多新东西，效果也不错
+                                                  ，趁着有空，想着�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�出了很多新东西，效果也不错，
+                                                  趁着有空，想着更�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 趁 (U+8D81)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�了很多新东西，效果也不错，趁
+                                                  着有空，想着更新�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 着 (U+7740)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�很多新东西，效果也不错，趁着
+                                                  有空，想着更新一�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 有 (U+6709)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�多新东西，效果也不错，趁着有
+                                                  空，想着更新一下�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 空 (U+7A7A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�新东西，效果也不错，趁着有空
+                                                  ，想着更新一下博�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�东西，效果也不错，趁着有空，
+                                                  想着更新一下博客�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 想 (U+60F3)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�西，效果也不错，趁着有空，想
+                                                  着更新一下博客。�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 着 (U+7740)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�，效果也不错，趁着有空，想着
+                                                  更新一下博客。最�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 更 (U+66F4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�效果也不错，趁着有空，想着更
+                                                  新一下博客。最近�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 新 (U+65B0)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�果也不错，趁着有空，想着更新
+                                                  一下博客。最近认�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 一 (U+4E00)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�也不错，趁着有空，想着更新一
+                                                  下博客。最近认识�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 下 (U+4E0B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�不错，趁着有空，想着更新一下
+                                                  博客。最近认识了�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 博 (U+535A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�错，趁着有空，想着更新一下博
+                                                  客。最近认识了一�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 客 (U+5BA2)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�，趁着有空，想着更新一下博客
+                                                  。最近认识了一个�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 。 (U+3002)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�趁着有空，想着更新一下博客。
+                                                  最近认识了一个新�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 最 (U+6700)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�着有空，想着更新一下博客。最
+                                                  近认识了一个新朋�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 近 (U+8FD1)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�有空，想着更新一下博客。最近
+                                                  认识了一个新朋友�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 认 (U+8BA4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�空，想着更新一下博客。最近认
+                                                  识了一个新朋友， y...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 识 (U+8BC6)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�，想着更新一下博客。最近认识
+                                                  了一个新朋友， yan�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 了 (U+4E86)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�想着更新一下博客。最近认识了
+                                                  一个新朋友， yan， ...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 一 (U+4E00)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�着更新一下博客。最近认识了一
+                                                  个新朋友， yan， 跟...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 个 (U+4E2A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�更新一下博客。最近认识了一个
+                                                  新朋友， yan， 跟她...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 新 (U+65B0)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�新一下博客。最近认识了一个新
+                                                  朋友， yan， 跟她交...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 朋 (U+670B)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�一下博客。最近认识了一个新朋
+                                                  友， yan， 跟她交流...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 友 (U+53CB)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�下博客。最近认识了一个新朋友
+                                                  ， yan， 跟她交流了...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�博客。最近认识了一个新朋友，
+                                                   yan， 跟她交流了关...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��客。最近认识了一个新朋友， y
+                                                  an， 跟她交流了关�...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no y in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...。最近认识了一个新朋友， yan，
+                                                   跟她交流了关于各�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 跟 (U+8DDF)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��近认识了一个新朋友， yan， 跟
+                                                  她交流了关于各行�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 她 (U+5979)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��认识了一个新朋友， yan， 跟她
+                                                  交流了关于各行各�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 交 (U+4EA4)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��识了一个新朋友， yan， 跟她交
+                                                  流了关于各行各样�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 流 (U+6D41)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��了一个新朋友， yan， 跟她交流
+                                                  了关于各行各样的�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 了 (U+4E86)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��一个新朋友， yan， 跟她交流了
+                                                  关于各行各样的东�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 关 (U+5173)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��个新朋友， yan， 跟她交流了关
+                                                  于各行各样的东西�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 于 (U+4E8E)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��新朋友， yan， 跟她交流了关于
+                                                  各行各样的东西，se...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 各 (U+5404)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��朋友， yan， 跟她交流了关于各
+                                                  行各样的东西，self-...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 行 (U+884C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��友， yan， 跟她交流了关于各行
+                                                  各样的东西，self-imp...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 各 (U+5404)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...��， yan， 跟她交流了关于各行各
+                                                  样的东西，self-improv...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 样 (U+6837)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�� yan， 跟她交流了关于各行各样
+                                                  的东西，self-improveme...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 的 (U+7684)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...yan， 跟她交流了关于各行各样的
+                                                  东西，self-improvement�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 东 (U+4E1C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...， 跟她交流了关于各行各样的东
+                                                  西，self-improvement尤�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 西 (U+897F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ... 跟她交流了关于各行各样的东西
+                                                  ，self-improvement尤为�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character ， (U+FF0C)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...�她交流了关于各行各样的东西，
+                                                  self-improvement尤为突�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+Missing character: There is no s in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no - in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no t in font nullfont!
+
+! Package inputenc Error: Unicode character 尤 (U+5C24)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...各行各样的东西，self-improvement尤
+                                                  为突出的是我俩共�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 为 (U+4E3A)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...行各样的东西，self-improvement尤为
+                                                  突出的是我俩共同�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 突 (U+7A81)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...各样的东西，self-improvement尤为突
+                                                  出的是我俩共同关�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 出 (U+51FA)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...样的东西，self-improvement尤为突出
+                                                  的是我俩共同关心�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 的 (U+7684)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...的东西，self-improvement尤为突出的
+                                                  是我俩共同关心的�...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+! Package inputenc Error: Unicode character 是 (U+662F)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.8 ...东西，self-improvement尤为突出的是
+                                                  我俩共同关心的一�...
+(That makes 100 errors; please try again.) 
+Here is how much of TeX's memory you used:
+ 96 strings out of 480608
+ 1181 string characters out of 5903631
+ 239610 words of memory out of 5000000
+ 16085 multiletter control sequences out of 15000+600000
+ 532338 words of font info for 24 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 12i,0n,15p,630b,14s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+!  ==> Fatal error occurred, no output PDF file produced!
