@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/7habits/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/transformer_components_analysis/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Transformer Component Analysis | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Transformer Component Analysis | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Transformer Component Analysis",
+    "headline" : "Transformer Component Analysis",
+    "description" : "Introduction Although Transformers have become the state-of-the-art method in neutral language modeling, it is still unclear how each intermediate component contributes to the model performance. The pre-training and fine-tuning approach has been widely accepted, however the performance can differ greatly among datasets, along with the possibility of exhibiting poorer performance than some small capacity models like CNN or Bi-LSTM. Recently, many efforts have been made to transformers, mostly in the following three areas:",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-03-02 11:40:18 -0500 EST",
+    "dateModified" : "2021-03-02 11:40:18 -0500 EST",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/transformer_components_analysis\/",
+    "wordCount" : "1506",
+    "keywords" : [ "natural language processing","deep learning", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Transformer Component Analysis</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2021-03-02 itemprop="datePublished">March 2, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/nlp/"> nlp </a>
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning&#39; </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="introduction">Introduction</h1>
+<p>Although Transformers have become the state-of-the-art method in neutral language modeling, it is still unclear how each intermediate component contributes to the model performance. The pre-training and fine-tuning approach has been widely accepted, however the performance can differ greatly among datasets, along with the possibility of exhibiting poorer performance than some small capacity models like CNN or Bi-LSTM. Recently, many efforts have been made to transformers, mostly in the following three areas:</p>
+<ul>
+<li>Within Transformers
+<ul>
+<li>Adaptation to long sequences</li>
+<li>Multi-head attention explains</li>
+<li>Better representation by using transformations such as convolution, gated lining units, multi-branching units, DeLighT, etc.</li>
+</ul>
+</li>
+<li>Model scaling
+<ul>
+<li>Width and depth control</li>
+</ul>
+</li>
+<li>Efficiency Improvement
+<ul>
+<li>Better token-level representations, i.e. BPE, adaptive inputs and outputs, DeFINE outputs.</li>
+<li>Compression</li>
+<li>Distillation</li>
+<li>Pruning</li>
+</ul>
+</li>
+</ul>
+<p>The above work exposes some shortcomings in the particular transformer component as a result of the analysis and improvements made on that component, but there is no explanation with regard to how each component contributes to the model outputs and its reasonable performance. An <a href="https://arxiv.org/abs/2011.03803">article</a> came to my attention recently that explains the components of transformers very well. In the next section, I will introduce to you the basic gist of the article.</p>
+<h1 id="component-analysis">Component Analysis</h1>
+<p>Transformers generally consist of a few stacked components, like <code>encoder-attention</code>, <code>encoder-decoder attention</code>,  <code>decoder-attention</code>, and <code>feedforward layers</code>. To address the importance of each component, two intuitive methods are proposed:  $\color{blue}{\text{contribution in information flow}}$ and $\color{blue}{\text{criticality in representation generalization}}$.</p>
+<h2 id="contribution-in-information-flow">Contribution in Information Flow</h2>
+<p>Transformer was originally used to study neural machine translation, in which information flow refers to how source text is translated into target text. Intuitively, an ablation experiment can be used to find out which part helps or hinders the information flow, and what we need to find is a metric that can be used to evaluate its importance. It is very similar to the early days of statistics where the Bayesian Information Criterion (BIC) was used to select the best subset of covariates for stepwise regression. More specifically, a backward feature selection procedure estimates the amount of change in BIC when the coefficient of a random feature is set to zero. Equivalently, researchers replaced the output of each component of a trained Transformer with zero and analyzed the performance of a resulting masked Transformer. A component is important if the performance without it is significantly worse than that of the full model; otherwise, it is redundant with the rest of the model.
+Researchers address the contribution score of $n$-th component as a function of</p>
+<p>\begin{align*}
+Contri_n = \frac{\widehat{M}_{n}}{\widetilde{M}} \quad where \quad \<br>
+\widehat{M}_n=
+\begin{cases}
+0 &amp; M_{n} &lt; 0 \\<br>
+M_{n} &amp; 0&lt; M_{n} &lt; C \\<br>
+C &amp; M_{n}&gt;C
+\end{cases}, \quad
+\widetilde{M} = \max \{ \widehat{M}_1, \cdots, \widehat{M}_N \}
+\end{align*}</p>
+<p>where $M_n$ is the BLEU drop by ablating the $n$-th component, and the constant value C is (refer to the paper) recommended to be 10% of the baseline model BELU fraction. Simply put, the contribution score of $n$-th component is calculated by taking the maximum BELU change among all components in addition to its own BELU change. In the paper, the author refers to this score as a <strong>hard</strong> metric since it sets the output of a component towards zero.</p>
+<h2 id="criticality-in-representation-generalization">Criticality in representation generalization</h2>
+<p>Much like the contribution score in information flow, the criticality in representation generalization assesses the importance of components in terms of their impact on model performance. However, this approach measures the amount of re-useable components while keeping model performance, it is considered a soft metric by the author. <em>Module criticality phenomenon</em> is originally showed in [1] &amp; [2]. They define the criticality of the module in a quantitative manner that depends on how close it is to the initial weights while maintaining performance for a convex combination of initial and final weights. Mathematically, its setting is as followings:</p>
+<p>$$
+\theta_{n}^{\alpha_{n}}=\left(1-\alpha_{n}\right) \theta_{n}^{0}+\alpha_{n} \theta_{n}^{f}, \quad \text { where }
+\alpha_n \in [0, 1] \\<br>
+Criti_n =\min \alpha_{n} \quad s.t. \quad BLEU(f;\theta_n^f) - BLEU(f;\theta_n^{\alpha_n}) &lt; \epsilon, f = Model
+$$</p>
+<p>where $\theta_n$ is the convex combination between initial weights $\theta_n^0$ and the final weights $\theta_n^f$, and  $BLEU(f; \theta)$ is the BELU score for the model $f$ given the parameters $\theta$. It is clear that the critical score for $n$-th component: $Crti_n$ is just the minimum $alpha$ to maintain the performance drop within a threshold value $\epsilon$. The small critical score of the $n$-th component means that we can move the weight of the $n$-th component far away for initialization without hurting the model performance. In the paper, $\epsilon$ is suggested as 0.5 BLEU point. Figure below shows an example.</p>
+<p><img src="/post_imgs/criticality.png" alt=""></p>
+<h2 id="component-importance-identification">Component Importance Identification</h2>
+<p>Now, it is the fun part. To have a consistent format, I am going to use the symbols in the paper to represent those components. Let us do it in a dictionary way:</p>
+<pre><code>{
+  &quot;E:SA&quot; : &quot;Encoder Self-Attention&quot;,
+  &quot;E:FF&quot; : &quot;Encoder FeedForward&quot;,
+  &quot;D:SA&quot; : &quot;Decoder Self-Attention&quot;,
+  &quot;D:EA&quot; : &quot;Decoder-Encoder Attention&quot;,
+  &quot;D:FF&quot; : &quot;Decoder FeedForward&quot;
+}
+</code></pre><p>A series of experiments have been done, and some results are shown in the figure below. Two metrics agree well with each other, and reveal several observations in common:</p>
+<ol>
+<li>In general, the decoder-attention (&ldquo;D:SA&rdquo;) layers are least important, and the $\color{red}{\text{decoder feedforward (&ldquo;D:FF&rdquo;) layers are most important}}$.</li>
+<li>Lower components in encoder (e.g. “E:SA” and “E:FF”) and higher components in decoder (e.g. “D:EA” and “D:FF”) are more important.</li>
+<li>$\color{red}{\text{Higher encoder-attention (“D:EA”) layers in decoder}}$ are more important than lower encoder attention layers. This is the same in [4] which claims that lower part of decoder is more like a language model. For the other components, the bottom and top layers are more important than the intermediate layer.</li>
+<li>$\color{red}{\text{1-3 remain invariant with different initialization seeds}}$</li>
+<li>$\color{red}{\text{1-3 hold in various model capacities}}$.</li>
+</ol>
+<p><img src="/post_imgs/transformer_components.png" alt=""></p>
+<p>The authors also attempt <em>LayerDrop</em>[3], a form of structured dropout, to layer-wise ablate the experiments in addition to ablating each component. LayerDrop discards the entire component during training, which makes the network more robust to subsequent pruning. The results confirm their contention that the performance of different components of different layers varies.</p>
+<p>The  $\color{blue}{\text{most interesting}}$ thing to me was that the authors went on to explain why some components were considered unimportant. Several approaches were used to find the reasons for the presence of insignificant components, including $\color{blue}{\text{representation similarity analysis}}$, $\color{blue}{\text{learning dynamics analysis}}$, and $\color{blue}{\text{layer-wise isometry checks}}$.</p>
+<p><img src="/post_imgs/unimportant_components.jpeg" alt=""></p>
+<p>It is able to draw conclusions from above figure that $\color{red}{\text{lower dropout rates and more training data resulted in fewer unimportant components}}$. In general, the lower the dropout rate, the lower the number of unimportant components in the model. It is plausible that a higher dropout rate results in a trained model with more redundant components, which are then more easily pruned without degrading performance. As the dataset grows larger, more components are needed. This is in line with the pre-training setup: training a 12- or 24-layer model with a large-scale dataset.</p>
+<p>In addition, the authors present three simultaneous post-observation results.</p>
+<ul>
+<li>The output of unimportant components and the representation of the output layer are not similar</li>
+<li>[5] &amp; [6] show that unimportant components can be identified in the early stage of training.</li>
+<li>Unimportant components are not due to deficient training.</li>
+</ul>
+<h2 id="group-component-important-identification">Group Component Important Identification</h2>
+<p>After describing different ablation experiments, the authors wondered what would happen if several components were ablated simultaneously. They did iteratively ablate multiple components from a trained transformer model, and report the BELU score of ablated model as below figure. In the early three ablation modules, the performance is unaffected by ablation, but as more areas are ablated, the performance declines rapidly. This can be easily understood as the interaction term in a simple linear regression. Given a two variable linear regression model $f(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 x_2 + error$ where $x_1 x_2$ is the interaction feature, it is possible that the hypothesis testing or generalization of test data may indicate that individual features are not as significant, however the interaction terms perform well.</p>
+<p><img src="/post_imgs/ablation_components.png" alt=""></p>
+<p><strong>The question then arises</strong>, if we identify unimportant components, but cannot remove them directly, is there a way to reasonably ”eliminate“ them and achieve better generalization? Thanks to the authors, and they utilize unimportant components to improve model performance with two strategies, namely $\color{blue}{\text{component pruning}}$ and $\color{blue}{\text{component rewinding}}$.</p>
+<h2 id="references">References</h2>
+<p>[1] Chiyuan Zhang, Samy Bengio, and Yoram Singer. 2019. Are all layers created equal? ICML Workshop.<br>
+[2] Niladri Chatterji, Behnam Neyshabur, and Hanie Sedghi. 2020. The intriguing role of module criticality in the generalization of deep networks. In ICLR.<br>
+[3] Angela Fan, Edouard Grave, and Armand Joulin. 2020. Reducing Transformer Depth on Demand with StructuredDropout. ICLR.<br>
+[4] Elena Voita, David Talbot, Fedor Moiseev, Rico Sennrich, and Ivan Titov. 2019. Analyzing multi-head self-attention: Specialized heads do the heavy lifting, the rest can be pruned. In ACL.<br>
+[5] Namhoon Lee, Thalaiyasingam Ajanthan, Stephen Gould, and Philip H. S. Torr. 2020. A signal propagation perspective for pruning neural networks at initialization. ArXiv, abs/1906.06307.<br>
+[6] Haoran You, Chaojian Li, Pengfei Xu, Yonggan Fu, Yue Wang, Xiaohan Chen, Yingyan Lin, Zhangyang Wang, and Richard Baraniuk. 2020. Drawing early-bird tickets: Towards more efﬁcient training of deep networks. ICLR.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/transformer_components_analysis/>https://mmy12580.github.io/posts/transformer_components_analysis/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/7habits/" class="prev" rel="prev" title="重新整理：高效能人事的七个习惯"><i class="iconfont icon-left"></i>&nbsp;重新整理：高效能人事的七个习惯</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2021</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

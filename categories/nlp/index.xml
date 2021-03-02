@@ -6,10 +6,28 @@
     <description>Recent content in nlp on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Mar 2020 17:36:33 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 02 Mar 2021 11:40:18 -0500</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/categories/nlp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Transformer Component Analysis</title>
+      <link>https://mmy12580.github.io/posts/transformer_components_analysis/</link>
+      <pubDate>Tue, 02 Mar 2021 11:40:18 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/transformer_components_analysis/</guid>
+      <description>Introduction Although Transformers have become the state-of-the-art method in neutral language modeling, it is still unclear how each intermediate component contributes to the model performance. The pre-training and fine-tuning approach has been widely accepted, however the performance can differ greatly among datasets, along with the possibility of exhibiting poorer performance than some small capacity models like CNN or Bi-LSTM. Recently, many efforts have been made to transformers, mostly in the following three areas:</description>
+    </item>
+    
+    <item>
+      <title>Talk about the GPT Family</title>
+      <link>https://mmy12580.github.io/posts/gpt-family/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/gpt-family/</guid>
+      <description>Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or De-noising Auto-Encoder (DAE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q &amp;amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the advantages of both types of models, i.e., XLNet, MASS, UniLM, etc.</description>
+    </item>
     
     <item>
       <title>A quick summary: Text-to-SQL</title>

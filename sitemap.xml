@@ -2,7 +2,97 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://mmy12580.github.io/categories/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/natural-language-processing/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/nlp/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>https://mmy12580.github.io/posts/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/posts/transformer_components_analysis/</loc>
+      
+      <lastmod>2021-03-02T11:40:18-05:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/tags/reading/</loc>
+      
+      <lastmod>2020-10-19T00:00:00+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://mmy12580.github.io/categories/reading/</loc>
       
       <lastmod>2020-10-19T00:00:00+00:00</lastmod>
       
@@ -32,36 +122,6 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/categories/</loc>
-      
-      <lastmod>2020-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/deep-learning/</loc>
-      
-      <lastmod>2020-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/natural-language-processing/</loc>
-      
-      <lastmod>2020-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://mmy12580.github.io/categories/natural-language-processing/</loc>
       
       <lastmod>2020-05-07T00:00:00+00:00</lastmod>
@@ -82,17 +142,7 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/tags/</loc>
-      
-      <lastmod>2020-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/categories/deep-learning/</loc>
+      <loc>https://mmy12580.github.io/tags/machine-learning/</loc>
       
       <lastmod>2020-04-15T00:00:00+00:00</lastmod>
       
@@ -102,7 +152,7 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/tags/machine-learning/</loc>
+      <loc>https://mmy12580.github.io/categories/machine-learning/</loc>
       
       <lastmod>2020-04-15T00:00:00+00:00</lastmod>
       
@@ -152,16 +202,6 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/categories/nlp/</loc>
-      
-      <lastmod>2020-03-18T17:36:33-04:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://mmy12580.github.io/about/</loc>
       
       <lastmod>2020-03-06T00:00:00+00:00</lastmod>
@@ -192,26 +232,6 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/tags/reading/</loc>
-      
-      <lastmod>2019-11-01T09:57:22-04:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/categories/reading/</loc>
-      
-      <lastmod>2019-11-01T09:57:22-04:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://mmy12580.github.io/posts/%E8%AF%BB%E6%87%82%E4%B8%80%E6%9C%AC%E4%B9%A6/</loc>
       
       <lastmod>2019-11-01T09:57:22-04:00</lastmod>
@@ -222,29 +242,9 @@
     </url>
   
     <url>
-      <loc>https://mmy12580.github.io/categories/machine-learning/</loc>
-      
-      <lastmod>2019-09-25T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://mmy12580.github.io/posts/nlp-roadmap/</loc>
       
       <lastmod>2019-09-25T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/nlp/</loc>
-      
-      <lastmod>2019-09-23T00:00:00+00:00</lastmod>
       
       
       
@@ -353,16 +353,6 @@
   
     <url>
       <loc>https://mmy12580.github.io/tags/github/</loc>
-      
-      <lastmod>2019-03-01T11:27:28-05:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://mmy12580.github.io/tags/hugo/</loc>
       
       <lastmod>2019-03-01T11:27:28-05:00</lastmod>
       

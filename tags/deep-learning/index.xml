@@ -6,10 +6,28 @@
     <description>Recent content in deep learning on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 02 Mar 2021 11:40:18 -0500</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Transformer Component Analysis</title>
+      <link>https://mmy12580.github.io/posts/transformer_components_analysis/</link>
+      <pubDate>Tue, 02 Mar 2021 11:40:18 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/transformer_components_analysis/</guid>
+      <description>Introduction Although Transformers have become the state-of-the-art method in neutral language modeling, it is still unclear how each intermediate component contributes to the model performance. The pre-training and fine-tuning approach has been widely accepted, however the performance can differ greatly among datasets, along with the possibility of exhibiting poorer performance than some small capacity models like CNN or Bi-LSTM. Recently, many efforts have been made to transformers, mostly in the following three areas:</description>
+    </item>
+    
+    <item>
+      <title>Talk about the GPT Family</title>
+      <link>https://mmy12580.github.io/posts/gpt-family/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/gpt-family/</guid>
+      <description>Ever since pre-trained language model (PLM) has become the mainstream method for NLP applications, it is arguable whether to use Auto-Regressive (AR) or De-noising Auto-Encoder (DAE) models in order to achieving better performance in downstream tasks, such as classification, question and answer (Q &amp;amp; A) machine, multiple choice questions, auto summarization and so on. Certainly, other work has been proposed that combines the advantages of both types of models, i.e., XLNet, MASS, UniLM, etc.</description>
+    </item>
     
     <item>
       <title>NLG Decoding Strategies</title>
@@ -46,6 +64,19 @@ Public Dataset:  ATIS &amp;amp; GeoQuery: flight tickets reserving system WikiSQ
       
       <guid>https://mmy12580.github.io/posts/activation/</guid>
       <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
+    </item>
+    
+    <item>
+      <title>NlPer路线图</title>
+      <link>https://mmy12580.github.io/posts/nlp-roadmap/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/nlp-roadmap/</guid>
+      <description>这篇blog属于专门给喜爱NLP的童鞋们准备的。路线图（roadmap）包含了从基础的 $\color{blue}{概率学}$ 和 $\color{blue}{统计学}$，到$\color{blue}{机器学习}$，到$\color{blue}{文本挖掘}$，到 关键字之间的关系可以用模棱两可的方式解释，因为它们以语义思维导图的格式表示。请只将重点放在方格中的关键字上，并认为它们是学习必不可少的部分。自然语言处理 (natural language processing, aka., NLP)。本篇属于转载，原地址在reddit的讨论区中。
+注意事项  $\color{red}{关键字}$之间的关系可以用模棱两可的方式解释，因为它们以语义思维导图的格式表示。请只将重点放在方格中的关键字上，并认为它们是学习必不可少的部分。 路线图仅供于参考，并不能直接代替你理解关键词与其之间的关系  概率学与统计 (Probability &amp;amp; Statistics) 机器学习 (Machine Learning) 文本挖掘 (Text Mining) 自然语言处理 (NLP) Reference $[1]$ ratsgo&amp;rsquo;s blog for textmining, ratsgo/ratsgo.github.io
+$[2]$ (한국어) 텍스트 마이닝을 위한 공부거리들, lovit/textmining-tutorial
+$[3]$ Christopher Bishop(2006). Pattern Recognition and Machine Learning
+$[4]$ Young, T., Hazarika, D., Poria, S., &amp;amp; Cambria, E. (2017). Recent Trends in Deep Learning Based Natural Language Processing. arXiv preprint arXiv:1708.</description>
     </item>
     
     <item>
