@@ -203,7 +203,7 @@ import time import numpy as np from matplotlib import pyplot as plt from concurr
       <pubDate>Fri, 01 Mar 2019 11:27:28 -0500</pubDate>
       
       <guid>https://mmy12580.github.io/posts/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2hugo&#43;github-page&#43;https/</guid>
-      <description>初衷 个人网站这个事情，想倒腾很久了。可惜一直被各种事情给影响，近来想着，还是得发一下狠。在2019年年初倒腾一个个人网站，原因很简单，高效的做做笔记，发表一些看法，希望能和更多人交流，学习以及成长。Stay foolish, stay hungary! 本文将介绍如何搭配Hugo + Github Pages + 个人域名的流程。因为我是用Mac搭建的，所以这里的准备工作和具体的流程都只包含了如何用Mac搭建（linux 大同小异)。这里对windows的童鞋先说声抱歉了(シ_ _)シ，因为我学代码开始没用过😅。对于写代码的要求，这里并不高，只需要你对terminal会用一些常用的代码就可以了，当然，其最基本的git的代码还是需要的 e.g git clone, add, commit, push这些 。而对于完全没写过代码的小白，有一些东西也只能麻烦你们自己google了，比如如何建立github。我这里会提供一些相对应的链接，以方便你在建立网站时的流程.
+      <description>初衷 个人网站这个事情，想倒腾很久了。可惜一直被各种事情给影响，近来想着，还是得发一下狠。在2019年年初倒腾一个个人网站，原因很简单，高效的做做笔记，发表一些看法，希望能和更多人交流，学习以及成长。Stay foolish, stay hungary! 本文将介绍如何搭配Hugo + Github Pages + 个人域名的流程。因为我是用Mac搭建的，所以这里的准备工作和具体的流程都只包含了如何用Mac搭建（linux 大同小异)。这里对windows的童鞋先说声抱歉了(シ_ _)シ，因为我学代码开始没用过:sweat_smile:。对于写代码的要求，这里并不高，只需要你对terminal会用一些常用的代码就可以了，当然，其最基本的git的代码还是需要的 e.g git clone, add, commit, push这些 。而对于完全没写过代码的小白，有一些东西也只能麻烦你们自己google了，比如如何建立github。我这里会提供一些相对应的链接，以方便你在建立网站时的流程.
 准备工作 正如标题所说，只需要安装hugo, github page, 以及https保障网站安全就好了.
 依赖环境：  brew git hugo  前期安装 安装brew, 先打开spotlight输入terminal, 然后复制以下代码
 /usr/bin/ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot; 安装后，安装git
@@ -211,6 +211,24 @@ brew install git 安装我们需要的网站建立的框架
 brew install hugo 选择管理blog的位置,例如我的桌面，然后建立新项目e.g myblog, 并进入blog文件夹
 cd ~/Desktop hugo new site myblog cd myblog 尝试建立内容为”hello world&amp;quot;的post, 将其命名为myfirst_post.md
 hugo new posts/myfirst_post echo &amp;quot;hello world&amp;quot; &amp;gt; content/posts/myfirst_post.md 启动hugo的静态服务:</description>
+    </item>
+    
+    <item>
+      <title>Cool_optimization</title>
+      <link>https://mmy12580.github.io/posts/cool_optimization/</link>
+      <pubDate>Fri, 25 Jan 2019 11:18:47 -0500</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/cool_optimization/</guid>
+      <description>Optimiztion on deep learning is always painful.</description>
+    </item>
+    
+    <item>
+      <title>Look at Activation Functions</title>
+      <link>https://mmy12580.github.io/posts/look-at-activation-functions/</link>
+      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/look-at-activation-functions/</guid>
+      <description>Overview: Activation functions play a crucial rule in neural networks because they are the nonlinearities which have been attributed to the success story of deep learning. At present, the most popular activation functions are ReLU and its extended work such as LReLU, PReLu, ELU, SELU, and CReLU etc. However, none of them is guaranteed to perform better then others in all applications, so it becomes fundamental to understand their advantages and disadvantages in order to achieve better performances in specific applications.</description>
     </item>
     
   </channel>

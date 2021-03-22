@@ -5,7 +5,7 @@
     <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -20,16 +20,12 @@
     <item>
       <title>About</title>
       <link>https://mmy12580.github.io/about/</link>
-      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/about/</guid>
-      <description>&lt;h2 id=&#34;about-me&#34;&gt;About Me&lt;/h2&gt;
-&lt;p&gt;I am now working as Principal Scientist for &lt;a href=&#34;https://www.course5i.com&#34;&gt;Course5i AI Lab&lt;/a&gt;, Toronto. My main focus is to build scalable and transferable B2B AI products and services to more than 20 countries and regions, e.g., Microsoft, Lenovo, Colgate Palmolive, and so on.&lt;/p&gt;
-&lt;p&gt;My &lt;strong&gt;main interest&lt;/strong&gt; is to build an &amp;ldquo;end-to-end&amp;rdquo; human-computer interaction system given kinds of &amp;ldquo;knowledge&amp;rdquo;, including transfer learning, MTL, meta-learning, and self-supervised learning etc.  If you are interested in my experience or the website, have a look at my &lt;a href=&#34;https://mmy12580.github.io/resume/moyan_resume.pdf&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
-&lt;h2 id=&#34;why-the-blog&#34;&gt;Why the blog?&lt;/h2&gt;
-&lt;p&gt;I created this blog not only to help me refresh my memory about engineering details, theory behind models, training tricks, and optimization techniques, but also to communicate with people who read and share what they know or think, so we can expand our own &amp;ldquo;knowledge&amp;rdquo; base togeter. Feel free to reach me out from any accessible source, e.g., email or wechat, at my &lt;a href=&#34;https://moyan.ml&#34;&gt;homepage&lt;/a&gt;. I am looking forward to any interesting topic discussions or feedbacks. Thanks😄.&lt;/p&gt;
-&lt;h2 id=&#34;just-for-fun&#34;&gt;Just for fun&lt;/h2&gt;
-&lt;p&gt;Click the &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; on the top left of the web page to switch the theme of the website.&lt;/p&gt;
+      <description>&lt;p&gt;I am an Applied Scientist at &lt;a href=&#34;https://wgames.com/&#34;&gt;WGames&lt;/a&gt;, currently focused on recommendation system, reinforcement learning, and generative adversarial network. In the meantime, I am also an Artificial Intelligence Researcher at &lt;a href=&#34;https://leafy.ai/&#34;&gt;Leafy.ai&lt;/a&gt; working on natural language processing. Previously, I worked in a start-up company, &lt;a href=&#34;http://google.com/&#34;&gt;Istuary Innovation Group&lt;/a&gt;, on developing deep learning algorithms on smart camera, which includes face recognition, face alignment, and object recognition. I&amp;rsquo;m interested in transfer learning, multi-task learning, and light neural network models for NLP and democratizing machine learning and AI. Have a look at my &lt;a href=&#34;https://drive.google.com/file/d/12JC-CSasaQpasyAhzh2llL2ZI5FlCFX-/view?usp=sharing&#34;&gt;resume&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;I write this blog not only to help me refresh my memory about engineering details and theory behind models, training tricks, and optimization but also to communicate with people who might read and share what they know so we can learn from each other.&lt;/p&gt;
 </description>
     </item>
     
