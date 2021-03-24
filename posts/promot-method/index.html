@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s personal website">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/transformer_components_analysis/" />
+  
+  <link rel="canonical" href="https://mmy12580.github.io/posts/promot-method/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Prompt-based Fine-tuning | Moyan&#39;s Website
+       
+  </title>
+  <meta name="title" content="Prompt-based Fine-tuning | Moyan&#39;s Website">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Prompt-based Fine-tuning",
+    "headline" : "Prompt-based Fine-tuning",
+    "description" : "Today I want to talk about an interesting phenomenon in NLP in the near future, which is one of my current research interests. There is no official name for it yet, so let\x26rsquo;s call it prompt-based fine-tuning.\nInherited backbones, coupled with a certain head, are known to be a standard method of fine-tuning. In the case of text classification, we could represent this head with one or two linear layers on top of the BERT backbone, and then use Softmax layer for probabilistic output.",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-03-22 12:16:02 -0400 EDT",
+    "dateModified" : "2021-03-22 12:16:02 -0400 EDT",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/promot-method\/",
+    "wordCount" : "1484",
+    "keywords" : [ "natural language processing","deep learning", "Moyan\x27s Website"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Website</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Prompt-based Fine-tuning</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2021-03-22 itemprop="datePublished">March 22, 2021</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://mmy12580.github.io/categories/nlp/"> nlp </a>
+                        <a href="https://mmy12580.github.io/categories/deep-learning/"> deep learning </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>Today I want to talk about an interesting phenomenon in NLP in the near future, which is one of my current research interests. There is no official name for it yet, so let&rsquo;s call it <strong>prompt-based fine-tuning</strong>.</p>
+<p>Inherited backbones, coupled with a certain head, are known to be a standard method of fine-tuning. In the case of text classification, we could represent this head with one or two linear layers on top of the BERT backbone, and then use Softmax layer for probabilistic output. So far as I am aware, there is no paper that proves that the prompt method works better than the traditional method of fine-tuning. Some empirical study indicate that the prompt method has some very good advantages and can be superior to the traditional way in many cases. After many tries, I agree that that the appropriate pattern and verbalizer prompts indeed make models perform better.</p>
+<p>In the following sections, I will mainly introduce prompts-based method in below ways:</p>
+<ul>
+<li>what does the prompt-based method look like?</li>
+<li>when do we prefer it over a standard fine-tuning?</li>
+<li>why does it work?</li>
+<li>What else?</li>
+</ul>
+<h2 id="what-is-it-and-what-does-it-look-like">What is it and what does it look like?</h2>
+<p>Prompt-based method is firstly mentioned in work[1] and [2] for zero-shot scenarios: they simply append task descriptions (such as English to Chinese) to an input, and let the pre-trained language models (PLMs) predict continuations that solve the task e.g., $\color{green}{\text{English to Chinese}}$ &lt;$\color{orange}{\text{I like soccer}}$&gt; &lt;$\color{red}{\text{我喜欢足球}}$&gt;. Later, work [3] introduced Pattern Exploiting Training (PET), a semi-supervised learning procedure based on natural language patterns that creates cloze style sentences for the input examples. The authors introduced iPET [4] in order to address this issue. The PET algorithm has a limitation that it works only when an answer to be predicted corresponds to a single token in its vocabulary. While PET focused on the semi-supervised setting, researchers proposed LM-BFF[5] which use a few annotated examples as supervision, and also explore automatically generated prompts and fine-tuning with in-context demonstrations.</p>
+<blockquote>
+<p>Overall, prompt-based prediction reformulates the downstream task as a (masked) language modeling problem, where the model directly generates a textual response to a given prompt.</p>
+</blockquote>
+<p>Let us take an example for illustration. Below is a news classification task where the given text should be classified as &ldquo;real estate&rdquo;. As can be seen, both the PET and LM-BFF methods convert the label to the <!-- raw HTML omitted --> token in the preset prompt, while LM-BFF takes two additional examples of the same pattern sport and political news &ldquo;This is a __ news&rdquo; as a in-context demonstration for the text to perform the task of filling the mask. It is worth noting that the MASK here can also be filled by synonyms of the label, for example, real estate can be changed to territory or building. This is mentioned as a verbalizer in PET[3]. <strong>Doesn&rsquo;t LM-BFF look similar?</strong> This is very similar to the concept of Word2Vec, which is used for a word analogy, e.g., king -&gt; queen vs. man -&gt; woman, while LM-BFF is more like a sentence-level analogy.</p>
+<pre><code># original text
+text = &quot;Home sales in the Greater Toronto Area (GTA) will start to recover by 2021 Q1 and show growth throughout 2022.&quot;
+
+# PET prefix version
+prompt_prefix = &quot;This is a &lt;MASK&gt; news. Home sales in the Greater Toronto Area (GTA) will start to recover by 2021 Q1 and show growth throughout 2022.&quot;
+
+# PET suffix version
+prompt_suffix = &quot;Home sales in the Greater Toronto Area (GTA) will start to recover by 2021 Q1 and show growth throughout 2022, according to the above piece of &lt;MASK&gt; news.&quot;
+
+# LM-BFF
+prompt_bff = &quot;[CLS] This is a &lt;MASK&gt; news. Home sales in the Greater Toronto Area (GTA) will start to recover by 2021 Q1 and show growth throughout 2022. [SEP] This is a sports news. Juventus suffers shock 0-1 loss to Benevento. [SEP] This is a politic news. White House confirms it is sending vaccine to Canada [SEP]&quot;
+</code></pre><p>For natural language inference tasks such as MNLI, model takes the inputs<code>[CLS] text1 [SEP] text2 [SEP]</code>to perform a textual entailment task with the label map {&ldquo;yes&rdquo;: &ldquo;entailment&rdquo;, &ldquo;no&rdquo;: &ldquo;disagreement&rdquo;, &ldquo;maybe&rdquo;: &ldquo;neutral&rdquo;}. Again, we could do the same transformation as above example showed to convert this classic fine-tuning to a prompt-based fine-tuning such as <code>text1 | __, text2</code>, where the blank can be filled as yes/no/maybe/.</p>
+<h2 id="when-to-use-it">When to use it?</h2>
+<p>What follows a broad introduction is the question of when to use it. In other words, when should this method be considered to be a better choice than the standard fine-tuning. The first natural answer is the <strong>zero-shot setting</strong>, as it was first started in the GPT family and, in particular, GPT-3 [6] played its part in bringing NLP to great public attention.</p>
+<p>The second case is when the task is easier to create patterns and verbalizers with prompts and there is not as <strong>much labeled data</strong> for you to do transfer learning. From the work [3-5], empirical experiments were done for mainly two tasks, single sentence classification and sentence pairing. Does that mean we can&rsquo;t do other tasks? It is a good question, and it is expected for more exploration. Didn&rsquo;t you mention prompts-method is initially used in translation? Yes, as mentioned in the beginning of the blog, the prompt-based approach is firstly used for translation tasks by assigning task descriptions, however, it is not used as fine-tuning, but more like a guided language modeling with some patterns.</p>
+<p>As a consequence, a natural question arises: How much labeled data will be required for prompt-based fine-tuning for the second case.
+Thanks to a recent paper [7] submitted five days ago, we get a reasonable answer that $\color{blue}{\text{prompting is often worth 100s of data points on average cross classification tasks}}$. Some superGLUE results are shown as below.</p>
+<p><img src="/post_imgs/prompt_vs_head.png" alt=""></p>
+<p><img src="/post_imgs/prompt_superglue.png" alt=""></p>
+<h2 id="why-does-it-work">Why does it work?</h2>
+<p>OOk, so far I&rsquo;ve shown how this prompt-based fine-tuning works and how well it works on different tasks. It is interesting to see why it works, as this may help us to learn more and come up with something new in this area. By carefully reading the work[3-6] and conducting my own experiments at Course5 AI lab, I found that <strong>the main reason it works is the reduction of inductive bias by reconstructing downstream tasks as (masked) language modeling</strong>. We know that the standard fine-tuning can be unstable for a transformer-based model when the downstream task differs significantly from its pre-training objective, and several works have been proposed to address it, such as fine-tuning the classification task with auxiliary tasks (e.g., language modeling), or we can further pre-train custom datasets and then fine-tune the model using their weights. There is also some work on reinitializing several layers in BERT due to its unfavorable transfer capability.</p>
+<p>Another possible reason is that the self-attention mechanism remembers the patterns with the input text. As I showed in the LM-BFF example above, they include patterns and in-context demonstration with the input text, which behave in a way like sentence-level analogues of the input text. This can be further visualized by integrating the gradients for attentional analysis. (Sorry I am too lazy to try it out)</p>
+<h2 id="what-else">What else?</h2>
+<p>Here, I did not really include how to create patterns and verbalizers, which have large impacts on the performance of the models. I will suggest you reading the paper [3-5], and trying to create some for your own data and experiments.</p>
+<p><strong>What could this inspire us?</strong></p>
+<p>First, can we apply this approach to other tasks besides classification, sequence tagging or sentence matching? Second, does this prompt-based fine-tuning still work if the pre-training objective. Second, does this prompt-based fine-tuning still work if the pre-training goal is not (masked) language modeling? Third, how can we improve the robustness of PLMs by using prompt-based fine-tuning? Last but not least, how can we incorporate enhancements with it, or does it really help?</p>
+<p>I&rsquo;ll leave this open-ended question to you. You are welcome to ask me any questions you may have.</p>
+<h2 id="references">References</h2>
+<p>[1] Alec Radford, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. 2019. Language models are unsupervised multitask learners. Technical report.</p>
+<p>[2] Raul Puri and Bryan Catanzaro. 2019. Zero-shot text classiﬁcation with generative language models. Computing Research Repository, arXiv:1912.10165.</p>
+<p>[3] Timo Schick and Hinrich Sch¨utze. 2020a. Exploiting cloze questions for few shot text classiﬁcation and natural language inference. Computing Research Repository, arXiv:2001.07676.</p>
+<p>[4] Timo Schick and Hinrich Sch¨utze. 2020b. It’s not just size that matters: Small language models are also few-shot learners. arXiv preprint arXiv:2009.07118.</p>
+<p>[5] Gao, T., Fisch, A., &amp; Chen, D. 2020. Making Pre-trained Language Models Better Few-shot Learners. arXiv preprint arXiv:2012.15723.</p>
+<p>[6] Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. 2020. Language models are few-shot learners. In Advances in Neural Information Processing Systems (NeurIPS).</p>
+<p>[7] Scao, T.L., &amp; Rush, A.M. (2021). How Many Data Points is a Prompt Worth? arkiv preprint arXiv:2103.08493.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/promot-method/>https://mmy12580.github.io/posts/promot-method/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/natural-language-processing/">
+                    #natural language processing</a></span>
+            
+            <span class="tag"><a href="https://mmy12580.github.io/tags/deep-learning/">
+                    #deep learning</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/transformer_components_analysis/" class="prev" rel="prev" title="Transformer Component Analysis"><i class="iconfont icon-left"></i>&nbsp;Transformer Component Analysis</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2021</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.11/css/lightgallery.min.css" rel="stylesheet">  
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>
