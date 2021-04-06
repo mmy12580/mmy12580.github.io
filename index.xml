@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Moyan&#39;s Website on Moyan&#39;s Website</title>
+    <title>Moyan&#39;s Blog on Moyan&#39;s Blog</title>
     <link>https://mmy12580.github.io/</link>
-    <description>Recent content in Moyan&#39;s Website on Moyan&#39;s Website</description>
+    <description>Recent content in Moyan&#39;s Blog on Moyan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate>
@@ -14,7 +14,7 @@
       <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>https://mmy12580.github.io/about/</guid>
-      <description>&lt;p&gt;I am the principal scientist working at &lt;a href=&#34;https://www.course5i.com/&#34;&gt;Course5 AI Lab&lt;/a&gt;, currently focused on natural language generation and understanding. I lead a team developing the business intelligence bot &lt;strong&gt;Persia&lt;/strong&gt;. Persia analyzes users&amp;rsquo; questions automatically and provides tailored responses based on a combination of database search and data analysis. My main interest is in researching and developing fast, versatile and easily deployable deep learning models. For more information, please see my &lt;a href=&#34;https://mmy12580.github.io/resume/resume.pdf&#34;&gt;CV&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;I am the principal scientist working at &lt;a href=&#34;https://www.course5i.com/&#34;&gt;Course5 AI Lab&lt;/a&gt;, currently focused on natural language generation and understanding. I lead a team developing the business intelligence bot &lt;strong&gt;Persia&lt;/strong&gt;. Persia analyzes users&amp;rsquo; questions automatically and provides tailored responses based on a combination of database search and data analysis. My main interest is in researching and developing fast, versatile and easily deployable deep learning models. For more information, please see my &lt;a href=&#34;https://mmy12580.github.io/resume/moyan_resume.pdf&#34;&gt;CV&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;I run this blog not only to refresh my memory about machine learning and knowledge, but also to improve my presentation skills and to help as much as I can my friends who are also on this path.&lt;/p&gt;
 </description>
