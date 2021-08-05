@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Moyan Mei">
+  <meta name="description" content="Moyan&#39;s Blog">
+  <meta name="keywords" content="deep learning, machine learning, natural language processing">
+  
+  <link rel="prev" href="https://mmy12580.github.io/posts/gpt-family/" />
+  <link rel="next" href="https://mmy12580.github.io/posts/7habits/" />
+  <link rel="canonical" href="https://mmy12580.github.io/posts/double_decent_curve/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Loss, Error, and Double Descent Phenomenon | Moyan&#39;s Blog
+       
+  </title>
+  <meta name="title" content="Loss, Error, and Double Descent Phenomenon | Moyan&#39;s Blog">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/mmy12580.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Loss, Error, and Double Descent Phenomenon",
+    "headline" : "Loss, Error, and Double Descent Phenomenon",
+    "description" : "Given a well-split set of data, machine learning practitioners try their best to find the \x26ldquo;optimal\x26rdquo; model (with the right weights) based on the performance of the model on the validation set or\/and test set e.g. accuracy, mean square error, etc. We do this rather than looking at performance on training data, mainly because of $\\color{blue}{\\text{\x26ldquo;overfitting\x26rdquo;}}$, also known as $\\color{blue}{\\text{\x26ldquo;error chasing\x26rdquo;}}$ . Statistically speaking, we assume that the relationship between the independent variable $Y$ and the dependent variable $X$ is formulated as",
+    "inLanguage" : "en-us",
+    "author" : "Moyan Mei",
+    "creator" : "Moyan Mei",
+    "publisher": "Moyan Mei",
+    "accountablePerson" : "Moyan Mei",
+    "copyrightHolder" : "Moyan Mei",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-08-04 10:10:03 -0400 EDT",
+    "dateModified" : "2020-08-04 10:10:03 -0400 EDT",
+    "url" : "https:\/\/mmy12580.github.io\/posts\/double_decent_curve\/",
+    "wordCount" : "306",
+    "keywords" : [  "Moyan\x27s Blog"]
+}
+</script>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-lightbulb"></i></a>&nbsp;<a href="https://mmy12580.github.io">Moyan&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Loss, Error, and Double Descent Phenomenon</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://mmy12580.github.io" rel="author">Moyan Mei</a>   
+                <span class="post-time">
+                on <time datetime=2020-08-04 itemprop="datePublished">August 4, 2020</time>
+                </span>
+                in
+                
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>Given a well-split set of data, machine learning practitioners try their best to find the &ldquo;optimal&rdquo; model (with the right weights) based on the performance of the model on the validation set or/and test set e.g. accuracy, mean square error, etc. We do this rather than looking at performance on training data, mainly because of $\color{blue}{\text{&ldquo;overfitting&rdquo;}}$, also known as $\color{blue}{\text{&ldquo;error chasing&rdquo;}}$ . Statistically speaking, we assume that the relationship between the independent variable $Y$ and the dependent variable $X$ is formulated as</p>
+<p>\begin{align*}
+Y = f(X) + \epsilon
+\end{align*}</p>
+<p>, where $f(\cdot)$ is the assumed true model, and $\epsilon$ is the unachievable random error. We try our best to find the &ldquo;optimal&rdquo; model $\hat{f}(\cdot)$ to approximate $f(\cdot)$ instead of approximating Y directly, because if so, we are chasing the error $\epsilon$ as well. It intuitively suggests that a relatively simpler (less complexity) model leads to better generalization.</p>
+<p><strong>However, the trend in modern machine learning practice is to build a very large complexity model that fits the data (near-) perfectly</strong>. Logically this is an obvious overfitting case, yet it achieves high accuracy on test data. $\color{red}{\text{Isn&rsquo;t that a contradiction?}}$ In the past, a well-tuned LSTM+CRF architecture (i.e., 2 million parameters) was mainstream solutions for sequence labeling, but now over-parameterized models such as BERT ($\ge 334$ million parameters) and RoberTa ($\ge 125$ million parameters) after few epochs fine-tuning can significantly improve performance by several percentage points. Does that seem like we are sort of &ldquo;underfitting&rdquo;?</p>
+<p>This kind contradiction is then addressed as $\color{blue}{\text{&ldquo;double descent&rdquo;}}$ phenomenon. Basically, the performance of a machine learning/deep learning model, i.e., transformers, CNN, etc., first improves then gets worse, and then improves again as the complexity of the model increases. In addition, Nakkiran et al. [2020] observed that double descent curves can also be presented as a function of number of epochs (more training).</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Moyan Mei </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://mmy12580.github.io/posts/double_decent_curve/>https://mmy12580.github.io/posts/double_decent_curve/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://mmy12580.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://mmy12580.github.io/posts/gpt-family/" class="prev" rel="prev" title="Talk about the GPT Family"><i class="iconfont icon-left"></i>&nbsp;Talk about the GPT Family</a>
+         
+        
+        <a href="https://mmy12580.github.io/posts/7habits/" class="next" rel="next" title="重新整理：高效能人事的七个习惯">重新整理：高效能人事的七个习惯&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2021</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://mmy12580.github.io">Moyan Mei</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['$$','$$'], ['\\[','\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+     </div>
+  </body>
+</html>

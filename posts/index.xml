@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Moyan&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Mar 2021 12:16:02 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 05 Aug 2021 15:25:12 -0400</lastBuildDate>
     
 	<atom:link href="https://mmy12580.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AI Project Flow: From experiments to deployment</title>
+      <link>https://mmy12580.github.io/posts/ai_project_flow/</link>
+      <pubDate>Thu, 05 Aug 2021 15:25:12 -0400</pubDate>
+      
+      <guid>https://mmy12580.github.io/posts/ai_project_flow/</guid>
+      <description>After working in artificial intelligence for a number of years since my graduation, I wanted to share some practical experience with those who have been in the field for a while or who want to consider it when taking charge of some projects. Here is a process for an AI project that aims to help these people how to fully land a real AI solution.
+Email me with any questions you may have.</description>
+    </item>
     
     <item>
       <title>Prompt-based Fine-tuning</title>
